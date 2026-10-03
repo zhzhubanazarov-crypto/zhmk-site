@@ -1,0 +1,1894 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ЖМК платформасы</title>
+<style>
+  :root{
+    --ink:#12161d;
+    --ink-soft:#4a5568;
+    --ink-faint:#8592a3;
+    --paper:#f5f6f8;
+    --card:#ffffff;
+    --line:#e2e5ea;
+    --blue:#1c4c8c;
+    --blue-deep:#0f2f5c;
+    --blue-wash:#eaf0f8;
+    --gold:#c8a34f;
+    --gold-soft:#f3e8cd;
+    --good:#2f8f5b;
+    --good-soft:#e2f3e8;
+    --warn:#b3841f;
+    --warn-soft:#faf0dc;
+    --purple:#6a4fa8;
+    --purple-soft:#ece7f6;
+    --shadow: 0 1px 2px rgba(15,32,64,.06), 0 8px 24px rgba(15,32,64,.08);
+    --shadow-lg: 0 4px 8px rgba(15,32,64,.08), 0 16px 40px rgba(15,32,64,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#eef1f5; --ink-soft:#a9b3c2; --ink-faint:#6b7684;
+      --paper:#0b0e13; --card:#141a23; --line:#232b37;
+      --blue:#6ba0e0; --blue-deep:#0f2f5c; --blue-wash:#152234;
+      --gold:#d9bb73; --gold-soft:#332a17;
+      --good:#4cb37e; --good-soft:#132a1e;
+      --warn:#d9b25c; --warn-soft:#2e2510;
+      --purple:#a48ede; --purple-soft:#251f38;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 28px rgba(0,0,0,.45);
+      --shadow-lg: 0 4px 10px rgba(0,0,0,.4), 0 20px 48px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#eef1f5; --ink-soft:#a9b3c2; --ink-faint:#6b7684;
+    --paper:#0b0e13; --card:#141a23; --line:#232b37;
+    --blue:#6ba0e0; --blue-deep:#0f2f5c; --blue-wash:#152234;
+    --gold:#d9bb73; --gold-soft:#332a17;
+    --good:#4cb37e; --good-soft:#132a1e;
+    --warn:#d9b25c; --warn-soft:#2e2510;
+    --purple:#a48ede; --purple-soft:#251f38;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 28px rgba(0,0,0,.45);
+    --shadow-lg: 0 4px 10px rgba(0,0,0,.4), 0 20px 48px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Times New Roman", Georgia, "PT Serif", serif;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font:inherit;font-family:"Times New Roman", Georgia, "PT Serif", serif;}
+  input,textarea,select{font-family:"Times New Roman", Georgia, "PT Serif", serif;}
+  h1,h2,h3,h4{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-weight:700;text-wrap:balance;}
+  img{max-width:100%;display:block;}
+  .hidden{display:none!important;}
+
+  /* ===== demo banner ===== */
+  .demo-banner{
+    background:var(--blue-deep);
+    color:#fff;
+    font-size:12px;
+    text-align:center;
+    padding:7px 16px;
+    letter-spacing:.01em;
+  }
+  .demo-banner b{color:var(--gold);}
+
+  /* ===== header ===== */
+  .site-header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:10px 28px;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .logo-group{display:flex;align-items:center;gap:12px;cursor:pointer;}
+  .logo-group img{object-fit:contain;}
+  .logo-kbm{height:34px;}
+  .logo-jmk{height:38px;}
+  .logo-divider{width:1px;height:26px;background:var(--line);}
+
+  .site-nav{display:flex;gap:4px;margin-left:10px;flex-wrap:wrap;}
+  .site-nav button{
+    background:none;border:none;cursor:pointer;
+    font-size:13.5px;font-weight:500;color:var(--ink-soft);
+    padding:8px 12px;border-radius:8px;
+  }
+  .site-nav button.active{color:var(--blue);background:var(--blue-wash);font-weight:600;}
+  .site-nav button:hover:not(.active){background:var(--paper);}
+
+  /* ===== burger + off-canvas drawer (mobile) ===== */
+  .burger{
+    display:none;
+    width:38px;height:38px;flex-shrink:0;
+    background:none;border:1px solid var(--line);border-radius:9px;cursor:pointer;
+    align-items:center;justify-content:center;
+    flex-direction:column;gap:4px;
+  }
+  .burger span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;}
+
+  .drawer-overlay{
+    display:none;position:fixed;inset:0;background:rgba(10,14,20,.45);z-index:29;
+  }
+  .drawer-overlay.open{display:block;}
+
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:30;
+    width:78%;max-width:300px;
+    background:var(--card);
+    box-shadow:var(--shadow-lg);
+    transform:translateX(-100%);
+    transition:transform .22s ease;
+    display:flex;flex-direction:column;
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 14px;border-bottom:1px solid var(--line);}
+  .drawer-head img{height:32px;}
+  .drawer-close{background:none;border:none;font-size:20px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px 8px;}
+  .drawer-nav{display:flex;flex-direction:column;padding:10px;gap:2px;}
+  .drawer-nav button{
+    text-align:left;background:none;border:none;cursor:pointer;
+    font-size:15.5px;padding:13px 14px;border-radius:10px;color:var(--ink);
+  }
+  .drawer-nav button.active{background:var(--blue-wash);color:var(--blue);font-weight:700;}
+  .drawer-foot{margin-top:auto;padding:16px;border-top:1px solid var(--line);}
+
+  .site-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+  .lang-switch{display:flex;font-size:11.5px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;overflow:hidden;}
+  .lang-switch span{padding:5px 9px;cursor:default;}
+  .lang-switch span.active{background:var(--blue);color:#fff;}
+  .btn{
+    font-size:13px;font-weight:600;cursor:pointer;border:none;border-radius:8px;
+    padding:9px 16px;white-space:nowrap;
+  }
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:var(--blue-deep);}
+  .btn-ghost{background:none;color:var(--blue);border:1px solid var(--line);}
+  .btn-gold{background:var(--gold);color:var(--blue-deep);}
+
+  main{max-width:1100px;margin:0 auto;padding:36px 24px 80px;}
+
+  /* ===== home ===== */
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:40px;
+    align-items:center;
+    padding:36px 8px 44px;
+  }
+  .eyebrow{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;}
+  .hero h1{font-size:clamp(26px,3.4vw,38px);line-height:1.15;margin:0 0 14px;letter-spacing:-.01em;}
+  .hero p{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:46ch;margin:0 0 22px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-art{
+    aspect-ratio:1/.85;
+    border-radius:20px;
+    background:linear-gradient(150deg,var(--blue-deep),var(--blue) 60%,var(--gold) 130%);
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow-lg);
+  }
+  .hero-art .ring{position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);}
+  .hero-art .r1{width:70%;aspect-ratio:1;top:-15%;right:-15%;}
+  .hero-art .r2{width:45%;aspect-ratio:1;bottom:8%;left:6%;}
+  .hero-art .glyph{position:absolute;bottom:22px;left:24px;color:#fff;font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:13px;font-weight:600;letter-spacing:.04em;opacity:.9;}
+
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:0 8px 48px;}
+  .stat{background:var(--card);padding:18px 16px;text-align:center;}
+  .stat b{display:block;font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:24px;color:var(--blue);font-variant-numeric:tabular-nums;}
+  .stat span{font-size:11.5px;color:var(--ink-soft);}
+
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0 8px;}
+  .feature-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 18px;cursor:pointer;transition:border-color .15s,transform .15s;
+  }
+  .feature-card:hover{border-color:var(--blue);transform:translateY(-2px);}
+  .feature-card .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--blue-wash);color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;
+  }
+  .feature-card h3{font-size:14.5px;margin:0 0 6px;}
+  .feature-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin:0;}
+  .feature-card .soon{display:inline-block;margin-top:10px;font-size:10.5px;font-weight:600;color:var(--warn);background:var(--warn-soft);padding:2px 8px;border-radius:100px;}
+
+  /* ===== section shell ===== */
+  .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px;padding:0 4px;}
+  .page-head h2{font-size:22px;margin:0 0 6px;}
+  .page-head p{font-size:13.5px;color:var(--ink-soft);margin:0;max-width:54ch;}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px;padding:0 4px;}
+  .search-box{
+    flex:1;min-width:180px;display:flex;align-items:center;gap:8px;
+    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;
+  }
+  .search-box input{border:none;outline:none;background:none;font:inherit;color:var(--ink);width:100%;font-size:13.5px;}
+  .search-box input::placeholder{color:var(--ink-faint);}
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{
+    font-size:12px;font-weight:600;color:var(--ink-soft);background:var(--card);
+    border:1px solid var(--line);padding:7px 13px;border-radius:100px;cursor:pointer;
+  }
+  .chip.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+  /* ===== mamandar grid ===== */
+  .people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .person-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px;cursor:pointer;transition:border-color .15s,transform .15s;
+  }
+  .person-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:var(--shadow);}
+  .person-top{display:flex;gap:12px;align-items:center;margin-bottom:12px;}
+  .avatar{
+    width:52px;height:52px;border-radius:12px;flex-shrink:0;
+    background:var(--gold-soft);color:var(--blue-deep);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Times New Roman", Georgia, "PT Serif", serif;font-weight:600;font-size:16px;
+  }
+  .person-name{font-size:14.5px;font-weight:600;margin:0 0 2px;}
+  .person-role{font-size:12px;color:var(--ink-soft);}
+  .person-tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .ptag{font-size:10.5px;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:3px 9px;border-radius:100px;}
+
+  /* ===== profile ===== */
+  .profile-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+  .profile-banner{height:70px;background:linear-gradient(120deg,var(--blue-deep),var(--blue));}
+  .profile-main{display:grid;grid-template-columns:180px 1fr;gap:26px;padding:0 28px 26px;}
+  .avatar-col{margin-top:-40px;}
+  .avatar-lg{width:110px;height:110px;border-radius:18px;border:4px solid var(--card);background:var(--gold-soft);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-family:"Times New Roman", Georgia, "PT Serif", serif;font-weight:600;font-size:32px;}
+  .profile-id{padding-top:16px;}
+  .profile-id h2{font-size:21px;margin:0 0 4px;}
+  .profile-id .role{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;}
+  .field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 22px;padding:22px 28px;border-top:1px solid var(--line);}
+  .field dt{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;}
+  .field dd{margin:0;font-size:13.5px;font-weight:500;}
+  .profile-blocks{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-top:1px solid var(--line);}
+  .pblock{background:var(--card);padding:20px 28px;}
+  .pblock h4{font-size:12px;margin:0 0 10px;}
+  .pblock ul{margin:0;padding-left:16px;}
+  .pblock li{font-size:13px;line-height:1.65;margin-bottom:5px;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;margin-bottom:16px;}
+
+  /* ===== ideas ===== */
+  .idea-list{display:flex;flex-direction:column;gap:12px;}
+  .idea-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .idea-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;}
+  .idea-title{font-size:15px;font-weight:600;margin:0 0 6px;}
+  .idea-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+  .idea-author{color:var(--blue);font-weight:600;cursor:pointer;}
+  .status-pill{font-size:11px;font-weight:600;padding:4px 11px;border-radius:100px;white-space:nowrap;}
+  .st-new{background:var(--gold-soft);color:#8a6b1f;}
+  .st-review{background:var(--blue-wash);color:var(--blue-deep);}
+  .st-discuss{background:var(--purple-soft);color:var(--purple);}
+  .st-accepted{background:var(--good-soft);color:var(--good);}
+  .st-progress{background:var(--warn-soft);color:var(--warn);}
+  .st-done{background:var(--good-soft);color:var(--good);font-weight:700;}
+  .st-rejected{background:var(--paper);color:var(--ink-faint);border:1px solid var(--line);}
+  .idea-desc{font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 12px;}
+  .idea-bottom{display:flex;align-items:center;gap:14px;}
+  .vote-btn{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 13px;font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;}
+  .vote-btn:hover{border-color:var(--blue);}
+  .vote-btn.liked{background:var(--good-soft);border-color:var(--good);color:var(--good);}
+  .vote-btn.disliked{background:var(--warn-soft);border-color:var(--warn);color:var(--warn);}
+  .cat-tag{font-size:11px;font-weight:600;color:var(--ink-faint);}
+
+  .new-idea-box{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;}
+  .new-idea-box.open{border-style:solid;border-color:var(--blue);}
+  .new-idea-row{display:flex;gap:10px;align-items:center;}
+  .new-idea-row input,.new-idea-form textarea,.new-idea-form select{
+    width:100%;font:inherit;font-size:13.5px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;
+    background:var(--paper);color:var(--ink);outline:none;
+  }
+  .new-idea-form{display:none;flex-direction:column;gap:10px;margin-top:12px;}
+  .new-idea-box.open .new-idea-form{display:flex;}
+  .new-idea-form textarea{resize:vertical;min-height:64px;font-family:inherit;}
+  .form-row{display:flex;gap:10px;}
+  .form-row>*{flex:1;}
+
+  /* ===== soon page ===== */
+  .soon-box{
+    background:var(--card);border:1px dashed var(--line);border-radius:16px;
+    padding:50px 24px;text-align:center;
+  }
+  .soon-box .ic{font-size:30px;margin-bottom:12px;}
+  .soon-box h3{font-size:17px;margin:0 0 8px;}
+  .soon-box p{font-size:13.5px;color:var(--ink-soft);max-width:42ch;margin:0 auto;line-height:1.6;}
+
+  footer{border-top:1px solid var(--line);padding:22px 24px;text-align:center;font-size:12px;color:var(--ink-faint);}
+
+  /* ===== auth modal ===== */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50;align-items:center;justify-content:center;padding:16px;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--card);border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 0;}
+  .modal-head h3{font-size:17px;margin:0;}
+  .modal-close{background:none;border:none;font-size:18px;color:var(--ink-soft);cursor:pointer;padding:4px 8px;}
+  .modal-tabs{display:flex;gap:4px;padding:14px 20px 0;}
+  .modal-tabs button{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;}
+  .modal-tabs button.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .modal-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px;}
+  .modal-body input,.modal-body select{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;}
+  .pw-wrap{position:relative;}
+  .pw-wrap input{padding-right:40px;}
+  .pw-toggle{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:6px 8px;color:var(--ink-faint);}
+  .modal-note{font-size:11.5px;color:var(--ink-faint);line-height:1.5;margin:0;}
+  .modal-error{font-size:12.5px;color:#c0392b;background:var(--warn-soft);border-radius:8px;padding:8px 11px;display:none;}
+  .modal-error.show{display:block;}
+  .modal-ok{font-size:12.5px;color:var(--good);background:var(--good-soft);border-radius:8px;padding:8px 11px;display:none;}
+  .modal-ok.show{display:block;}
+  .user-chip{display:flex;align-items:center;gap:8px;cursor:pointer;}
+  .user-chip .avatar{width:30px;height:30px;border-radius:9px;font-size:12px;}
+  .pending-banner{background:var(--warn-soft);color:var(--warn);font-size:12.5px;font-weight:600;padding:9px 16px;text-align:center;}
+  .admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .admin-row .meta{font-size:12.5px;color:var(--ink-soft);}
+  .admin-actions{display:flex;gap:8px;}
+  .admin-actions button{font-size:12px;font-weight:600;border:none;border-radius:8px;padding:7px 12px;cursor:pointer;}
+  .admin-actions .approve{background:var(--good);color:#fff;}
+  .admin-actions .reject{background:var(--paper);color:var(--ink-soft);border:1px solid var(--line);}
+
+  /* ===== Не Әңгіме feed ===== */
+  .new-post-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px;}
+  .new-post-box textarea{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;resize:vertical;min-height:56px;}
+  .new-post-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+  .post-img-preview{max-height:140px;border-radius:10px;display:none;}
+  .post-img-preview.show{display:block;}
+  .post-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+  .post-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .post-head .avatar{width:38px;height:38px;border-radius:10px;font-size:13px;}
+  .post-name{font-size:13.5px;font-weight:600;cursor:pointer;}
+  .post-time{font-size:11.5px;color:var(--ink-faint);}
+  .post-body{font-size:13.5px;line-height:1.6;white-space:pre-wrap;margin:0 0 10px;}
+  .post-img{max-width:100%;border-radius:10px;margin-bottom:10px;}
+  .post-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .post-del{margin-left:auto;background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;}
+  .comment-list{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+  .comment-item{font-size:12.5px;background:var(--paper);border-radius:9px;padding:8px 11px;}
+  .comment-item b{font-weight:600;}
+  .comment-del{float:right;background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:11px;}
+  .comment-form{display:flex;gap:8px;margin-top:8px;}
+  .comment-form input{flex:1;font:inherit;font-size:12.5px;padding:8px 11px;border:1px solid var(--line);border-radius:100px;background:var(--paper);color:var(--ink);outline:none;}
+  .new-post-box input{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;}
+  .new-post-box select{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;}
+  .section-sub{font-size:14px;font-weight:700;color:var(--ink-soft);margin:22px 4px 10px;padding-left:10px;border-left:4px solid var(--line);}
+  .section-sub.status-done{border-color:var(--good);color:var(--good);}
+  .section-sub.status-in_progress{border-color:#c9951a;color:#9a7412;}
+  .section-sub.status-planned{border-color:var(--blue);color:var(--blue);}
+  .event-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+  .event-card.status-done{border-left-color:var(--good);background:var(--good-soft);}
+  .event-card.status-in_progress{border-left-color:#c9951a;background:#fdf3de;}
+  .event-card.status-planned{border-left-color:var(--blue);}
+  .event-card .ev-title{font-size:15px;font-weight:700;margin:0 0 4px;}
+  .event-card .ev-meta{font-size:12px;color:var(--ink-faint);margin-bottom:8px;}
+  .event-card .ev-desc{font-size:13.5px;line-height:1.6;margin:0 0 10px;white-space:pre-wrap;}
+  .event-card .ev-img{max-width:100%;border-radius:10px;margin-bottom:10px;}
+  .vote-btn.attending{background:var(--good-soft);border-color:var(--good);color:var(--good);}
+  .ev-suggestions{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+  .ev-suggestion-item{font-size:12.5px;background:var(--paper);border-radius:9px;padding:8px 11px;}
+  .ev-status-select{font:inherit;font-size:11.5px;padding:4px 7px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);margin-left:auto;}
+  .history-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;display:flex;gap:16px;align-items:flex-start;}
+  .history-card .h-photo{width:72px;height:72px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--gold-soft);}
+  .history-card .h-photo-ph{width:72px;height:72px;border-radius:12px;flex-shrink:0;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--blue-deep);font-weight:700;}
+  .history-card .h-name{font-size:15px;font-weight:700;margin:0 0 2px;}
+  .history-card .h-years{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:6px;}
+  .history-card .h-bio{font-size:13.5px;line-height:1.6;margin:0 0 6px;white-space:pre-wrap;}
+  .history-card .h-workplace{font-size:12px;color:var(--ink-faint);}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;}
+    .hero-art{order:-1;max-width:340px;margin:0 auto;}
+    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .people-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .site-header{padding:10px 14px;gap:10px;}
+    .site-nav{display:none;}
+    .burger{display:flex;}
+    .logo-jmk{height:30px;}.logo-kbm{height:26px;}
+    main{padding:24px 14px 60px;}
+    .stat-row{grid-template-columns:repeat(2,1fr);margin:0 0 36px;}
+    .feature-grid{grid-template-columns:1fr;}
+    .people-grid{grid-template-columns:1fr;}
+    .profile-main{grid-template-columns:1fr;padding:0 16px 20px;}
+    .field-grid{grid-template-columns:repeat(2,1fr);padding:18px 16px;}
+    .profile-blocks{grid-template-columns:1fr;}
+    .pblock{padding:16px;}
+    .form-row{flex-direction:column;}
+    .history-card{flex-direction:column;align-items:flex-start;}
+    .history-card .h-photo, .history-card .h-photo-ph{width:56px;height:56px;}
+    .new-post-row{flex-direction:column;align-items:stretch;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner" id="demoBanner" data-i18n="banner_loading">🔗 Деректер Supabase-тен жүктелуде…</div>
+
+<header class="site-header">
+  <div class="logo-group" onclick="nav('home')">
+    <img class="logo-kbm" src="logos/kbm-logo.png" alt="КБМ логотипі">
+    <div class="logo-divider"></div>
+    <img class="logo-jmk" src="logos/jmk-logo.png" alt="Жас мамандар кеңесі логотипі">
+  </div>
+  <nav class="site-nav">
+    <button data-route="home" onclick="nav('home')" data-i18n="nav_home">Басты бет</button>
+    <button data-route="mamandar" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
+    <button data-route="ideas" onclick="nav('ideas')" data-i18n="nav_ideas">Идеялар банкі</button>
+    <button data-route="events" onclick="nav('events')" data-i18n="nav_events">Іс-шаралар</button>
+    <button data-route="history" onclick="nav('history')" data-i18n="nav_history">Тарих</button>
+    <button data-route="feed" onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
+    <button data-route="admin" onclick="nav('admin')" data-i18n="nav_admin" class="hidden" id="navAdminTop">Админ</button>
+  </nav>
+  <div class="site-actions">
+    <div class="lang-switch" id="langSwitchTop">
+      <span class="active" data-lang="kk" onclick="setLang('kk')">ҚАЗ</span><span data-lang="en" onclick="setLang('en')">ENG</span>
+    </div>
+    <span id="authArea"><button class="btn btn-primary" data-i18n="btn_login" onclick="openAuthModal()">Кіру / Тіркелу</button></span>
+  </div>
+  <button class="burger" aria-label="Мәзір" onclick="openDrawer()"><span></span><span></span><span></span></button>
+</header>
+<div class="pending-banner hidden" id="pendingBanner"></div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<nav class="drawer" id="drawer">
+  <div class="drawer-head">
+    <img src="logos/jmk-logo.png" alt="ЖМК логотипі">
+    <button class="drawer-close" aria-label="Жабу" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <button data-route="home" onclick="nav('home');closeDrawer()" data-i18n="nav_home">Басты бет</button>
+    <button data-route="mamandar" onclick="nav('mamandar');closeDrawer()" data-i18n="nav_mamandar">Жас мамандар</button>
+    <button data-route="ideas" onclick="nav('ideas');closeDrawer()" data-i18n="nav_ideas">Идеялар банкі</button>
+    <button data-route="events" onclick="nav('events');closeDrawer()" data-i18n="nav_events">Іс-шаралар</button>
+    <button data-route="history" onclick="nav('history');closeDrawer()" data-i18n="nav_history">Тарих</button>
+    <button data-route="feed" onclick="nav('feed');closeDrawer()" data-i18n="nav_feed">NE ANGIME</button>
+    <button data-route="admin" onclick="nav('admin');closeDrawer()" data-i18n="nav_admin" class="hidden" id="navAdminDrawer">Админ</button>
+  </div>
+  <div class="drawer-foot">
+    <div class="lang-switch" id="langSwitchDrawer">
+      <span class="active" data-lang="kk" onclick="setLang('kk')">ҚАЗ</span><span data-lang="en" onclick="setLang('en')">ENG</span>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section id="view-home">
+    <div class="hero">
+      <div>
+        <p class="eyebrow" data-i18n="hero_eyebrow">Ақ Қаражанбасмұнай · Жас мамандар кеңесі</p>
+        <h1 data-i18n="hero_title">Идеяңызбен өзгеріс жасаңыз</h1>
+        <p data-i18n="hero_desc">Кеңестің жаңа платформасы — жас мамандардың идеяларын ұсынатын, бір-бірімен танысатын және компанияның тарихын бірге жазатын ортақ алаң.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="nav('ideas')" data-i18n="hero_cta_ideas">Идеялар банкін көру</button>
+          <button class="btn btn-ghost" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="glyph">ЖМК · 2026</div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><b>82</b><span data-i18n="stat_people">жас маман</span></div>
+      <div class="stat"><b>24</b><span data-i18n="stat_ideas">идея</span></div>
+      <div class="stat"><b>15</b><span data-i18n="stat_events">іс-шара (2026)</span></div>
+      <div class="stat"><b>5</b><span data-i18n="stat_history">жыл тарих</span></div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card" onclick="nav('mamandar')">
+        <div class="ic">👥</div>
+        <h3 data-i18n="nav_mamandar">Жас мамандар</h3>
+        <p data-i18n="feat_people_desc">Кеңес мүшелерінің профильдері мен тәжірибесі.</p>
+      </div>
+      <div class="feature-card" onclick="nav('ideas')">
+        <div class="ic">💡</div>
+        <h3 data-i18n="nav_ideas">Идеялар банкі</h3>
+        <p data-i18n="feat_ideas_desc">Идея ұсыныңыз, дауыс беріңіз, статусын бақылаңыз.</p>
+      </div>
+      <div class="feature-card" onclick="nav('events')">
+        <div class="ic">📅</div>
+        <h3 data-i18n="nav_events">Іс-шаралар</h3>
+        <p data-i18n="feat_events_desc">Кездесулер мен жобалар осы жерде жиналады.</p>
+        <span class="soon" data-i18n="feat_soon">Келесі кезең</span>
+      </div>
+      <div class="feature-card" onclick="nav('history')">
+        <div class="ic">🏛️</div>
+        <h3 data-i18n="nav_history">Кеңес тарихы</h3>
+        <p data-i18n="feat_history_desc">Бұрынғы мүшелер мен жылдар бойынша архив.</p>
+        <span class="soon" data-i18n="feat_soon">Келесі кезең</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAMANDAR LIST ============ -->
+  <section id="view-mamandar" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_mamandar">Жас мамандар</h2>
+        <p data-i18n="page_mamandar_desc">Кеңеске тіркелген жас мамандардың профильдері. Атына бассаңыз, толық ақпарат ашылады.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔍</span>
+        <input id="peopleSearch" data-i18n-ph="search_people_ph" placeholder="Аты немесе бөлімі бойынша іздеу…" oninput="renderPeople()">
+      </div>
+    </div>
+    <div class="people-grid" id="peopleGrid"></div>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section id="view-profile" class="hidden">
+    <span class="back-link" onclick="nav('mamandar')" data-i18n="profile_back">← Жас мамандар тізіміне оралу</span>
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <div class="profile-main">
+        <div class="avatar-col">
+          <div class="avatar-lg" id="pAvatar">ЖЖ</div>
+        </div>
+        <div class="profile-id">
+          <h2 id="pName">Жұбаназаров Жәнібек</h2>
+          <p class="role" id="pRole">Геолог · ЦДН-1 · Жас маман</p>
+          <div class="person-tags" id="pTags"></div>
+        </div>
+      </div>
+      <dl class="field-grid" id="pFields"></dl>
+      <div class="profile-blocks">
+        <div class="pblock"><h4 data-i18n="profile_projects">Қатысқан жобалары</h4><ul id="pProjects"></ul></div>
+        <div class="pblock"><h4 data-i18n="profile_achievements">Жетістіктері</h4><ul id="pAchievements"></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IDEAS ============ -->
+  <section id="view-ideas" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_ideas">Идеялар банкі</h2>
+        <p data-i18n="page_ideas_desc">Барлық тіркелген қызметкер идеяларды көре алады. Дауыс беру мен статус — тіркелгендерге ғана ашық.</p>
+      </div>
+      <button class="btn btn-gold" onclick="toggleNewIdea()" data-i18n="btn_new_idea">+ Идея ұсыну</button>
+    </div>
+
+    <div class="new-idea-box" id="newIdeaBox">
+      <div class="new-idea-row" onclick="toggleNewIdea()" style="cursor:pointer;">
+        <span>💡</span>
+        <input readonly data-i18n-ph="new_idea_row_ph" placeholder="Жаңа идеяңызды осы жерден ұсыныңыз…" style="cursor:pointer;">
+      </div>
+      <div class="new-idea-form" id="newIdeaForm">
+        <input id="newIdeaTitle" data-i18n-ph="idea_title_ph" placeholder="Идеяның қысқаша атауы">
+        <textarea id="newIdeaDesc" data-i18n-ph="idea_desc_ph" placeholder="Идеяны толығырақ сипаттаңыз…"></textarea>
+        <div class="form-row">
+          <select id="newIdeaCat"></select>
+          <button class="btn btn-primary" onclick="submitIdea()" data-i18n="btn_send">Жіберу</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔍</span>
+        <input id="ideaSearch" data-i18n-ph="search_idea_ph" placeholder="Идея, автор немесе кілт сөз бойынша іздеу…" oninput="renderIdeas()">
+      </div>
+    </div>
+    <div class="chip-row" id="catChips" style="margin-bottom:18px;"></div>
+
+    <div class="idea-list" id="ideaList"></div>
+  </section>
+
+  <!-- ============ EVENTS ============ -->
+  <section id="view-events" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_events">Іс-шаралар</h2>
+        <p data-i18n="events_desc">Кеңестің жоспарлаған және өткен іс-шаралары.</p>
+      </div>
+      <button class="btn btn-primary hidden" id="evAddBtn" onclick="document.getElementById('newEventBox').classList.toggle('hidden')" data-i18n="ev_btn_new">+ Іс-шара қосу</button>
+    </div>
+    <div class="new-post-box hidden" id="newEventBox">
+      <input id="evTitle" data-i18n-ph="ev_ph_title" placeholder="Атауы">
+      <input id="evDate" type="date">
+      <input id="evLocation" data-i18n-ph="ev_ph_location" placeholder="Орны">
+      <textarea id="evDesc" data-i18n-ph="ev_ph_desc" placeholder="Қысқаша сипаттама"></textarea>
+      <select id="evStatus">
+        <option value="planned" data-i18n="ev_status_planned">Жоспарда</option>
+        <option value="in_progress" data-i18n="ev_status_in_progress">Орындалып жатыр</option>
+        <option value="done" data-i18n="ev_status_done">Орындалды</option>
+      </select>
+      <img class="post-img-preview" id="evImagePreview">
+      <div class="new-post-row">
+        <input type="file" id="evImage" accept="image/*" onchange="onEventImageChange()">
+        <button class="btn btn-primary" onclick="submitEvent()" data-i18n="ev_btn_create">Қосу</button>
+      </div>
+    </div>
+    <h3 class="section-sub status-done" data-i18n="ev_status_done">Орындалды</h3>
+    <div id="eventsDone"></div>
+    <h3 class="section-sub status-in_progress" data-i18n="ev_status_in_progress">Орындалып жатыр</h3>
+    <div id="eventsInProgress"></div>
+    <h3 class="section-sub status-planned" data-i18n="ev_status_planned">Жоспарда</h3>
+    <div id="eventsPlanned"></div>
+  </section>
+
+  <!-- ============ HISTORY ============ -->
+  <section id="view-history" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_history">Кеңес тарихы</h2>
+        <p data-i18n="history_soon_desc">Кеңестің құрылған жылынан бергі тарихы, бұрынғы төрағалар осы жерде жинақталады.</p>
+      </div>
+      <button class="btn btn-primary hidden" id="hAddBtn" onclick="document.getElementById('newHistoryBox').classList.toggle('hidden')" data-i18n="h_btn_new">+ Төраға қосу</button>
+    </div>
+    <div class="new-post-box hidden" id="newHistoryBox">
+      <input id="hName" data-i18n-ph="h_ph_name" placeholder="Аты-жөні">
+      <div class="new-post-row" style="gap:10px;">
+        <input id="hStartYear" type="number" data-i18n-ph="h_ph_start" placeholder="Бастаған жылы" style="flex:1;">
+        <input id="hEndYear" type="number" data-i18n-ph="h_ph_end" placeholder="Аяқтаған жылы (бос — қазірге дейін)" style="flex:1;">
+      </div>
+      <textarea id="hBio" data-i18n-ph="h_ph_bio" placeholder="Сол кісі туралы қысқаша топик"></textarea>
+      <input id="hWorkplace" data-i18n-ph="h_ph_workplace" placeholder="Қазір қайда жұмыс жасайды">
+      <img class="post-img-preview" id="hImagePreview">
+      <div class="new-post-row">
+        <input type="file" id="hImage" accept="image/*" onchange="onHistoryImageChange()">
+        <button class="btn btn-primary" onclick="submitHistory()" data-i18n="ev_btn_create">Қосу</button>
+      </div>
+    </div>
+    <div id="historyList"></div>
+  </section>
+
+  <!-- ============ НЕ ӘҢГІМЕ ============ -->
+  <section id="view-feed" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_feed">NE ANGIME</h2>
+        <p data-i18n="feed_desc">Ойыңызбен, суретпен бөлісіңіз — кеңестің ортақ лентасы.</p>
+      </div>
+    </div>
+    <div class="new-post-box">
+      <textarea id="newPostBody" data-i18n-ph="post_ph" placeholder="Не ойлап тұрсыз?"></textarea>
+      <img class="post-img-preview" id="newPostPreview">
+      <div class="new-post-row">
+        <input type="file" id="newPostImage" accept="image/*" onchange="onPostImageChange()">
+        <button class="btn btn-primary" onclick="submitPost()" data-i18n="btn_post">Жариялау</button>
+      </div>
+    </div>
+    <div id="feedList"></div>
+  </section>
+
+  <!-- ============ ADMIN ============ -->
+  <section id="view-admin" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_admin">Админ</h2>
+        <p data-i18n="admin_desc">Тіркелу сұраныстарын осы жерден бекітесіз немесе қабылдамайсыз.</p>
+      </div>
+    </div>
+    <div id="adminList"></div>
+  </section>
+
+</main>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle" data-i18n="tab_login">Кіру</h3>
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="active" id="tabLoginBtn" onclick="switchAuthTab('login')" data-i18n="tab_login">Кіру</button>
+      <button id="tabRegisterBtn" onclick="switchAuthTab('register')" data-i18n="tab_register">Тіркелу</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-error" id="authError"></div>
+      <div class="modal-ok" id="authOk"></div>
+
+      <div id="loginForm">
+        <input id="loginEmail" type="email" data-i18n-ph="ph_email" placeholder="Email">
+        <div class="pw-wrap">
+          <input id="loginPassword" type="password" data-i18n-ph="ph_password" placeholder="Құпия сөз">
+          <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
+        </div>
+        <button class="btn btn-primary" style="width:100%;padding:11px;" onclick="doLogin()" data-i18n="btn_login_submit">Кіру</button>
+      </div>
+
+      <div id="registerForm" class="hidden">
+        <input id="regName" data-i18n-ph="ph_fullname" placeholder="Аты-жөні">
+        <input id="regPosition" data-i18n-ph="ph_position" placeholder="Лауазымы">
+        <input id="regDept" data-i18n-ph="ph_department" placeholder="Бөлімі">
+        <input id="regCompany" data-i18n-ph="ph_company" placeholder="Компания" value="ҚБМ">
+        <input id="regPhone" type="tel" data-i18n-ph="ph_phone" placeholder="Телефон (міндетті емес)">
+        <input id="regEmail" type="email" data-i18n-ph="ph_email" placeholder="Email">
+        <div class="pw-wrap">
+          <input id="regPassword" type="password" data-i18n-ph="ph_password_new" placeholder="Құпия сөз (кемінде 6 таңба)">
+          <button type="button" class="pw-toggle" onclick="togglePw('regPassword',this)">👁</button>
+        </div>
+        <div class="pw-wrap">
+          <input id="regPasswordConfirm" type="password" data-i18n-ph="ph_password_confirm" placeholder="Құпия сөзді қайталаңыз">
+          <button type="button" class="pw-toggle" onclick="togglePw('regPasswordConfirm',this)">👁</button>
+        </div>
+        <button class="btn btn-primary" style="width:100%;padding:11px;" onclick="doRegister()" data-i18n="btn_register_submit">Тіркелу сұранысын жіберу</button>
+        <p class="modal-note" data-i18n="reg_note">Тіркелу сұранысыңызды админ қарап, бекіткеннен кейін толық мүмкіндіктер (дауыс беру, идея ұсыну) ашылады.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer data-i18n="footer_text">© Ақ Қаражанбасмұнай · Жас мамандар кеңесі — қаңқа нұсқасы, 2026</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ===================== Supabase байланысы ===================== */
+var SUPABASE_URL = 'https://siwpgmdphvkafjmkxorv.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_T5-O4fbhO_F-zIZ7EGfZXA_EuVNr4UJ';
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function sbGet(path){
+  return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+  }).then(function(r){
+    if(!r.ok) throw new Error('Supabase сұрауы сәтсіз: ' + r.status);
+    return r.json();
+  });
+}
+
+var people = [];
+var ideas = [];
+var currentUserId = null;
+
+/* ===================== i18n ===================== */
+var LANG = localStorage.getItem('jmk_lang') || 'kk';
+
+var I18N = {
+  kk: {
+    banner_loading:'🔗 Деректер Supabase-тен жүктелуде…',
+    nav_home:'Басты бет', nav_mamandar:'Жас мамандар', nav_ideas:'Идеялар банкі',
+    nav_events:'Іс-шаралар', nav_history:'Тарих',
+    btn_login:'Кіру / Тіркелу',
+    hero_eyebrow:'Ақ Қаражанбасмұнай · Жас мамандар кеңесі',
+    hero_title:'Идеяңызбен өзгеріс жасаңыз',
+    hero_desc:'Кеңестің жаңа платформасы — жас мамандардың идеяларын ұсынатын, бір-бірімен танысатын және компанияның тарихын бірге жазатын ортақ алаң.',
+    hero_cta_ideas:'Идеялар банкін көру',
+    stat_people:'жас маман', stat_ideas:'идея', stat_events:'іс-шара (2026)', stat_history:'жыл тарих',
+    feat_people_desc:'Кеңес мүшелерінің профильдері мен тәжірибесі.',
+    feat_ideas_desc:'Идея ұсыныңыз, дауыс беріңіз, статусын бақылаңыз.',
+    feat_events_desc:'Кездесулер мен жобалар осы жерде жиналады.',
+    feat_history_desc:'Бұрынғы мүшелер мен жылдар бойынша архив.',
+    feat_soon:'Келесі кезең',
+    page_mamandar_desc:'Кеңеске тіркелген жас мамандардың профильдері. Атына бассаңыз, толық ақпарат ашылады.',
+    search_people_ph:'Аты немесе бөлімі бойынша іздеу…',
+    page_ideas_desc:'Барлық тіркелген қызметкер идеяларды көре алады. Дауыс беру мен статус — тіркелгендерге ғана ашық.',
+    btn_new_idea:'+ Идея ұсыну',
+    new_idea_row_ph:'Жаңа идеяңызды осы жерден ұсыныңыз…',
+    idea_title_ph:'Идеяның қысқаша атауы',
+    idea_desc_ph:'Идеяны толығырақ сипаттаңыз…',
+    btn_send:'Жіберу',
+    search_idea_ph:'Идея, автор немесе кілт сөз бойынша іздеу…',
+    cat_all:'Барлығы',
+    no_results:'Іздеу нәтижесі табылмады.',
+    profile_back:'← Жас мамандар тізіміне оралу',
+    profile_projects:'Қатысқан жобалары',
+    profile_achievements:'Жетістіктері',
+    profile_no_project:'Әзірге жоба қосылмаған',
+    profile_no_achievement:'Әзірге жетістік қосылмаған',
+    field_education:'Білімі', field_hire_year:'Жұмысқа кірген жылы', field_experience:'Жұмыс өтілі',
+    field_council_year:'Кеңеске кірген жылы', field_council_role:'Кеңестегі қызметі', field_contact:'Байланыс',
+    council_role_default:'Мүше', years_suffix:'жыл', role_young_specialist:'Жас маман',
+    tag_since:function(y){return 'Кеңесте ' + y + ' жылдан бері';},
+    tag_ideas:function(n){return n + ' идея';},
+    events_soon_title:'Іс-шаралар / Жобалар',
+    events_soon_desc:'Бұл бөлім келесі кезеңде қосылады: ағымдағы жылдың іс-шаралары мен жобалары, содан кейін жыл сайын архивке өтіп отырады.',
+    history_soon_desc:'Кеңестің құрылған жылынан бергі тарихы, бұрынғы төрағалар мен мүшелер осы жерде біртіндеп жинақталады.',
+    events_desc:'Кеңестің жоспарлаған және өткен іс-шаралары.',
+    ev_btn_new:'+ Іс-шара қосу', ev_btn_create:'Қосу',
+    ev_ph_title:'Атауы', ev_ph_location:'Орны', ev_ph_desc:'Қысқаша сипаттама',
+    ev_upcoming:'Жоспарда', ev_past:'Архив',
+    ev_empty_upcoming:'Әзірге жоспарда іс-шара жоқ.', ev_empty_past:'Әзірге архивте іс-шара жоқ.',
+    ev_attending:'Мен қатысамын', ev_suggestion_ph:'Ұсынысыңызды жазыңыз…',
+    ev_err_required:'Атауы мен күнін толтырыңыз.',
+    ev_status_planned:'Жоспарда', ev_status_in_progress:'Орындалып жатыр', ev_status_done:'Орындалды',
+    ev_empty_done:'Әзірге орындалған іс-шара жоқ.', ev_empty_in_progress:'Қазір орындалып жатқан іс-шара жоқ.',
+    h_btn_new:'+ Төраға қосу', h_ph_name:'Аты-жөні', h_ph_start:'Бастаған жылы', h_ph_end:'Аяқтаған жылы (бос — қазірге дейін)',
+    h_ph_bio:'Сол кісі туралы қысқаша топик', h_ph_workplace:'Қазір қайда жұмыс жасайды',
+    h_present:'қазірге дейін', h_empty:'Әзірге тарих жазбасы қосылмаған.', h_err_required:'Аты-жөні мен бастаған жылын толтырыңыз.',
+    footer_text:'© Ақ Қаражанбасмұнай · Жас мамандар кеңесі — қаңқа нұсқасы, 2026',
+    banner_loaded:'🔗 <b>Деректер қоры қосылды</b> — жас мамандар мен идеялар Supabase-тен нақты жүктелді. Тіркелу/кіру мен дауыс беруді сақтау келесі кезеңде қосылады.',
+    banner_error:function(msg){return '⚠️ Деректерді жүктеу кезінде қате шықты: ' + msg;},
+    loading:'Жүктелуде…',
+    data_not_loaded:'Деректер жүктелмеді.',
+    login_alert:'Тіркелу/Кіру ағыны келесі кезеңде — деректер қоры мен авторизация қосылғанда іске қосылады.',
+    nav_admin:'Админ', admin_desc:'Тіркелу сұраныстарын осы жерден бекітесіз немесе қабылдамайсыз.',
+    tab_login:'Кіру', tab_register:'Тіркелу',
+    ph_email:'Email', ph_password:'Құпия сөз', ph_password_new:'Құпия сөз (кемінде 6 таңба)',
+    ph_fullname:'Аты-жөні', ph_position:'Лауазымы', ph_department:'Бөлімі', ph_company:'Компания', ph_phone:'Телефон (міндетті емес)',
+    btn_login_submit:'Кіру', btn_register_submit:'Тіркелу сұранысын жіберу', btn_logout:'Шығу',
+    reg_note:'Тіркелу сұранысыңызды админ қарап, бекіткеннен кейін толық мүмкіндіктер (дауыс беру, идея ұсыну) ашылады.',
+    reg_success:'Сұраныс жіберілді! Админ бекіткен соң хабарланады.',
+    ph_password_confirm:'Құпия сөзді қайталаңыз',
+    err_fill_all:'Барлық міндетті өрісті толтырыңыз.',
+    err_password_mismatch:'Құпия сөздер сәйкес келмейді.',
+    err_generic:'Қате шықты, қайта көріңіз.',
+    pending_text:'Тіркелу сұраныстарыңыз қаралуда — админ бекіткен соң дауыс беру мен идея ұсыну ашылады.',
+    need_login_alert:'Бұл әрекет үшін кіру керек.',
+    need_approval_alert:'Бұл әрекет үшін админ сұраныстарыңызды бекіту керек.',
+    admin_empty:'Қаралатын сұраныс жоқ.',
+    admin_approve:'Бекіту', admin_reject:'Қабылдамау',
+    admin_pending_tag:'Күтуде',
+    nav_feed:'NE ANGIME', feed_desc:'Ойыңызбен, суретпен бөлісіңіз — кеңестің ортақ лентасы.',
+    post_ph:'Не ойлап тұрсыз?', btn_post:'Жариялау',
+    comment_ph:'Пікір жазыңыз…', btn_comment_send:'Жіберу', btn_reply:'Жауап беру',
+    post_delete:'Өшіру', comment_delete:'Өшіру',
+    post_empty:'Әзірге ештеңе жарияланбаған.',
+    post_just_now:'жаңа ғана'
+  },
+  en: {
+    banner_loading:'🔗 Loading data from Supabase…',
+    nav_home:'Home', nav_mamandar:'Young specialists', nav_ideas:'Idea bank',
+    nav_events:'Events', nav_history:'History',
+    btn_login:'Log in / Sign up',
+    hero_eyebrow:'Ak Qarazhanbasmunai · Young Specialists Council',
+    hero_title:'Make change with your idea',
+    hero_desc:'The council\'s new platform — a shared space for submitting ideas, getting to know each other, and writing the company\'s history together.',
+    hero_cta_ideas:'Browse the idea bank',
+    stat_people:'young specialists', stat_ideas:'ideas', stat_events:'events (2026)', stat_history:'years of history',
+    feat_people_desc:'Profiles and experience of council members.',
+    feat_ideas_desc:'Submit ideas, vote, and track their status.',
+    feat_events_desc:'Meetings and projects are gathered here.',
+    feat_history_desc:'Archive of former members by year.',
+    feat_soon:'Coming next',
+    page_mamandar_desc:'Profiles of young specialists registered with the council. Click a name to see the full profile.',
+    search_people_ph:'Search by name or department…',
+    page_ideas_desc:'All registered employees can view ideas. Voting and status are only open to registered members.',
+    btn_new_idea:'+ Submit an idea',
+    new_idea_row_ph:'Submit your new idea here…',
+    idea_title_ph:'Short title of the idea',
+    idea_desc_ph:'Describe the idea in more detail…',
+    btn_send:'Submit',
+    search_idea_ph:'Search by idea, author or keyword…',
+    cat_all:'All',
+    no_results:'No results found.',
+    profile_back:'← Back to young specialists',
+    profile_projects:'Projects involved in',
+    profile_achievements:'Achievements',
+    profile_no_project:'No projects added yet',
+    profile_no_achievement:'No achievements added yet',
+    field_education:'Education', field_hire_year:'Hire year', field_experience:'Experience',
+    field_council_year:'Joined council in', field_council_role:'Council role', field_contact:'Contact',
+    council_role_default:'Member', years_suffix:'yr', role_young_specialist:'Young specialist',
+    tag_since:function(y){return 'With the council since ' + y;},
+    tag_ideas:function(n){return n + ' idea' + (n===1?'':'s');},
+    events_soon_title:'Events / Projects',
+    events_soon_desc:'This section is coming next: this year\'s events and projects, archived by year afterwards.',
+    history_soon_desc:'The council\'s history since its founding — former chairmen and members will be gathered here gradually.',
+    events_desc:'The council\'s planned and past events.',
+    ev_btn_new:'+ Add event', ev_btn_create:'Add',
+    ev_ph_title:'Title', ev_ph_location:'Location', ev_ph_desc:'Short description',
+    ev_upcoming:'Upcoming', ev_past:'Archive',
+    ev_empty_upcoming:'No upcoming events yet.', ev_empty_past:'No past events yet.',
+    ev_attending:'I\'m attending', ev_suggestion_ph:'Write your suggestion…',
+    ev_err_required:'Please fill in the title and date.',
+    ev_status_planned:'Upcoming', ev_status_in_progress:'In progress', ev_status_done:'Completed',
+    ev_empty_done:'No completed events yet.', ev_empty_in_progress:'No events currently in progress.',
+    h_btn_new:'+ Add chairman', h_ph_name:'Full name', h_ph_start:'Start year', h_ph_end:'End year (blank — present)',
+    h_ph_bio:'Short bio about this person', h_ph_workplace:'Current workplace',
+    h_present:'present', h_empty:'No history entries yet.', h_err_required:'Please fill in the name and start year.',
+    footer_text:'© Ak Qarazhanbasmunai · Young Specialists Council — skeleton version, 2026',
+    banner_loaded:'🔗 <b>Database connected</b> — young specialists and ideas loaded live from Supabase. Saving sign-up/login and votes comes next.',
+    banner_error:function(msg){return '⚠️ Error loading data: ' + msg;},
+    loading:'Loading…',
+    data_not_loaded:'Data failed to load.',
+    login_alert:'Sign-up/login flow comes next — once the database and authorization are connected.',
+    nav_admin:'Admin', admin_desc:'Review and approve or reject sign-up requests here.',
+    tab_login:'Log in', tab_register:'Sign up',
+    ph_email:'Email', ph_password:'Password', ph_password_new:'Password (6+ characters)',
+    ph_fullname:'Full name', ph_position:'Position', ph_department:'Department', ph_company:'Company', ph_phone:'Phone (optional)',
+    btn_login_submit:'Log in', btn_register_submit:'Send sign-up request', btn_logout:'Log out',
+    reg_note:'Once an admin reviews and approves your request, full access (voting, submitting ideas) will open up.',
+    reg_success:'Request sent! You\'ll get access once an admin approves it.',
+    ph_password_confirm:'Confirm password',
+    err_fill_all:'Please fill in all required fields.',
+    err_password_mismatch:'Passwords do not match.',
+    err_generic:'Something went wrong, please try again.',
+    pending_text:'Your sign-up request is pending — voting and submitting ideas will open once an admin approves it.',
+    need_login_alert:'You need to log in for this action.',
+    need_approval_alert:'An admin needs to approve your request first.',
+    admin_empty:'No pending requests.',
+    admin_approve:'Approve', admin_reject:'Reject',
+    admin_pending_tag:'Pending',
+    nav_feed:'NE ANGIME', feed_desc:'Share your thoughts and photos — the council\'s shared feed.',
+    post_ph:'What\'s on your mind?', btn_post:'Post',
+    comment_ph:'Write a comment…', btn_comment_send:'Send', btn_reply:'Reply',
+    post_delete:'Delete', comment_delete:'Delete',
+    post_empty:'Nothing posted yet.',
+    post_just_now:'just now'
+  }
+};
+
+function t(key){
+  var v = (I18N[LANG] && I18N[LANG][key] !== undefined) ? I18N[LANG][key] : (I18N.kk[key] !== undefined ? I18N.kk[key] : key);
+  return v;
+}
+
+var STATUS_DEFS = [
+  {key:'new',         kk:'🟡 Жаңа ұсыныс',               en:'🟡 New suggestion',          cls:'st-new'},
+  {key:'review',      kk:'🔵 Қаралуда',                  en:'🔵 Under review',           cls:'st-review'},
+  {key:'discuss',     kk:'🟣 Талқылауда',                en:'🟣 In discussion',           cls:'st-discuss'},
+  {key:'accepted',    kk:'🟢 Іске асыруға қабылданды',   en:'🟢 Accepted for implementation', cls:'st-accepted'},
+  {key:'in_progress', kk:'⚙️ Іске асырылуда',            en:'⚙️ In progress',             cls:'st-progress'},
+  {key:'done',        kk:'🏆 Іске асырылды',             en:'🏆 Implemented',             cls:'st-done'},
+  {key:'rejected',    kk:'⚪ Қабылданбады',              en:'⚪ Not accepted',            cls:'st-rejected'}
+];
+function statusInfo(key){
+  var d = STATUS_DEFS.find(function(x){return x.key===key;}) || STATUS_DEFS[0];
+  return {label: d[LANG] || d.kk, cls: d.cls};
+}
+
+var CAT_DEFS = [
+  {key:'geology', kk:'Геология және мұнай өндіру',        en:'Geology & oil production'},
+  {key:'hse',     kk:'HSE / өнеркәсіптік қауіпсіздік',     en:'HSE / industrial safety'},
+  {key:'digital', kk:'Цифрландыру',                        en:'Digitalisation'},
+  {key:'economy', kk:'Экономика / шығындарды азайту',      en:'Economy / cost reduction'},
+  {key:'ecology', kk:'Экология',                           en:'Ecology'},
+  {key:'social',  kk:'Әлеуметтік',                          en:'Social'},
+  {key:'other',   kk:'Басқа',                               en:'Other'}
+];
+function catByRaw(raw){
+  return CAT_DEFS.find(function(c){ return c.key===raw || c.kk===raw; });
+}
+function catKey(raw){
+  var c = catByRaw(raw);
+  return c ? c.key : raw;
+}
+function catLabel(raw){
+  var c = catByRaw(raw);
+  if(!c) return raw;
+  return c[LANG] || c.kk;
+}
+function populateCatSelect(){
+  var sel = document.getElementById('newIdeaCat');
+  if(!sel) return;
+  sel.innerHTML = CAT_DEFS.map(function(c){
+    return '<option value="'+c.key+'">'+(c[LANG]||c.kk)+'</option>';
+  }).join('');
+}
+
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
+  document.querySelectorAll('.lang-switch span').forEach(function(sp){
+    sp.classList.toggle('active', sp.getAttribute('data-lang')===LANG);
+  });
+  document.documentElement.lang = LANG;
+  populateCatSelect();
+}
+
+function setLang(lang){
+  LANG = lang;
+  try{ localStorage.setItem('jmk_lang', lang); }catch(e){}
+  applyI18n();
+  renderCatChips();
+  renderPeople();
+  renderIdeas();
+  refreshAuthUI();
+  if(document.getElementById('view-admin') && !document.getElementById('view-admin').classList.contains('hidden')) renderAdminList();
+  if(document.getElementById('view-feed') && !document.getElementById('view-feed').classList.contains('hidden')) loadFeed();
+}
+
+var activeCat = 'all';
+
+/* ===================== auth state ===================== */
+var authUser = null;   // Supabase auth user
+var myProfile = null;  // profiles row for authUser
+var isAdmin = false;
+var myVotes = {};      // { idea_id: 'like'|'dislike' } for authUser
+
+function isApproved(){ return !!(myProfile && myProfile.approval_status === 'approved'); }
+
+function refreshAuthUI(){
+  var area = document.getElementById('authArea');
+  var pendingBanner = document.getElementById('pendingBanner');
+  if(authUser){
+    var initials = (myProfile && myProfile.full_name) ? myProfile.full_name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase() : '?';
+    var label = myProfile ? myProfile.full_name : authUser.email;
+    area.innerHTML = '<span class="user-chip" onclick="doLogout()" title="'+t('btn_logout')+'">'+
+      '<span class="avatar" style="display:flex;align-items:center;justify-content:center;background:var(--gold-soft);color:var(--blue-deep);font-weight:600;">'+initials+'</span>'+
+      '<span style="font-size:13px;font-weight:600;">'+label+'</span></span>';
+    if(myProfile && myProfile.approval_status === 'pending'){
+      pendingBanner.textContent = t('pending_text');
+      pendingBanner.classList.remove('hidden');
+    } else {
+      pendingBanner.classList.add('hidden');
+    }
+  } else {
+    area.innerHTML = '<button class="btn btn-primary" data-i18n="btn_login" onclick="openAuthModal()">'+t('btn_login')+'</button>';
+    pendingBanner.classList.add('hidden');
+  }
+  document.getElementById('navAdminTop').classList.toggle('hidden', !isAdmin);
+  document.getElementById('navAdminDrawer').classList.toggle('hidden', !isAdmin);
+  var evAddBtn = document.getElementById('evAddBtn');
+  if(evAddBtn) evAddBtn.classList.toggle('hidden', !isAdmin);
+  var hAddBtn = document.getElementById('hAddBtn');
+  if(hAddBtn) hAddBtn.classList.toggle('hidden', !isAdmin);
+}
+
+function loadMyState(){
+  return sb.auth.getUser().then(function(res){
+    authUser = (res.data && res.data.user) || null;
+    if(!authUser){ myProfile = null; isAdmin = false; myVotes = {}; refreshAuthUI(); return; }
+    return Promise.all([
+      sb.from('profiles').select('*').eq('id', authUser.id).maybeSingle(),
+      sb.from('admins').select('user_id').eq('user_id', authUser.id).maybeSingle(),
+      sb.from('idea_votes').select('idea_id,vote_type').eq('profile_id', authUser.id)
+    ]).then(function(res2){
+      myProfile = (res2[0] && res2[0].data) || null;
+      isAdmin = !!(res2[1] && res2[1].data);
+      myVotes = {};
+      ((res2[2] && res2[2].data) || []).forEach(function(r){ myVotes[r.idea_id] = r.vote_type; });
+      refreshAuthUI();
+      renderIdeas();
+    });
+  }).catch(function(){ refreshAuthUI(); });
+}
+
+sb.auth.onAuthStateChange(function(){ loadMyState(); });
+
+function requireApproved(){
+  if(!authUser){ openAuthModal(); return false; }
+  if(!isApproved()){ alert(t('need_approval_alert')); return false; }
+  return true;
+}
+
+/* ===================== auth modal ===================== */
+function openAuthModal(){
+  clearAuthMsgs();
+  document.getElementById('authModal').classList.add('open');
+}
+function closeAuthModal(){
+  document.getElementById('authModal').classList.remove('open');
+}
+function switchAuthTab(tab){
+  clearAuthMsgs();
+  var isLogin = tab === 'login';
+  document.getElementById('tabLoginBtn').classList.toggle('active', isLogin);
+  document.getElementById('tabRegisterBtn').classList.toggle('active', !isLogin);
+  document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+  document.getElementById('registerForm').classList.toggle('hidden', isLogin);
+  document.getElementById('modalTitle').textContent = isLogin ? t('tab_login') : t('tab_register');
+}
+function clearAuthMsgs(){
+  var e = document.getElementById('authError'); e.classList.remove('show'); e.textContent='';
+  var o = document.getElementById('authOk'); o.classList.remove('show'); o.textContent='';
+}
+function showAuthError(msg){
+  var e = document.getElementById('authError'); e.textContent = msg; e.classList.add('show');
+}
+function showAuthOk(msg){
+  var o = document.getElementById('authOk'); o.textContent = msg; o.classList.add('show');
+}
+function togglePw(id, btn){
+  var input = document.getElementById(id);
+  var show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  btn.textContent = show ? '🙈' : '👁';
+}
+
+function doLogin(){
+  clearAuthMsgs();
+  var email = document.getElementById('loginEmail').value.trim();
+  var password = document.getElementById('loginPassword').value;
+  if(!email || !password){ showAuthError(t('err_fill_all')); return; }
+  sb.auth.signInWithPassword({ email: email, password: password }).then(function(res){
+    if(res.error){ showAuthError(res.error.message || t('err_generic')); return; }
+    closeAuthModal();
+    loadMyState();
+  });
+}
+
+function doRegister(){
+  clearAuthMsgs();
+  var name = document.getElementById('regName').value.trim();
+  var position = document.getElementById('regPosition').value.trim();
+  var dept = document.getElementById('regDept').value.trim();
+  var company = document.getElementById('regCompany').value.trim();
+  var phone = document.getElementById('regPhone').value.trim();
+  var email = document.getElementById('regEmail').value.trim();
+  var password = document.getElementById('regPassword').value;
+  var passwordConfirm = document.getElementById('regPasswordConfirm').value;
+  if(!name || !email || !password || !passwordConfirm){ showAuthError(t('err_fill_all')); return; }
+  if(password !== passwordConfirm){ showAuthError(t('err_password_mismatch')); return; }
+
+  sb.auth.signUp({ email: email, password: password }).then(function(res){
+    if(res.error){ showAuthError(res.error.message || t('err_generic')); return; }
+    var user = res.data.user;
+    if(!user){ showAuthError(t('err_generic')); return; }
+    var initials = name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
+    return sb.from('profiles').insert({
+      id: user.id,
+      full_name: name,
+      position: position || null,
+      department: dept || null,
+      company: company || 'ҚБМ',
+      phone: phone || null,
+      email: email,
+      avatar_initials: initials,
+      council_join_year: new Date().getFullYear(),
+      approval_status: 'pending'
+    }).then(function(res2){
+      if(res2.error){ showAuthError(res2.error.message || t('err_generic')); return; }
+      showAuthOk(t('reg_success'));
+      loadMyState();
+    });
+  });
+}
+
+function doLogout(){
+  sb.auth.signOut().then(function(){ loadMyState(); nav('home'); });
+}
+
+/* ===================== admin panel ===================== */
+function renderAdminList(){
+  var el = document.getElementById('adminList');
+  if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  sb.from('profiles').select('*').eq('approval_status','pending').order('created_at',{ascending:true}).then(function(res){
+    var rows = (res.data || []);
+    if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('admin_empty')+'</p>'; return; }
+    el.innerHTML = rows.map(function(r){
+      return '<div class="admin-row">'+
+        '<div><b>'+r.full_name+'</b><div class="meta">'+[r.position,r.department,r.company].filter(Boolean).join(' · ')+'</div>'+
+        '<div class="meta">'+[r.email,r.phone].filter(Boolean).join(' · ')+'</div></div>'+
+        '<div class="admin-actions">'+
+          '<button class="approve" onclick="decideRequest(\''+r.id+'\',\'approved\')">'+t('admin_approve')+'</button>'+
+          '<button class="reject" onclick="decideRequest(\''+r.id+'\',\'rejected\')">'+t('admin_reject')+'</button>'+
+        '</div></div>';
+    }).join('');
+  });
+}
+function decideRequest(id, status){
+  sb.from('profiles').update({ approval_status: status }).eq('id', id).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    renderAdminList();
+  });
+}
+
+/* ===================== Не Әңгіме feed ===================== */
+var newPostImageFile = null;
+var openComments = {}; // postId -> bool
+
+function onPostImageChange(){
+  var input = document.getElementById('newPostImage');
+  var preview = document.getElementById('newPostPreview');
+  newPostImageFile = input.files && input.files[0] ? input.files[0] : null;
+  if(newPostImageFile){
+    var reader = new FileReader();
+    reader.onload = function(e){ preview.src = e.target.result; preview.classList.add('show'); };
+    reader.readAsDataURL(newPostImageFile);
+  } else {
+    preview.classList.remove('show'); preview.src = '';
+  }
+}
+
+function submitPost(){
+  if(!requireApproved()) return;
+  var body = document.getElementById('newPostBody').value.trim();
+  if(!body && !newPostImageFile){ return; }
+
+  var afterUpload = function(imageUrl){
+    sb.from('posts').insert({ author_id: authUser.id, body: body || null, image_url: imageUrl }).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      document.getElementById('newPostBody').value = '';
+      document.getElementById('newPostImage').value = '';
+      newPostImageFile = null;
+      document.getElementById('newPostPreview').classList.remove('show');
+      loadFeed();
+    });
+  };
+
+  if(newPostImageFile){
+    var path = authUser.id + '/' + Date.now() + '-' + newPostImageFile.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+    sb.storage.from('post-images').upload(path, newPostImageFile).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      var pub = sb.storage.from('post-images').getPublicUrl(path);
+      afterUpload(pub.data.publicUrl);
+    });
+  } else {
+    afterUpload(null);
+  }
+}
+
+function timeAgo(iso){
+  var d = new Date(iso);
+  return d.toLocaleString(LANG==='en' ? 'en-GB' : 'kk-KZ', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+}
+
+function loadFeed(){
+  var el = document.getElementById('feedList');
+  if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  Promise.all([
+    sb.from('posts').select('*, profiles!posts_author_id_fkey(full_name,avatar_initials)').order('created_at',{ascending:false}),
+    sb.from('post_likes').select('post_id,profile_id,vote_type'),
+    sb.from('post_comments').select('id,post_id')
+  ]).then(function(results){
+    if(results[0].error){ el.innerHTML = '<p style="color:#c0392b;">'+results[0].error.message+'</p>'; return; }
+    var posts = (results[0].data || []);
+    var likes = (results[1].data || []);
+    var commentCounts = {};
+    (results[2].data || []).forEach(function(c){ commentCounts[c.post_id] = (commentCounts[c.post_id]||0)+1; });
+    if(!posts.length){ el.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:20px 0;">'+t('post_empty')+'</p>'; return; }
+    el.innerHTML = posts.map(function(p){
+      var author = p.profiles || {};
+      var likeCount = likes.filter(function(l){ return l.post_id===p.id && l.vote_type==='like'; }).length;
+      var dislikeCount = likes.filter(function(l){ return l.post_id===p.id && l.vote_type==='dislike'; }).length;
+      var myVote = authUser && likes.find(function(l){ return l.post_id===p.id && l.profile_id===authUser.id; });
+      var liked = myVote && myVote.vote_type === 'like';
+      var disliked = myVote && myVote.vote_type === 'dislike';
+      var canDelete = authUser && (p.author_id===authUser.id || isAdmin);
+      var cCount = commentCounts[p.id] || 0;
+      return '<div class="post-card" data-post="'+p.id+'">'+
+        '<div class="post-head">'+
+          '<div class="avatar" style="display:flex;align-items:center;justify-content:center;background:var(--gold-soft);color:var(--blue-deep);font-weight:600;">'+(author.avatar_initials||'?')+'</div>'+
+          '<div><div class="post-name" onclick="nav(\'profile\',\''+p.author_id+'\')">'+(author.full_name||'—')+'</div><div class="post-time">'+timeAgo(p.created_at)+'</div></div>'+
+          (canDelete ? '<button class="post-del" onclick="deletePost(\''+p.id+'\')">'+t('post_delete')+'</button>' : '') +
+        '</div>'+
+        (p.body ? '<p class="post-body">'+p.body.replace(/</g,'&lt;')+'</p>' : '') +
+        (p.image_url ? '<img class="post-img" src="'+p.image_url+'">' : '') +
+        '<div class="post-actions">'+
+          '<button class="vote-btn'+(liked?' liked':'')+'" onclick="togglePostVote(\''+p.id+'\',\'like\')">👍 <span>'+likeCount+'</span></button>'+
+          '<button class="vote-btn'+(disliked?' disliked':'')+'" onclick="togglePostVote(\''+p.id+'\',\'dislike\')">👎 <span>'+dislikeCount+'</span></button>'+
+          '<button class="vote-btn" onclick="toggleComments(\''+p.id+'\')">💬 <span>'+cCount+'</span></button>'+
+        '</div>'+
+        '<div class="comment-list hidden" id="comments-'+p.id+'"></div>'+
+      '</div>';
+    }).join('');
+    Object.keys(openComments).forEach(function(pid){ if(openComments[pid]) renderComments(pid); });
+  });
+}
+
+function togglePostVote(postId, type){
+  if(!requireApproved()) return;
+  sb.from('post_likes').select('vote_type').eq('post_id', postId).eq('profile_id', authUser.id).maybeSingle().then(function(res){
+    var current = res.data ? res.data.vote_type : null;
+    var action;
+    if(current === type){
+      action = sb.from('post_likes').delete().eq('post_id', postId).eq('profile_id', authUser.id);
+    } else if(current){
+      action = sb.from('post_likes').update({ vote_type: type }).eq('post_id', postId).eq('profile_id', authUser.id);
+    } else {
+      action = sb.from('post_likes').insert({ post_id: postId, profile_id: authUser.id, vote_type: type });
+    }
+    action.then(function(res2){
+      if(res2.error){ alert(res2.error.message); return; }
+      loadFeed();
+    });
+  });
+}
+
+function toggleComments(postId){
+  openComments[postId] = !openComments[postId];
+  var box = document.getElementById('comments-'+postId);
+  box.classList.toggle('hidden', !openComments[postId]);
+  if(openComments[postId]) renderComments(postId);
+}
+
+function renderComments(postId){
+  var box = document.getElementById('comments-'+postId);
+  if(!box) return;
+  box.innerHTML = '<p style="color:var(--ink-faint);font-size:12px;">'+t('loading')+'</p>';
+  sb.from('post_comments').select('*, profiles!post_comments_author_id_fkey(full_name)').eq('post_id', postId).order('created_at',{ascending:true}).then(function(res){
+    if(res.error){ box.innerHTML = '<p style="color:#c0392b;font-size:12px;">'+res.error.message+'</p>'; return; }
+    var comments = res.data || [];
+    var ids = comments.map(function(c){return c.id;});
+    var votesP = ids.length ? sb.from('comment_votes').select('comment_id,profile_id,vote_type').in('comment_id', ids) : Promise.resolve({data:[]});
+    votesP.then(function(vres){
+      var votes = vres.data || [];
+      box.innerHTML = buildCommentTree(comments, votes, postId, null) +
+        '<div class="comment-form">'+
+          '<input id="commentInput-'+postId+'" data-i18n-ph="comment_ph" placeholder="'+t('comment_ph')+'">'+
+          '<button class="btn btn-ghost" onclick="submitComment(\''+postId+'\', null)">'+t('btn_comment_send')+'</button>'+
+        '</div>';
+    });
+  });
+}
+
+function buildCommentTree(comments, votes, postId, parentId){
+  var level = comments.filter(function(c){ return (c.parent_comment_id||null) === parentId; });
+  return level.map(function(c){
+    var canDel = authUser && (c.author_id===authUser.id || isAdmin);
+    var cVotes = votes.filter(function(v){ return v.comment_id===c.id; });
+    var likeN = cVotes.filter(function(v){ return v.vote_type==='like'; }).length;
+    var dislikeN = cVotes.filter(function(v){ return v.vote_type==='dislike'; }).length;
+    var mine = authUser && cVotes.find(function(v){ return v.profile_id===authUser.id; });
+    var replies = buildCommentTree(comments, votes, postId, c.id);
+    return '<div class="comment-item" style="'+(parentId?'margin-left:18px;':'')+'">'+
+      (canDel ? '<button class="comment-del" onclick="deleteComment(\''+c.id+'\',\''+postId+'\')">'+t('comment_delete')+'</button>' : '') +
+      '<b>'+((c.profiles&&c.profiles.full_name)||'—')+':</b> '+c.body.replace(/</g,'&lt;')+
+      '<div style="display:flex;gap:10px;align-items:center;margin-top:6px;">'+
+        '<button class="vote-btn'+(mine&&mine.vote_type==='like'?' liked':'')+'" style="padding:3px 9px;font-size:11px;" onclick="toggleCommentVote(\''+c.id+'\',\'like\',\''+postId+'\')">👍 '+likeN+'</button>'+
+        '<button class="vote-btn'+(mine&&mine.vote_type==='dislike'?' disliked':'')+'" style="padding:3px 9px;font-size:11px;" onclick="toggleCommentVote(\''+c.id+'\',\'dislike\',\''+postId+'\')">👎 '+dislikeN+'</button>'+
+        '<button class="comment-del" style="float:none;" onclick="showReplyForm(\''+c.id+'\')">'+t('btn_reply')+'</button>'+
+      '</div>'+
+      '<div class="hidden" id="replyForm-'+c.id+'" style="display:flex;gap:8px;margin-top:8px;">'+
+        '<input id="replyInput-'+c.id+'" data-i18n-ph="comment_ph" placeholder="'+t('comment_ph')+'" style="flex:1;font:inherit;font-size:12.5px;padding:7px 10px;border:1px solid var(--line);border-radius:100px;background:var(--paper);color:var(--ink);outline:none;">'+
+        '<button class="btn btn-ghost" style="padding:6px 12px;font-size:12px;" onclick="submitComment(\''+postId+'\', \''+c.id+'\')">'+t('btn_comment_send')+'</button>'+
+      '</div>'+
+      replies +
+    '</div>';
+  }).join('');
+}
+
+function showReplyForm(commentId){
+  var el = document.getElementById('replyForm-'+commentId);
+  if(el) el.classList.toggle('hidden');
+}
+
+function toggleCommentVote(commentId, type, postId){
+  if(!requireApproved()) return;
+  sb.from('comment_votes').select('vote_type').eq('comment_id', commentId).eq('profile_id', authUser.id).maybeSingle().then(function(res){
+    var current = res.data ? res.data.vote_type : null;
+    var action;
+    if(current === type){
+      action = sb.from('comment_votes').delete().eq('comment_id', commentId).eq('profile_id', authUser.id);
+    } else if(current){
+      action = sb.from('comment_votes').update({ vote_type: type }).eq('comment_id', commentId).eq('profile_id', authUser.id);
+    } else {
+      action = sb.from('comment_votes').insert({ comment_id: commentId, profile_id: authUser.id, vote_type: type });
+    }
+    action.then(function(res2){
+      if(res2.error){ alert(res2.error.message); return; }
+      renderComments(postId);
+    });
+  });
+}
+
+function submitComment(postId, parentId){
+  if(!requireApproved()) return;
+  var input = document.getElementById(parentId ? ('replyInput-'+parentId) : ('commentInput-'+postId));
+  var body = input.value.trim();
+  if(!body) return;
+  sb.from('post_comments').insert({ post_id: postId, author_id: authUser.id, body: body, parent_comment_id: parentId || null }).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    renderComments(postId);
+    loadFeed();
+  });
+}
+
+function deletePost(postId){
+  sb.from('posts').delete().eq('id', postId).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadFeed();
+  });
+}
+function deleteComment(commentId, postId){
+  sb.from('post_comments').delete().eq('id', commentId).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    renderComments(postId);
+    loadFeed();
+  });
+}
+
+/* ===================== Іс-шаралар (Events) ===================== */
+var newEventImageFile = null;
+var openSuggestions = {}; // eventId -> bool
+
+function onEventImageChange(){
+  var input = document.getElementById('evImage');
+  var preview = document.getElementById('evImagePreview');
+  newEventImageFile = input.files && input.files[0] ? input.files[0] : null;
+  if(newEventImageFile){
+    var reader = new FileReader();
+    reader.onload = function(e){ preview.src = e.target.result; preview.classList.add('show'); };
+    reader.readAsDataURL(newEventImageFile);
+  } else {
+    preview.classList.remove('show'); preview.src = '';
+  }
+}
+
+function submitEvent(){
+  if(!isAdmin){ return; }
+  var title = document.getElementById('evTitle').value.trim();
+  var date = document.getElementById('evDate').value;
+  var location = document.getElementById('evLocation').value.trim();
+  var desc = document.getElementById('evDesc').value.trim();
+  var status = document.getElementById('evStatus').value;
+  if(!title || !date){ alert(t('ev_err_required')); return; }
+
+  var afterUpload = function(imageUrl){
+    sb.from('events').insert({
+      title: title, event_date: date, location: location || null, description: desc || null,
+      image_url: imageUrl, created_by: authUser.id, status: status
+    }).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      document.getElementById('evTitle').value = '';
+      document.getElementById('evDate').value = '';
+      document.getElementById('evLocation').value = '';
+      document.getElementById('evDesc').value = '';
+      document.getElementById('evStatus').value = 'planned';
+      document.getElementById('evImage').value = '';
+      newEventImageFile = null;
+      document.getElementById('evImagePreview').classList.remove('show');
+      document.getElementById('newEventBox').classList.add('hidden');
+      loadEvents();
+    });
+  };
+
+  if(newEventImageFile){
+    var path = authUser.id + '/' + Date.now() + '-' + newEventImageFile.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+    sb.storage.from('post-images').upload(path, newEventImageFile).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      var pub = sb.storage.from('post-images').getPublicUrl(path);
+      afterUpload(pub.data.publicUrl);
+    });
+  } else {
+    afterUpload(null);
+  }
+}
+
+function loadEvents(){
+  var doneEl = document.getElementById('eventsDone');
+  var progEl = document.getElementById('eventsInProgress');
+  var planEl = document.getElementById('eventsPlanned');
+  if(!doneEl || !progEl || !planEl) return;
+  doneEl.innerHTML = progEl.innerHTML = planEl.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  Promise.all([
+    sb.from('events').select('*').order('event_date',{ascending:true}),
+    sb.from('event_attendance').select('event_id,profile_id'),
+    sb.from('event_suggestions').select('*, profiles!event_suggestions_profile_id_fkey(full_name)').order('created_at',{ascending:true})
+  ]).then(function(results){
+    if(results[0].error){ doneEl.innerHTML = '<p style="color:#c0392b;">'+results[0].error.message+'</p>'; progEl.innerHTML=''; planEl.innerHTML=''; return; }
+    var events = results[0].data || [];
+    var attendance = results[1].data || [];
+    var suggestions = results[2].data || [];
+    var done = events.filter(function(e){ return e.status==='done'; }).sort(function(a,b){ return b.event_date.localeCompare(a.event_date); });
+    var inProgress = events.filter(function(e){ return e.status==='in_progress'; });
+    var planned = events.filter(function(e){ return !e.status || e.status==='planned'; });
+
+    function card(e){
+      var attendCount = attendance.filter(function(a){ return a.event_id===e.id; }).length;
+      var attending = authUser && attendance.some(function(a){ return a.event_id===e.id && a.profile_id===authUser.id; });
+      var canManage = isAdmin;
+      var evSuggestions = suggestions.filter(function(s){ return s.event_id===e.id; });
+      var dateFmt = new Date(e.event_date+'T00:00:00').toLocaleDateString(LANG==='en' ? 'en-GB' : 'kk-KZ', {day:'numeric',month:'long',year:'numeric'});
+      var statusCls = e.status || 'planned';
+      return '<div class="event-card status-'+statusCls+'" data-event="'+e.id+'">'+
+        '<p class="ev-title">'+e.title.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" style="float:right;" onclick="deleteEvent(\''+e.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
+        '<p class="ev-meta">📅 '+dateFmt+(e.location ? ' · 📍 '+e.location.replace(/</g,'&lt;') : '')+'</p>'+
+        (e.description ? '<p class="ev-desc">'+e.description.replace(/</g,'&lt;')+'</p>' : '')+
+        (e.image_url ? '<img class="ev-img" src="'+e.image_url+'">' : '')+
+        '<div class="post-actions">'+
+          '<button class="vote-btn'+(attending?' attending':'')+'" onclick="toggleAttendance(\''+e.id+'\')">✅ <span>'+t('ev_attending')+' ('+attendCount+')</span></button>'+
+          '<button class="vote-btn" onclick="toggleSuggestions(\''+e.id+'\')">💬 <span>'+evSuggestions.length+'</span></button>'+
+          (canManage ? '<select class="ev-status-select" onchange="updateEventStatus(\''+e.id+'\',this.value)">'+
+            '<option value="planned"'+(statusCls==='planned'?' selected':'')+'>'+t('ev_status_planned')+'</option>'+
+            '<option value="in_progress"'+(statusCls==='in_progress'?' selected':'')+'>'+t('ev_status_in_progress')+'</option>'+
+            '<option value="done"'+(statusCls==='done'?' selected':'')+'>'+t('ev_status_done')+'</option>'+
+          '</select>' : '')+
+        '</div>'+
+        '<div class="ev-suggestions hidden" id="suggestions-'+e.id+'">'+
+          evSuggestions.map(function(s){
+            var author = s.profiles || {};
+            return '<div class="ev-suggestion-item"><b>'+(author.full_name||'—')+':</b> '+s.body.replace(/</g,'&lt;')+'</div>';
+          }).join('')+
+          '<div class="comment-form">'+
+            '<input id="suggestionInput-'+e.id+'" data-i18n-ph="ev_suggestion_ph" placeholder="'+t('ev_suggestion_ph')+'">'+
+            '<button class="btn btn-ghost" onclick="submitSuggestion(\''+e.id+'\')">'+t('btn_comment_send')+'</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }
+
+    doneEl.innerHTML = done.length ? done.map(card).join('') : '<p style="color:var(--ink-faint);">'+t('ev_empty_done')+'</p>';
+    progEl.innerHTML = inProgress.length ? inProgress.map(card).join('') : '<p style="color:var(--ink-faint);">'+t('ev_empty_in_progress')+'</p>';
+    planEl.innerHTML = planned.length ? planned.map(card).join('') : '<p style="color:var(--ink-faint);">'+t('ev_empty_upcoming')+'</p>';
+    Object.keys(openSuggestions).forEach(function(eid){
+      if(openSuggestions[eid]){
+        var box = document.getElementById('suggestions-'+eid);
+        if(box) box.classList.remove('hidden');
+      }
+    });
+  });
+}
+
+function updateEventStatus(eventId, status){
+  if(!isAdmin) return;
+  sb.from('events').update({ status: status }).eq('id', eventId).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadEvents();
+  });
+}
+
+function toggleAttendance(eventId){
+  if(!requireApproved()) return;
+  var card = document.querySelector('.event-card[data-event="'+eventId+'"]');
+  var attending = card.querySelector('.post-actions .vote-btn').classList.contains('attending');
+  var action = attending
+    ? sb.from('event_attendance').delete().eq('event_id', eventId).eq('profile_id', authUser.id)
+    : sb.from('event_attendance').insert({ event_id: eventId, profile_id: authUser.id });
+  action.then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadEvents();
+  });
+}
+
+function toggleSuggestions(eventId){
+  openSuggestions[eventId] = !openSuggestions[eventId];
+  var box = document.getElementById('suggestions-'+eventId);
+  if(box) box.classList.toggle('hidden', !openSuggestions[eventId]);
+}
+
+function submitSuggestion(eventId){
+  if(!requireApproved()) return;
+  var input = document.getElementById('suggestionInput-'+eventId);
+  var body = input.value.trim();
+  if(!body) return;
+  sb.from('event_suggestions').insert({ event_id: eventId, profile_id: authUser.id, body: body }).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    openSuggestions[eventId] = true;
+    loadEvents();
+  });
+}
+
+/* ===================== Кеңес тарихы (History) ===================== */
+var newHistoryImageFile = null;
+
+function onHistoryImageChange(){
+  var input = document.getElementById('hImage');
+  var preview = document.getElementById('hImagePreview');
+  newHistoryImageFile = input.files && input.files[0] ? input.files[0] : null;
+  if(newHistoryImageFile){
+    var reader = new FileReader();
+    reader.onload = function(e){ preview.src = e.target.result; preview.classList.add('show'); };
+    reader.readAsDataURL(newHistoryImageFile);
+  } else {
+    preview.classList.remove('show'); preview.src = '';
+  }
+}
+
+function submitHistory(){
+  if(!isAdmin){ return; }
+  var name = document.getElementById('hName').value.trim();
+  var startYear = parseInt(document.getElementById('hStartYear').value, 10);
+  var endYearRaw = document.getElementById('hEndYear').value.trim();
+  var endYear = endYearRaw ? parseInt(endYearRaw, 10) : null;
+  var bio = document.getElementById('hBio').value.trim();
+  var workplace = document.getElementById('hWorkplace').value.trim();
+  if(!name || !startYear){ alert(t('h_err_required')); return; }
+
+  var afterUpload = function(imageUrl){
+    sb.from('council_history').insert({
+      full_name: name, start_year: startYear, end_year: endYear,
+      bio: bio || null, current_workplace: workplace || null,
+      photo_url: imageUrl, created_by: authUser.id
+    }).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      document.getElementById('hName').value = '';
+      document.getElementById('hStartYear').value = '';
+      document.getElementById('hEndYear').value = '';
+      document.getElementById('hBio').value = '';
+      document.getElementById('hWorkplace').value = '';
+      document.getElementById('hImage').value = '';
+      newHistoryImageFile = null;
+      document.getElementById('hImagePreview').classList.remove('show');
+      document.getElementById('newHistoryBox').classList.add('hidden');
+      loadHistory();
+    });
+  };
+
+  if(newHistoryImageFile){
+    var path = authUser.id + '/' + Date.now() + '-' + newHistoryImageFile.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+    sb.storage.from('post-images').upload(path, newHistoryImageFile).then(function(res){
+      if(res.error){ alert(res.error.message); return; }
+      var pub = sb.storage.from('post-images').getPublicUrl(path);
+      afterUpload(pub.data.publicUrl);
+    });
+  } else {
+    afterUpload(null);
+  }
+}
+
+function loadHistory(){
+  var el = document.getElementById('historyList');
+  if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  sb.from('council_history').select('*').order('start_year',{ascending:false}).then(function(res){
+    if(res.error){ el.innerHTML = '<p style="color:#c0392b;">'+res.error.message+'</p>'; return; }
+    var rows = res.data || [];
+    if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('h_empty')+'</p>'; return; }
+    el.innerHTML = rows.map(function(h){
+      var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+      var years = h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
+      var canManage = isAdmin;
+      return '<div class="history-card">'+
+        (h.photo_url ? '<img class="h-photo" src="'+h.photo_url+'">' : '<div class="h-photo-ph">'+initials+'</div>')+
+        '<div style="flex:1;">'+
+          '<p class="h-name">'+h.full_name.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" onclick="deleteHistory(\''+h.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
+          '<p class="h-years">'+years+'</p>'+
+          (h.bio ? '<p class="h-bio">'+h.bio.replace(/</g,'&lt;')+'</p>' : '')+
+          (h.current_workplace ? '<p class="h-workplace">💼 '+h.current_workplace.replace(/</g,'&lt;')+'</p>' : '')+
+        '</div>'+
+      '</div>';
+    }).join('');
+  });
+}
+
+function deleteHistory(id){
+  if(!isAdmin) return;
+  sb.from('council_history').delete().eq('id', id).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadHistory();
+  });
+}
+
+function deleteEvent(eventId){
+  if(!isAdmin) return;
+  sb.from('events').delete().eq('id', eventId).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadEvents();
+  });
+}
+
+/* ===================== router ===================== */
+function nav(route, param){
+  if(route === 'admin' && !isAdmin){ route = 'home'; }
+  document.querySelectorAll('main > section').forEach(function(s){ s.classList.add('hidden'); });
+  document.getElementById('view-'+route).classList.remove('hidden');
+  document.querySelectorAll('.site-nav button, .drawer-nav button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.route === route);
+  });
+  if(route==='profile' && param) renderProfile(param);
+  if(route==='admin') renderAdminList();
+  if(route==='feed') loadFeed();
+  if(route==='events') loadEvents();
+  if(route==='history') loadHistory();
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+/* ===================== mobile drawer ===================== */
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+
+/* ===================== people ===================== */
+function renderPeople(){
+  var grid = document.getElementById('peopleGrid');
+  if(!people.length){ return; }
+  var q = (document.getElementById('peopleSearch').value || '').toLowerCase();
+  grid.innerHTML = '';
+  people.filter(function(p){
+    return p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q) || p.role.toLowerCase().includes(q);
+  }).forEach(function(p){
+    var card = document.createElement('div');
+    card.className = 'person-card';
+    card.onclick = function(){ nav('profile', p.id); };
+    card.innerHTML =
+      '<div class="person-top">'+
+        '<div class="avatar">'+p.initials+'</div>'+
+        '<div><p class="person-name">'+p.name+'</p><p class="person-role">'+p.role+' · '+p.dept+'</p></div>'+
+      '</div>'+
+      '<div class="person-tags">'+tagsFor(p).map(function(tg){return '<span class="ptag">'+tg+'</span>';}).join('')+'</div>';
+    grid.appendChild(card);
+  });
+}
+function tagsFor(p){
+  var tags = [t('tag_since')(p.councilJoinYear || '—')];
+  if(p.ideaCount) tags.push(t('tag_ideas')(p.ideaCount));
+  return tags;
+}
+function fieldsFor(p){
+  var thisYear = new Date().getFullYear();
+  return [
+    [t('field_education'), p.education || '—'],
+    [t('field_hire_year'), p.hireYear || '—'],
+    [t('field_experience'), p.hireYear ? ((thisYear - p.hireYear) + ' ' + t('years_suffix')) : '—'],
+    [t('field_council_year'), p.councilJoinYear || '—'],
+    [t('field_council_role'), p.councilRole || t('council_role_default')],
+    [t('field_contact'), p.contact || '—']
+  ];
+}
+
+/* ===================== profile ===================== */
+function renderProfile(id){
+  var p = people.find(function(x){ return x.id === id; }) || people[0];
+  if(!p) return;
+  document.getElementById('pAvatar').textContent = p.initials;
+  document.getElementById('pName').textContent = p.name;
+  document.getElementById('pRole').textContent = p.role + ' · ' + p.dept + ' · ' + t('role_young_specialist');
+  document.getElementById('pTags').innerHTML = tagsFor(p).map(function(tg){return '<span class="ptag">'+tg+'</span>';}).join('');
+  var fg = document.getElementById('pFields');
+  fg.innerHTML = '';
+  fieldsFor(p).forEach(function(pair){
+    fg.innerHTML += '<div class="field"><dt>'+pair[0]+'</dt><dd>'+pair[1]+'</dd></div>';
+  });
+  document.getElementById('pProjects').innerHTML = p.projects.length
+    ? p.projects.map(function(x){return '<li>'+x+'</li>';}).join('')
+    : '<li style="color:var(--ink-faint);">'+t('profile_no_project')+'</li>';
+  document.getElementById('pAchievements').innerHTML = p.achievements.length
+    ? p.achievements.map(function(x){return '<li>'+x+'</li>';}).join('')
+    : '<li style="color:var(--ink-faint);">'+t('profile_no_achievement')+'</li>';
+}
+
+/* ===================== ideas ===================== */
+function renderCatChips(){
+  var keys = ['all'].concat(Array.from(new Set(ideas.map(function(i){return catKey(i.cat);}))));
+  var row = document.getElementById('catChips');
+  row.innerHTML = keys.map(function(k){
+    var label = k==='all' ? t('cat_all') : catLabel(k);
+    return '<button class="chip'+(k===activeCat?' active':'')+'" onclick="setCat(\''+k+'\')">'+label+'</button>';
+  }).join('');
+}
+function setCat(k){ activeCat = k; renderCatChips(); renderIdeas(); }
+
+function renderIdeas(){
+  if(!document.getElementById('ideaSearch')) return;
+  var q = (document.getElementById('ideaSearch').value || '').toLowerCase();
+  var list = document.getElementById('ideaList');
+  list.innerHTML = '';
+  var filtered = ideas.filter(function(i){
+    var matchesCat = activeCat === 'all' || catKey(i.cat) === activeCat;
+    var author = people.find(function(p){return p.id===i.author;});
+    var matchesQ = i.title.toLowerCase().includes(q) || (author && author.name.toLowerCase().includes(q));
+    return matchesCat && matchesQ;
+  });
+  if(!filtered.length){
+    list.innerHTML = '<p style="color:var(--ink-faint);font-size:13.5px;text-align:center;padding:30px 0;">'+t('no_results')+'</p>';
+    return;
+  }
+  filtered.forEach(function(i){
+    var author = people.find(function(p){return p.id===i.author;});
+    var st = statusInfo(i.status);
+    var card = document.createElement('div');
+    card.className = 'idea-card';
+    card.innerHTML =
+      '<div class="idea-top">'+
+        '<h3 class="idea-title">'+i.title+'</h3>'+
+        '<span class="status-pill '+st.cls+'">'+st.label+'</span>'+
+      '</div>'+
+      '<div class="idea-meta">'+
+        '<span class="idea-author" onclick="nav(\'profile\',\''+i.author+'\')">'+ (author?author.name:'—') +'</span>'+
+        '<span>·</span><span class="cat-tag">'+catLabel(i.cat)+'</span>'+
+      '</div>'+
+      '<p class="idea-desc">'+i.desc+'</p>'+
+      '<div class="idea-bottom">'+
+        '<button class="vote-btn'+(myVotes[i.id]==='like'?' liked':'')+'" onclick="vote(\''+i.id+'\',\'like\')">👍 <span>'+i.likes+'</span></button>'+
+        '<button class="vote-btn'+(myVotes[i.id]==='dislike'?' disliked':'')+'" onclick="vote(\''+i.id+'\',\'dislike\')">👎 <span>'+i.dislikes+'</span></button>'+
+      '</div>';
+    list.appendChild(card);
+  });
+}
+function vote(ideaId, type){
+  if(!requireApproved()) return;
+  var i = ideas.find(function(x){ return x.id === ideaId; });
+  if(!i) return;
+  var current = myVotes[ideaId];
+  var action;
+  if(current === type){
+    action = sb.from('idea_votes').delete().eq('idea_id', ideaId).eq('profile_id', authUser.id);
+  } else if(current){
+    action = sb.from('idea_votes').update({ vote_type: type }).eq('idea_id', ideaId).eq('profile_id', authUser.id);
+  } else {
+    action = sb.from('idea_votes').insert({ idea_id: ideaId, profile_id: authUser.id, vote_type: type });
+  }
+  action.then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    if(current === type){
+      if(type==='like') i.likes = Math.max(0, i.likes-1); else i.dislikes = Math.max(0, i.dislikes-1);
+      delete myVotes[ideaId];
+    } else {
+      if(current){
+        if(current==='like') i.likes = Math.max(0, i.likes-1); else i.dislikes = Math.max(0, i.dislikes-1);
+      }
+      if(type==='like') i.likes++; else i.dislikes++;
+      myVotes[ideaId] = type;
+    }
+    renderIdeas();
+  });
+}
+
+function toggleNewIdea(){
+  document.getElementById('newIdeaBox').classList.toggle('open');
+}
+function submitIdea(){
+  if(!requireApproved()) return;
+  var title = document.getElementById('newIdeaTitle').value.trim();
+  var desc = document.getElementById('newIdeaDesc').value.trim();
+  var cat = document.getElementById('newIdeaCat').value; // canonical key, e.g. 'digital'
+  if(!title){ document.getElementById('newIdeaTitle').focus(); return; }
+  ideas.unshift({id:'local-'+Date.now(), title:title, author: currentUserId, cat:cat, status:'new', desc:desc || '—', likes:0, dislikes:0});
+  document.getElementById('newIdeaTitle').value='';
+  document.getElementById('newIdeaDesc').value='';
+  document.getElementById('newIdeaBox').classList.remove('open');
+  renderCatChips();
+  renderIdeas();
+  // Ескерту: бұл идея де әзірге тек экранда көрінеді, деректер қорына әлі жазылмайды.
+}
+
+/* ===================== Supabase-тен деректерді жүктеу ===================== */
+function loadData(){
+  var peopleGrid = document.getElementById('peopleGrid');
+  var ideaList = document.getElementById('ideaList');
+  peopleGrid.innerHTML = '<p style="color:var(--ink-faint);grid-column:1/-1;text-align:center;padding:30px 0;">'+t('loading')+'</p>';
+  ideaList.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:30px 0;">'+t('loading')+'</p>';
+
+  Promise.all([
+    sbGet('profiles?select=*,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'),
+    sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc')
+  ]).then(function(results){
+    var profileRows = results[0];
+    var ideaRows = results[1];
+
+    people = profileRows.map(function(row){
+      var ideaCount = ideaRows.filter(function(x){ return x.author_id === row.id; }).length;
+      return {
+        id: row.id,
+        initials: row.avatar_initials || '?',
+        name: row.full_name,
+        role: row.position || '—',
+        dept: row.department || '—',
+        education: row.education,
+        hireYear: row.hire_year,
+        councilJoinYear: row.council_join_year,
+        councilRole: row.council_role,
+        contact: row.contact,
+        ideaCount: ideaCount,
+        projects: (row.profile_projects || []).map(function(p){ return p.title; }),
+        achievements: (row.profile_achievements || []).map(function(a){ return (a.year ? a.year + ' — ' : '') + a.title; })
+      };
+    });
+
+    ideas = ideaRows.map(function(row){
+      return {
+        id: row.id,
+        title: row.title,
+        author: row.author_id,
+        cat: row.category,
+        status: row.status,
+        desc: row.description,
+        likes: row.likes_count || 0,
+        dislikes: row.dislikes_count || 0
+      };
+    });
+
+    var me = people.find(function(p){ return p.name === 'Жұбаназаров Жәнібек'; });
+    currentUserId = me ? me.id : (people[0] ? people[0].id : null);
+
+    document.getElementById('demoBanner').innerHTML = t('banner_loaded');
+
+    renderPeople();
+    renderCatChips();
+    renderIdeas();
+    if(currentUserId) renderProfile(currentUserId);
+  }).catch(function(err){
+    document.getElementById('demoBanner').innerHTML = t('banner_error')(err.message);
+    peopleGrid.innerHTML = '<p style="color:var(--ink-faint);grid-column:1/-1;text-align:center;padding:30px 0;">'+t('data_not_loaded')+'</p>';
+    ideaList.innerHTML = '';
+  });
+}
+
+/* ===================== boot ===================== */
+applyI18n();
+nav('home');
+loadData();
+loadMyState();
+</script>
+</body>
+</html>
