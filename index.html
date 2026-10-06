@@ -397,6 +397,11 @@
   }
   @media (max-width:640px){
     .site-header{padding:10px 14px;gap:10px;}
+    .site-header{flex-wrap:nowrap;}
+    #langSwitchTop{display:none;}
+    .site-actions{gap:8px;min-width:0;}
+    .site-actions .btn{padding:8px 12px;font-size:13px;white-space:nowrap;}
+    .logo-group{gap:8px;flex-shrink:0;}
     .site-nav{display:none;}
     .burger{display:flex;}
     .logo-jmk{height:30px;}.logo-kbm{height:26px;}
@@ -417,7 +422,7 @@
 </head>
 <body>
 
-<div class="demo-banner" id="demoBanner" data-i18n="banner_loading">🔗 Деректер Supabase-тен жүктелуде…</div>
+<div class="demo-banner hidden" id="demoBanner" data-i18n="banner_loading">🔗 Деректер Supabase-тен жүктелуде…</div>
 
 <header class="site-header">
   <div class="logo-group" onclick="nav('home')">
@@ -1879,7 +1884,7 @@ function loadData(){
     var me = people.find(function(p){ return p.name === 'Жұбаназаров Жәнібек'; });
     currentUserId = me ? me.id : (people[0] ? people[0].id : null);
 
-    document.getElementById('demoBanner').innerHTML = t('banner_loaded');
+    document.getElementById('demoBanner').classList.add('hidden');
 
     renderPeople();
     renderCatChips();
@@ -1887,6 +1892,7 @@ function loadData(){
     if(currentUserId) renderProfile(currentUserId);
   }).catch(function(err){
     document.getElementById('demoBanner').innerHTML = t('banner_error')(err.message);
+    document.getElementById('demoBanner').classList.remove('hidden');
     peopleGrid.innerHTML = '<p style="color:var(--ink-faint);grid-column:1/-1;text-align:center;padding:30px 0;">'+t('data_not_loaded')+'</p>';
     ideaList.innerHTML = '';
   });
