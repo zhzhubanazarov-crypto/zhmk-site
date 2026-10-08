@@ -493,10 +493,10 @@
     </div>
 
     <div class="stat-row">
-      <div class="stat"><b>82</b><span data-i18n="stat_people">жас маман</span></div>
-      <div class="stat"><b>24</b><span data-i18n="stat_ideas">идея</span></div>
-      <div class="stat"><b>15</b><span data-i18n="stat_events">іс-шара (2026)</span></div>
-      <div class="stat"><b>5</b><span data-i18n="stat_history">жыл тарих</span></div>
+      <div class="stat"><b id="statPeople">–</b><span data-i18n="stat_people">жас маман</span></div>
+      <div class="stat"><b id="statIdeas">–</b><span data-i18n="stat_ideas">идея</span></div>
+      <div class="stat"><b id="statEvents">–</b><span data-i18n="stat_events">іс-шара (2026)</span></div>
+      <div class="stat"><b id="statHistory">–</b><span data-i18n="stat_history">жыл тарих</span></div>
     </div>
 
     <div class="feature-grid">
@@ -1687,7 +1687,10 @@ function renderPeople(){
   if(!people.length){ return; }
   var q = (document.getElementById('peopleSearch').value || '').toLowerCase();
   grid.innerHTML = '';
-  people.filter(function(p){
+  var kkCollator = (typeof Intl !== 'undefined' && Intl.Collator) ? new Intl.Collator('kk') : null;
+  people.slice().sort(function(x,y){
+    return kkCollator ? kkCollator.compare(x.name||'', y.name||'') : String(x.name||'').localeCompare(String(y.name||''));
+  }).filter(function(p){
     return p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q) || p.role.toLowerCase().includes(q);
   }).forEach(function(p){
     var card = document.createElement('div');
@@ -1836,6 +1839,14 @@ function submitIdea(){
 }
 
 /* ===================== Supabase-тен деректерді жүктеу ===================== */
+function setStat(id, v){ var el = document.getElementById(id); if(el) el.textContent = v; }
+function loadHomeStats(){
+  sbGet('events?select=id&event_date=gte.2026-01-01&event_date=lt.2027-01-01').then(function(r){ setStat('statEvents', r.length); }).catch(function(){});
+  sbGet('council_history?select=start_year&order=start_year.asc&limit=1').then(function(r){
+    var y = new Date().getFullYear();
+    setStat('statHistory', r.length ? Math.max(1, y - r[0].start_year) : 0);
+  }).catch(function(){});
+}
 function loadData(){
   var peopleGrid = document.getElementById('peopleGrid');
   var ideaList = document.getElementById('ideaList');
@@ -1886,6 +1897,8 @@ function loadData(){
 
     document.getElementById('demoBanner').classList.add('hidden');
 
+    setStat('statPeople', people.length);
+    setStat('statIdeas', ideas.length);
     renderPeople();
     renderCatChips();
     renderIdeas();
@@ -1902,6 +1915,7 @@ function loadData(){
 applyI18n();
 nav('home');
 loadData();
+loadHomeStats();
 loadMyState();
 
 </script>
