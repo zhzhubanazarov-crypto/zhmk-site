@@ -89,6 +89,42 @@
   .ig-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--blue-deep);color:#fff;font-size:12.5px;padding:6px 14px;letter-spacing:.01em;}
   .ig-bar b{color:var(--gold);font-weight:700;}
   .ig-bar:hover{filter:brightness(1.12);}
+  .reg-check{display:flex;align-items:center;gap:8px;font-size:14px;margin:6px 0;cursor:pointer;}
+  .reg-check{justify-content:flex-start;text-align:left;}
+  .modal-body .reg-check input[type=checkbox]{width:18px;height:18px;flex:0 0 18px;padding:0;margin:0;}
+  .reg-check span{flex:1;}
+  .reg-sub{margin:0 0 8px;padding:10px 12px;background:var(--gold-soft);border-radius:10px;}
+  .reg-lbl{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;}
+  .reg-sub select{width:100%;}
+  .me-head{display:flex;align-items:center;gap:16px;background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(20,40,80,.06);}
+  .me-head h3{margin:0 0 4px;font-size:18px;}
+  .me-head .meta{font-size:13px;color:var(--ink-soft);}
+  .me-badge{display:inline-block;font-size:11.5px;font-weight:700;background:var(--gold-soft);color:var(--blue-deep);border-radius:999px;padding:3px 10px;margin-top:6px;}
+  .me-box{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(20,40,80,.06);}
+  .me-box h4{margin:0 0 10px;font-size:15px;}
+  .me-box p{margin:0 0 12px;font-size:14px;color:var(--ink-soft);}
+  .me-box label.fl{display:block;font-size:12.5px;color:var(--ink-soft);margin:12px 0 5px;}
+  .me-box input[type=text],.me-box input[type=number],.me-box textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;font:inherit;box-sizing:border-box;}
+  .me-box textarea{min-height:90px;resize:vertical;}
+  .me-hint{font-size:12px;color:var(--ink-faint);margin-top:4px;}
+  .me-msg{font-size:13px;margin-top:10px;min-height:18px;}
+  .me-msg.err{color:#c0392b;} .me-msg.ok{color:var(--blue-deep);}
+  .me-photo-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .p-actions{margin:0 22px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .p-actions .note{font-size:13px;color:var(--ink-soft);}
+  .idea-attach{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0;}
+  .attach-btn{cursor:pointer;padding:8px 14px;font-size:13px;}
+  .attach-hint{font-size:12px;color:var(--ink-faint);}
+  #newIdeaFileList{flex-basis:100%;font-size:13px;}
+  #newIdeaFileList div{display:flex;gap:8px;align-items:center;padding:3px 0;}
+  #newIdeaFileList button{border:0;background:none;color:#c0392b;cursor:pointer;font-size:15px;}
+  .idea-files{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 2px;}
+  .idea-files a{font-size:12.5px;background:var(--gold-soft);color:var(--blue-deep);padding:4px 10px;border-radius:999px;text-decoration:none;}
+  .adm-block{background:#fff;border-radius:14px;padding:16px;margin:0 0 18px;box-shadow:0 2px 10px rgba(20,40,80,.06);}
+  .adm-block h3{margin:0 0 10px;font-size:15px;}
+  .adm-block h4{margin:12px 0 6px;font-size:13px;color:var(--ink-soft);}
+  .adm-block .admin-row{box-shadow:none;}
+
   .igp-wrap{margin:0 0 22px;}
   .igp-wrap h3{margin:0 0 10px;font-size:16px;}
   .igp-row{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;}
@@ -648,6 +684,15 @@
     <div class="people-grid" id="peopleGrid"></div>
   </section>
 
+  <!-- ============ ME ============ -->
+  <section id="view-me" class="hidden">
+    <div class="page-head">
+      <div><h2 data-i18n="me_title">Менің профилім</h2></div>
+      <button class="btn" onclick="doLogout()" data-i18n="btn_logout">Шығу</button>
+    </div>
+    <div id="meBody"></div>
+  </section>
+
   <!-- ============ QR ============ -->
   <section id="view-qr" class="hidden">
     <div class="qr-card">
@@ -680,6 +725,7 @@
       </div>
       <dl class="field-grid" id="pFields"></dl>
       <div class="ig-field" id="pIgBox"></div>
+      <div class="p-actions" id="pActions"></div>
       <div class="profile-blocks">
         <div class="pblock"><h4 data-i18n="profile_projects">Қатысқан жобалары</h4><ul id="pProjects"></ul></div>
         <div class="pblock"><h4 data-i18n="profile_achievements">Жетістіктері</h4><ul id="pAchievements"></ul></div>
@@ -705,6 +751,11 @@
       <div class="new-idea-form" id="newIdeaForm">
         <input id="newIdeaTitle" data-i18n-ph="idea_title_ph" placeholder="Идеяның қысқаша атауы">
         <textarea id="newIdeaDesc" data-i18n-ph="idea_desc_ph" placeholder="Идеяны толығырақ сипаттаңыз…"></textarea>
+        <div class="idea-attach">
+          <label class="btn attach-btn">📎 <span data-i18n="attach_btn">Файл тіркеу</span><input type="file" id="newIdeaFiles" multiple style="display:none" accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,.doc,.docx,.xls,.xlsx,.ppt,.pptx" onchange="onIdeaFiles()"></label>
+          <span class="attach-hint" data-i18n="attach_hint"></span>
+          <div id="newIdeaFileList"></div>
+        </div>
         <div class="form-row">
           <select id="newIdeaCat"></select>
           <button class="btn btn-primary" onclick="submitIdea()" data-i18n="btn_send">Жіберу</button>
@@ -814,6 +865,7 @@
     <div class="page-head" style="margin-top:34px;"><div><h2 data-i18n="adm_users_title">Платформа қолданушылары</h2></div></div>
     <div id="adminUsers"></div>
     <div class="page-head" style="margin-top:34px;"><div><h2 data-i18n="adm_cup_title">Жас маман CUP — баптаулар</h2></div></div>
+    <div id="adminEdits"></div>
     <div id="adminIgPosts"></div>
     <div id="adminCup"></div>
   </section>
@@ -872,6 +924,17 @@
         <input id="regDept" data-i18n-ph="ph_department" placeholder="Бөлімі">
         <input id="regCompany" data-i18n-ph="ph_company" placeholder="Компания" value="ҚБМ">
         <input id="regPhone" type="tel" data-i18n-ph="ph_phone" placeholder="Телефон (міндетті емес)">
+        <label class="reg-check"><input type="checkbox" id="regIsSpec" onchange="onRegToggle()"> <span data-i18n="reg_is_spec">Сіз жас маман ба?</span></label>
+        <div id="regSpecBox" class="hidden reg-sub">
+          <label class="reg-lbl" data-i18n="reg_claim_label">Жас мамандар тізімінен өзіңізді таңдаңыз</label>
+          <select id="regClaim"></select>
+          <p class="modal-note" data-i18n="reg_spec_note"></p>
+        </div>
+        <label class="reg-check"><input type="checkbox" id="regIsChair" onchange="onRegToggle()"> <span data-i18n="reg_is_chair">Мен бұрынғы Кеңес төрағасымын</span></label>
+        <div id="regChairBox" class="hidden reg-sub">
+          <label class="reg-lbl" data-i18n="reg_chair_label">Төрағалар тізімінен өзіңізді таңдаңыз</label>
+          <select id="regChair"></select>
+        </div>
         <input id="regEmail" type="email" data-i18n-ph="ph_email" placeholder="Email">
         <div class="pw-wrap">
           <input id="regPassword" type="password" data-i18n-ph="ph_password_new" placeholder="Құпия сөз (кемінде 6 таңба)">
@@ -2515,6 +2578,71 @@ function ruPlural(n, one, few, many){
 }
 function dateLocale(){ return LANG==='en' ? 'en-GB' : (LANG==='ru' ? 'ru-RU' : 'kk-KZ'); }
 
+
+var I18N_EXTRA = {
+ kk:{
+  reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
+  reg_spec_note:'Админ бекіткен соң профиліңіз жас мамандар тізіміне қосылады. Фото мен жетістіктеріңізді өзіңіз толтырасыз.',
+  reg_is_chair:'Мен бұрынғы Кеңес төрағасымын', reg_chair_label:'Төрағалар тізімінен өзіңізді таңдаңыз', reg_chair_none:'— таңдаңыз —',
+  me_title:'Менің профилім', me_login:'Алдымен сайтқа кіріңіз.', me_pending:'Тіркелуіңіз әлі бекітілген жоқ. Админ бекіткен соң профильді толтыра аласыз.',
+  me_spec_badge:'Жас маман', me_member_badge:'Қатысушы',
+  me_req_text:'Фото, жетістіктер және басқа деректерді өзгерту үшін админнен рұқсат сұраңыз.', me_req_btn:'Өзгертуге рұқсат сұрау',
+  me_req_sent:'Сұраныс жіберілді. Админ рұқсат бергенде бұл жерден профильді өзгерте аласыз.',
+  me_f_pos:'Лауазымы', me_f_dept:'Бөлімі', me_f_edu:'Білімі', me_f_contact:'Байланыс', me_f_hire:'Жұмысқа кірген жылы',
+  me_f_proj:'Қатысқан жобалары', me_f_proj_hint:'Әр жобаны жаңа жолға жазыңыз', me_f_ach:'Жетістіктері', me_f_ach_hint:'Әр жетістік жаңа жолға. Жылы болса басына жазыңыз: 2024 — Жоба байқауының жеңімпазы',
+  me_photo:'Фото', me_photo_hint:'Беті анық көрінетін суретті таңдаңыз (автоматты түрде шаршы етіп кесіледі)', me_photo_pick:'Фото таңдау',
+  me_save:'Сақтау', me_saved:'Сақталды ✓', me_err:'Сақтау мүмкін болмады: ', me_uploading:'Жүктелуде…',
+  me_chair_title:'Кеңес тарихындағы жазбам', me_f_bio:'Өзі туралы', me_f_work:'Қазіргі жұмыс орны',
+  prof_edit_btn:'Профильді өзгерту', prof_claim_btn:'Бұл менің профилім', prof_claim_sent:'Сұраныс жіберілді — админ растағанша күтіңіз.',
+  prof_claim_confirm:'Бұл профильді өзіңіздікі деп админге сұраныс жіберейін бе?',
+  attach_btn:'Файл тіркеу', attach_hint:'Ең көбі 3 файл, әрқайсысы 10 МБ дейін (PDF, сурет, Word, Excel, PowerPoint)', attach_bad:'Бұл файл қабылданбайды: ', attach_fail:'Идея сақталды, бірақ кейбір файл жүктелмеді: ',
+  adm_edits_title:'Профильді өзгерту рұқсаттары', adm_req_title:'Рұқсат сұраған', adm_grant:'Рұқсат беру', adm_revoke:'Рұқсатты алу',
+  adm_claims_title:'Профильді өзіме деп сұраған', adm_merge:'Біріктіру', adm_granted_title:'Рұқсаты бар қолданушылар', adm_none:'Жоқ',
+  adm_claim_line:'Тізімдегі профиль: ', adm_wants_spec:'Жас маманмын деді', adm_chair_line:'Бұрынғы төраға: ', adm_err:'Қате: '
+ },
+ ru:{
+  reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
+  reg_spec_note:'После подтверждения админом ваш профиль появится в списке молодых специалистов. Фото и достижения вы заполните сами.',
+  reg_is_chair:'Я бывший председатель Совета', reg_chair_label:'Выберите себя из списка председателей', reg_chair_none:'— выберите —',
+  me_title:'Мой профиль', me_login:'Сначала войдите на сайт.', me_pending:'Регистрация ещё не подтверждена. После подтверждения админом вы сможете заполнить профиль.',
+  me_spec_badge:'Молодой специалист', me_member_badge:'Участник',
+  me_req_text:'Чтобы изменить фото, достижения и другие данные, запросите разрешение у админа.', me_req_btn:'Запросить разрешение на редактирование',
+  me_req_sent:'Запрос отправлен. Когда админ даст разрешение, здесь можно будет редактировать профиль.',
+  me_f_pos:'Должность', me_f_dept:'Подразделение', me_f_edu:'Образование', me_f_contact:'Контакты', me_f_hire:'Год начала работы',
+  me_f_proj:'Проекты, в которых участвовал(а)', me_f_proj_hint:'Каждый проект с новой строки', me_f_ach:'Достижения', me_f_ach_hint:'Каждое достижение с новой строки. Год можно указать в начале: 2024 — Победитель конкурса проектов',
+  me_photo:'Фото', me_photo_hint:'Выберите фото с чётко видимым лицом (автоматически обрежется в квадрат)', me_photo_pick:'Выбрать фото',
+  me_save:'Сохранить', me_saved:'Сохранено ✓', me_err:'Не удалось сохранить: ', me_uploading:'Загрузка…',
+  me_chair_title:'Моя запись в истории Совета', me_f_bio:'О себе', me_f_work:'Текущее место работы',
+  prof_edit_btn:'Редактировать профиль', prof_claim_btn:'Это мой профиль', prof_claim_sent:'Запрос отправлен — дождитесь подтверждения админа.',
+  prof_claim_confirm:'Отправить админу запрос, что этот профиль ваш?',
+  attach_btn:'Прикрепить файл', attach_hint:'Не более 3 файлов, каждый до 10 МБ (PDF, изображение, Word, Excel, PowerPoint)', attach_bad:'Этот файл не принимается: ', attach_fail:'Идея сохранена, но некоторые файлы не загрузились: ',
+  adm_edits_title:'Разрешения на редактирование профиля', adm_req_title:'Запросили разрешение', adm_grant:'Разрешить', adm_revoke:'Отозвать',
+  adm_claims_title:'Запросили профиль из списка', adm_merge:'Объединить', adm_granted_title:'Пользователи с разрешением', adm_none:'Нет',
+  adm_claim_line:'Профиль из списка: ', adm_wants_spec:'Сказал(а), что молодой специалист', adm_chair_line:'Бывший председатель: ', adm_err:'Ошибка: '
+ },
+ en:{
+  reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
+  reg_spec_note:'After the admin approves you, your profile will appear in the young specialists list. You will add your photo and achievements yourself.',
+  reg_is_chair:'I am a former Council chairman', reg_chair_label:'Pick yourself from the chairmen list', reg_chair_none:'— select —',
+  me_title:'My profile', me_login:'Please log in first.', me_pending:'Your registration is not approved yet. You can fill in your profile once the admin approves it.',
+  me_spec_badge:'Young specialist', me_member_badge:'Member',
+  me_req_text:'Ask the admin for permission to edit your photo, achievements and other details.', me_req_btn:'Request edit permission',
+  me_req_sent:'Request sent. Once the admin grants permission you can edit your profile here.',
+  me_f_pos:'Position', me_f_dept:'Department', me_f_edu:'Education', me_f_contact:'Contact', me_f_hire:'Year of joining',
+  me_f_proj:'Projects', me_f_proj_hint:'One project per line', me_f_ach:'Achievements', me_f_ach_hint:'One achievement per line. You can start with a year: 2024 — Project contest winner',
+  me_photo:'Photo', me_photo_hint:'Pick a photo with a clearly visible face (it is cropped to a square automatically)', me_photo_pick:'Choose photo',
+  me_save:'Save', me_saved:'Saved ✓', me_err:'Could not save: ', me_uploading:'Uploading…',
+  me_chair_title:'My entry in the Council history', me_f_bio:'About', me_f_work:'Current workplace',
+  prof_edit_btn:'Edit profile', prof_claim_btn:'This is my profile', prof_claim_sent:'Request sent — please wait for admin confirmation.',
+  prof_claim_confirm:'Send the admin a request saying this profile is yours?',
+  attach_btn:'Attach file', attach_hint:'Up to 3 files, 10 MB each (PDF, image, Word, Excel, PowerPoint)', attach_bad:'This file is not accepted: ', attach_fail:'The idea was saved, but some files failed to upload: ',
+  adm_edits_title:'Profile edit permissions', adm_req_title:'Requested permission', adm_grant:'Grant', adm_revoke:'Revoke',
+  adm_claims_title:'Asked for a profile from the list', adm_merge:'Merge', adm_granted_title:'Users with permission', adm_none:'None',
+  adm_claim_line:'Profile from list: ', adm_wants_spec:'Says they are a young specialist', adm_chair_line:'Former chairman: ', adm_err:'Error: '
+ }
+};
+(function(){ ['kk','ru','en'].forEach(function(l){ if(I18N[l]) Object.keys(I18N_EXTRA[l]).forEach(function(k){ I18N[l][k]=I18N_EXTRA[l][k]; }); }); })();
+
 function t(key){
   var v = (I18N[LANG] && I18N[LANG][key] !== undefined) ? I18N[LANG][key] : (I18N.kk[key] !== undefined ? I18N.kk[key] : key);
   return v;
@@ -2607,7 +2735,7 @@ function refreshAuthUI(){
   if(authUser){
     var initials = (myProfile && myProfile.full_name) ? myProfile.full_name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase() : '?';
     var label = myProfile ? myProfile.full_name : authUser.email;
-    area.innerHTML = '<span class="user-chip" onclick="doLogout()" title="'+t('btn_logout')+'">'+
+    area.innerHTML = '<span class="user-chip" onclick="nav(\'me\')" title="'+t('me_title')+'">'+
       '<span class="avatar" style="display:flex;align-items:center;justify-content:center;background:var(--gold-soft);color:var(--blue-deep);font-weight:600;">'+USER_ICON+photoImg(myProfile && myProfile.photo_url)+'</span>'+
       '<span style="font-size:13px;font-weight:600;">'+label+'</span></span>';
     if(myProfile && myProfile.approval_status === 'pending'){
@@ -2643,6 +2771,8 @@ function loadMyState(){
       ((res2[2] && res2[2].data) || []).forEach(function(r){ myVotes[r.idea_id] = r.vote_type; });
       refreshAuthUI();
       renderIdeas();
+      var meV = document.getElementById('view-me');
+      if(meV && !meV.classList.contains('hidden')) renderMe();
     });
   }).catch(function(){ refreshAuthUI(); });
 }
@@ -2671,6 +2801,27 @@ function switchAuthTab(tab){
   document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
   document.getElementById('registerForm').classList.toggle('hidden', isLogin);
   document.getElementById('modalTitle').textContent = isLogin ? t('tab_login') : t('tab_register');
+}
+
+var regListsLoaded = false;
+function loadRegLists(){
+  if(regListsLoaded) return; regListsLoaded = true;
+  sb.rpc('unclaimed_specialists').then(function(r){
+    var rows = (r && r.data) || [];
+    document.getElementById('regClaim').innerHTML = '<option value="">'+escHtml(t('reg_claim_none'))+'</option>' +
+      rows.map(function(x){ return '<option value="'+x.id+'">'+escHtml(x.full_name)+'</option>'; }).join('');
+  });
+  sb.rpc('unclaimed_chairmen').then(function(r){
+    var rows = (r && r.data) || [];
+    document.getElementById('regChair').innerHTML = '<option value="">'+escHtml(t('reg_chair_none'))+'</option>' +
+      rows.map(function(x){ return '<option value="'+x.id+'">'+escHtml(x.full_name)+' ('+x.start_year+'–'+(x.end_year||'…')+')</option>'; }).join('');
+  });
+}
+function onRegToggle(){
+  var a = document.getElementById('regIsSpec').checked, c = document.getElementById('regIsChair').checked;
+  document.getElementById('regSpecBox').classList.toggle('hidden', !a);
+  document.getElementById('regChairBox').classList.toggle('hidden', !c);
+  if(a || c) loadRegLists();
 }
 function clearAuthMsgs(){
   var e = document.getElementById('authError'); e.classList.remove('show'); e.textContent='';
@@ -2710,6 +2861,10 @@ function doRegister(){
   var phone = document.getElementById('regPhone').value.trim();
   var email = document.getElementById('regEmail').value.trim();
   var password = document.getElementById('regPassword').value;
+  var isSpec = document.getElementById('regIsSpec').checked;
+  var claimId = isSpec ? document.getElementById('regClaim').value : '';
+  var isChair = document.getElementById('regIsChair').checked;
+  var chairId = isChair ? document.getElementById('regChair').value : '';
   var passwordConfirm = document.getElementById('regPasswordConfirm').value;
   if(!name || !email || !password || !passwordConfirm){ showAuthError(t('err_fill_all')); return; }
   if(password !== passwordConfirm){ showAuthError(t('err_password_mismatch')); return; }
@@ -2719,7 +2874,11 @@ function doRegister(){
     var user = res.data.user;
     if(!user){ showAuthError(t('err_generic')); return; }
     var initials = name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
-    return sb.from('profiles').insert({
+    var regExtra = {};
+    if(isSpec) regExtra.wants_specialist = true;
+    if(claimId) regExtra.claim_profile_id = claimId;
+    if(chairId) regExtra.claim_history_id = chairId;
+    return sb.from('profiles').insert(Object.assign({
       id: user.id,
       full_name: name,
       position: position || null,
@@ -2730,7 +2889,7 @@ function doRegister(){
       avatar_initials: initials,
       council_join_year: new Date().getFullYear(),
       approval_status: 'pending'
-    }).then(function(res2){
+    }, regExtra)).then(function(res2){
       if(res2.error){ showAuthError(res2.error.message || t('err_generic')); return; }
       showAuthOk(t('reg_success'));
       loadMyState();
@@ -2749,24 +2908,82 @@ function renderAdminList(){
   renderAdminCup(); renderAdminIgPosts();
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  renderAdminEdits();
   sb.from('profiles').select('*').eq('approval_status','pending').order('created_at',{ascending:true}).then(function(res){
     var rows = (res.data || []);
     if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('admin_empty')+'</p>'; return; }
-    el.innerHTML = rows.map(function(r){
-      return '<div class="admin-row">'+
-        '<div><b>'+r.full_name+'</b><div class="meta">'+[r.position,r.department,r.company].filter(Boolean).join(' · ')+'</div>'+
-        '<div class="meta">'+[r.email,r.phone].filter(Boolean).join(' · ')+'</div></div>'+
-        '<div class="admin-actions">'+
-          '<button class="approve" onclick="decideRequest(\''+r.id+'\',\'approved\')">'+t('admin_approve')+'</button>'+
-          '<button class="reject" onclick="decideRequest(\''+r.id+'\',\'rejected\')">'+t('admin_reject')+'</button>'+
-        '</div></div>';
-    }).join('');
+    var pids = rows.map(function(r){return r.claim_profile_id;}).filter(Boolean);
+    var hids = rows.map(function(r){return r.claim_history_id;}).filter(Boolean);
+    return Promise.all([
+      pids.length ? sb.from('profiles').select('id,full_name').in('id', pids) : Promise.resolve({data:[]}),
+      hids.length ? sb.from('council_history').select('id,full_name,start_year').in('id', hids) : Promise.resolve({data:[]})
+    ]).then(function(rr){
+      var pn = {}, hn = {};
+      (rr[0].data||[]).forEach(function(x){ pn[x.id] = x.full_name; });
+      (rr[1].data||[]).forEach(function(x){ hn[x.id] = x.full_name + ' ('+x.start_year+')'; });
+      el.innerHTML = rows.map(function(r){
+        var extra = '';
+        if(r.wants_specialist) extra += '<div class="meta">✔ '+t('adm_wants_spec')+'</div>';
+        if(r.claim_profile_id) extra += '<div class="meta">'+t('adm_claim_line')+'<b>'+escHtml(pn[r.claim_profile_id]||'?')+'</b></div>';
+        if(r.claim_history_id) extra += '<div class="meta">'+t('adm_chair_line')+'<b>'+escHtml(hn[r.claim_history_id]||'?')+'</b></div>';
+        return '<div class="admin-row">'+
+          '<div><b>'+escHtml(r.full_name)+'</b><div class="meta">'+escHtml([r.position,r.department,r.company].filter(Boolean).join(' · '))+'</div>'+
+          '<div class="meta">'+escHtml([r.email,r.phone].filter(Boolean).join(' · '))+'</div>'+extra+'</div>'+
+          '<div class="admin-actions">'+
+            '<button class="approve" onclick="decideRequest(\''+r.id+'\',\'approved\')">'+t('admin_approve')+'</button>'+
+            '<button class="reject" onclick="decideRequest(\''+r.id+'\',\'rejected\')">'+t('admin_reject')+'</button>'+
+          '</div></div>';
+      }).join('');
+    });
   });
 }
 function decideRequest(id, status){
-  sb.from('profiles').update({ approval_status: status }).eq('id', id).then(function(res){
-    if(res.error){ alert(res.error.message); return; }
+  sb.rpc('admin_approve_profile', { p_id: id, p_status: status }).then(function(res){
+    if(res.error){ alert(t('adm_err') + res.error.message); return; }
     renderAdminList();
+    loadData();
+  });
+}
+
+/* --- админ: өзгерту рұқсаттары және профиль байланыстары --- */
+function renderAdminEdits(){
+  var box = document.getElementById('adminEdits'); if(!box) return;
+  sb.from('profiles').select('id,full_name,position,department,approval_status,edit_granted,edit_requested_at,claim_profile_id')
+    .or('edit_requested_at.not.is.null,edit_granted.eq.true,claim_profile_id.not.is.null')
+    .order('full_name',{ascending:true}).then(function(res){
+    if(res.error){ box.innerHTML=''; return; }
+    var rows = res.data || [];
+    var reqs = rows.filter(function(r){ return r.edit_requested_at && !r.edit_granted; });
+    var claims = rows.filter(function(r){ return r.claim_profile_id && r.approval_status==='approved'; });
+    var granted = rows.filter(function(r){ return r.edit_granted; });
+    var cids = claims.map(function(r){return r.claim_profile_id;});
+    var namesP = cids.length ? sb.from('profiles').select('id,full_name').in('id', cids) : Promise.resolve({data:[]});
+    namesP.then(function(nr){
+      var cn = {}; (nr.data||[]).forEach(function(x){ cn[x.id]=x.full_name; });
+      function row(r, btns, extra){
+        return '<div class="admin-row"><div><b>'+escHtml(r.full_name)+'</b><div class="meta">'+escHtml([r.position,r.department].filter(Boolean).join(' · '))+'</div>'+(extra||'')+'</div><div class="admin-actions">'+btns+'</div></div>';
+      }
+      var html = '<div class="adm-block"><h3>'+t('adm_edits_title')+'</h3>';
+      html += '<h4>'+t('adm_req_title')+' ('+reqs.length+')</h4>';
+      html += reqs.length ? reqs.map(function(r){ return row(r,'<button class="approve" onclick="adminSetEdit(\''+r.id+'\',true)">'+t('adm_grant')+'</button>'); }).join('') : '<div class="meta">'+t('adm_none')+'</div>';
+      html += '<h4>'+t('adm_claims_title')+' ('+claims.length+')</h4>';
+      html += claims.length ? claims.map(function(r){ return row(r,'<button class="approve" onclick="adminMergeClaim(\''+r.id+'\')">'+t('adm_merge')+'</button>','<div class="meta">'+t('adm_claim_line')+'<b>'+escHtml(cn[r.claim_profile_id]||'?')+'</b></div>'); }).join('') : '<div class="meta">'+t('adm_none')+'</div>';
+      html += '<details style="margin-top:12px;"><summary style="cursor:pointer;font-size:13px;color:var(--ink-soft);">'+t('adm_granted_title')+' ('+granted.length+')</summary>'+
+        granted.map(function(r){ return row(r,'<button class="reject" onclick="adminSetEdit(\''+r.id+'\',false)">'+t('adm_revoke')+'</button>'); }).join('')+'</details></div>';
+      box.innerHTML = html;
+    });
+  });
+}
+function adminSetEdit(id, grant){
+  sb.rpc('admin_set_edit', { p_profile: id, p_grant: grant }).then(function(r){
+    if(r.error){ alert(t('adm_err')+r.error.message); return; }
+    renderAdminEdits();
+  });
+}
+function adminMergeClaim(id){
+  sb.rpc('admin_merge_claim', { p_user: id }).then(function(r){
+    if(r.error){ alert(t('adm_err')+r.error.message); return; }
+    renderAdminEdits(); loadData();
   });
 }
 
@@ -3455,6 +3672,7 @@ function deleteEvent(eventId){
 /* ===================== router ===================== */
 function nav(route, param){
   if(route === 'admin' && !isAdmin){ route = 'home'; }
+  if(route === 'me' && !authUser){ openAuthModal(); return; }
   document.querySelectorAll('main > section').forEach(function(s){ s.classList.add('hidden'); });
   document.getElementById('view-'+route).classList.remove('hidden');
   document.querySelectorAll('.site-nav button, .drawer-nav button').forEach(function(b){
@@ -3462,6 +3680,7 @@ function nav(route, param){
   });
   if(route==='profile' && param) renderProfile(param);
   if(route==='admin') renderAdminList();
+  if(route==='me') renderMe();
   if(route==='qr') drawQR();
   if(route==='feed'){ loadIgPosts(); loadFeed(); }
   if(route==='events') loadEvents();
@@ -3637,6 +3856,7 @@ function renderProfile(id){
     fg.innerHTML += '<div class="field"><dt>'+pair[0]+'</dt><dd>'+pair[1]+'</dd></div>';
   });
   renderIgBox(p);
+  renderProfileActions(p);
   document.getElementById('pProjects').innerHTML = p.projects.length
     ? p.projects.map(function(x){return '<li>'+x+'</li>';}).join('')
     : '<li style="color:var(--ink-faint);">'+t('profile_no_project')+'</li>';
@@ -3664,7 +3884,7 @@ function renderIdeas(){
   var filtered = ideas.filter(function(i){
     var matchesCat = activeCat === 'all' || catKey(i.cat) === activeCat;
     var author = people.find(function(p){return p.id===i.author;});
-    var matchesQ = i.title.toLowerCase().includes(q) || (author && author.name.toLowerCase().includes(q));
+    var matchesQ = String(i.title||'').toLowerCase().includes(q) || ((author ? author.name : (i.authorName||'')).toLowerCase().includes(q));
     return matchesCat && matchesQ;
   });
   if(!filtered.length){
@@ -3678,14 +3898,15 @@ function renderIdeas(){
     card.className = 'idea-card';
     card.innerHTML =
       '<div class="idea-top">'+
-        '<h3 class="idea-title">'+i.title+'</h3>'+
+        '<h3 class="idea-title">'+escHtml(i.title)+'</h3>'+
         '<span class="status-pill '+st.cls+'">'+st.label+'</span>'+
       '</div>'+
       '<div class="idea-meta">'+
-        '<span class="idea-author" onclick="nav(\'profile\',\''+i.author+'\')">'+ (author?author.name:'—') +'</span>'+
+        (author ? '<span class="idea-author" onclick="nav(\'profile\',\''+i.author+'\')">'+escHtml(author.name)+'</span>' : '<span>'+escHtml(i.authorName||'—')+'</span>')+
         '<span>·</span><span class="cat-tag">'+catLabel(i.cat)+'</span>'+
       '</div>'+
-      '<p class="idea-desc">'+i.desc+'</p>'+
+      '<p class="idea-desc">'+escHtml(i.desc||'—')+'</p>'+
+      ((i.files&&i.files.length) ? '<div class="idea-files">'+i.files.map(function(a){ return '<a href="'+escHtml(a.file_url)+'" target="_blank" rel="noopener noreferrer">📎 '+escHtml(a.file_name)+(a.file_size?' · '+fmtSize(a.file_size):'')+'</a>'; }).join('')+'</div>' : '')+
       '<div class="idea-bottom">'+
         '<button class="vote-btn'+(myVotes[i.id]==='like'?' liked':'')+'" onclick="vote(\''+i.id+'\',\'like\')">👍 <span>'+i.likes+'</span></button>'+
         '<button class="vote-btn'+(myVotes[i.id]==='dislike'?' disliked':'')+'" onclick="vote(\''+i.id+'\',\'dislike\')">👎 <span>'+i.dislikes+'</span></button>'+
@@ -3731,14 +3952,244 @@ function submitIdea(){
   var desc = document.getElementById('newIdeaDesc').value.trim();
   var cat = document.getElementById('newIdeaCat').value; // canonical key, e.g. 'digital'
   if(!title){ document.getElementById('newIdeaTitle').focus(); return; }
-  ideas.unshift({id:'local-'+Date.now(), title:title, author: currentUserId, cat:cat, status:'new', desc:desc || '—', likes:0, dislikes:0});
-  document.getElementById('newIdeaTitle').value='';
-  document.getElementById('newIdeaDesc').value='';
-  document.getElementById('newIdeaBox').classList.remove('open');
-  renderCatChips();
-  renderIdeas();
-  // Ескерту: бұл идея де әзірге тек экранда көрінеді, деректер қорына әлі жазылмайды.
+  var btn = document.querySelector('#newIdeaForm .btn-primary'); if(btn) btn.disabled = true;
+  sb.from('ideas').insert({ title: title, description: desc || null, category: cat, author_id: authUser.id, status: 'new' })
+    .select('id').single().then(function(res){
+    if(res.error){ if(btn) btn.disabled = false; alert(res.error.message); return; }
+    return uploadIdeaFiles(res.data.id).then(function(failed){
+      if(btn) btn.disabled = false;
+      document.getElementById('newIdeaTitle').value='';
+      document.getElementById('newIdeaDesc').value='';
+      ideaFiles = []; renderIdeaFileList();
+      document.getElementById('newIdeaBox').classList.remove('open');
+      if(failed.length) alert(t('attach_fail') + failed.join(', '));
+      loadData();
+    });
+  });
 }
+
+
+
+/* ===================== Менің профилім ===================== */
+var meChair = null;
+function msgSet(id, kind, text){ var el=document.getElementById(id); if(!el) return; el.className='me-msg '+(kind||''); el.textContent=text||''; }
+
+function resizeToJpeg(file, size, cb, errCb){
+  var rd = new FileReader();
+  rd.onerror = function(){ errCb && errCb(); };
+  rd.onload = function(){
+    var img = new Image();
+    img.onerror = function(){ errCb && errCb(); };
+    img.onload = function(){
+      var side = Math.min(img.width, img.height);
+      var sx = (img.width - side)/2, sy = (img.height - side)/2;
+      var cv = document.createElement('canvas'); cv.width = size; cv.height = size;
+      cv.getContext('2d').drawImage(img, sx, sy, side, side, 0, 0, size, size);
+      cv.toBlob(function(b){ b ? cb(b) : (errCb && errCb()); }, 'image/jpeg', 0.88);
+    };
+    img.src = rd.result;
+  };
+  rd.readAsDataURL(file);
+}
+function uploadAvatar(file, done, fail){
+  resizeToJpeg(file, 400, function(blob){
+    var path = authUser.id + '/' + Date.now() + '.jpg';
+    sb.storage.from('avatars').upload(path, blob, { contentType:'image/jpeg' }).then(function(r){
+      if(r.error){ fail(r.error.message); return; }
+      var url = sb.storage.from('avatars').getPublicUrl(path).data.publicUrl;
+      done(url);
+    });
+  }, function(){ fail('image'); });
+}
+
+function renderMe(){
+  var body = document.getElementById('meBody'); if(!body) return;
+  if(!authUser || !myProfile){ body.innerHTML = '<p style="color:var(--ink-faint);">'+t('me_login')+'</p>'; return; }
+  var p = myProfile;
+  var initials = escHtml(p.avatar_initials || (p.full_name||'?')[0]);
+  var badge = p.is_specialist ? t('me_spec_badge') : t('me_member_badge');
+  var html = '<div class="me-head"><div class="avatar-lg" id="meAvatar">'+initials+photoImg(p.photo_url)+'</div><div><h3>'+escHtml(p.full_name)+'</h3>'+
+    '<div class="meta">'+escHtml([p.position,p.department].filter(Boolean).join(' · '))+'</div>'+
+    (p.approval_status==='approved' ? '<span class="me-badge">'+badge+'</span>' : '')+'</div></div>';
+  if(p.approval_status !== 'approved'){
+    body.innerHTML = html + '<div class="me-box"><p>'+t('me_pending')+'</p></div>';
+    return;
+  }
+  // Instagram — әркім өзі жаза алады
+  var h = igHandle(p.instagram);
+  html += '<div class="me-box"><h4>Instagram</h4><div class="ig-edit"><input id="meIgInput" maxlength="60" placeholder="'+t('ig_ph')+'" value="'+(h?'@'+escHtml(h):'')+'"><button class="btn btn-gold" onclick="saveMeInstagram()">'+t('ig_save')+'</button></div><div class="ig-note">'+t('ig_optional')+'</div><div class="me-msg" id="meIgMsg"></div></div>';
+  if(p.edit_granted){
+    html += '<div id="meFormHolder"></div>';
+  } else if(p.edit_requested_at){
+    html += '<div class="me-box"><p>'+t('me_req_sent')+'</p></div>';
+  } else {
+    html += '<div class="me-box"><p>'+t('me_req_text')+'</p><button class="btn btn-gold" onclick="requestEdit()">'+t('me_req_btn')+'</button><div class="me-msg" id="meReqMsg"></div></div>';
+  }
+  html += '<div id="meChairHolder"></div>';
+  body.innerHTML = html;
+  if(p.edit_granted) loadMeForm();
+  loadMeChair();
+}
+function saveMeInstagram(){
+  var h = igHandle(document.getElementById('meIgInput').value);
+  sb.rpc('set_my_instagram',{p_instagram:h}).then(function(r){
+    if(r.error){ msgSet('meIgMsg','err',t('ig_err')); return; }
+    myProfile.instagram = h; msgSet('meIgMsg','ok',t('ig_saved')); loadData();
+  });
+}
+function requestEdit(){
+  sb.rpc('request_profile_edit').then(function(r){
+    if(r.error){ msgSet('meReqMsg','err',r.error.message); return; }
+    loadMyState();
+  });
+}
+function loadMeForm(){
+  var p = myProfile, holder = document.getElementById('meFormHolder'); if(!holder) return;
+  Promise.all([
+    sb.from('profile_projects').select('title').eq('profile_id', p.id).order('created_at',{ascending:true}),
+    sb.from('profile_achievements').select('title,year').eq('profile_id', p.id)
+  ]).then(function(rr){
+    var projects = ((rr[0].data)||[]).map(function(x){return x.title;}).join('\n');
+    var ach = ((rr[1].data)||[]).map(function(a){ return (a.year ? a.year+' — ' : '')+a.title; }).join('\n');
+    function fld(id, key, val, type){ return '<label class="fl">'+t(key)+'</label><input type="'+(type||'text')+'" id="'+id+'" value="'+escHtml(val||'')+'">'; }
+    holder.innerHTML = '<div class="me-box"><h4>'+t('me_photo')+'</h4>'+
+      '<div class="me-photo-row"><label class="btn attach-btn">📷 '+t('me_photo_pick')+'<input type="file" accept="image/*" style="display:none" onchange="onMePhoto(this)"></label><span class="me-hint">'+t('me_photo_hint')+'</span></div>'+
+      '<div class="me-msg" id="mePhotoMsg"></div></div>'+
+      '<div class="me-box">'+
+      fld('mePos','me_f_pos',p.position)+fld('meDept','me_f_dept',p.department)+fld('meEdu','me_f_edu',p.education)+
+      fld('meContact','me_f_contact',p.contact)+fld('meHire','me_f_hire',p.hire_year,'number')+
+      '<label class="fl">'+t('me_f_proj')+'</label><textarea id="meProj">'+escHtml(projects)+'</textarea><div class="me-hint">'+t('me_f_proj_hint')+'</div>'+
+      '<label class="fl">'+t('me_f_ach')+'</label><textarea id="meAch">'+escHtml(ach)+'</textarea><div class="me-hint">'+t('me_f_ach_hint')+'</div>'+
+      '<div style="margin-top:14px;"><button class="btn btn-gold" onclick="saveMe()">'+t('me_save')+'</button></div><div class="me-msg" id="meSaveMsg"></div></div>';
+  });
+}
+function onMePhoto(inp){
+  var f = inp.files && inp.files[0]; if(!f) return;
+  msgSet('mePhotoMsg','', t('me_uploading'));
+  uploadAvatar(f, function(url){
+    sb.rpc('update_my_profile', { p_data: { photo_url: url } }).then(function(r){
+      if(r.error){ msgSet('mePhotoMsg','err',t('me_err')+r.error.message); return; }
+      msgSet('mePhotoMsg','ok',t('me_saved'));
+      myProfile.photo_url = url;
+      var av = document.getElementById('meAvatar'); if(av) av.innerHTML = escHtml(myProfile.avatar_initials||'')+photoImg(url);
+      refreshAuthUI(); loadData();
+    });
+  }, function(m){ msgSet('mePhotoMsg','err',t('me_err')+m); });
+}
+function parseAchievements(text){
+  return String(text||'').split('\n').map(function(l){ return l.trim(); }).filter(Boolean).map(function(l){
+    var m = l.match(/^(\d{4})\s*[-–—:.]?\s*(.+)$/);
+    return m ? { year: parseInt(m[1],10), title: m[2].trim() } : { year: null, title: l };
+  });
+}
+function saveMe(){
+  var data = {
+    position: document.getElementById('mePos').value, department: document.getElementById('meDept').value,
+    education: document.getElementById('meEdu').value, contact: document.getElementById('meContact').value,
+    hire_year: document.getElementById('meHire').value
+  };
+  var projects = document.getElementById('meProj').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+  var ach = parseAchievements(document.getElementById('meAch').value);
+  msgSet('meSaveMsg','', t('me_uploading'));
+  sb.rpc('update_my_profile', { p_data: data }).then(function(r1){
+    if(r1.error) throw r1.error;
+    return sb.rpc('set_my_projects', { p_items: projects });
+  }).then(function(r2){
+    if(r2.error) throw r2.error;
+    return sb.rpc('set_my_achievements', { p_items: ach });
+  }).then(function(r3){
+    if(r3.error) throw r3.error;
+    msgSet('meSaveMsg','ok',t('me_saved'));
+    loadMyState(); loadData();
+  }).catch(function(e){ msgSet('meSaveMsg','err',t('me_err')+(e.message||e)); });
+}
+
+function loadMeChair(){
+  var holder = document.getElementById('meChairHolder'); if(!holder) return;
+  sb.from('council_history').select('*').eq('profile_id', authUser.id).maybeSingle().then(function(r){
+    var h = r && r.data; meChair = h; if(!h) { holder.innerHTML=''; return; }
+    var can = myProfile.edit_granted;
+    holder.innerHTML = '<div class="me-box"><h4>'+t('me_chair_title')+'</h4>'+
+      '<p><b>'+escHtml(h.full_name)+'</b> · '+h.start_year+'–'+(h.end_year||'…')+'</p>'+
+      (can ?
+        '<div class="me-photo-row"><label class="btn attach-btn">📷 '+t('me_photo_pick')+'<input type="file" accept="image/*" style="display:none" onchange="onChairPhoto(this)"></label></div>'+
+        '<label class="fl">'+t('me_f_work')+'</label><input type="text" id="meChairWork" value="'+escHtml(h.current_workplace||'')+'">'+
+        '<label class="fl">'+t('me_f_bio')+'</label><textarea id="meChairBio">'+escHtml(h.bio||'')+'</textarea>'+
+        '<div style="margin-top:14px;"><button class="btn btn-gold" onclick="saveChair()">'+t('me_save')+'</button></div><div class="me-msg" id="meChairMsg"></div>'
+      : '<p>'+t('me_req_text')+'</p>')+'</div>';
+  });
+}
+function saveChair(url){
+  var bio = document.getElementById('meChairBio').value, work = document.getElementById('meChairWork').value;
+  sb.rpc('update_my_history', { p_bio: bio, p_workplace: work, p_photo: (typeof url==='string') ? url : '' }).then(function(r){
+    if(r.error){ msgSet('meChairMsg','err',t('me_err')+r.error.message); return; }
+    msgSet('meChairMsg','ok',t('me_saved'));
+  });
+}
+function onChairPhoto(inp){
+  var f = inp.files && inp.files[0]; if(!f) return;
+  msgSet('meChairMsg','', t('me_uploading'));
+  uploadAvatar(f, function(url){ saveChair(url); }, function(m){ msgSet('meChairMsg','err',t('me_err')+m); });
+}
+
+/* --- профиль бетіндегі әрекеттер --- */
+var unclaimedIds = {};
+function renderProfileActions(p){
+  var box = document.getElementById('pActions'); if(!box) return;
+  box.innerHTML = '';
+  if(!authUser || !myProfile) return;
+  if(p.id === authUser.id){
+    box.innerHTML = '<button class="btn btn-gold" onclick="nav(\'me\')">'+t('prof_edit_btn')+'</button>';
+  } else if(unclaimedIds[p.id] && myProfile.approval_status==='approved'){
+    if(myProfile.claim_profile_id === p.id) box.innerHTML = '<span class="note">'+t('prof_claim_sent')+'</span>';
+    else if(!myProfile.claim_profile_id) box.innerHTML = '<button class="btn" onclick="requestClaim(\''+p.id+'\')">'+t('prof_claim_btn')+'</button>';
+  }
+}
+function requestClaim(pid){
+  if(!confirm(t('prof_claim_confirm'))) return;
+  sb.rpc('request_claim', { p_profile: pid }).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    alert(t('prof_claim_sent'));
+    loadMyState().then(function(){ var p = people.find(function(x){return x.id===pid;}); if(p) renderProfileActions(p); });
+  });
+}
+
+/* ===================== Идея файлдары ===================== */
+var ideaFiles = [];
+var IDEA_OK_EXT = ['pdf','png','jpg','jpeg','webp','txt','doc','docx','xls','xlsx','ppt','pptx'];
+function fileExt(n){ var m = String(n||'').toLowerCase().match(/\.([a-z0-9]{1,5})$/); return m ? m[1] : ''; }
+function onIdeaFiles(){
+  var inp = document.getElementById('newIdeaFiles');
+  Array.prototype.forEach.call(inp.files, function(f){
+    if(ideaFiles.length >= 3) return;
+    if(f.size > 10*1024*1024 || IDEA_OK_EXT.indexOf(fileExt(f.name)) < 0){ alert(t('attach_bad') + f.name); return; }
+    ideaFiles.push(f);
+  });
+  inp.value = '';
+  renderIdeaFileList();
+}
+function renderIdeaFileList(){
+  document.getElementById('newIdeaFileList').innerHTML = ideaFiles.map(function(f,i){
+    return '<div>📎 '+escHtml(f.name)+' <span class="attach-hint">'+(f.size/1048576).toFixed(1)+' MB</span><button onclick="removeIdeaFile('+i+')">✕</button></div>';
+  }).join('');
+}
+function removeIdeaFile(i){ ideaFiles.splice(i,1); renderIdeaFileList(); }
+function uploadIdeaFiles(ideaId){
+  var failed = [];
+  return ideaFiles.reduce(function(chain, f, idx){
+    return chain.then(function(){
+      var path = authUser.id + '/' + ideaId + '_' + idx + '_' + Date.now() + '.' + fileExt(f.name);
+      return sb.storage.from('idea-files').upload(path, f, { contentType: f.type || undefined }).then(function(r){
+        if(r.error){ failed.push(f.name); return; }
+        var url = sb.storage.from('idea-files').getPublicUrl(path).data.publicUrl;
+        return sb.from('idea_attachments').insert({ idea_id: ideaId, uploader: authUser.id, file_url: url, file_name: f.name, file_size: f.size }).then(function(r2){
+          if(r2.error) failed.push(f.name);
+        });
+      });
+    });
+  }, Promise.resolve()).then(function(){ return failed; });
+}
+function fmtSize(n){ return n > 1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(n/1024))+' KB'; }
 
 /* ===================== Supabase-тен деректерді жүктеу ===================== */
 function setStat(id, v){ var el = document.getElementById(id); if(el) el.textContent = v; }
@@ -3757,10 +4208,14 @@ function loadData(){
 
   Promise.all([
     sbGet('profiles?select=*,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'),
-    sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc')
+    sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc'),
+    sbGet('idea_attachments?select=*&order=created_at.asc').catch(function(){ return []; }),
+    sb.rpc('unclaimed_specialists').then(function(r){ return (r && r.data) || []; }, function(){ return []; })
   ]).then(function(results){
-    var profileRows = results[0];
+    var profileRows = results[0].filter(function(r){ return r.approval_status === 'approved' && r.is_specialist !== false; });
     var ideaRows = results[1];
+    var attRows = results[2];
+    unclaimedIds = {}; results[3].forEach(function(x){ unclaimedIds[x.id] = true; });
 
     people = profileRows.map(function(row){
       var ideaCount = ideaRows.filter(function(x){ return x.author_id === row.id; }).length;
@@ -3789,6 +4244,8 @@ function loadData(){
         id: row.id,
         title: row.title,
         author: row.author_id,
+        authorName: (row.profiles && row.profiles.full_name) || '',
+        files: attRows.filter(function(a){ return a.idea_id === row.id; }),
         cat: row.category,
         status: row.status,
         desc: row.description,
