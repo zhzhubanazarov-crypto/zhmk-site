@@ -4268,7 +4268,10 @@ function loadData(){
     document.getElementById('demoBanner').classList.add('hidden');
 
     setStat('statPeople', people.length);
-    setStat('statIdeas', ideas.length);
+    // Басты беттегі идея саны: мысал идеялар есептелмейді; нақты идея пайда болғанға дейін «–»
+    var IDEA_STAT_MIN = 1;
+    var realIdeas = ideas.filter(function(x){ return !x.example; }).length;
+    setStat('statIdeas', realIdeas >= IDEA_STAT_MIN ? realIdeas : '–');
     renderPeople();
     renderCatChips();
     renderIdeas();
