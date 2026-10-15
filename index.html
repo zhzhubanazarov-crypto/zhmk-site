@@ -89,6 +89,8 @@
   .ig-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--blue-deep);color:#fff;font-size:12.5px;padding:6px 14px;letter-spacing:.01em;}
   .ig-bar b{color:var(--gold);font-weight:700;}
   .ig-bar:hover{filter:brightness(1.12);}
+  .idea-card.example{background:#fff8e6;border-color:#e3b341;border-style:dashed;}
+  .idea-example-tag{display:inline-block;font-size:12px;font-weight:700;color:#8a5a00;background:#ffe9a8;border-radius:999px;padding:3px 10px;margin-bottom:8px;}
   .reg-check{display:flex;align-items:center;gap:8px;font-size:14px;margin:6px 0;cursor:pointer;}
   .reg-check{justify-content:flex-start;text-align:left;}
   .modal-body .reg-check input[type=checkbox]{width:18px;height:18px;flex:0 0 18px;padding:0;margin:0;}
@@ -2581,7 +2583,7 @@ function dateLocale(){ return LANG==='en' ? 'en-GB' : (LANG==='ru' ? 'ru-RU' : '
 
 var I18N_EXTRA = {
  kk:{
-  reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
+  idea_example:'📌 Мысал үшін салынған идея', reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
   reg_spec_note:'Админ бекіткен соң профиліңіз жас мамандар тізіміне қосылады. Фото мен жетістіктеріңізді өзіңіз толтырасыз.',
   reg_is_chair:'Мен бұрынғы Кеңес төрағасымын', reg_chair_label:'Төрағалар тізімінен өзіңізді таңдаңыз', reg_chair_none:'— таңдаңыз —',
   me_title:'Менің профилім', me_login:'Алдымен сайтқа кіріңіз.', me_pending:'Тіркелуіңіз әлі бекітілген жоқ. Админ бекіткен соң профильді толтыра аласыз.',
@@ -2601,7 +2603,7 @@ var I18N_EXTRA = {
   adm_claim_line:'Тізімдегі профиль: ', adm_wants_spec:'Жас маманмын деді', adm_chair_line:'Бұрынғы төраға: ', adm_err:'Қате: '
  },
  ru:{
-  reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
+  idea_example:'📌 Пример идеи для демонстрации', reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
   reg_spec_note:'После подтверждения админом ваш профиль появится в списке молодых специалистов. Фото и достижения вы заполните сами.',
   reg_is_chair:'Я бывший председатель Совета', reg_chair_label:'Выберите себя из списка председателей', reg_chair_none:'— выберите —',
   me_title:'Мой профиль', me_login:'Сначала войдите на сайт.', me_pending:'Регистрация ещё не подтверждена. После подтверждения админом вы сможете заполнить профиль.',
@@ -2621,7 +2623,7 @@ var I18N_EXTRA = {
   adm_claim_line:'Профиль из списка: ', adm_wants_spec:'Сказал(а), что молодой специалист', adm_chair_line:'Бывший председатель: ', adm_err:'Ошибка: '
  },
  en:{
-  reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
+  idea_example:'📌 Example idea for demonstration', reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
   reg_spec_note:'After the admin approves you, your profile will appear in the young specialists list. You will add your photo and achievements yourself.',
   reg_is_chair:'I am a former Council chairman', reg_chair_label:'Pick yourself from the chairmen list', reg_chair_none:'— select —',
   me_title:'My profile', me_login:'Please log in first.', me_pending:'Your registration is not approved yet. You can fill in your profile once the admin approves it.',
@@ -2761,7 +2763,10 @@ function loadMyState(){
     authUser = (res.data && res.data.user) || null;
     if(!authUser){ myProfile = null; isAdmin = false; myVotes = {}; refreshAuthUI(); return; }
     return Promise.all([
-      sb.from('profiles').select('*').eq('id', authUser.id).maybeSingle(),
+      sb.rpc('my_profile').then(function(r){
+        if(r.error){ return sb.from('profiles').select('*').eq('id', authUser.id).maybeSingle(); }
+        return { data: (r.data && r.data[0]) || null };
+      }),
       sb.from('admins').select('user_id').eq('user_id', authUser.id).maybeSingle(),
       sb.from('idea_votes').select('idea_id,vote_type').eq('profile_id', authUser.id)
     ]).then(function(res2){
@@ -2909,7 +2914,10 @@ function renderAdminList(){
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   renderAdminEdits();
-  sb.from('profiles').select('*').eq('approval_status','pending').order('created_at',{ascending:true}).then(function(res){
+  sb.rpc('admin_pending_profiles').then(function(r){
+    if(r.error) return sb.from('profiles').select('*').eq('approval_status','pending').order('created_at',{ascending:true});
+    return r;
+  }).then(function(res){
     var rows = (res.data || []);
     if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('admin_empty')+'</p>'; return; }
     var pids = rows.map(function(r){return r.claim_profile_id;}).filter(Boolean);
@@ -2948,9 +2956,7 @@ function decideRequest(id, status){
 /* --- админ: өзгерту рұқсаттары және профиль байланыстары --- */
 function renderAdminEdits(){
   var box = document.getElementById('adminEdits'); if(!box) return;
-  sb.from('profiles').select('id,full_name,position,department,approval_status,edit_granted,edit_requested_at,claim_profile_id')
-    .or('edit_requested_at.not.is.null,edit_granted.eq.true,claim_profile_id.not.is.null')
-    .order('full_name',{ascending:true}).then(function(res){
+  sb.rpc('admin_edit_overview').then(function(res){
     if(res.error){ box.innerHTML=''; return; }
     var rows = res.data || [];
     var reqs = rows.filter(function(r){ return r.edit_requested_at && !r.edit_granted; });
@@ -3895,8 +3901,9 @@ function renderIdeas(){
     var author = people.find(function(p){return p.id===i.author;});
     var st = statusInfo(i.status);
     var card = document.createElement('div');
-    card.className = 'idea-card';
+    card.className = 'idea-card' + (i.example ? ' example' : '');
     card.innerHTML =
+      (i.example ? '<div class="idea-example-tag">'+t('idea_example')+'</div>' : '')+
       '<div class="idea-top">'+
         '<h3 class="idea-title">'+escHtml(i.title)+'</h3>'+
         '<span class="status-pill '+st.cls+'">'+st.label+'</span>'+
@@ -4207,7 +4214,7 @@ function loadData(){
   ideaList.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:30px 0;">'+t('loading')+'</p>';
 
   Promise.all([
-    sbGet('profiles?select=*,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'),
+    sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'),
     sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc'),
     sbGet('idea_attachments?select=*&order=created_at.asc').catch(function(){ return []; }),
     sb.rpc('unclaimed_specialists').then(function(r){ return (r && r.data) || []; }, function(){ return []; })
@@ -4245,6 +4252,7 @@ function loadData(){
         title: row.title,
         author: row.author_id,
         authorName: (row.profiles && row.profiles.full_name) || '',
+        example: !!row.is_example,
         files: attRows.filter(function(a){ return a.idea_id === row.id; }),
         cat: row.category,
         status: row.status,
