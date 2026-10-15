@@ -156,7 +156,9 @@
   /* ===== background art (swap by uploading bg.jpg next to index.html) ===== */
   body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--blue);opacity:.07;
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'%3E%3Cpath d='M0 770 C220 700 400 748 600 722 S940 676 1140 726 S1470 704 1600 744 V900 H0Z'/%3E%3Cpath d='M0 836 C260 792 470 842 720 810 S1160 778 1370 820 S1550 806 1600 796 V900 H0Z'/%3E%3Cg transform='translate(290 724)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(-11 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3Cg transform='translate(1180 700) scale(.8)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(9 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3Cg transform='translate(760 700) scale(.55)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(-6 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3C/svg%3E") center bottom/cover no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'%3E%3Cpath d='M0 770 C220 700 400 748 600 722 S940 676 1140 726 S1470 704 1600 744 V900 H0Z'/%3E%3Cpath d='M0 836 C260 792 470 842 720 810 S1160 778 1370 820 S1550 806 1600 796 V900 H0Z'/%3E%3Cg transform='translate(290 724)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(-11 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3Cg transform='translate(1180 700) scale(.8)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(9 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3Cg transform='translate(760 700) scale(.55)'%3E%3Crect x='-42' y='-8' width='84' height='8'/%3E%3Cpath d='M-12 -8 L0 -74 L12 -8Z'/%3E%3Cg transform='rotate(-6 0 -74)'%3E%3Crect x='-74' y='-80' width='148' height='8' rx='4'/%3E%3Cpath d='M-74 -82 q-20 4 -24 32 l13 0 q2 -15 15 -20z'/%3E%3Ccircle cx='66' cy='-62' r='15'/%3E%3C/g%3E%3Crect x='-72' y='-44' width='4' height='44'/%3E%3C/g%3E%3C/svg%3E") center bottom/cover no-repeat;}
-  body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("bg.jpg") center/cover no-repeat;opacity:.14;}
+  body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("bg.jpg") center/cover no-repeat;opacity:.42;will-change:transform;animation:bgDrift 36s ease-in-out infinite alternate;}
+  @keyframes bgDrift{from{transform:scale(1) translate3d(0,0,0);}to{transform:scale(1.09) translate3d(-1.5%,-1%,0);}}
+  @media (prefers-reduced-motion: reduce){body::after{animation:none;}}
 
   /* ===== header ===== */
   .site-header{
@@ -275,6 +277,32 @@
   .cup-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
   .cup-foot .btn{padding:11px 22px;font-size:14px;}
   .cup-foot .btn[disabled]{opacity:.6;cursor:default;}
+  .team-banner{position:relative;border-radius:18px;overflow:hidden;margin:6px 0 22px;box-shadow:var(--shadow-lg);background:#bcdcf3;}
+  .team-banner img{display:block;width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;object-position:center 62%;}
+  .team-cap{position:absolute;left:0;right:0;top:0;padding:22px 26px 60px;background:linear-gradient(180deg,rgba(15,47,92,.62),rgba(15,47,92,0));color:#fff;display:flex;flex-direction:column;gap:4px;}
+  .team-cap b{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:clamp(20px,3vw,32px);line-height:1.15;}
+  .team-cap span{font-size:clamp(12.5px,1.5vw,15px);opacity:.92;}
+  @media (max-width:640px){.team-banner img{aspect-ratio:4/3;object-position:center 70%;}.team-cap{padding:16px 16px 40px;}}
+  .cup-link{margin-left:auto;font-size:13px;font-weight:600;color:#fff;opacity:.95;border-bottom:1px solid rgba(255,255,255,.5);}
+  .br-wrap{overflow-x:auto;padding:6px 2px 18px;-webkit-overflow-scrolling:touch;}
+  .br{display:flex;gap:26px;min-width:max-content;align-items:stretch;}
+  .br-col{display:flex;flex-direction:column;min-width:210px;}
+  .br-col h4{margin:0 0 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);text-align:center;}
+  .br-list{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:10px;}
+  .br-m{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);position:relative;}
+  .br-m:after{content:"";position:absolute;right:-26px;top:50%;width:26px;border-top:2px solid var(--line);}
+  .br-col.last .br-m:after{display:none;}
+  .br-t{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;font-size:13px;min-height:34px;}
+  .br-t+.br-t{border-top:1px solid var(--line);}
+  .br-t.win{background:var(--gold-soft);font-weight:700;}
+  .br-t.tbd{color:var(--ink-faint);font-style:italic;}
+  .br-t span.n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px;}
+  .br-t b{font-variant-numeric:tabular-nums;min-width:16px;text-align:right;}
+  .br-t input[type=number]{width:44px;padding:3px 4px;font-size:13px;}
+  .br-t select{max-width:150px;font-size:12px;padding:3px;}
+  .br-final{display:flex;flex-direction:column;gap:20px;justify-content:center;}
+  .br-trophy{text-align:center;font-size:28px;margin-bottom:-4px;}
+  .br-adm{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
   .cup-teams-note{font-size:12px;opacity:.85;}
   .cup-teams-list{margin:0;padding:0;list-style:none;font-size:13px;display:flex;flex-direction:column;gap:5px;max-height:160px;overflow-y:auto;}
   .cup-teams-list li{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px;}
@@ -614,7 +642,7 @@
           <button class="btn btn-ghost" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
         </div>
       </div>
-      <div class="hero-art cup-card" id="cupCard">
+      <div class="hero-art cup-card" id="cupCard" onclick="nav('cup')" style="cursor:pointer;" role="link" tabindex="0">
         <div class="ring r1"></div>
         <div class="ring r2"></div>
         <div>
@@ -629,10 +657,16 @@
           <div class="cup-meta" id="cupMeta" style="margin-top:8px;"></div>
         </div>
         <div class="cup-foot">
-          <button class="btn btn-gold hidden" id="cupBtn" onclick="openCupModal()">Тіркелу</button>
+          <button class="btn btn-gold hidden" id="cupBtn" onclick="event.stopPropagation();openCupModal()">Тіркелу</button>
           <span class="cup-teams-note" id="cupTeamsNote"></span>
+          <span class="cup-link" id="cupLink">→</span>
         </div>
       </div>
+    </div>
+
+    <div class="team-banner">
+      <img src="team.jpg" alt="" loading="lazy">
+      <div class="team-cap"><b data-i18n="team_cap">Біз — Жас мамандар кеңесі</b><span data-i18n="team_sub">Бірге идеялар ұсынамыз, бірге өсеміз</span></div>
     </div>
 
     <div class="stat-row">
@@ -810,6 +844,22 @@
   </section>
 
   <!-- ============ HISTORY ============ -->
+  <!-- ============ CUP BRACKET ============ -->
+  <section id="view-cup" class="hidden">
+    <div class="page-head">
+      <div>
+        <span class="back-link" onclick="nav('home')" id="brBack">← </span>
+        <h2 id="brTitle">Жас маман CUP</h2>
+        <p id="brSub" style="color:var(--ink-soft);margin:6px 0 0;"></p>
+      </div>
+      <button class="btn btn-gold hidden" id="brRegBtn" onclick="openCupModal()">Тіркелу</button>
+    </div>
+    <div class="br-adm hidden" id="brAdm"></div>
+    <div class="br-wrap"><div class="br" id="brBoard"></div></div>
+    <h3 id="brTeamsH" style="margin:22px 0 10px;"></h3>
+    <ul class="cup-teams-list" id="brTeams" style="max-height:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;"></ul>
+  </section>
+
   <section id="view-history" class="hidden">
     <div class="page-head">
       <div>
@@ -2618,7 +2668,7 @@ function dateLocale(){ return LANG==='en' ? 'en-GB' : (LANG==='ru' ? 'ru-RU' : '
 
 var I18N_EXTRA = {
  kk:{
-  idea_example:'📌 Мысал үшін салынған идея', qr_ig:'Instagram парақшасы', qr_site:'Сайт', qr_scan_ig:'Instagram-дағы @kbm_jasmaman парақшасына өту үшін сканерлеңіз', qr_scan_site:'Сайтқа өту үшін сканерлеңіз', reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
+  idea_example:'📌 Мысал үшін салынған идея', team_cap:'Біз — Жас мамандар кеңесі', team_sub:'Бірге идеялар ұсынамыз, бірге өсеміз', qr_ig:'Instagram парақшасы', qr_site:'Сайт', qr_scan_ig:'Instagram-дағы @kbm_jasmaman парақшасына өту үшін сканерлеңіз', qr_scan_site:'Сайтқа өту үшін сканерлеңіз', reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
   reg_spec_note:'Админ бекіткен соң профиліңіз жас мамандар тізіміне қосылады. Фото мен жетістіктеріңізді өзіңіз толтырасыз.',
   reg_is_chair:'Мен бұрынғы Кеңес төрағасымын', reg_chair_label:'Төрағалар тізімінен өзіңізді таңдаңыз', reg_chair_none:'— таңдаңыз —',
   me_title:'Менің профилім', me_login:'Алдымен сайтқа кіріңіз.', me_pending:'Тіркелуіңіз әлі бекітілген жоқ. Админ бекіткен соң профильді толтыра аласыз.',
@@ -2638,7 +2688,7 @@ var I18N_EXTRA = {
   adm_claim_line:'Тізімдегі профиль: ', adm_wants_spec:'Жас маманмын деді', adm_wants_alumni:'Бұрынғы жас маманмын деді', reg_is_alumni:'Мен бұрынғы жас маманмын', tag_alumni:'Бұрынғы жас маман', flt_all:'Барлығы', flt_current:'Қазіргі', flt_alumni:'Бұрынғы жас мамандар', adm_alumni_on:'Бұрынғы жас маман ету', adm_alumni_off:'Қазіргі жас маман ету', me_alumni_badge:'Бұрынғы жас маман', adm_chair_line:'Бұрынғы төраға: ', adm_err:'Қате: '
  },
  ru:{
-  idea_example:'📌 Пример идеи для демонстрации', qr_ig:'Страница Instagram', qr_site:'Сайт', qr_scan_ig:'Отсканируйте, чтобы открыть страницу @kbm_jasmaman в Instagram', qr_scan_site:'Отсканируйте, чтобы открыть сайт', reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
+  idea_example:'📌 Пример идеи для демонстрации', team_cap:'Мы — Совет молодых специалистов', team_sub:'Вместе предлагаем идеи и растём', qr_ig:'Страница Instagram', qr_site:'Сайт', qr_scan_ig:'Отсканируйте, чтобы открыть страницу @kbm_jasmaman в Instagram', qr_scan_site:'Отсканируйте, чтобы открыть сайт', reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
   reg_spec_note:'После подтверждения админом ваш профиль появится в списке молодых специалистов. Фото и достижения вы заполните сами.',
   reg_is_chair:'Я бывший председатель Совета', reg_chair_label:'Выберите себя из списка председателей', reg_chair_none:'— выберите —',
   me_title:'Мой профиль', me_login:'Сначала войдите на сайт.', me_pending:'Регистрация ещё не подтверждена. После подтверждения админом вы сможете заполнить профиль.',
@@ -2658,7 +2708,7 @@ var I18N_EXTRA = {
   adm_claim_line:'Профиль из списка: ', adm_wants_spec:'Сказал(а), что молодой специалист', adm_wants_alumni:'Сказал(а), что бывший молодой специалист', reg_is_alumni:'Я бывший молодой специалист', tag_alumni:'Бывший молодой специалист', flt_all:'Все', flt_current:'Текущие', flt_alumni:'Бывшие молодые специалисты', adm_alumni_on:'Сделать бывшим молодым специалистом', adm_alumni_off:'Сделать текущим молодым специалистом', me_alumni_badge:'Бывший молодой специалист', adm_chair_line:'Бывший председатель: ', adm_err:'Ошибка: '
  },
  en:{
-  idea_example:'📌 Example idea for demonstration', qr_ig:'Instagram page', qr_site:'Website', qr_scan_ig:'Scan to open the @kbm_jasmaman page on Instagram', qr_scan_site:'Scan to open the website', reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
+  idea_example:'📌 Example idea for demonstration', team_cap:'We are the Young Specialists Council', team_sub:'Sharing ideas and growing together', qr_ig:'Instagram page', qr_site:'Website', qr_scan_ig:'Scan to open the @kbm_jasmaman page on Instagram', qr_scan_site:'Scan to open the website', reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
   reg_spec_note:'After the admin approves you, your profile will appear in the young specialists list. You will add your photo and achievements yourself.',
   reg_is_chair:'I am a former Council chairman', reg_chair_label:'Pick yourself from the chairmen list', reg_chair_none:'— select —',
   me_title:'My profile', me_login:'Please log in first.', me_pending:'Your registration is not approved yet. You can fill in your profile once the admin approves it.',
@@ -2751,6 +2801,7 @@ function setLang(lang){
   renderIdeas();
   refreshAuthUI();
   renderCupCard();
+  if(!document.getElementById('view-cup').classList.contains('hidden')) renderBracket();
   if(document.getElementById('view-admin') && !document.getElementById('view-admin').classList.contains('hidden')) renderAdminList();
   if(document.getElementById('view-feed') && !document.getElementById('view-feed').classList.contains('hidden')){ loadFeed(); }
 }
@@ -3076,6 +3127,7 @@ function renderCupCard(){
   } else {
     btn.classList.add('hidden');
   }
+  var lk = document.getElementById('cupLink'); if(lk) lk.textContent = (LANG==='ru'?'Сетка турнира →':LANG==='en'?'Bracket →':'Турнир кестесі →');
   document.getElementById('cupTeamsNote').textContent = (cup && cupTeams.length) ? t('cup_teams_count')(cupTeams.length) : '';
 
   updateCupCount();
@@ -3090,6 +3142,186 @@ function updateCupCount(){
   function box(n, key){ return '<div class="cup-box"><b>'+String(n).padStart(2,'0')+'</b><span>'+t(key)+'</span></div>'; }
   var d = Math.floor(diff/864e5), h = Math.floor(diff%864e5/36e5), m = Math.floor(diff%36e5/6e4), s = Math.floor(diff%6e4/1e3);
   el.innerHTML = box(d,'cup_d') + box(h,'cup_h') + box(m,'cup_m') + box(s,'cup_s');
+}
+
+
+/* ===================== CUP кестесі ===================== */
+var BR_T = {
+ kk:{r16:'1/8 финал',qf:'1/4 финал',sf:'1/2 финал',fin:'Финал',third:'3-орын үшін талас',tbd:'Күтілуде',back:'← Басты бет',teams:'Тіркелген командалар',none:'Әлі тіркелген команда жоқ — кесте командалар тіркелген сайын толады.',draw:'🎲 Жеребьёвка',reset:'Кестені тазалау',sure:'Кестедегі нәтижелер өшіріледі. Жалғастырасыз ба?',sel:'— команда —',nosql:'Админге: 21-cup-bracket.sql файлын Supabase-те іске қосыңыз.',reg:'Тіркелу',pub:'📣 Не әңгімеге салу',posted:'Не әңгімеге пост болып салынды ✓',err:'Қате: ',sub:'Командалар тіркелген сайын кестеге өздері түседі'},
+ ru:{r16:'1/8 финала',qf:'1/4 финала',sf:'1/2 финала',fin:'Финал',third:'Матч за 3-е место',tbd:'Ожидается',back:'← На главную',teams:'Зарегистрированные команды',none:'Пока нет команд — сетка заполняется по мере регистрации.',draw:'🎲 Жеребьёвка',reset:'Очистить сетку',sure:'Результаты в сетке будут удалены. Продолжить?',sel:'— команда —',nosql:'Админу: запустите 21-cup-bracket.sql в Supabase.',reg:'Регистрация',pub:'📣 Опубликовать в ленту',posted:'Опубликовано в ленте ✓',err:'Ошибка: ',sub:'Команды попадают в сетку по мере регистрации'},
+ en:{r16:'Round of 16',qf:'Quarter-finals',sf:'Semi-finals',fin:'Final',third:'3rd place match',tbd:'TBD',back:'← Home',teams:'Registered teams',none:'No teams yet — the bracket fills as teams register.',draw:'🎲 Draw',reset:'Clear bracket',sure:'Bracket results will be deleted. Continue?',sel:'— team —',nosql:'Admin: run 21-cup-bracket.sql in Supabase.',reg:'Register',pub:'📣 Post to the feed',posted:'Posted to the feed ✓',err:'Error: ',sub:'Teams appear in the bracket as they register'}
+};
+function tb(k){ return (BR_T[LANG] || BR_T.kk)[k]; }
+var brRows = [], brNoSql = false;
+function loadBracket(){
+  var go = function(){
+    if(!cup){ renderBracket(); return; }
+    sb.from('promo_matches').select('*').eq('promo_id', cup.id).then(function(r){
+      brNoSql = !!(r && r.error);
+      brRows = (r && r.data) || [];
+      renderBracket();
+    }, function(){ brNoSql = true; brRows = []; renderBracket(); });
+  };
+  renderBracket();
+  if(cup) go(); else loadCup().then(go);
+}
+function brRow(round, slot){
+  for(var i=0;i<brRows.length;i++) if(brRows[i].round===round && brRows[i].slot===slot) return brRows[i];
+  return null;
+}
+function brModel(){
+  var pos = [], used = {};
+  for(var s=0;s<8;s++){
+    var m = brRow('r16', s);
+    pos[2*s] = (m && m.team_a) || null; pos[2*s+1] = (m && m.team_b) || null;
+    if(pos[2*s]) used[pos[2*s]] = 1; if(pos[2*s+1]) used[pos[2*s+1]] = 1;
+  }
+  var rest = cupTeams.map(function(x){ return x.team_name; }).filter(function(n){ return !used[n]; });
+  for(var i=0;i<16 && rest.length;i++) if(!pos[i]) pos[i] = rest.shift();
+  function mk(round, slot, a, b){
+    var m = brRow(round, slot) || {};
+    var sa = (m.score_a===null||m.score_a===undefined) ? null : m.score_a;
+    var sb2 = (m.score_b===null||m.score_b===undefined) ? null : m.score_b;
+    var w = null, l = null;
+    if(a && b && sa!==null && sb2!==null && sa!==sb2){ w = sa>sb2 ? a : b; l = sa>sb2 ? b : a; }
+    return { round:round, slot:slot, a:a||null, b:b||null, sa:sa, sb:sb2, w:w, l:l };
+  }
+  var r16=[], qf=[], sf=[];
+  for(var k=0;k<8;k++) r16.push(mk('r16',k,pos[2*k],pos[2*k+1]));
+  for(k=0;k<4;k++) qf.push(mk('qf',k,r16[2*k].w,r16[2*k+1].w));
+  for(k=0;k<2;k++) sf.push(mk('sf',k,qf[2*k].w,qf[2*k+1].w));
+  var fin = mk('final',0,sf[0].w,sf[1].w), third = mk('third',0,sf[0].l,sf[1].l);
+  return { r16:r16, qf:qf, sf:sf, fin:fin, third:third };
+}
+function brTeamOpts(sel){
+  return '<option value="">'+escHtml(tb('sel'))+'</option>' + cupTeams.map(function(x){
+    return '<option'+(x.team_name===sel?' selected':'')+'>'+escHtml(x.team_name)+'</option>';
+  }).join('');
+}
+function brMatchHtml(m){
+  var id = m.round+'_'+m.slot;
+  function row(side, name, score){
+    var win = m.w && m.w===name;
+    if(isAdmin){
+      var nm = m.round==='r16'
+        ? '<select id="bt_'+id+'_'+side+'" onchange="saveMatch(\''+m.round+'\','+m.slot+')">'+brTeamOpts(name)+'</select>'
+        : '<span class="n'+(name?'':' tbd')+'">'+escHtml(name||tb('tbd'))+'</span>';
+      return '<div class="br-t'+(win?' win':'')+'">'+nm+'<input type="number" min="0" id="bs_'+id+'_'+side+'" value="'+(score===null?'':score)+'" onchange="saveMatch(\''+m.round+'\','+m.slot+')"></div>';
+    }
+    return '<div class="br-t'+(win?' win':'')+(name?'':' tbd')+'"><span class="n">'+escHtml(name||tb('tbd'))+'</span><b>'+(score===null?'':score)+'</b></div>';
+  }
+  return '<div class="br-m">'+row('a',m.a,m.sa)+row('b',m.b,m.sb)+'</div>';
+}
+function renderBracket(){
+  var board = document.getElementById('brBoard'); if(!board) return;
+  document.getElementById('brBack').textContent = tb('back');
+  document.getElementById('brTitle').textContent = (cup && cup.title) || 'Жас маман CUP';
+  document.getElementById('brSub').textContent = tb('sub');
+  var rb = document.getElementById('brRegBtn');
+  var canReg = !!(cup && !cupIsPast() && cup.registration_open);
+  rb.classList.toggle('hidden', !canReg); rb.textContent = tb('reg');
+  var m = brModel();
+  function col(title, list, last){
+    return '<div class="br-col'+(last?' last':'')+'"><h4>'+title+'</h4><div class="br-list">'+list.map(brMatchHtml).join('')+'</div></div>';
+  }
+  board.innerHTML = col(tb('r16'), m.r16) + col(tb('qf'), m.qf) + col(tb('sf'), m.sf) +
+    '<div class="br-col last"><div class="br-final"><div><div class="br-trophy">🏆</div><h4>'+tb('fin')+'</h4>'+brMatchHtml(m.fin)+'</div>'+
+    '<div><h4>'+tb('third')+'</h4>'+brMatchHtml(m.third)+'</div></div></div>';
+  document.getElementById('brTeamsH').textContent = tb('teams') + (cupTeams.length ? ' ('+cupTeams.length+')' : '');
+  document.getElementById('brTeams').innerHTML = cupTeams.length
+    ? cupTeams.map(function(x,i){ return '<li>'+(i+1)+'. '+escHtml(x.team_name)+' <span>'+escHtml(x.dzo||'')+'</span></li>'; }).join('')
+    : '<li style="grid-column:1/-1;">'+escHtml(tb('none'))+'</li>';
+  var adm = document.getElementById('brAdm');
+  adm.classList.toggle('hidden', !isAdmin);
+  adm.innerHTML = isAdmin ? ('<button class="btn btn-gold" onclick="drawBracket()">'+tb('draw')+'</button><button class="btn btn-ghost" onclick="resetBracket()">'+tb('reset')+'</button><button class="btn btn-primary" onclick="publishBracketPost()">'+tb('pub')+'</button>'+(brNoSql?'<span style="color:#c0392b;font-size:13px;">'+tb('nosql')+'</span>':'')) : '';
+}
+
+function bracketToCanvas(){
+  var m = brModel(), W=1780, H=1010, cv = document.createElement('canvas'); cv.width=W; cv.height=H;
+  var c = cv.getContext('2d'), bw=300, bh=70, colX=function(i){ return 40+i*345; };
+  c.fillStyle='#eef5fb'; c.fillRect(0,0,W,H);
+  c.fillStyle='#0f2f5c'; c.fillRect(0,0,W,86);
+  c.fillStyle='#fff'; c.font='700 36px Arial'; c.textBaseline='middle';
+  c.fillText('🏆 '+((cup&&cup.title)||'Жас маман CUP'), 40, 44);
+  c.font='500 20px Arial'; c.textAlign='right'; c.fillStyle='#cfe3f5'; c.fillText(tb('sub'), W-40, 44); c.textAlign='left';
+  var top=130, slot=(H-top-30)/8;
+  function ys(n,i){ var h=slot*8/n; return top+h*i+h/2; }
+  function box(x,y,mt){
+    c.fillStyle='#fff'; c.strokeStyle='#c9d4e2'; c.lineWidth=2; c.beginPath(); c.roundRect(x,y-bh/2,bw,bh,10); c.fill(); c.stroke();
+    [[mt.a,mt.sa,-bh/4],[mt.b,mt.sb,bh/4]].forEach(function(r){
+      var win = mt.w && mt.w===r[0];
+      if(win){ c.fillStyle='#f3e8cd'; c.fillRect(x+2,y+r[2]-bh/4+1,bw-4,bh/2-2); }
+      c.fillStyle = r[0] ? '#12161d' : '#8592a3'; c.font=(win?'700 ':'500 ')+'19px Arial';
+      var nm = r[0] || tb('tbd'); while(c.measureText(nm).width>bw-70 && nm.length>3) nm = nm.slice(0,-2);
+      if(nm!==(r[0]||tb('tbd'))) nm += '…';
+      c.fillText(nm, x+12, y+r[2]); c.textAlign='right'; c.fillText(r[1]===null?'':String(r[1]), x+bw-12, y+r[2]); c.textAlign='left';
+    });
+    c.strokeStyle='#c9d4e2'; c.beginPath(); c.moveTo(x+2,y); c.lineTo(x+bw-2,y); c.stroke();
+  }
+  function link(x1,y1,x2,y2){ c.strokeStyle='#9db4cf'; c.lineWidth=2; c.beginPath(); c.moveTo(x1,y1); c.lineTo((x1+x2)/2,y1); c.lineTo((x1+x2)/2,y2); c.lineTo(x2,y2); c.stroke(); }
+  var cols=[[tb('r16'),m.r16],[tb('qf'),m.qf],[tb('sf'),m.sf]];
+  cols.forEach(function(col,ci){
+    c.fillStyle='#1c4c8c'; c.font='700 18px Arial'; c.textAlign='center'; c.fillText(col[0].toUpperCase(), colX(ci)+bw/2, 108); c.textAlign='left';
+    col[1].forEach(function(mt,i){
+      var y=ys(col[1].length,i); box(colX(ci),y,mt);
+      var ny = ci<2 ? ys(col[1].length/2,Math.floor(i/2)) : ys(1,0)-0;
+      if(ci<2) link(colX(ci)+bw,y,colX(ci+1),ny); else link(colX(ci)+bw,y,colX(3),ys(1,0));
+    });
+  });
+  var fy=ys(1,0)-40, ty=ys(1,0)+250;
+  c.fillStyle='#1c4c8c'; c.font='700 18px Arial'; c.textAlign='center';
+  c.fillText(tb('fin').toUpperCase(), colX(3)+bw/2, fy-62); c.fillText(tb('third').toUpperCase(), colX(3)+bw/2, ty-62); c.textAlign='left';
+  box(colX(3),fy,m.fin); box(colX(3),ty,m.third);
+  return cv;
+}
+function publishBracketPost(){
+  if(!isAdmin || !authUser || !cup){ return; }
+  var cv; try{ cv = bracketToCanvas(); }catch(e){ alert(tb('err')+e.message); return; }
+  cv.toBlob(function(blob){
+    var path = authUser.id + '/' + Date.now() + '-cup-bracket.png';
+    sb.storage.from('post-images').upload(path, blob, { contentType:'image/png' }).then(function(r){
+      if(r.error){ alert(tb('err')+r.error.message); return; }
+      var url = sb.storage.from('post-images').getPublicUrl(path).data.publicUrl;
+      var body = '🏆 ' + ((cup && cup.title) || 'Жас маман CUP') + ' — ' + (LANG==='ru'?'турнирная сетка':LANG==='en'?'tournament bracket':'турнир кестесі') + '\n' + siteUrl();
+      return sb.from('posts').insert({ author_id: authUser.id, body: body, image_url: url }).then(function(res){
+        if(res.error){ alert(tb('err')+res.error.message); return; }
+        alert(tb('posted')); nav('feed');
+      });
+    });
+  }, 'image/png');
+}
+function brGetNum(id){ var e = document.getElementById(id); if(!e || e.value==='') return null; var n = parseInt(e.value,10); return isNaN(n)||n<0 ? null : n; }
+function brUpsert(rows){
+  return sb.from('promo_matches').upsert(rows, { onConflict: 'promo_id,round,slot' }).then(function(r){
+    if(r.error){ alert(tb('err')+r.error.message); return; }
+    return loadBracket();
+  });
+}
+function saveMatch(round, slot){
+  if(!cup || !isAdmin) return;
+  var id = round+'_'+slot, row = { promo_id: cup.id, round: round, slot: slot, score_a: brGetNum('bs_'+id+'_a'), score_b: brGetNum('bs_'+id+'_b') };
+  if(round==='r16'){
+    var a = document.getElementById('bt_'+id+'_a'), b = document.getElementById('bt_'+id+'_b');
+    row.team_a = (a && a.value) || null; row.team_b = (b && b.value) || null;
+  } else {
+    var ex = brRow(round, slot); row.team_a = ex ? ex.team_a : null; row.team_b = ex ? ex.team_b : null;
+  }
+  brUpsert([row]);
+}
+function drawBracket(){
+  if(!cup || !isAdmin || !cupTeams.length) return;
+  var names = cupTeams.map(function(x){ return x.team_name; });
+  for(var i=names.length-1;i>0;i--){ var j = Math.floor(Math.random()*(i+1)); var tmp = names[i]; names[i] = names[j]; names[j] = tmp; }
+  var rows = [];
+  for(var s=0;s<8;s++) rows.push({ promo_id: cup.id, round:'r16', slot:s, team_a: names[2*s]||null, team_b: names[2*s+1]||null, score_a:null, score_b:null });
+  sb.from('promo_matches').delete().eq('promo_id', cup.id).neq('round','r16').then(function(){ return brUpsert(rows); });
+}
+function resetBracket(){
+  if(!cup || !isAdmin || !confirm(tb('sure'))) return;
+  sb.from('promo_matches').delete().eq('promo_id', cup.id).then(function(r){
+    if(r.error){ alert(tb('err')+r.error.message); return; }
+    loadBracket();
+  });
 }
 
 function showCupMsg(kind, text){
@@ -3751,6 +3983,7 @@ function nav(route, param){
   if(route==='feed') loadFeed();
   if(route==='events') loadEvents();
   if(route==='history') loadHistory();
+  if(route==='cup') loadBracket();
   window.scrollTo({top:0, behavior:'instant'});
 }
 
