@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ЖМК платформасы</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0f2f5c">
+<meta name="theme-color" content="#6cabdd">
+<meta name="color-scheme" content="light">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ЖМК">
@@ -17,7 +18,7 @@
     --ink:#12161d;
     --ink-soft:#4a5568;
     --ink-faint:#8592a3;
-    --paper:#f5f6f8;
+    --paper:#eef5fb;
     --card:#ffffff;
     --line:#e2e5ea;
     --blue:#1c4c8c;
@@ -34,19 +35,7 @@
     --shadow: 0 1px 2px rgba(15,32,64,.06), 0 8px 24px rgba(15,32,64,.08);
     --shadow-lg: 0 4px 8px rgba(15,32,64,.08), 0 16px 40px rgba(15,32,64,.12);
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ink:#eef1f5; --ink-soft:#a9b3c2; --ink-faint:#6b7684;
-      --paper:#0b0e13; --card:#141a23; --line:#232b37;
-      --blue:#6ba0e0; --blue-deep:#0f2f5c; --blue-wash:#152234;
-      --gold:#d9bb73; --gold-soft:#332a17;
-      --good:#4cb37e; --good-soft:#132a1e;
-      --warn:#d9b25c; --warn-soft:#2e2510;
-      --purple:#a48ede; --purple-soft:#251f38;
-      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 28px rgba(0,0,0,.45);
-      --shadow-lg: 0 4px 10px rgba(0,0,0,.4), 0 20px 48px rgba(0,0,0,.5);
-    }
-  }
+  /* Жүйелік қараңғы режим ескерілмейді: сайт әрқашан ашық түсте (Android-та қою көк болмауы үшін) */
   :root[data-theme="dark"]{
     --ink:#eef1f5; --ink-soft:#a9b3c2; --ink-faint:#6b7684;
     --paper:#0b0e13; --card:#141a23; --line:#232b37;
@@ -127,6 +116,9 @@
   .adm-block h4{margin:12px 0 6px;font-size:13px;color:var(--ink-soft);}
   .adm-block .admin-row{box-shadow:none;}
 
+  .ig-card{display:flex;justify-content:center;}
+  .ig-card-in{width:100%;max-width:540px;}
+  .ig-card-in .instagram-media{min-width:0!important;max-width:100%!important;width:100%!important;margin:0!important;}
   .igp-wrap{margin:0 0 22px;}
   .igp-wrap h3{margin:0 0 12px;font-size:16px;text-align:center;}
   .igp-row{display:flex;flex-direction:column;align-items:center;gap:20px;}
@@ -138,6 +130,13 @@
   .igp-adm input{flex:1;min-width:200px;padding:9px 12px;border:1px solid #ddd;border-radius:10px;font:inherit;}
   .igp-li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:13px;padding:6px 0;border-top:1px solid #eee;word-break:break-all;}
 
+  .foot-qrs{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
+  .foot-qr{width:118px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:pointer;font:inherit;color:var(--ink-soft);font-size:11.5px;transition:transform .15s,box-shadow .15s;}
+  .foot-qr:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(20,40,80,.12);}
+  .foot-col button.foot-qr{display:flex;background:#fff;border:1px solid var(--line);padding:8px;text-align:center;font-size:11.5px;color:var(--ink-soft);}
+  .foot-col button.foot-qr:hover{color:var(--ink-soft);}
+  .foot-qr canvas{width:84px;height:84px;display:block;}
+  .qr-modal{max-width:380px;}
   .qr-card{max-width:420px;margin:10px auto 30px;background:#fff;border-radius:18px;padding:24px 20px;text-align:center;box-shadow:0 6px 24px rgba(20,40,80,.1);}
   .qr-card h2{margin:0 0 8px;}
   .qr-card p{color:var(--ink-faint);font-size:14px;margin:0 0 16px;}
@@ -478,7 +477,7 @@
   .post-name{font-size:13.5px;font-weight:600;cursor:pointer;}
   .post-time{font-size:11.5px;color:var(--ink-faint);}
   .post-body{font-size:13.5px;line-height:1.6;white-space:pre-wrap;margin:0 0 10px;}
-  .post-img{max-width:100%;border-radius:10px;margin-bottom:10px;}
+  .post-img{display:block;margin:0 auto 10px;max-width:100%;max-height:640px;object-fit:contain;border-radius:10px;}
   .post-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
   .post-del{margin-left:auto;background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;}
   .comment-list{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
@@ -683,6 +682,7 @@
         <input id="peopleSearch" data-i18n-ph="search_people_ph" placeholder="Аты немесе бөлімі бойынша іздеу…" oninput="renderPeople()">
       </div>
     </div>
+    <div class="chip-row hidden" id="peopleFilter" style="margin:0 0 16px;"></div>
     <div class="people-grid" id="peopleGrid"></div>
   </section>
 
@@ -704,8 +704,8 @@
       <div class="qr-url" id="qrUrl"></div>
       <div class="qr-actions">
         <button class="btn btn-gold" onclick="qrDownload()" data-i18n="qr_download">PNG жүктеп алу</button>
-        <button class="btn" onclick="qrCopy()" id="qrCopyBtn" data-i18n="qr_copy">Сілтемені көшіру</button>
-        <button class="btn" onclick="qrShare()" id="qrShareBtn" data-i18n="qr_share">Бөлісу</button>
+        <button class="btn" onclick="qrCopy(this)" data-i18n="qr_copy">Сілтемені көшіру</button>
+        <button class="btn qr-share-btn" onclick="qrShare()" data-i18n="qr_share">Бөлісу</button>
       </div>
     </div>
   </section>
@@ -843,7 +843,6 @@
         <p data-i18n="feed_desc">Ойыңызбен, суретпен бөлісіңіз — кеңестің ортақ лентасы.</p>
       </div>
     </div>
-    <div id="igPosts"></div>
     <div class="new-post-box">
       <textarea id="newPostBody" data-i18n-ph="post_ph" placeholder="Не ойлап тұрсыз?"></textarea>
       <img class="post-img-preview" id="newPostPreview">
@@ -926,13 +925,14 @@
         <input id="regDept" data-i18n-ph="ph_department" placeholder="Бөлімі">
         <input id="regCompany" data-i18n-ph="ph_company" placeholder="Компания" value="ҚБМ">
         <input id="regPhone" type="tel" data-i18n-ph="ph_phone" placeholder="Телефон (міндетті емес)">
-        <label class="reg-check"><input type="checkbox" id="regIsSpec" onchange="onRegToggle()"> <span data-i18n="reg_is_spec">Сіз жас маман ба?</span></label>
+        <label class="reg-check"><input type="checkbox" id="regIsSpec" onchange="onRegToggle('spec')"> <span data-i18n="reg_is_spec">Сіз жас маман ба?</span></label>
+        <label class="reg-check"><input type="checkbox" id="regIsAlumni" onchange="onRegToggle('alumni')"> <span data-i18n="reg_is_alumni">Мен бұрынғы жас маманмын</span></label>
         <div id="regSpecBox" class="hidden reg-sub">
           <label class="reg-lbl" data-i18n="reg_claim_label">Жас мамандар тізімінен өзіңізді таңдаңыз</label>
           <select id="regClaim"></select>
           <p class="modal-note" data-i18n="reg_spec_note"></p>
         </div>
-        <label class="reg-check"><input type="checkbox" id="regIsChair" onchange="onRegToggle()"> <span data-i18n="reg_is_chair">Мен бұрынғы Кеңес төрағасымын</span></label>
+        <label class="reg-check"><input type="checkbox" id="regIsChair" onchange="onRegToggle('chair')"> <span data-i18n="reg_is_chair">Мен бұрынғы Кеңес төрағасымын</span></label>
         <div id="regChairBox" class="hidden reg-sub">
           <label class="reg-lbl" data-i18n="reg_chair_label">Төрағалар тізімінен өзіңізді таңдаңыз</label>
           <select id="regChair"></select>
@@ -948,6 +948,25 @@
         </div>
         <button class="btn btn-primary" style="width:100%;padding:11px;" onclick="doRegister()" data-i18n="btn_register_submit">Тіркелу сұранысын жіберу</button>
         <p class="modal-note" data-i18n="reg_note">Тіркелу сұранысыңызды админ қарап, бекіткеннен кейін толық мүмкіндіктер (дауыс беру, идея ұсыну) ашылады.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="qrModal" onclick="if(event.target===this)closeQR()">
+  <div class="modal-box qr-modal">
+    <div class="modal-head">
+      <h3 id="qrModalTitle">QR</h3>
+      <button class="modal-close" onclick="closeQR()">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <canvas id="qrModalCanvas" width="1024" height="1024" style="width:100%;max-width:300px;height:auto;border:1px solid #e5e5e5;border-radius:12px;"></canvas>
+      <p id="qrModalDesc" style="font-size:13px;color:var(--ink-soft);margin:10px 0 4px;"></p>
+      <div class="qr-url" id="qrModalUrl"></div>
+      <div class="qr-actions">
+        <button class="btn btn-gold" onclick="qrDownload()" data-i18n="qr_download">PNG жүктеп алу</button>
+        <button class="btn" onclick="qrCopy(this)" data-i18n="qr_copy">Сілтемені көшіру</button>
+        <button class="btn qr-share-btn" onclick="qrShare()" data-i18n="qr_share">Бөлісу</button>
       </div>
     </div>
   </div>
@@ -975,6 +994,10 @@
     <div class="foot-col">
       <h4 data-i18n="footer_follow">Бізді бақылаңыз</h4>
       <a class="foot-ig" href="https://www.instagram.com/kbm_jasmaman/" target="_blank" rel="noopener noreferrer"><svg viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='5'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' r='1' fill='currentColor'/></svg><span><b>@kbm_jasmaman</b></span></a>
+      <div class="foot-qrs">
+        <button type="button" class="foot-qr" onclick="openQR('ig')" aria-label="QR Instagram"><canvas id="fqIg" width="220" height="220"></canvas><span data-i18n="qr_ig">Instagram парақшасы</span></button>
+        <button type="button" class="foot-qr" onclick="openQR('site')" aria-label="QR site"><canvas id="fqSite" width="220" height="220"></canvas><span data-i18n="qr_site">Сайт</span></button>
+      </div>
     </div>
   </div>
   <div class="foot-bottom"><span data-i18n="footer_text">© 2026 Ақ Қаражанбасмұнай · Жас мамандар кеңесі</span></div>
@@ -2578,12 +2601,24 @@ function ruPlural(n, one, few, many){
   if(m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
   return many;
 }
+var KK_MONTHS=['қаңтар','ақпан','наурыз','сәуір','мамыр','маусым','шілде','тамыз','қыркүйек','қазан','қараша','желтоқсан'];
+var KK_MONTHS_S=['қаң.','ақп.','нау.','сәу.','мам.','мау.','шіл.','там.','қыр.','қаз.','қар.','жел.'];
+// Күн мен уақытты форматтау: қазақша айлардың атауын өзіміз береміз (кейбір браузерлерде «М10» болып шығады)
+function fmtDate(v, o){
+  var d = (v instanceof Date) ? v : new Date(v);
+  if(isNaN(d.getTime())) return '—';
+  if(LANG !== 'kk') return d.toLocaleString(dateLocale(), o);
+  var m = (o.month === 'long' ? KK_MONTHS : KK_MONTHS_S)[d.getMonth()];
+  var out = (o.year ? d.getFullYear() + ' ж. ' : '') + d.getDate() + ' ' + m;
+  if(o.hour){ out += ', ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
+  return out;
+}
 function dateLocale(){ return LANG==='en' ? 'en-GB' : (LANG==='ru' ? 'ru-RU' : 'kk-KZ'); }
 
 
 var I18N_EXTRA = {
  kk:{
-  idea_example:'📌 Мысал үшін салынған идея', reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
+  idea_example:'📌 Мысал үшін салынған идея', qr_ig:'Instagram парақшасы', qr_site:'Сайт', qr_scan_ig:'Instagram-дағы @kbm_jasmaman парақшасына өту үшін сканерлеңіз', qr_scan_site:'Сайтқа өту үшін сканерлеңіз', reg_is_spec:'Сіз жас маман ба?', reg_claim_label:'Жас мамандар тізімінен өзіңізді таңдаңыз', reg_claim_none:'Тізімде жоқпын — жаңа профиль жасаңыз',
   reg_spec_note:'Админ бекіткен соң профиліңіз жас мамандар тізіміне қосылады. Фото мен жетістіктеріңізді өзіңіз толтырасыз.',
   reg_is_chair:'Мен бұрынғы Кеңес төрағасымын', reg_chair_label:'Төрағалар тізімінен өзіңізді таңдаңыз', reg_chair_none:'— таңдаңыз —',
   me_title:'Менің профилім', me_login:'Алдымен сайтқа кіріңіз.', me_pending:'Тіркелуіңіз әлі бекітілген жоқ. Админ бекіткен соң профильді толтыра аласыз.',
@@ -2600,10 +2635,10 @@ var I18N_EXTRA = {
   attach_btn:'Файл тіркеу', attach_hint:'Ең көбі 3 файл, әрқайсысы 10 МБ дейін (PDF, сурет, Word, Excel, PowerPoint)', attach_bad:'Бұл файл қабылданбайды: ', attach_fail:'Идея сақталды, бірақ кейбір файл жүктелмеді: ',
   adm_edits_title:'Профильді өзгерту рұқсаттары', adm_req_title:'Рұқсат сұраған', adm_grant:'Рұқсат беру', adm_revoke:'Рұқсатты алу',
   adm_claims_title:'Профильді өзіме деп сұраған', adm_merge:'Біріктіру', adm_granted_title:'Рұқсаты бар қолданушылар', adm_none:'Жоқ',
-  adm_claim_line:'Тізімдегі профиль: ', adm_wants_spec:'Жас маманмын деді', adm_chair_line:'Бұрынғы төраға: ', adm_err:'Қате: '
+  adm_claim_line:'Тізімдегі профиль: ', adm_wants_spec:'Жас маманмын деді', adm_wants_alumni:'Бұрынғы жас маманмын деді', reg_is_alumni:'Мен бұрынғы жас маманмын', tag_alumni:'Бұрынғы жас маман', flt_all:'Барлығы', flt_current:'Қазіргі', flt_alumni:'Бұрынғы жас мамандар', adm_alumni_on:'Бұрынғы жас маман ету', adm_alumni_off:'Қазіргі жас маман ету', me_alumni_badge:'Бұрынғы жас маман', adm_chair_line:'Бұрынғы төраға: ', adm_err:'Қате: '
  },
  ru:{
-  idea_example:'📌 Пример идеи для демонстрации', reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
+  idea_example:'📌 Пример идеи для демонстрации', qr_ig:'Страница Instagram', qr_site:'Сайт', qr_scan_ig:'Отсканируйте, чтобы открыть страницу @kbm_jasmaman в Instagram', qr_scan_site:'Отсканируйте, чтобы открыть сайт', reg_is_spec:'Вы молодой специалист?', reg_claim_label:'Выберите себя из списка молодых специалистов', reg_claim_none:'Меня нет в списке — создать новый профиль',
   reg_spec_note:'После подтверждения админом ваш профиль появится в списке молодых специалистов. Фото и достижения вы заполните сами.',
   reg_is_chair:'Я бывший председатель Совета', reg_chair_label:'Выберите себя из списка председателей', reg_chair_none:'— выберите —',
   me_title:'Мой профиль', me_login:'Сначала войдите на сайт.', me_pending:'Регистрация ещё не подтверждена. После подтверждения админом вы сможете заполнить профиль.',
@@ -2620,10 +2655,10 @@ var I18N_EXTRA = {
   attach_btn:'Прикрепить файл', attach_hint:'Не более 3 файлов, каждый до 10 МБ (PDF, изображение, Word, Excel, PowerPoint)', attach_bad:'Этот файл не принимается: ', attach_fail:'Идея сохранена, но некоторые файлы не загрузились: ',
   adm_edits_title:'Разрешения на редактирование профиля', adm_req_title:'Запросили разрешение', adm_grant:'Разрешить', adm_revoke:'Отозвать',
   adm_claims_title:'Запросили профиль из списка', adm_merge:'Объединить', adm_granted_title:'Пользователи с разрешением', adm_none:'Нет',
-  adm_claim_line:'Профиль из списка: ', adm_wants_spec:'Сказал(а), что молодой специалист', adm_chair_line:'Бывший председатель: ', adm_err:'Ошибка: '
+  adm_claim_line:'Профиль из списка: ', adm_wants_spec:'Сказал(а), что молодой специалист', adm_wants_alumni:'Сказал(а), что бывший молодой специалист', reg_is_alumni:'Я бывший молодой специалист', tag_alumni:'Бывший молодой специалист', flt_all:'Все', flt_current:'Текущие', flt_alumni:'Бывшие молодые специалисты', adm_alumni_on:'Сделать бывшим молодым специалистом', adm_alumni_off:'Сделать текущим молодым специалистом', me_alumni_badge:'Бывший молодой специалист', adm_chair_line:'Бывший председатель: ', adm_err:'Ошибка: '
  },
  en:{
-  idea_example:'📌 Example idea for demonstration', reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
+  idea_example:'📌 Example idea for demonstration', qr_ig:'Instagram page', qr_site:'Website', qr_scan_ig:'Scan to open the @kbm_jasmaman page on Instagram', qr_scan_site:'Scan to open the website', reg_is_spec:'Are you a young specialist?', reg_claim_label:'Pick yourself from the young specialists list', reg_claim_none:'I am not on the list — create a new profile',
   reg_spec_note:'After the admin approves you, your profile will appear in the young specialists list. You will add your photo and achievements yourself.',
   reg_is_chair:'I am a former Council chairman', reg_chair_label:'Pick yourself from the chairmen list', reg_chair_none:'— select —',
   me_title:'My profile', me_login:'Please log in first.', me_pending:'Your registration is not approved yet. You can fill in your profile once the admin approves it.',
@@ -2640,7 +2675,7 @@ var I18N_EXTRA = {
   attach_btn:'Attach file', attach_hint:'Up to 3 files, 10 MB each (PDF, image, Word, Excel, PowerPoint)', attach_bad:'This file is not accepted: ', attach_fail:'The idea was saved, but some files failed to upload: ',
   adm_edits_title:'Profile edit permissions', adm_req_title:'Requested permission', adm_grant:'Grant', adm_revoke:'Revoke',
   adm_claims_title:'Asked for a profile from the list', adm_merge:'Merge', adm_granted_title:'Users with permission', adm_none:'None',
-  adm_claim_line:'Profile from list: ', adm_wants_spec:'Says they are a young specialist', adm_chair_line:'Former chairman: ', adm_err:'Error: '
+  adm_claim_line:'Profile from list: ', adm_wants_spec:'Says they are a young specialist', adm_wants_alumni:'Says they are a former young specialist', reg_is_alumni:'I am a former young specialist', tag_alumni:'Former young specialist', flt_all:'All', flt_current:'Current', flt_alumni:'Former young specialists', adm_alumni_on:'Mark as former young specialist', adm_alumni_off:'Mark as current young specialist', me_alumni_badge:'Former young specialist', adm_chair_line:'Former chairman: ', adm_err:'Error: '
  }
 };
 (function(){ ['kk','ru','en'].forEach(function(l){ if(I18N[l]) Object.keys(I18N_EXTRA[l]).forEach(function(k){ I18N[l][k]=I18N_EXTRA[l][k]; }); }); })();
@@ -2717,7 +2752,7 @@ function setLang(lang){
   refreshAuthUI();
   renderCupCard();
   if(document.getElementById('view-admin') && !document.getElementById('view-admin').classList.contains('hidden')) renderAdminList();
-  if(document.getElementById('view-feed') && !document.getElementById('view-feed').classList.contains('hidden')){ loadIgPosts(); loadFeed(); }
+  if(document.getElementById('view-feed') && !document.getElementById('view-feed').classList.contains('hidden')){ loadFeed(); }
 }
 
 var activeCat = 'all';
@@ -2822,8 +2857,11 @@ function loadRegLists(){
       rows.map(function(x){ return '<option value="'+x.id+'">'+escHtml(x.full_name)+' ('+x.start_year+'–'+(x.end_year||'…')+')</option>'; }).join('');
   });
 }
-function onRegToggle(){
-  var a = document.getElementById('regIsSpec').checked, c = document.getElementById('regIsChair').checked;
+function onRegToggle(src){
+  var sp = document.getElementById('regIsSpec'), al = document.getElementById('regIsAlumni');
+  if(src==='spec' && sp.checked) al.checked = false;
+  if(src==='alumni' && al.checked) sp.checked = false;
+  var a = sp.checked || al.checked, c = document.getElementById('regIsChair').checked;
   document.getElementById('regSpecBox').classList.toggle('hidden', !a);
   document.getElementById('regChairBox').classList.toggle('hidden', !c);
   if(a || c) loadRegLists();
@@ -2866,7 +2904,8 @@ function doRegister(){
   var phone = document.getElementById('regPhone').value.trim();
   var email = document.getElementById('regEmail').value.trim();
   var password = document.getElementById('regPassword').value;
-  var isSpec = document.getElementById('regIsSpec').checked;
+  var isAlumni = document.getElementById('regIsAlumni').checked;
+  var isSpec = document.getElementById('regIsSpec').checked || isAlumni;
   var claimId = isSpec ? document.getElementById('regClaim').value : '';
   var isChair = document.getElementById('regIsChair').checked;
   var chairId = isChair ? document.getElementById('regChair').value : '';
@@ -2881,6 +2920,7 @@ function doRegister(){
     var initials = name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
     var regExtra = {};
     if(isSpec) regExtra.wants_specialist = true;
+    if(isAlumni) regExtra.wants_alumni = true;
     if(claimId) regExtra.claim_profile_id = claimId;
     if(chairId) regExtra.claim_history_id = chairId;
     return sb.from('profiles').insert(Object.assign({
@@ -2931,7 +2971,8 @@ function renderAdminList(){
       (rr[1].data||[]).forEach(function(x){ hn[x.id] = x.full_name + ' ('+x.start_year+')'; });
       el.innerHTML = rows.map(function(r){
         var extra = '';
-        if(r.wants_specialist) extra += '<div class="meta">✔ '+t('adm_wants_spec')+'</div>';
+        if(r.wants_alumni) extra += '<div class="meta">✔ '+t('adm_wants_alumni')+'</div>';
+        else if(r.wants_specialist) extra += '<div class="meta">✔ '+t('adm_wants_spec')+'</div>';
         if(r.claim_profile_id) extra += '<div class="meta">'+t('adm_claim_line')+'<b>'+escHtml(pn[r.claim_profile_id]||'?')+'</b></div>';
         if(r.claim_history_id) extra += '<div class="meta">'+t('adm_chair_line')+'<b>'+escHtml(hn[r.claim_history_id]||'?')+'</b></div>';
         return '<div class="admin-row">'+
@@ -3022,7 +3063,7 @@ function renderCupCard(){
 
   var meta = '';
   if(cup && cup.event_date){
-    meta = new Date(cup.event_date).toLocaleString(dateLocale(), {day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    meta = fmtDate(cup.event_date, {day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
   }
   if(cup && cup.location) meta += (meta ? ' · ' : '') + '📍 ' + cup.location;
   document.getElementById('cupMeta').textContent = meta;
@@ -3246,7 +3287,7 @@ function submitPost(){
 
 function timeAgo(iso){
   var d = new Date(iso);
-  return d.toLocaleString(dateLocale(), {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  return fmtDate(d, {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
 }
 
 function loadFeed(){
@@ -3256,15 +3297,22 @@ function loadFeed(){
   Promise.all([
     sb.from('posts').select('*, profiles!posts_author_id_fkey(full_name,avatar_initials)').order('created_at',{ascending:false}),
     sb.from('post_likes').select('post_id,profile_id,vote_type'),
-    sb.from('post_comments').select('id,post_id')
+    sb.from('post_comments').select('id,post_id'),
+    sbGet('instagram_posts?select=*&order=created_at.desc&limit=30').catch(function(){ return []; })
   ]).then(function(results){
     if(results[0].error){ el.innerHTML = '<p style="color:#c0392b;">'+results[0].error.message+'</p>'; return; }
     var posts = (results[0].data || []);
+    // Бір лента: қолданушылар посттары мен Instagram посттары уақыты бойынша (жаңасы жоғарыда)
+    var items = posts.map(function(p){ return { kind:'post', date:p.created_at, row:p }; })
+      .concat((results[3] || []).map(function(r){ return { kind:'ig', date:r.created_at, row:r }; }))
+      .sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
     var likes = (results[1].data || []);
     var commentCounts = {};
     (results[2].data || []).forEach(function(c){ commentCounts[c.post_id] = (commentCounts[c.post_id]||0)+1; });
-    if(!posts.length){ el.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:20px 0;">'+t('post_empty')+'</p>'; return; }
-    el.innerHTML = posts.map(function(p){
+    if(!items.length){ el.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:20px 0;">'+t('post_empty')+'</p>'; return; }
+    el.innerHTML = items.map(function(it){
+      if(it.kind === 'ig') return igCardHtml(it.row);
+      var p = it.row;
       var author = p.profiles || {};
       var likeCount = likes.filter(function(l){ return l.post_id===p.id && l.vote_type==='like'; }).length;
       var dislikeCount = likes.filter(function(l){ return l.post_id===p.id && l.vote_type==='dislike'; }).length;
@@ -3290,7 +3338,19 @@ function loadFeed(){
       '</div>';
     }).join('');
     Object.keys(openComments).forEach(function(pid){ if(openComments[pid]) renderComments(pid); });
+    processIgEmbeds();
   });
+}
+
+function igCardHtml(r){
+  return '<div class="post-card ig-card"><div class="ig-card-in"><blockquote class="instagram-media" data-instgrm-permalink="'+escHtml(r.url)+'" data-instgrm-version="14"><a href="'+escHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+t('igp_open')+'</a></blockquote></div></div>';
+}
+function processIgEmbeds(){
+  if(!document.querySelector('#feedList .instagram-media')) return;
+  if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); }
+  else if(!document.getElementById('igEmbedJs')){
+    var sc=document.createElement('script'); sc.id='igEmbedJs'; sc.async=true; sc.src='https://www.instagram.com/embed.js'; document.body.appendChild(sc);
+  }
 }
 
 function togglePostVote(postId, type){
@@ -3496,7 +3556,7 @@ function loadEvents(){
       var attending = authUser && attendance.some(function(a){ return a.event_id===e.id && a.profile_id===authUser.id; });
       var canManage = isAdmin;
       var evSuggestions = suggestions.filter(function(s){ return s.event_id===e.id; });
-      var dateFmt = new Date(e.event_date+'T00:00:00').toLocaleDateString(dateLocale(), {day:'numeric',month:'long',year:'numeric'});
+      var dateFmt = fmtDate(new Date(e.event_date+'T00:00:00'), {day:'numeric',month:'long',year:'numeric'});
       var statusCls = e.status || 'planned';
       return '<div class="event-card status-'+statusCls+'" data-event="'+e.id+'">'+
         '<p class="ev-title">'+e.title.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" style="float:right;" onclick="deleteEvent(\''+e.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
@@ -3688,7 +3748,7 @@ function nav(route, param){
   if(route==='admin') renderAdminList();
   if(route==='me') renderMe();
   if(route==='qr') drawQR();
-  if(route==='feed'){ loadIgPosts(); loadFeed(); }
+  if(route==='feed') loadFeed();
   if(route==='events') loadEvents();
   if(route==='history') loadHistory();
   window.scrollTo({top:0, behavior:'instant'});
@@ -3697,59 +3757,69 @@ function nav(route, param){
 
 /* ===================== QR ===================== */
 function siteUrl(){ return location.origin + '/'; }
-function drawQR(){
-  var cv=document.getElementById('qrCanvas'); if(!cv) return;
-  var url=siteUrl();
-  document.getElementById('qrUrl').textContent=url;
+var IG_URL = 'https://www.instagram.com/kbm_jasmaman/';
+var qrCur = { url: null, canvasId: 'qrCanvas', file: 'zhmk-site-qr.png' };
+function renderQR(cv, url){
   var q=new ZhmkQR(-1,3); q.addData(url); q.make();
   var n=q.getModuleCount(), size=cv.width, quiet=4, cell=Math.floor(size/(n+quiet*2));
   var off=Math.floor((size-cell*n)/2), ctx=cv.getContext('2d');
   ctx.fillStyle='#fff'; ctx.fillRect(0,0,size,size); ctx.fillStyle='#0b2a5b';
   for(var r=0;r<n;r++) for(var c=0;c<n;c++) if(q.isDark(r,c)) ctx.fillRect(off+c*cell,off+r*cell,cell,cell);
-  var sb2=document.getElementById('qrShareBtn'); if(sb2 && !navigator.share) sb2.classList.add('hidden');
 }
+function hideShareIfNone(){
+  if(navigator.share) return;
+  Array.prototype.forEach.call(document.querySelectorAll('.qr-share-btn'), function(b){ b.classList.add('hidden'); });
+}
+function drawFooterQRs(){
+  var a=document.getElementById('fqIg'), b=document.getElementById('fqSite');
+  try{ if(a) renderQR(a, IG_URL); if(b) renderQR(b, siteUrl()); }catch(e){}
+}
+function drawQR(){
+  var cv=document.getElementById('qrCanvas'); if(!cv) return;
+  qrCur = { url: siteUrl(), canvasId: 'qrCanvas', file: 'zhmk-site-qr.png' };
+  document.getElementById('qrUrl').textContent = qrCur.url;
+  renderQR(cv, qrCur.url);
+  hideShareIfNone();
+}
+function openQR(kind){
+  var isIg = kind === 'ig';
+  qrCur = { url: isIg ? IG_URL : siteUrl(), canvasId: 'qrModalCanvas', file: isIg ? 'kbm-jasmaman-instagram-qr.png' : 'zhmk-site-qr.png' };
+  document.getElementById('qrModalTitle').textContent = t(isIg ? 'qr_ig' : 'qr_site');
+  document.getElementById('qrModalDesc').textContent = t(isIg ? 'qr_scan_ig' : 'qr_scan_site');
+  document.getElementById('qrModalUrl').textContent = qrCur.url;
+  renderQR(document.getElementById('qrModalCanvas'), qrCur.url);
+  hideShareIfNone();
+  document.getElementById('qrModal').classList.add('open');
+}
+function closeQR(){ document.getElementById('qrModal').classList.remove('open'); }
 function qrDownload(){
-  var cv=document.getElementById('qrCanvas');
+  var cv=document.getElementById(qrCur.canvasId);
   cv.toBlob(function(b){
-    var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='zhmk-qr.png';
+    var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=qrCur.file;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
   },'image/png');
 }
-function qrCopy(){
-  var url=siteUrl(), btn=document.getElementById('qrCopyBtn');
-  function ok(){ var o=btn.textContent; btn.textContent=t('qr_copied'); setTimeout(function(){btn.textContent=t('qr_copy');},1800); }
+function qrCopy(btn){
+  var url=qrCur.url;
+  function ok(){ var o=btn.textContent; btn.textContent=t('qr_copied'); setTimeout(function(){btn.textContent=o;},1800); }
   if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(ok,function(){window.prompt('',url);}); }
   else { window.prompt('',url); }
 }
 function qrShare(){
-  var cv=document.getElementById('qrCanvas');
+  var cv=document.getElementById(qrCur.canvasId);
   cv.toBlob(function(b){
-    var file=new File([b],'zhmk-qr.png',{type:'image/png'});
-    var data={title:'ЖМК',url:siteUrl()};
+    var file=new File([b],qrCur.file,{type:'image/png'});
+    var data={title:'ЖМК',url:qrCur.url};
     if(navigator.canShare && navigator.canShare({files:[file]})) data.files=[file];
     navigator.share(data).catch(function(){});
   },'image/png');
 }
-
+var QR_LANG_HOOK = null;
 
 /* ===================== Instagram posts ===================== */
 function igPostUrl(v){
   var m = String(v||'').trim().match(/^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/i);
   return m ? 'https://www.instagram.com/'+m[2].toLowerCase()+'/'+m[3]+'/' : null;
-}
-function loadIgPosts(){
-  var box=document.getElementById('igPosts'); if(!box) return;
-  sbGet('instagram_posts?select=*&order=created_at.desc&limit=9').then(function(rows){
-    if(!rows.length){ box.innerHTML=''; return; }
-    box.innerHTML='<div class="igp-wrap"><h3>'+t('igp_title')+'</h3><div class="igp-row">'+
-      rows.map(function(r){
-        return '<div class="igp-item"><blockquote class="instagram-media" data-instgrm-permalink="'+escHtml(r.url)+'" data-instgrm-version="14"><a href="'+escHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+t('igp_open')+'</a></blockquote></div>';
-      }).join('')+'</div></div>';
-    if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); }
-    else if(!document.getElementById('igEmbedJs')){
-      var sc=document.createElement('script'); sc.id='igEmbedJs'; sc.async=true; sc.src='https://www.instagram.com/embed.js'; document.body.appendChild(sc);
-    }
-  }).catch(function(){ box.innerHTML=''; });
 }
 function renderAdminIgPosts(){
   var box=document.getElementById('adminIgPosts'); if(!box) return;
@@ -3783,15 +3853,28 @@ function closeDrawer(){
 }
 
 /* ===================== people ===================== */
+var peopleFlt = 'all';
+function setPeopleFlt(k){ peopleFlt = k; renderPeople(); }
 function renderPeople(){
   var grid = document.getElementById('peopleGrid');
   if(!people.length){ return; }
+  var hasAl = people.some(function(p){ return p.alumni; });
+  var fb = document.getElementById('peopleFilter');
+  if(fb){
+    fb.classList.toggle('hidden', !hasAl);
+    if(!hasAl) peopleFlt = 'all';
+    fb.innerHTML = [['all','flt_all'],['current','flt_current'],['alumni','flt_alumni']].map(function(x){
+      return '<button class="chip'+(peopleFlt===x[0]?' active':'')+'" onclick="setPeopleFlt(\''+x[0]+'\')">'+t(x[1])+'</button>';
+    }).join('');
+  }
   var q = (document.getElementById('peopleSearch').value || '').toLowerCase();
   grid.innerHTML = '';
   var kkCollator = (typeof Intl !== 'undefined' && Intl.Collator) ? new Intl.Collator('kk') : null;
   people.slice().sort(function(x,y){
     return kkCollator ? kkCollator.compare(x.name||'', y.name||'') : String(x.name||'').localeCompare(String(y.name||''));
   }).filter(function(p){
+    if(peopleFlt==='current' && p.alumni) return false;
+    if(peopleFlt==='alumni' && !p.alumni) return false;
     return p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q) || p.role.toLowerCase().includes(q);
   }).forEach(function(p){
     var card = document.createElement('div');
@@ -3807,7 +3890,9 @@ function renderPeople(){
   });
 }
 function tagsFor(p){
-  var tags = [t('tag_since')(p.councilJoinYear || '—')];
+  var tags = [];
+  if(p.alumni) tags.push(t('tag_alumni'));
+  tags.push(t('tag_since')(p.councilJoinYear || '—'));
   if(p.ideaCount) tags.push(t('tag_ideas')(p.ideaCount));
   return tags;
 }
@@ -4014,7 +4099,7 @@ function renderMe(){
   if(!authUser || !myProfile){ body.innerHTML = '<p style="color:var(--ink-faint);">'+t('me_login')+'</p>'; return; }
   var p = myProfile;
   var initials = escHtml(p.avatar_initials || (p.full_name||'?')[0]);
-  var badge = p.is_specialist ? t('me_spec_badge') : t('me_member_badge');
+  var badge = p.is_alumni ? t('me_alumni_badge') : (p.is_specialist ? t('me_spec_badge') : t('me_member_badge'));
   var html = '<div class="me-head"><div class="avatar-lg" id="meAvatar">'+initials+photoImg(p.photo_url)+'</div><div><h3>'+escHtml(p.full_name)+'</h3>'+
     '<div class="meta">'+escHtml([p.position,p.department].filter(Boolean).join(' · '))+'</div>'+
     (p.approval_status==='approved' ? '<span class="me-badge">'+badge+'</span>' : '')+'</div></div>';
@@ -4151,6 +4236,16 @@ function renderProfileActions(p){
     if(myProfile.claim_profile_id === p.id) box.innerHTML = '<span class="note">'+t('prof_claim_sent')+'</span>';
     else if(!myProfile.claim_profile_id) box.innerHTML = '<button class="btn" onclick="requestClaim(\''+p.id+'\')">'+t('prof_claim_btn')+'</button>';
   }
+  if(isAdmin){
+    box.innerHTML += ' <button class="btn" onclick="adminToggleAlumni(\''+p.id+'\','+(p.alumni?'false':'true')+')">'+t(p.alumni?'adm_alumni_off':'adm_alumni_on')+'</button>';
+  }
+}
+function adminToggleAlumni(pid, on){
+  sb.rpc('admin_set_alumni', { p_profile: pid, p_alumni: on }).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    loadData();
+    setTimeout(function(){ var p = people.find(function(x){return x.id===pid;}); if(p) renderProfileActions(p); }, 800);
+  });
 }
 function requestClaim(pid){
   if(!confirm(t('prof_claim_confirm'))) return;
@@ -4214,7 +4309,7 @@ function loadData(){
   ideaList.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:30px 0;">'+t('loading')+'</p>';
 
   Promise.all([
-    sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'),
+    sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,is_alumni,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc').catch(function(){ return sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'); }),
     sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc'),
     sbGet('idea_attachments?select=*&order=created_at.asc').catch(function(){ return []; }),
     sb.rpc('unclaimed_specialists').then(function(r){ return (r && r.data) || []; }, function(){ return []; })
@@ -4240,6 +4335,7 @@ function loadData(){
         contact: row.contact,
         instagram: row.instagram || '',
         authUserId: row.auth_user_id || null,
+        alumni: !!row.is_alumni,
         ideaCount: ideaCount,
         projects: (row.profile_projects || []).map(function(p){ return p.title; }),
         achievements: (row.profile_achievements || []).map(function(a){ return (a.year ? a.year + ' — ' : '') + a.title; })
@@ -4267,7 +4363,7 @@ function loadData(){
 
     document.getElementById('demoBanner').classList.add('hidden');
 
-    setStat('statPeople', people.length);
+    setStat('statPeople', people.filter(function(p){ return !p.alumni; }).length);
     // Басты беттегі идея саны: мысал идеялар есептелмейді; нақты идея пайда болғанға дейін «–»
     var IDEA_STAT_MIN = 1;
     var realIdeas = ideas.filter(function(x){ return !x.example; }).length;
@@ -4290,6 +4386,7 @@ nav('home');
 loadData();
 loadHomeStats();
 loadCup();
+drawFooterQRs();
 loadMyState();
 
 </script>
