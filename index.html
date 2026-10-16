@@ -182,11 +182,12 @@
   .site-nav{display:flex;gap:4px;margin-left:10px;flex-wrap:wrap;}
   .site-nav button{
     background:none;border:none;cursor:pointer;
-    font-size:13.5px;font-weight:500;color:var(--ink-soft);
-    padding:8px 12px;border-radius:8px;
+    font-size:13.5px;font-weight:600;color:var(--ink);
+    padding:7px 13px;border-radius:9px;
+    background:#fff;border:1.5px solid #b9c9de;transition:border-color .15s,background .15s,color .15s;
   }
-  .site-nav button.active{color:var(--blue);background:var(--blue-wash);font-weight:600;}
-  .site-nav button:hover:not(.active){background:var(--paper);}
+  .site-nav button.active{color:#fff;background:var(--blue);border-color:var(--blue);font-weight:700;}
+  .site-nav button:hover:not(.active){background:var(--blue-wash);border-color:var(--blue);color:var(--blue);}
 
   /* ===== burger + off-canvas drawer (mobile) ===== */
   .burger{
@@ -248,10 +249,13 @@
     align-items:center;
     padding:36px 8px 44px;
   }
-  .eyebrow{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;}
-  .hero h1{font-size:clamp(26px,3.4vw,38px);line-height:1.15;margin:0 0 14px;letter-spacing:-.01em;}
-  .hero p{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:46ch;margin:0 0 22px;}
+  .eyebrow{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 14px;}
+  .hero>div:first-child{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:28px 30px;border-radius:20px;}
+  .hero h1{font-size:clamp(30px,4.4vw,52px);line-height:1.12;margin:0 0 16px;letter-spacing:-.01em;}
+  .hero p{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:var(--ink);max-width:48ch;margin:0 0 24px;}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-ctas .btn{font-size:16px;padding:13px 24px;}
+  .hero-ctas .btn-ghost{background:#fff;border:1.5px solid var(--blue);}
   .hero-art{
     aspect-ratio:1/.85;
     border-radius:20px;
@@ -283,6 +287,21 @@
   .team-cap b{font-family:"Times New Roman", Georgia, "PT Serif", serif;font-size:clamp(20px,3vw,32px);line-height:1.15;}
   .team-cap span{font-size:clamp(12.5px,1.5vw,15px);opacity:.92;}
   @media (max-width:640px){.team-banner img{aspect-ratio:4/3;object-position:center 70%;}.team-cap{padding:16px 16px 40px;}}
+  .car{position:relative;min-width:0;}
+  .car-view{overflow:hidden;border-radius:20px;box-shadow:var(--shadow-lg);}
+  .car-track{display:flex;transition:transform .55s ease;}
+  .car-track>.hero-art{flex:0 0 100%;min-width:0;box-shadow:none;border-radius:0;}
+  .quiz-card{background:linear-gradient(150deg,#2a1457,#6a3fb0 62%,#2fb6a8 135%) !important;}
+  .car .hero-art.cup-card{padding-left:50px;padding-right:50px;}
+  .car .cup-count{gap:6px;flex-wrap:nowrap;}
+  .car .cup-box{min-width:0;padding:8px 2px;}
+  @media (max-width:640px){.car .hero-art.cup-card{padding-left:44px;padding-right:44px;}.car .cup-box b{font-size:21px;}}
+  .car-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(15,32,64,.35);color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:0 0 3px;display:flex;align-items:center;justify-content:center;z-index:3;}
+  .car-arrow:hover{background:rgba(15,32,64,.6);}
+  .car-arrow.prev{left:8px;} .car-arrow.next{right:8px;}
+  .car-dots{display:flex;gap:8px;justify-content:center;margin-top:12px;}
+  .car-dots button{width:10px;height:10px;border-radius:50%;border:none;padding:0;cursor:pointer;background:#b9c9de;transition:all .2s;}
+  .car-dots button.on{background:var(--blue);width:26px;border-radius:6px;}
   .cup-link{margin-left:auto;font-size:13px;font-weight:600;color:#fff;opacity:.95;border-bottom:1px solid rgba(255,255,255,.5);}
   .br-wrap{overflow-x:auto;padding:6px 2px 18px;-webkit-overflow-scrolling:touch;}
   .br{display:flex;gap:26px;min-width:max-content;align-items:stretch;}
@@ -533,16 +552,16 @@
   .ev-suggestion-item{font-size:12.5px;background:var(--paper);border-radius:9px;padding:8px 11px;}
   .ev-status-select{font:inherit;font-size:11.5px;padding:4px 7px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);margin-left:auto;}
   .history-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;display:flex;gap:16px;align-items:flex-start;}
-  .history-card .h-photo{width:72px;height:72px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--gold-soft);}
-  .history-card .h-photo-ph{width:72px;height:72px;border-radius:12px;flex-shrink:0;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--blue-deep);font-weight:700;}
-  .history-card .h-name{font-size:15px;font-weight:700;margin:0 0 2px;}
-  .history-card .h-years{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:6px;}
+  .history-card .h-photo{width:132px;height:165px;border-radius:14px;object-fit:cover;object-position:center top;flex-shrink:0;background:var(--gold-soft);box-shadow:var(--shadow);}
+  .history-card .h-photo-ph{width:132px;height:165px;border-radius:14px;flex-shrink:0;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:38px;color:var(--blue-deep);font-weight:700;}
+  .history-card .h-name{font-size:18px;font-weight:700;margin:0 0 2px;}
+  .history-card .h-years{font-size:14px;color:var(--blue);font-weight:600;margin-bottom:6px;}
   .history-card .h-bio{font-size:13.5px;line-height:1.6;margin:0 0 6px;white-space:pre-wrap;}
   .history-card .h-workplace{font-size:12px;color:var(--ink-faint);}
 
   @media (max-width:860px){
     .hero{grid-template-columns:1fr;}
-    .hero-art{order:-1;max-width:340px;margin:0 auto;}
+    .car{order:-1;max-width:340px;width:100%;margin:0 auto;}
     .feature-grid{grid-template-columns:repeat(2,1fr);}
     .people-grid{grid-template-columns:repeat(2,1fr);}
   }
@@ -570,7 +589,7 @@
     .pblock{padding:16px;}
     .form-row{flex-direction:column;}
     .history-card{flex-direction:column;align-items:flex-start;}
-    .history-card .h-photo, .history-card .h-photo-ph{width:56px;height:56px;}
+    .history-card .h-photo, .history-card .h-photo-ph{width:112px;height:140px;}
     .new-post-row{flex-direction:column;align-items:stretch;}
   }
 </style>
@@ -642,6 +661,8 @@
           <button class="btn btn-ghost" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
         </div>
       </div>
+      <div class="car" id="heroCar">
+        <div class="car-view"><div class="car-track" id="carTrack">
       <div class="hero-art cup-card" id="cupCard" onclick="nav('cup')" style="cursor:pointer;" role="link" tabindex="0">
         <div class="ring r1"></div>
         <div class="ring r2"></div>
@@ -661,6 +682,25 @@
           <span class="cup-teams-note" id="cupTeamsNote"></span>
           <span class="cup-link" id="cupLink">→</span>
         </div>
+      </div>
+      <div class="hero-art cup-card quiz-card" id="quizCard">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div><span class="cup-badge" id="qzBadge">Жуырда</span></div>
+        <div>
+          <h2 class="cup-title" id="qzTitle">КБМ QUIZ</h2>
+          <p class="cup-sub" id="qzSub"></p>
+        </div>
+        <div>
+          <div class="cup-count" id="qzCount"></div>
+          <div class="cup-meta" id="qzMeta" style="margin-top:8px;"></div>
+        </div>
+        <div class="cup-foot"><span class="cup-teams-note" id="qzNote"></span></div>
+      </div>
+        </div></div>
+        <button class="car-arrow prev" onclick="carGo(carIdx-1,true)" aria-label="‹">‹</button>
+        <button class="car-arrow next" onclick="carGo(carIdx+1,true)" aria-label="›">›</button>
+        <div class="car-dots" id="carDots"></div>
       </div>
     </div>
 
@@ -919,6 +959,8 @@
     <div id="adminEdits"></div>
     <div id="adminIgPosts"></div>
     <div id="adminCup"></div>
+    <div class="page-head" style="margin-top:34px;"><div><h2 id="adminQuizH">КБМ QUIZ — баптаулар</h2></div></div>
+    <div id="adminQuiz"></div>
   </section>
 
 </main>
@@ -2800,7 +2842,7 @@ function setLang(lang){
   renderPeople();
   renderIdeas();
   refreshAuthUI();
-  renderCupCard();
+  renderCupCard(); renderQuizCard();
   if(!document.getElementById('view-cup').classList.contains('hidden')) renderBracket();
   if(document.getElementById('view-admin') && !document.getElementById('view-admin').classList.contains('hidden')) renderAdminList();
   if(document.getElementById('view-feed') && !document.getElementById('view-feed').classList.contains('hidden')){ loadFeed(); }
@@ -3001,7 +3043,7 @@ function doLogout(){
 function renderAdminList(){
   var el = document.getElementById('adminList');
   if(!el) return;
-  renderAdminCup(); renderAdminIgPosts();
+  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts();
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   renderAdminEdits();
@@ -3135,6 +3177,7 @@ function renderCupCard(){
 }
 
 function updateCupCount(){
+  updateQuizCount();
   var el = document.getElementById('cupCount'); if(!el) return;
   if(!cup || !cup.event_date){ el.innerHTML = '<div class="cup-tba">'+t('cup_date_tba')+'</div>'; return; }
   var diff = new Date(cup.event_date).getTime() - Date.now();
@@ -3447,6 +3490,88 @@ function renderAdminCup(){
     }).join('') : '<span style="color:var(--ink-faint);">'+t('adm_cup_none')+'</span>';
   });
 }
+/* ===================== Баннер карусельі + КБМ QUIZ ===================== */
+var quiz = null, carIdx = 0, carTimer = null, carPaused = false;
+var QZ_T = {
+ kk:{sub:'Жас мамандар арасындағы интеллектуалды сайыс',note:'Тіркелу туралы ақпарат жуырда жарияланады',adm:'КБМ QUIZ — баптаулар',nosql:'Алдымен 23-quiz.sql файлын Supabase-те іске қосыңыз.'},
+ ru:{sub:'Интеллектуальная игра для молодых специалистов',note:'Информация о регистрации будет объявлена позже',adm:'КБМ QUIZ — настройки',nosql:'Сначала запустите 23-quiz.sql в Supabase.'},
+ en:{sub:'An intellectual contest for young specialists',note:'Registration details coming soon',adm:'KBM QUIZ — settings',nosql:'Run 23-quiz.sql in Supabase first.'}
+};
+function tq(k){ return (QZ_T[LANG] || QZ_T.kk)[k]; }
+function loadQuiz(){
+  return sb.from('promo_events').select('*').eq('slug','kbm-quiz').maybeSingle().then(function(res){
+    quiz = (res && res.data) || null; renderQuizCard();
+  }, function(){ quiz = null; renderQuizCard(); });
+}
+function quizIsPast(){ return !!(quiz && quiz.event_date && new Date(quiz.event_date).getTime() <= Date.now()); }
+function renderQuizCard(){
+  if(!document.getElementById('quizCard')) return;
+  document.getElementById('qzTitle').textContent = (quiz && quiz.title) || 'КБМ QUIZ';
+  document.getElementById('qzSub').textContent = (quiz && quiz.subtitle) || tq('sub');
+  document.getElementById('qzBadge').textContent = quizIsPast() ? t('cup_badge_done') : t('cup_badge_soon');
+  var meta = '';
+  if(quiz && quiz.event_date) meta = fmtDate(quiz.event_date, {day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  if(quiz && quiz.location) meta += (meta ? ' · ' : '') + '📍 ' + quiz.location;
+  document.getElementById('qzMeta').textContent = meta;
+  document.getElementById('qzNote').textContent = quizIsPast() ? '' : tq('note');
+  updateQuizCount();
+}
+function updateQuizCount(){
+  var el = document.getElementById('qzCount'); if(!el) return;
+  if(!quiz || !quiz.event_date){ el.innerHTML = '<div class="cup-tba">'+t('cup_date_tba')+'</div>'; return; }
+  var diff = new Date(quiz.event_date).getTime() - Date.now();
+  if(diff <= 0){ el.innerHTML = '<div class="cup-tba">'+t('cup_started')+'</div>'; return; }
+  function box(n, key){ return '<div class="cup-box"><b>'+String(n).padStart(2,'0')+'</b><span>'+t(key)+'</span></div>'; }
+  var d = Math.floor(diff/864e5), h = Math.floor(diff%864e5/36e5), m = Math.floor(diff%36e5/6e4), sc = Math.floor(diff%6e4/1e3);
+  el.innerHTML = box(d,'cup_d') + box(h,'cup_h') + box(m,'cup_m') + box(sc,'cup_s');
+}
+function carGo(i, manual){
+  var n = 2; carIdx = (i + n) % n;
+  var tr = document.getElementById('carTrack'); if(tr) tr.style.transform = 'translateX(' + (-100*carIdx) + '%)';
+  var dots = document.getElementById('carDots');
+  if(dots) dots.innerHTML = [0,1].map(function(k){ return '<button class="'+(k===carIdx?'on':'')+'" onclick="carGo('+k+',true)" aria-label="'+(k+1)+'"></button>'; }).join('');
+  if(manual) carRestart();
+}
+function carRestart(){
+  if(carTimer) clearInterval(carTimer);
+  carTimer = setInterval(function(){ if(!carPaused && !document.hidden) carGo(carIdx+1); }, 6000);
+}
+function initCarousel(){
+  var car = document.getElementById('heroCar'); if(!car) return;
+  car.addEventListener('mouseenter', function(){ carPaused = true; });
+  car.addEventListener('mouseleave', function(){ carPaused = false; });
+  var x0 = null;
+  car.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; carPaused = true; }, {passive:true});
+  car.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - x0; carPaused = false;
+    if(Math.abs(dx) > 40) carGo(carIdx + (dx < 0 ? 1 : -1), true);
+  }, {passive:true});
+  carGo(0); carRestart();
+}
+function renderAdminQuiz(){
+  var el = document.getElementById('adminQuiz'); if(!el) return;
+  if(!quiz){ el.innerHTML = '<p style="color:var(--ink-faint);">'+tq('nosql')+'</p>'; return; }
+  el.innerHTML = '<div class="adm-card">'+
+    '<label>'+t('adm_cup_f_title')+'<input type="text" id="admQzTitle" value="'+escHtml(quiz.title)+'"></label>'+
+    '<label>'+t('adm_cup_f_sub')+'<input type="text" id="admQzSub" value="'+escHtml(quiz.subtitle||'')+'"></label>'+
+    '<label>'+t('adm_cup_f_date')+'<input type="datetime-local" id="admQzDate" value="'+(quiz.event_date ? toLocalInput(new Date(quiz.event_date)) : '')+'"></label>'+
+    '<label>'+t('adm_cup_f_loc')+'<input type="text" id="admQzLoc" value="'+escHtml(quiz.location||'')+'"></label>'+
+    '<div><button class="btn btn-primary" onclick="saveQuiz()">'+t('adm_cup_save')+'</button> <span id="admQzSaved" style="font-size:12.5px;color:var(--good);"></span></div></div>';
+}
+function saveQuiz(){
+  if(!quiz) return;
+  var dv = document.getElementById('admQzDate').value;
+  sb.from('promo_events').update({
+    title: document.getElementById('admQzTitle').value.trim() || 'КБМ QUIZ',
+    subtitle: document.getElementById('admQzSub').value.trim() || null,
+    event_date: dv ? new Date(dv).toISOString() : null,
+    location: document.getElementById('admQzLoc').value.trim() || null
+  }).eq('id', quiz.id).then(function(res){
+    if(res.error){ alert(res.error.message); return; }
+    loadQuiz().then(function(){ renderAdminQuiz(); var sv = document.getElementById('admQzSaved'); if(sv) sv.textContent = t('adm_cup_saved'); });
+  });
+}
+
 function saveCup(){
   if(!cup) return;
   var dv = document.getElementById('admCupDate').value;
@@ -4619,6 +4744,8 @@ nav('home');
 loadData();
 loadHomeStats();
 loadCup();
+loadQuiz();
+initCarousel();
 drawFooterQRs();
 loadMyState();
 
