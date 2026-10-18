@@ -592,6 +592,53 @@
     .history-card .h-photo, .history-card .h-photo-ph{width:112px;height:140px;}
     .new-post-row{flex-direction:column;align-items:stretch;}
   }
+  /* ===== v26: ticker, quotes, letter, support, meet, filters ===== */
+  .hero-ctas .btn-gold{font-size:16px;padding:13px 24px;}
+  .tick-sec{margin:44px 8px 0;}
+  .tick-sec h2{font-size:20px;margin:0 0 12px;}
+  .tick{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);}
+  .tick-track{display:flex;gap:14px;width:max-content;animation:tickMove var(--tick-dur,30s) linear infinite;}
+  .tick:hover .tick-track{animation-play-state:paused;}
+  .tick-item{white-space:nowrap;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:8px 18px;font-size:14px;font-weight:600;color:var(--blue-deep);}
+  .tick-item i{font-style:normal;color:var(--ink-faint);font-weight:500;margin-left:8px;font-size:12px;}
+  @keyframes tickMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .quotes-sec{margin:44px 8px 0;}
+  .quotes-sec h2{font-size:20px;margin:0 0 12px;}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .quote{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 18px;}
+  .quote p{margin:0 0 10px;font-size:14.5px;line-height:1.55;font-style:italic;}
+  .quote b{display:block;font-size:13px;}
+  .quote span{font-size:12px;color:var(--ink-faint);}
+  .flt-row{display:flex;gap:10px;flex-wrap:wrap;margin:0 4px 14px;}
+  .flt-row select{font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);max-width:100%;}
+  .sk-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+  .sk-chip{font:inherit;font-size:12.5px;padding:5px 11px;border:1px solid var(--line);border-radius:100px;background:var(--paper);color:var(--ink-soft);cursor:pointer;}
+  .sk-chip.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .letter-tabs{display:flex;gap:6px;flex-wrap:wrap;}
+  .letter-tabs .chip{cursor:pointer;}
+  .lt-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .lt-card .lt-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;margin-bottom:6px;}
+  .lt-card p{margin:0 0 8px;font-size:14px;line-height:1.55;white-space:pre-wrap;}
+  .lt-card .ans{background:var(--gold-soft);border-radius:10px;padding:10px 12px;}
+  .lt-card textarea,.sup-in textarea{width:100%;font:inherit;font-size:13.5px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);min-height:70px;resize:vertical;}
+  .lt-badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:100px;background:var(--paper);border:1px solid var(--line);}
+  .sup-fab{position:fixed;right:16px;bottom:16px;z-index:40;border:none;border-radius:100px;background:var(--blue);color:#fff;font:inherit;font-weight:600;font-size:13.5px;padding:12px 18px;box-shadow:0 6px 20px rgba(15,47,92,.35);cursor:pointer;}
+  .sup-panel{position:fixed;right:16px;bottom:70px;z-index:41;width:340px;max-width:calc(100vw - 32px);max-height:70vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .sup-panel.open{display:flex;}
+  .sup-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--blue-deep);color:#fff;font-weight:600;font-size:14px;}
+  .sup-head button{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;}
+  .sup-body{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px;}
+  .sup-topic{font:inherit;font-size:13.5px;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);cursor:pointer;}
+  .sup-topic:hover{border-color:var(--blue);}
+  .sup-msg{max-width:88%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.45;white-space:pre-wrap;}
+  .sup-msg.user{align-self:flex-end;background:var(--blue);color:#fff;}
+  .sup-msg.admin{align-self:flex-start;background:var(--gold-soft);color:var(--ink);}
+  .sup-in{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);}
+  .sup-in textarea{min-height:40px;height:40px;}
+  .meet-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+  .achv{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55;}
+  @media (max-width:980px){.quotes{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.quotes{grid-template-columns:1fr;}.tick-sec,.quotes-sec{margin:34px 0 0;}.meet-list{grid-template-columns:1fr;}.sup-fab{bottom:12px;right:12px;}}
 </style>
 </head>
 <body>
@@ -608,10 +655,12 @@
   <nav class="site-nav">
     <button data-route="home" onclick="nav('home')" data-i18n="nav_home">Басты бет</button>
     <button data-route="mamandar" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
-    <button data-route="ideas" onclick="nav('ideas')" data-i18n="nav_ideas">Идеялар банкі</button>
+    <button data-route="ideas" onclick="nav('ideas')" data-i18n="nav_ideas">Жобалар</button>
     <button data-route="events" onclick="nav('events')" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history')" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
+    <button data-route="meet" onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="chair" onclick="nav('chair')" data-i18n="nav_chair" class="hidden" id="navChairTop">Төраға</button>
     <button data-route="admin" onclick="nav('admin')" data-i18n="nav_admin" class="hidden" id="navAdminTop">Админ</button>
   </nav>
   <div class="site-actions">
@@ -633,10 +682,12 @@
   <div class="drawer-nav">
     <button data-route="home" onclick="nav('home');closeDrawer()" data-i18n="nav_home">Басты бет</button>
     <button data-route="mamandar" onclick="nav('mamandar');closeDrawer()" data-i18n="nav_mamandar">Жас мамандар</button>
-    <button data-route="ideas" onclick="nav('ideas');closeDrawer()" data-i18n="nav_ideas">Идеялар банкі</button>
+    <button data-route="ideas" onclick="nav('ideas');closeDrawer()" data-i18n="nav_ideas">Жобалар</button>
     <button data-route="events" onclick="nav('events');closeDrawer()" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history');closeDrawer()" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed');closeDrawer()" data-i18n="nav_feed">NE ANGIME</button>
+    <button data-route="meet" onclick="nav('meet');closeDrawer()" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="chair" onclick="nav('chair');closeDrawer()" data-i18n="nav_chair" class="hidden" id="navChairDrawer">Төраға</button>
     <button data-route="admin" onclick="nav('admin');closeDrawer()" data-i18n="nav_admin" class="hidden" id="navAdminDrawer">Админ</button>
   </div>
   <div class="drawer-foot">
@@ -653,11 +704,12 @@
   <section id="view-home">
     <div class="hero">
       <div>
-        <p class="eyebrow" data-i18n="hero_eyebrow">Ақ Қаражанбасмұнай · Жас мамандар кеңесі</p>
-        <h1 data-i18n="hero_title">Идеяңызбен өзгеріс жасаңыз</h1>
+        <p class="eyebrow" data-i18n="hero_eyebrow">АҚ Қаражанбасмұнай · Жас мамандар кеңесі</p>
+        <h1 data-i18n="hero_title">Төрағаға хат</h1>
         <p data-i18n="hero_desc">Кеңестің жаңа платформасы — жас мамандардың идеяларын ұсынатын, бір-бірімен танысатын және компанияның тарихын бірге жазатын ортақ алаң.</p>
         <div class="hero-ctas">
-          <button class="btn btn-primary" onclick="nav('ideas')" data-i18n="hero_cta_ideas">Идеялар банкін көру</button>
+          <button class="btn btn-primary" onclick="openLetter('letter')" data-i18n="hero_write">✉️ Хат жазу</button>
+          <button class="btn btn-gold" onclick="openLetter('question')" data-i18n="hero_ask">❓ Сұрақ қою</button>
           <button class="btn btn-ghost" onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
         </div>
       </div>
@@ -724,7 +776,7 @@
       </div>
       <div class="feature-card" onclick="nav('ideas')">
         <div class="ic">💡</div>
-        <h3 data-i18n="nav_ideas">Идеялар банкі</h3>
+        <h3 data-i18n="nav_ideas">Жобалар</h3>
         <p data-i18n="feat_ideas_desc">Идея ұсыныңыз, дауыс беріңіз, статусын бақылаңыз.</p>
       </div>
       <div class="feature-card" onclick="nav('events')">
@@ -739,6 +791,16 @@
         <p data-i18n="feat_history_desc">Бұрынғы мүшелер мен жылдар бойынша архив.</p>
         <span class="soon" data-i18n="feat_soon">Келесі кезең</span>
       </div>
+    </div>
+    <div class="tick-sec hidden" id="tickSec">
+      <h2 data-i18n="tick_title">Біздің осы жылы атқарған шаруаларымыз</h2>
+      <div class="tick"><div class="tick-track" id="tickTrack"></div></div>
+    </div>
+
+    <!-- ЦИТАТАЛАР: жоба мәтіндері. Аты көрсетілгендерден міндетті түрде рұқсат алу керек! -->
+    <div class="quotes-sec">
+      <h2 data-i18n="quotes_title">Жас мамандар не дейді</h2>
+      <div class="quotes" id="quotesGrid"></div>
     </div>
   </section>
 
@@ -756,6 +818,7 @@
         <input id="peopleSearch" data-i18n-ph="search_people_ph" placeholder="Аты немесе бөлімі бойынша іздеу…" oninput="renderPeople()">
       </div>
     </div>
+    <div class="flt-row" id="peopleFlt"></div>
     <div class="chip-row hidden" id="peopleFilter" style="margin:0 0 16px;"></div>
     <div class="people-grid" id="peopleGrid"></div>
   </section>
@@ -813,13 +876,13 @@
   <section id="view-ideas" class="hidden">
     <div class="page-head">
       <div>
-        <h2 data-i18n="nav_ideas">Идеялар банкі</h2>
+        <h2 data-i18n="ideas_title">Жас мамандар ұсынған жобалары</h2>
         <p data-i18n="page_ideas_desc">Барлық тіркелген қызметкер идеяларды көре алады. Дауыс беру мен статус — тіркелгендерге ғана ашық.</p>
       </div>
-      <button class="btn btn-gold" onclick="toggleNewIdea()" data-i18n="btn_new_idea">+ Идея ұсыну</button>
+      <button class="btn btn-gold hidden" onclick="toggleNewIdea()" data-i18n="btn_new_idea">+ Идея ұсыну</button>
     </div>
 
-    <div class="new-idea-box" id="newIdeaBox">
+    <div class="new-idea-box hidden" id="newIdeaBox">
       <div class="new-idea-row" onclick="toggleNewIdea()" style="cursor:pointer;">
         <span>💡</span>
         <input readonly data-i18n-ph="new_idea_row_ph" placeholder="Жаңа идеяңызды осы жерден ұсыныңыз…" style="cursor:pointer;">
@@ -944,6 +1007,29 @@
     <div id="feedList"></div>
   </section>
 
+  <!-- ============ TANYS BOL ============ -->
+  <section id="view-meet" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_meet">Таныс бол</h2>
+        <p data-i18n="meet_desc">Жас мамандар туралы бір минуттық бейнелер — әріптестеріңізбен танысыңыз.</p>
+      </div>
+    </div>
+    <div class="meet-list" id="meetList"></div>
+  </section>
+
+  <!-- ============ CHAIR PANEL ============ -->
+  <section id="view-chair" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="nav_chair">Төраға</h2>
+        <p data-i18n="chair_desc">Жас маман болуға өтініштер мен жас мамандардан келген хаттар, сұрақтар.</p>
+      </div>
+      <button class="btn" onclick="nav('mamandar')" data-i18n="chair_find">Қабілеттер бойынша іздеу</button>
+    </div>
+    <div id="chairBody"></div>
+  </section>
+
   <!-- ============ ADMIN ============ -->
   <section id="view-admin" class="hidden">
     <div class="page-head">
@@ -958,12 +1044,30 @@
     <div class="page-head" style="margin-top:34px;"><div><h2 data-i18n="adm_cup_title">Жас маман CUP — баптаулар</h2></div></div>
     <div id="adminEdits"></div>
     <div id="adminIgPosts"></div>
+    <div id="adminSupport"></div>
     <div id="adminCup"></div>
     <div class="page-head" style="margin-top:34px;"><div><h2 id="adminQuizH">КБМ QUIZ — баптаулар</h2></div></div>
     <div id="adminQuiz"></div>
   </section>
 
 </main>
+
+<!-- ============ LETTER MODAL ============ -->
+<div class="modal-overlay" id="letterModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 data-i18n="hero_title">Төрағаға хат</h3>
+      <button class="modal-close" onclick="closeLetter()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="letter-tabs" id="letterTabs"></div>
+      <input id="letterSubj" data-i18n-ph="lt_subj_ph" placeholder="Тақырып">
+      <textarea id="letterBody" data-i18n-ph="lt_body_ph" placeholder="Хатыңызды осында жазыңыз…" style="min-height:130px;"></textarea>
+      <button class="btn btn-primary" style="width:100%;padding:11px;" onclick="sendLetter()" data-i18n="btn_send">Жіберу</button>
+      <div class="me-msg" id="letterMsg"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ============ CUP MODAL ============ -->
 <div class="modal-overlay" id="cupModal">
@@ -1029,6 +1133,10 @@
           <label class="reg-lbl" data-i18n="reg_chair_label">Төрағалар тізімінен өзіңізді таңдаңыз</label>
           <select id="regChair"></select>
         </div>
+        <label class="reg-check"><input type="checkbox" id="regWantJoin" onchange="onRegToggle('join')"> <span data-i18n="reg_want_join">Мен жас маман болғым келеді (Кеңес құрамына кіру)</span></label>
+        <div id="regJoinBox" class="hidden reg-sub"><textarea id="regJoinMsg" data-i18n-ph="reg_join_ph" placeholder="Өзіңіз туралы қысқаша жазыңыз (қалауыңызша)" style="width:100%;min-height:56px;font:inherit;padding:8px;border:1px solid var(--line);border-radius:9px;"></textarea><p class="modal-note" data-i18n="reg_join_note"></p></div>
+        <label class="reg-lbl" data-i18n="reg_skills" style="margin-top:6px;">Қабілеттеріңіз (қалауыңызша)</label>
+        <div id="regSkillsHolder"></div>
         <input id="regEmail" type="email" data-i18n-ph="ph_email" placeholder="Email">
         <div class="pw-wrap">
           <input id="regPassword" type="password" data-i18n-ph="ph_password_new" placeholder="Құпия сөз (кемінде 6 таңба)">
@@ -1064,6 +1172,13 @@
   </div>
 </div>
 
+<button class="sup-fab" id="supFab" onclick="toggleSupport()">💬 <span data-i18n="sup_fab">Қолдау</span></button>
+<div class="sup-panel" id="supPanel">
+  <div class="sup-head"><span data-i18n="sup_title">Қолдау қызметі</span><button onclick="toggleSupport()">✕</button></div>
+  <div class="sup-body" id="supBody"></div>
+  <div class="sup-in hidden" id="supIn"><textarea id="supText" data-i18n-ph="sup_ph" placeholder="Хабарлама жазыңыз…"></textarea><button class="btn btn-primary" onclick="sendSupport()">➤</button></div>
+</div>
+
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
@@ -1071,17 +1186,16 @@
         <img src="logos/kbm-logo.png" alt="КБМ">
         <img src="logos/jmk-logo.png" alt="ЖМК">
       </div>
-      <b data-i18n="footer_org">Ақ Қаражанбасмұнай · Жас мамандар кеңесі</b>
+      <b data-i18n="footer_org">АҚ Қаражанбасмұнай · Жас мамандар кеңесі</b>
       <p data-i18n="footer_tag">Жас мамандардың идеялары, іс-шаралары мен тарихы — бір платформада.</p>
     </div>
     <div class="foot-col">
-      <h4 data-i18n="footer_nav">Бөлімдер</h4>
-      <button onclick="nav('mamandar')" data-i18n="nav_mamandar">Жас мамандар</button>
-      <button onclick="nav('ideas')" data-i18n="nav_ideas">Идеялар банкі</button>
-      <button onclick="nav('events')" data-i18n="nav_events">Іс-шаралар</button>
-      <button onclick="nav('history')" data-i18n="nav_history">Тарих</button>
-      <button onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
+      <h4 data-i18n="foot_links">Пайдалы сілтемелер</h4>
+      <button onclick="openLetter('letter')" data-i18n="foot_letter">Төрағаға хат жазу</button>
+      <button onclick="nav('cup')" data-i18n="foot_bracket">Турнир кестесі</button>
+      <button onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
       <button onclick="nav('qr')" data-i18n="qr_foot">QR код</button>
+      <button onclick="toggleSupport()" data-i18n="foot_support">Қолдау қызметі</button>
     </div>
     <div class="foot-col">
       <h4 data-i18n="footer_follow">Бізді бақылаңыз</h4>
@@ -1092,7 +1206,7 @@
       </div>
     </div>
   </div>
-  <div class="foot-bottom"><span data-i18n="footer_text">© 2026 Ақ Қаражанбасмұнай · Жас мамандар кеңесі</span></div>
+  <div class="foot-bottom"><span data-i18n="footer_text">© 2026 АҚ Қаражанбасмұнай · Жас мамандар кеңесі</span></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -2384,7 +2498,7 @@ var I18N = {
     nav_home:'Басты бет', nav_mamandar:'Жас мамандар', nav_ideas:'Идеялар банкі',
     nav_events:'Іс-шаралар', nav_history:'Тарих',
     btn_login:'Кіру / Тіркелу',
-    hero_eyebrow:'Ақ Қаражанбасмұнай · Жас мамандар кеңесі',
+    hero_eyebrow:'АҚ Қаражанбасмұнай · Жас мамандар кеңесі',
     hero_title:'Идеяңызбен өзгеріс жасаңыз',
     hero_desc:'Кеңестің жаңа платформасы — жас мамандардың идеяларын ұсынатын, бір-бірімен танысатын және компанияның тарихын бірге жазатын ортақ алаң.',
     hero_cta_ideas:'Идеялар банкін көру',
@@ -2430,8 +2544,8 @@ var I18N = {
     h_btn_new:'+ Төраға қосу', h_ph_name:'Аты-жөні', h_ph_start:'Бастаған жылы', h_ph_end:'Аяқтаған жылы (бос — қазірге дейін)',
     h_ph_bio:'Сол кісі туралы қысқаша топик', h_ph_workplace:'Қазір қайда жұмыс жасайды',
     h_present:'қазірге дейін', h_empty:'Әзірге тарих жазбасы қосылмаған.', h_err_required:'Аты-жөні мен бастаған жылын толтырыңыз.',
-    footer_text:'© 2026 Ақ Қаражанбасмұнай · Жас мамандар кеңесі',
-    footer_org:'Ақ Қаражанбасмұнай · Жас мамандар кеңесі',
+    footer_text:'© 2026 АҚ Қаражанбасмұнай · Жас мамандар кеңесі',
+    footer_org:'АҚ Қаражанбасмұнай · Жас мамандар кеңесі',
     footer_tag:'Жас мамандардың идеялары, іс-шаралары мен тарихы — бір платформада.',
     footer_nav:'Бөлімдер', footer_follow:'Бізді бақылаңыз',
     banner_loaded:'🔗 <b>Деректер қоры қосылды</b> — жас мамандар мен идеялар Supabase-тен нақты жүктелді. Тіркелу/кіру мен дауыс беруді сақтау келесі кезеңде қосылады.',
@@ -2772,6 +2886,111 @@ var I18N_EXTRA = {
 };
 (function(){ ['kk','ru','en'].forEach(function(l){ if(I18N[l]) Object.keys(I18N_EXTRA[l]).forEach(function(k){ I18N[l][k]=I18N_EXTRA[l][k]; }); }); })();
 
+var I18N_NEW = {
+kk:{
+  nav_ideas:'Жобалар', ideas_title:'Жас мамандар ұсынған жобалары',
+  page_ideas_desc:'Жас мамандар ұсынған барлық жобалардың архиві.',
+  feat_ideas_desc:'Жас мамандар ұсынған жобалардың архиві.',
+  stat_ideas:'жоба',
+  hero_title:'Төрағаға хат',
+  hero_desc:'Жас мамандар кеңесін жақсарту бойынша немесе жаңа іс-шаралар бойынша ұсынысыңыз болса, не төрағаға сұрағыңыз болса — тікелей жазыңыз.',
+  hero_write:'✉️ Хат жазу', hero_ask:'❓ Сұрақ қою',
+  nav_meet:'Таныс бол', nav_chair:'Төраға',
+  meet_desc:'Жас мамандар туралы бір минуттық бейнелер — әріптестеріңізбен танысыңыз.',
+  meet_empty:'Бейнелер жақында қосылады.',
+  tick_title:'Біздің осы жылы атқарған шаруаларымыз',
+  quotes_title:'Жас мамандар не дейді',
+  q1t:'Жас мамандардың өмірін көрсету — бір-бірімізді жақынырақ тануға көмектеседі.', q1n:'Жаңбырбаев Қуандық', q1r:'Мобилограф',
+  q2t:'Әр теңгені дұрыс пайдалану — компанияның болашағына салған үлесіміз.', q2n:'Бегенішов Мұрат', q2r:'Экономист',
+  q3t:'Кез келген жұмыс заң аясында жүргенде ғана сенімді нәтиже береді.', q3n:'Әсем', q3r:'Заңгер',
+  q4t:'Біз үшін мұнайдың әр тамшысы маңызды.', q4n:'', q4r:'Өндіру операторы',
+  q5t:'Жер астын жақсы түсінген сайын, болашақты нақтырақ көреміз.', q5n:'', q5r:'Геолог',
+  q6t:'Бір команда болып жұмыс істесек, кез келген міндет орындалады.', q6n:'', q6r:'Инженер',
+  foot_links:'Пайдалы сілтемелер', foot_letter:'Төрағаға хат жазу', foot_bracket:'Турнир кестесі', foot_support:'Қолдау қызметі',
+  lt_letter:'Хат', lt_question:'Сұрақ', lt_proposal:'Ұсыныс', lt_subj_ph:'Тақырып', lt_body_ph:'Хатыңызды осында жазыңыз…',
+  lt_empty:'Хат мәтінін жазыңыз', lt_sent:'Жіберілді. Төраға жауап берсе, «Менің профилім» бетінде көресіз.',
+  me_letters:'Төрағаға жазған хаттарым', me_write:'Төрағаға хат жазу', lt_answer:'Төраға жауабы', lt_wait:'Жауап күтілуде',
+  sk_title:'Қабілеттерім', sk_hint:'Төраға байқауларға қатысушыларды осы қабілеттер бойынша таба алады.', reg_skills:'Қабілеттеріңіз (қалауыңызша)',
+  reg_want_join:'Мен жас маман болғым келеді (Кеңес құрамына кіру)', reg_join_ph:'Өзіңіз туралы қысқаша жазыңыз (қалауыңызша)',
+  reg_join_note:'Өтінішті тек Кеңес төрағасы қарайды.',
+  join_title:'Жас маман болу өтініші', join_text:'Кеңес құрамына кіргіңіз келсе, электрондық өтініш жіберіңіз. Оны Кеңес төрағасы қарайды.',
+  join_btn:'Өтініш жіберу', join_pending:'Өтінішіңіз төрағаға жіберілді, шешімді күтіңіз.', join_declined:'Өтініш қабылданбады. Қаласаңыз, қайта жібере аласыз.',
+  chair_desc:'Жас маман болуға өтініштер мен жас мамандардан келген хаттар, сұрақтар.', chair_find:'Қабілеттер бойынша іздеу',
+  chair_apps:'Жас маман болуға өтініштер', chair_letters:'Хаттар мен сұрақтар', chair_none:'Әзірге ештеңе жоқ.',
+  chair_accept:'Қабылданды (қарсылық жоқ)', chair_decline:'Қабылдамау', chair_only:'Өтінішті тек төраға шеше алады.',
+  chair_reply:'Жауап жазу', chair_send:'Жауап жіберу', chair_del:'Жою',
+  st_pending:'Күтуде', st_accepted:'Қабылданды', st_declined:'Қабылданбады', st_new:'Жаңа', st_read:'Оқылды', st_answered:'Жауап берілді',
+  flt_dept_all:'Барлық бөлім', flt_prof_all:'Барлық мамандық', flt_skill_all:'Барлық қабілет',
+  sup_fab:'Қолдау', sup_title:'Қолдау қызметі', sup_ph:'Хабарлама жазыңыз…',
+  sup_t1:'Сайтты жақсарту бойынша ұсыныстарыңыз бар ма?', sup_t2:'Басқа айтар нәрсеңіз бар ма?', sup_pick:'Қандай мәселе бойынша жазғыңыз келеді?', sup_topic:'Тақырып: ',
+  igp_meet:'«Таныс бол» бөлімі (бір минуттық бейне)', igp_meet_on:'Таныс бол', igp_meet_off:'Таныс болдан алу', igp_meet_add:'Таныс болға қосу',
+  adm_support:'Қолдау қызметі — хабарламалар', h_achv:'🏆 Жетістіктері', me_f_achv:'Жетістіктерім (әр жолға біреуден)',
+  prof_all:'Басқа'
+},
+ru:{
+  nav_ideas:'Проекты', ideas_title:'Проекты, предложенные молодыми специалистами',
+  page_ideas_desc:'Архив всех проектов, предложенных молодыми специалистами.',
+  feat_ideas_desc:'Архив проектов, предложенных молодыми специалистами.',
+  stat_ideas:'проектов',
+  hero_title:'Письмо председателю',
+  hero_desc:'Есть предложения по улучшению Совета, новым мероприятиям или вопрос к председателю — напишите напрямую.',
+  hero_write:'✉️ Написать', hero_ask:'❓ Задать вопрос',
+  nav_meet:'Познакомься', nav_chair:'Председатель',
+  meet_desc:'Минутные видео о молодых специалистах — познакомьтесь с коллегами.', meet_empty:'Видео скоро появятся.',
+  tick_title:'Что мы сделали в этом году', quotes_title:'Что говорят молодые специалисты',
+  foot_links:'Полезные ссылки', foot_letter:'Написать председателю', foot_bracket:'Турнирная сетка', foot_support:'Служба поддержки',
+  lt_letter:'Письмо', lt_question:'Вопрос', lt_proposal:'Предложение', lt_subj_ph:'Тема', lt_body_ph:'Напишите здесь…',
+  lt_empty:'Напишите текст', lt_sent:'Отправлено. Ответ председателя появится в «Моём профиле».',
+  me_letters:'Мои письма председателю', me_write:'Написать председателю', lt_answer:'Ответ председателя', lt_wait:'Ожидает ответа',
+  sk_title:'Мои навыки', sk_hint:'По этим навыкам председатель сможет подбирать участников соревнований.', reg_skills:'Ваши навыки (по желанию)',
+  reg_want_join:'Я хочу стать молодым специалистом (войти в состав Совета)', reg_join_ph:'Кратко о себе (по желанию)',
+  reg_join_note:'Заявку рассматривает только председатель Совета.',
+  join_title:'Заявка в молодые специалисты', join_text:'Хотите войти в состав Совета — отправьте электронную заявку. Её рассмотрит председатель.',
+  join_btn:'Отправить заявку', join_pending:'Заявка отправлена председателю, ожидайте решения.', join_declined:'Заявка отклонена. При желании можно отправить снова.',
+  chair_desc:'Заявки в молодые специалисты, письма и вопросы.', chair_find:'Поиск по навыкам',
+  chair_apps:'Заявки в молодые специалисты', chair_letters:'Письма и вопросы', chair_none:'Пока ничего нет.',
+  chair_accept:'Принято (возражений нет)', chair_decline:'Отклонить', chair_only:'Решать по заявке может только председатель.',
+  chair_reply:'Ответ', chair_send:'Отправить ответ', chair_del:'Удалить',
+  st_pending:'Ожидает', st_accepted:'Принято', st_declined:'Отклонено', st_new:'Новое', st_read:'Прочитано', st_answered:'Отвечено',
+  flt_dept_all:'Все отделы', flt_prof_all:'Все профессии', flt_skill_all:'Все навыки',
+  sup_fab:'Поддержка', sup_title:'Служба поддержки', sup_ph:'Напишите сообщение…',
+  sup_t1:'Есть предложения по улучшению сайта?', sup_t2:'Хотите сказать что-то другое?', sup_pick:'По какому вопросу хотите написать?', sup_topic:'Тема: ',
+  igp_meet:'Раздел «Познакомься» (минутное видео)', igp_meet_on:'Познакомься', igp_meet_off:'Убрать из «Познакомься»', igp_meet_add:'В «Познакомься»',
+  adm_support:'Служба поддержки — сообщения', h_achv:'🏆 Достижения', me_f_achv:'Мои достижения (по одному в строке)', prof_all:'Другое'
+},
+en:{
+  nav_ideas:'Projects', ideas_title:'Projects proposed by young specialists',
+  page_ideas_desc:'Archive of all projects proposed by young specialists.',
+  feat_ideas_desc:'Archive of projects proposed by young specialists.',
+  stat_ideas:'projects',
+  hero_title:'Letter to the Chairman',
+  hero_desc:'Have a suggestion to improve the Council or a new event, or a question for the chairman? Write directly.',
+  hero_write:'✉️ Write a letter', hero_ask:'❓ Ask a question',
+  nav_meet:'Meet us', nav_chair:'Chairman',
+  meet_desc:'One-minute videos about young specialists — get to know your colleagues.', meet_empty:'Videos coming soon.',
+  tick_title:'What we have done this year', quotes_title:'What young specialists say',
+  foot_links:'Useful links', foot_letter:'Write to the chairman', foot_bracket:'Tournament bracket', foot_support:'Support',
+  lt_letter:'Letter', lt_question:'Question', lt_proposal:'Proposal', lt_subj_ph:'Subject', lt_body_ph:'Write here…',
+  lt_empty:'Write your message', lt_sent:'Sent. The reply will appear in "My profile".',
+  me_letters:'My letters to the chairman', me_write:'Write to the chairman', lt_answer:'Chairman\'s reply', lt_wait:'Awaiting reply',
+  sk_title:'My skills', sk_hint:'The chairman can find competition participants by these skills.', reg_skills:'Your skills (optional)',
+  reg_want_join:'I want to become a young specialist (join the Council)', reg_join_ph:'A few words about yourself (optional)',
+  reg_join_note:'Only the Council chairman reviews applications.',
+  join_title:'Application to join', join_text:'Want to join the Council? Send an electronic application. The chairman will review it.',
+  join_btn:'Send application', join_pending:'Application sent to the chairman. Please wait for a decision.', join_declined:'Application declined. You may apply again.',
+  chair_desc:'Membership applications, letters and questions.', chair_find:'Search by skills',
+  chair_apps:'Membership applications', chair_letters:'Letters and questions', chair_none:'Nothing yet.',
+  chair_accept:'Accepted (no objection)', chair_decline:'Decline', chair_only:'Only the chairman can decide on applications.',
+  chair_reply:'Reply', chair_send:'Send reply', chair_del:'Delete',
+  st_pending:'Pending', st_accepted:'Accepted', st_declined:'Declined', st_new:'New', st_read:'Read', st_answered:'Answered',
+  flt_dept_all:'All departments', flt_prof_all:'All professions', flt_skill_all:'All skills',
+  sup_fab:'Support', sup_title:'Support', sup_ph:'Write a message…',
+  sup_t1:'Have suggestions to improve the site?', sup_t2:'Anything else to say?', sup_pick:'What would you like to write about?', sup_topic:'Topic: ',
+  igp_meet:'"Meet us" section (one-minute video)', igp_meet_on:'Meet us', igp_meet_off:'Remove from Meet us', igp_meet_add:'Add to Meet us',
+  adm_support:'Support — messages', h_achv:'🏆 Achievements', me_f_achv:'My achievements (one per line)', prof_all:'Other'
+}};
+(function(){ ['kk','ru','en'].forEach(function(l){ if(I18N[l]) Object.keys(I18N_NEW[l]).forEach(function(k){ I18N[l][k]=I18N_NEW[l][k]; }); }); })();
+
 function t(key){
   var v = (I18N[LANG] && I18N[LANG][key] !== undefined) ? I18N[LANG][key] : (I18N.kk[key] !== undefined ? I18N.kk[key] : key);
   return v;
@@ -2842,6 +3061,10 @@ function setLang(lang){
   renderPeople();
   renderIdeas();
   refreshAuthUI();
+  renderQuotes(); renderRegSkills(); renderLetterTabs();
+  if(supOpen) renderSupport();
+  if(!document.getElementById('view-meet').classList.contains('hidden')) loadMeet();
+  if(!document.getElementById('view-me').classList.contains('hidden')) renderMe();
   renderCupCard(); renderQuizCard();
   if(!document.getElementById('view-cup').classList.contains('hidden')) renderBracket();
   if(document.getElementById('view-admin') && !document.getElementById('view-admin').classList.contains('hidden')) renderAdminList();
@@ -2880,6 +3103,8 @@ function refreshAuthUI(){
   }
   document.getElementById('navAdminTop').classList.toggle('hidden', !isAdmin);
   document.getElementById('navAdminDrawer').classList.toggle('hidden', !isAdmin);
+  document.getElementById('navChairTop').classList.toggle('hidden', !(isChairman||isAdmin));
+  document.getElementById('navChairDrawer').classList.toggle('hidden', !(isChairman||isAdmin));
   var evAddBtn = document.getElementById('evAddBtn');
   if(evAddBtn) evAddBtn.classList.toggle('hidden', !isAdmin);
   var hAddBtn = document.getElementById('hAddBtn');
@@ -2889,17 +3114,21 @@ function refreshAuthUI(){
 function loadMyState(){
   return sb.auth.getUser().then(function(res){
     authUser = (res.data && res.data.user) || null;
-    if(!authUser){ myProfile = null; isAdmin = false; myVotes = {}; refreshAuthUI(); return; }
+    if(!authUser){ myProfile = null; isAdmin = false; isChairman = false; myVotes = {}; refreshAuthUI(); return; }
     return Promise.all([
       sb.rpc('my_profile').then(function(r){
         if(r.error){ return sb.from('profiles').select('*').eq('id', authUser.id).maybeSingle(); }
         return { data: (r.data && r.data[0]) || null };
       }),
       sb.from('admins').select('user_id').eq('user_id', authUser.id).maybeSingle(),
-      sb.from('idea_votes').select('idea_id,vote_type').eq('profile_id', authUser.id)
+      sb.from('idea_votes').select('idea_id,vote_type').eq('profile_id', authUser.id),
+      sb.from('profiles').select('skills,is_chairman').eq('id', authUser.id).maybeSingle().then(function(r){ return r; }, function(){ return {data:null}; })
     ]).then(function(res2){
       myProfile = (res2[0] && res2[0].data) || null;
       isAdmin = !!(res2[1] && res2[1].data);
+      var ex = (res2[3] && res2[3].data) || {};
+      isChairman = !!ex.is_chairman;
+      if(myProfile){ myProfile.skills = ex.skills || myProfile.skills || []; myProfile.is_chairman = isChairman; }
       myVotes = {};
       ((res2[2] && res2[2].data) || []).forEach(function(r){ myVotes[r.idea_id] = r.vote_type; });
       refreshAuthUI();
@@ -2951,6 +3180,7 @@ function loadRegLists(){
   });
 }
 function onRegToggle(src){
+  var wj = document.getElementById('regWantJoin'); if(wj) document.getElementById('regJoinBox').classList.toggle('hidden', !wj.checked);
   var sp = document.getElementById('regIsSpec'), al = document.getElementById('regIsAlumni');
   if(src==='spec' && sp.checked) al.checked = false;
   if(src==='alumni' && al.checked) sp.checked = false;
@@ -3030,7 +3260,10 @@ function doRegister(){
     }, regExtra)).then(function(res2){
       if(res2.error){ showAuthError(res2.error.message || t('err_generic')); return; }
       showAuthOk(t('reg_success'));
-      loadMyState();
+      var jobs = [], skSel = skRead('regSkills');
+      if(skSel.length) jobs.push(sb.rpc('set_my_skills', { p_skills: skSel }));
+      if(document.getElementById('regWantJoin').checked && !isSpec) jobs.push(sb.rpc('submit_application', { p_message: document.getElementById('regJoinMsg').value }));
+      Promise.all(jobs.map(function(j){ return Promise.resolve(j).then(function(x){return x;}, function(){return null;}); })).then(function(){ loadMyState(); });
     });
   });
 }
@@ -3043,7 +3276,7 @@ function doLogout(){
 function renderAdminList(){
   var el = document.getElementById('adminList');
   if(!el) return;
-  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts();
+  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts(); renderAdminSupport();
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   renderAdminEdits();
@@ -3703,7 +3936,7 @@ function igCardHtml(r){
   return '<div class="post-card ig-card"><div class="ig-card-in"><blockquote class="instagram-media" data-instgrm-permalink="'+escHtml(r.url)+'" data-instgrm-version="14"><a href="'+escHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+t('igp_open')+'</a></blockquote></div></div>';
 }
 function processIgEmbeds(){
-  if(!document.querySelector('#feedList .instagram-media')) return;
+  if(!document.querySelector('.instagram-media')) return;
   if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); }
   else if(!document.getElementById('igEmbedJs')){
     var sc=document.createElement('script'); sc.id='igEmbedJs'; sc.async=true; sc.src='https://www.instagram.com/embed.js'; document.body.appendChild(sc);
@@ -4069,6 +4302,7 @@ function loadHistory(){
           '<p class="h-name">'+h.full_name.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" onclick="deleteHistory(\''+h.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
           '<p class="h-years">'+years+'</p>'+
           (h.bio ? '<p class="h-bio">'+h.bio.replace(/</g,'&lt;')+'</p>' : '')+
+          (h.achievements ? '<p class="h-workplace"><b>'+t('h_achv')+'</b></p><ul class="achv">'+h.achievements.split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
           (h.current_workplace ? '<p class="h-workplace">💼 '+h.current_workplace.replace(/</g,'&lt;')+'</p>' : '')+
         '</div>'+
       '</div>';
@@ -4095,6 +4329,7 @@ function deleteEvent(eventId){
 /* ===================== router ===================== */
 function nav(route, param){
   if(route === 'admin' && !isAdmin){ route = 'home'; }
+  if(route === 'chair' && !(isChairman || isAdmin)){ route = 'home'; }
   if(route === 'me' && !authUser){ openAuthModal(); return; }
   document.querySelectorAll('main > section').forEach(function(s){ s.classList.add('hidden'); });
   document.getElementById('view-'+route).classList.remove('hidden');
@@ -4106,6 +4341,8 @@ function nav(route, param){
   if(route==='me') renderMe();
   if(route==='qr') drawQR();
   if(route==='feed') loadFeed();
+  if(route==='meet') loadMeet();
+  if(route==='chair') renderChair();
   if(route==='events') loadEvents();
   if(route==='history') loadHistory();
   if(route==='cup') loadBracket();
@@ -4179,23 +4416,6 @@ function igPostUrl(v){
   var m = String(v||'').trim().match(/^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/i);
   return m ? 'https://www.instagram.com/'+m[2].toLowerCase()+'/'+m[3]+'/' : null;
 }
-function renderAdminIgPosts(){
-  var box=document.getElementById('adminIgPosts'); if(!box) return;
-  box.innerHTML='<div class="igp-adm"><h3>'+t('igp_admin')+'</h3><div class="row"><input id="igpUrl" placeholder="'+t('igp_ph')+'"><button class="btn btn-gold" onclick="addIgPost()">'+t('igp_add')+'</button></div><div id="igpMsg" style="color:#c0392b;font-size:12.5px;"></div><div id="igpList"></div></div>';
-  sbGet('instagram_posts?select=*&order=created_at.desc').then(function(rows){
-    document.getElementById('igpList').innerHTML = rows.map(function(r){
-      return '<div class="igp-li"><a href="'+escHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+escHtml(r.url)+'</a><button class="btn" onclick="delIgPost(\''+r.id+'\')">'+t('igp_del')+'</button></div>';
-    }).join('');
-  }).catch(function(){});
-}
-function addIgPost(){
-  var u = igPostUrl(document.getElementById('igpUrl').value), msg=document.getElementById('igpMsg');
-  if(!u){ msg.textContent=t('igp_bad'); return; }
-  sb.from('instagram_posts').insert({url:u}).then(function(r){
-    if(r.error){ msg.textContent=r.error.message; return; }
-    renderAdminIgPosts();
-  });
-}
 function delIgPost(id){
   sb.from('instagram_posts').delete().eq('id',id).then(function(){ renderAdminIgPosts(); });
 }
@@ -4225,6 +4445,7 @@ function renderPeople(){
       return '<button class="chip'+(peopleFlt===x[0]?' active':'')+'" onclick="setPeopleFlt(\''+x[0]+'\')">'+t(x[1])+'</button>';
     }).join('');
   }
+  buildPeopleFlt();
   var q = (document.getElementById('peopleSearch').value || '').toLowerCase();
   grid.innerHTML = '';
   var kkCollator = (typeof Intl !== 'undefined' && Intl.Collator) ? new Intl.Collator('kk') : null;
@@ -4233,6 +4454,9 @@ function renderPeople(){
   }).filter(function(p){
     if(peopleFlt==='current' && p.alumni) return false;
     if(peopleFlt==='alumni' && !p.alumni) return false;
+    if(peopleDept && p.dept !== peopleDept) return false;
+    if(peopleProf && profGroup(p.role) !== peopleProf) return false;
+    if(peopleSkill && (p.skills||[]).indexOf(peopleSkill) < 0) return false;
     return p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q) || p.role.toLowerCase().includes(q);
   }).forEach(function(p){
     var card = document.createElement('div');
@@ -4252,6 +4476,7 @@ function tagsFor(p){
   if(p.alumni) tags.push(t('tag_alumni'));
   tags.push(t('tag_since')(p.councilJoinYear || '—'));
   if(p.ideaCount) tags.push(t('tag_ideas')(p.ideaCount));
+  (p.skills||[]).slice(0,3).forEach(function(k){ tags.push(skLabel(k)); });
   return tags;
 }
 function fieldsFor(p){
@@ -4462,7 +4687,8 @@ function renderMe(){
     '<div class="meta">'+escHtml([p.position,p.department].filter(Boolean).join(' · '))+'</div>'+
     (p.approval_status==='approved' ? '<span class="me-badge">'+badge+'</span>' : '')+'</div></div>';
   if(p.approval_status !== 'approved'){
-    body.innerHTML = html + '<div class="me-box"><p>'+t('me_pending')+'</p></div>';
+    body.innerHTML = html + '<div class="me-box"><p>'+t('me_pending')+'</p></div><div id="meJoinHolder"></div>';
+    loadMeJoin();
     return;
   }
   // Instagram — әркім өзі жаза алады
@@ -4475,8 +4701,13 @@ function renderMe(){
   } else {
     html += '<div class="me-box"><p>'+t('me_req_text')+'</p><button class="btn btn-gold" onclick="requestEdit()">'+t('me_req_btn')+'</button><div class="me-msg" id="meReqMsg"></div></div>';
   }
-  html += '<div id="meChairHolder"></div>';
+  html += '<div class="me-box"><h4>'+t('sk_title')+'</h4><div class="me-hint">'+t('sk_hint')+'</div>'+skPickerHtml(p.skills||[], 'meSk')+
+    '<div style="margin-top:12px;"><button class="btn btn-gold" onclick="saveMeSkills()">'+t('me_save')+'</button></div><div class="me-msg" id="meSkMsg"></div></div>';
+  if(!p.is_specialist && !p.is_alumni) html += '<div id="meJoinHolder"></div>';
+  html += '<div id="meChairHolder"></div><div id="meLettersHolder"></div>';
   body.innerHTML = html;
+  if(!p.is_specialist && !p.is_alumni) loadMeJoin();
+  renderMeLetters();
   if(p.edit_granted) loadMeForm();
   loadMeChair();
 }
@@ -4565,13 +4796,14 @@ function loadMeChair(){
         '<div class="me-photo-row"><label class="btn attach-btn">📷 '+t('me_photo_pick')+'<input type="file" accept="image/*" style="display:none" onchange="onChairPhoto(this)"></label></div>'+
         '<label class="fl">'+t('me_f_work')+'</label><input type="text" id="meChairWork" value="'+escHtml(h.current_workplace||'')+'">'+
         '<label class="fl">'+t('me_f_bio')+'</label><textarea id="meChairBio">'+escHtml(h.bio||'')+'</textarea>'+
+        '<label class="fl">'+t('me_f_achv')+'</label><textarea id="meChairAch" style="min-height:110px;">'+escHtml(h.achievements||'')+'</textarea>'+
         '<div style="margin-top:14px;"><button class="btn btn-gold" onclick="saveChair()">'+t('me_save')+'</button></div><div class="me-msg" id="meChairMsg"></div>'
       : '<p>'+t('me_req_text')+'</p>')+'</div>';
   });
 }
 function saveChair(url){
   var bio = document.getElementById('meChairBio').value, work = document.getElementById('meChairWork').value;
-  sb.rpc('update_my_history', { p_bio: bio, p_workplace: work, p_photo: (typeof url==='string') ? url : '' }).then(function(r){
+  sb.rpc('update_my_history', { p_bio: bio, p_workplace: work, p_photo: (typeof url==='string') ? url : '', p_achievements: (document.getElementById('meChairAch')||{value:null}).value }).then(function(r){
     if(r.error){ msgSet('meChairMsg','err',t('me_err')+r.error.message); return; }
     msgSet('meChairMsg','ok',t('me_saved'));
   });
@@ -4667,7 +4899,7 @@ function loadData(){
   ideaList.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:30px 0;">'+t('loading')+'</p>';
 
   Promise.all([
-    sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,is_alumni,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc').catch(function(){ return sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'); }),
+    sbGet('profiles?select=skills,id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,is_alumni,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc').catch(function(){ return sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'); }),
     sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc'),
     sbGet('idea_attachments?select=*&order=created_at.asc').catch(function(){ return []; }),
     sb.rpc('unclaimed_specialists').then(function(r){ return (r && r.data) || []; }, function(){ return []; })
@@ -4694,6 +4926,7 @@ function loadData(){
         instagram: row.instagram || '',
         authUserId: row.auth_user_id || null,
         alumni: !!row.is_alumni,
+        skills: row.skills || [],
         ideaCount: ideaCount,
         projects: (row.profile_projects || []).map(function(p){ return p.title; }),
         achievements: (row.profile_achievements || []).map(function(a){ return (a.year ? a.year + ' — ' : '') + a.title; })
@@ -4738,6 +4971,313 @@ function loadData(){
   });
 }
 
+/* ===================== v26: хат, чат, өтініш, қабілеттер, фильтр, Таныс бол ===================== */
+var isChairman = false;
+var SK = {
+  comm:['Қарым-қатынас','Коммуникация','Communication'], network:['Нетворкинг','Нетворкинг','Networking'],
+  en:['Ағылшын тілі','Английский язык','English'], ru:['Орыс тілі','Русский язык','Russian'], de:['Неміс/басқа тіл','Немецкий/др. язык','German/other'],
+  football:['Футбол','Футбол','Football'], volley:['Волейбол','Волейбол','Volleyball'], basket:['Баскетбол','Баскетбол','Basketball'],
+  chess:['Шахмат','Шахматы','Chess'], draw:['Сурет салу','Рисование','Drawing'], dombyra:['Домбыра','Домбра','Dombra'],
+  sing:['Ән айту','Пение','Singing'], dance:['Би','Танцы','Dance'], mc:['Жүргізуші (MC)','Ведущий (MC)','MC / host'],
+  photo:['Фото/видео','Фото/видео','Photo/video'], design:['Дизайн','Дизайн','Design'], it:['Бағдарламалау','Программирование','Programming'],
+  speak:['Шешендік','Публичные выступления','Public speaking'], org:['Іс-шара ұйымдастыру','Организация мероприятий','Event organising'],
+  quiz:['Интеллектуалдық ойындар','Интеллектуальные игры','Quiz games']
+};
+function skLabel(k){ var a = SK[k]; if(!a) return k; return a[LANG==='ru'?1:(LANG==='en'?2:0)]; }
+function skPickerHtml(sel, idp){
+  sel = sel || [];
+  return '<div class="sk-wrap" id="'+idp+'">'+Object.keys(SK).map(function(k){
+    return '<button type="button" class="sk-chip'+(sel.indexOf(k)>=0?' on':'')+'" data-sk="'+k+'" onclick="this.classList.toggle(\'on\')">'+escHtml(skLabel(k))+'</button>';
+  }).join('')+'</div>';
+}
+function skRead(idp){
+  return Array.prototype.map.call(document.querySelectorAll('#'+idp+' .sk-chip.on'), function(b){ return b.getAttribute('data-sk'); });
+}
+function renderRegSkills(){
+  var h = document.getElementById('regSkillsHolder'); if(!h) return;
+  var cur = document.getElementById('regSkills') ? skRead('regSkills') : [];
+  h.innerHTML = skPickerHtml(cur, 'regSkills');
+}
+function saveMeSkills(){
+  var sk = skRead('meSk');
+  sb.rpc('set_my_skills', { p_skills: sk }).then(function(r){
+    if(r.error){ msgSet('meSkMsg','err',t('me_err')+r.error.message); return; }
+    myProfile.skills = sk; msgSet('meSkMsg','ok',t('me_saved')); loadData();
+  });
+}
+
+/* --- мамандық топтары --- */
+var PROF = [
+  ['geo', /геолог|геофиз|геохим/, ['Геолог','Геолог','Geologist']],
+  ['oper', /оператор/, ['Оператор','Оператор','Operator']],
+  ['tech', /технолог/, ['Технолог','Технолог','Technologist']],
+  ['mech', /механик|слесар|жөндеу|ремонт/, ['Механик','Механик','Mechanic']],
+  ['elec', /энергет|электр|кіп|киа|автомат/, ['Энергетик / электрик','Энергетик / электрик','Power / electrical']],
+  ['econ', /экономист|бухгалтер|қаржы|финанс|экономик/, ['Экономист / қаржы','Экономист / финансы','Economics / finance']],
+  ['law', /юрист|заңгер|заң |право/, ['Заңгер','Юрист','Lawyer']],
+  ['eng', /инженер/, ['Инженер','Инженер','Engineer']],
+  ['mgr', /менеджер|басшы|бастық|начальник|руковод|директор|жетекші/, ['Басшы / менеджер','Руководитель / менеджер','Manager']]
+];
+function profGroup(role){
+  var s = String(role||'').toLowerCase()+' ';
+  for(var i=0;i<PROF.length;i++){ if(PROF[i][1].test(s)) return PROF[i][0]; }
+  return 'other';
+}
+function profLabel(k){
+  for(var i=0;i<PROF.length;i++){ if(PROF[i][0]===k) return PROF[i][2][LANG==='ru'?1:(LANG==='en'?2:0)]; }
+  return t('prof_all');
+}
+var peopleDept = '', peopleProf = '', peopleSkill = '';
+function buildPeopleFlt(){
+  var box = document.getElementById('peopleFlt'); if(!box) return;
+  var depts = {}, profs = {}, sks = {};
+  people.forEach(function(p){
+    if(p.dept && p.dept !== '—') depts[p.dept] = 1;
+    profs[profGroup(p.role)] = 1;
+    (p.skills||[]).forEach(function(k){ sks[k] = 1; });
+  });
+  function opt(v, l, sel){ return '<option value="'+escHtml(v)+'"'+(sel?' selected':'')+'>'+escHtml(l)+'</option>'; }
+  var dl = Object.keys(depts).sort();
+  var pl = PROF.map(function(x){return x[0];}).concat(['other']).filter(function(k){ return profs[k]; });
+  var sl = Object.keys(SK).filter(function(k){ return sks[k]; });
+  box.innerHTML =
+    '<select id="fltDept" onchange="peopleDept=this.value;renderPeople()">'+opt('',t('flt_dept_all'),!peopleDept)+dl.map(function(d){return opt(d,d,d===peopleDept);}).join('')+'</select>'+
+    '<select id="fltProf" onchange="peopleProf=this.value;renderPeople()">'+opt('',t('flt_prof_all'),!peopleProf)+pl.map(function(k){return opt(k,profLabel(k),k===peopleProf);}).join('')+'</select>'+
+    '<select id="fltSkill" onchange="peopleSkill=this.value;renderPeople()">'+opt('',t('flt_skill_all'),!peopleSkill)+sl.map(function(k){return opt(k,skLabel(k),k===peopleSkill);}).join('')+'</select>';
+}
+
+/* --- төрағаға хат --- */
+var letterKind = 'letter';
+function renderLetterTabs(){
+  var el = document.getElementById('letterTabs'); if(!el) return;
+  el.innerHTML = [['letter','lt_letter'],['question','lt_question'],['proposal','lt_proposal']].map(function(x){
+    return '<button type="button" class="chip'+(letterKind===x[0]?' active':'')+'" onclick="letterKind=\''+x[0]+'\';renderLetterTabs()">'+t(x[1])+'</button>';
+  }).join('');
+}
+function openLetter(kind){
+  if(!authUser){ openAuthModal(); return; }
+  letterKind = kind || 'letter'; renderLetterTabs();
+  document.getElementById('letterSubj').value = ''; document.getElementById('letterBody').value = '';
+  msgSet('letterMsg','','');
+  document.getElementById('letterModal').classList.add('open');
+}
+function closeLetter(){ document.getElementById('letterModal').classList.remove('open'); }
+function sendLetter(){
+  var s = document.getElementById('letterSubj').value.trim(), b = document.getElementById('letterBody').value.trim();
+  if(!b){ msgSet('letterMsg','err',t('lt_empty')); return; }
+  sb.from('chair_letters').insert({ profile_id: authUser.id, kind: letterKind, subject: s || null, body: b }).then(function(r){
+    if(r.error){ msgSet('letterMsg','err',r.error.message); return; }
+    document.getElementById('letterBody').value = ''; document.getElementById('letterSubj').value = '';
+    msgSet('letterMsg','ok',t('lt_sent'));
+    renderMeLetters();
+  });
+}
+function renderMeLetters(){
+  var h = document.getElementById('meLettersHolder'); if(!h || !authUser) return;
+  sb.from('chair_letters').select('*').eq('profile_id', authUser.id).order('created_at',{ascending:false}).then(function(r){
+    var rows = (r && r.data) || [];
+    h.innerHTML = '<div class="me-box"><h4>'+t('me_letters')+'</h4>'+
+      rows.map(function(x){
+        return '<div class="lt-card"><div class="lt-h"><b>'+escHtml(x.subject||t('lt_'+x.kind))+'</b><span class="lt-badge">'+(x.status==='answered'?t('st_answered'):t('lt_wait'))+'</span></div>'+
+          '<p>'+escHtml(x.body)+'</p>'+(x.answer ? '<div class="ans"><b>'+t('lt_answer')+':</b><br>'+escHtml(x.answer)+'</div>' : '')+'</div>';
+      }).join('')+
+      '<button class="btn btn-gold" onclick="openLetter(\'letter\')">✉️ '+t('me_write')+'</button></div>';
+  });
+}
+
+/* --- жас маман болу өтініші --- */
+function loadMeJoin(){
+  var h = document.getElementById('meJoinHolder'); if(!h || !authUser) return;
+  sb.from('member_applications').select('status').eq('profile_id', authUser.id).order('created_at',{ascending:false}).limit(1).then(function(r){
+    var a = r && r.data && r.data[0];
+    var inner;
+    if(a && a.status==='pending') inner = '<p>'+t('join_pending')+'</p>';
+    else inner = (a && a.status==='declined' ? '<p>'+t('join_declined')+'</p>' : '<p>'+t('join_text')+'</p>')+
+      '<textarea id="meJoinMsg" placeholder="'+escHtml(t('reg_join_ph'))+'" style="width:100%;min-height:60px;font:inherit;padding:9px;border:1px solid var(--line);border-radius:9px;"></textarea>'+
+      '<div style="margin-top:10px;"><button class="btn btn-gold" onclick="submitJoin()">'+t('join_btn')+'</button></div><div class="me-msg" id="meJoinMsgOut"></div>';
+    h.innerHTML = '<div class="me-box"><h4>'+t('join_title')+'</h4>'+inner+'</div>';
+  });
+}
+function submitJoin(){
+  var m = document.getElementById('meJoinMsg').value;
+  sb.rpc('submit_application', { p_message: m }).then(function(r){
+    if(r.error){ msgSet('meJoinMsgOut','err',r.error.message); return; }
+    loadMeJoin();
+  });
+}
+
+/* --- төраға панелі --- */
+function renderChair(){
+  var el = document.getElementById('chairBody'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  Promise.all([
+    sb.rpc('chair_applications'),
+    sb.from('chair_letters').select('*, profiles(full_name,position,department)').order('created_at',{ascending:false})
+  ]).then(function(rr){
+    var apps = (rr[0] && rr[0].data) || [], letters = (rr[1] && rr[1].data) || [];
+    var stName = { pending:t('st_pending'), accepted:t('st_accepted'), declined:t('st_declined') };
+    var h = '<div class="page-head" style="margin-top:6px;"><div><h2 style="font-size:18px;">'+t('chair_apps')+'</h2></div></div>';
+    if(!isChairman) h += '<p style="color:var(--ink-faint);">'+t('chair_only')+'</p>';
+    h += apps.length ? apps.map(function(a){
+      return '<div class="admin-row"><div><b>'+escHtml(a.full_name)+'</b><div class="meta">'+escHtml([a.position,a.department].filter(Boolean).join(' · '))+'</div>'+
+        (a.message ? '<div class="meta">“'+escHtml(a.message)+'”</div>' : '')+'<div class="meta"><span class="lt-badge">'+(stName[a.status]||a.status)+'</span></div></div>'+
+        (a.status==='pending' && isChairman ? '<div class="admin-actions"><button class="approve" onclick="decideApp(\''+a.id+'\',true)">'+t('chair_accept')+'</button><button class="reject" onclick="decideApp(\''+a.id+'\',false)">'+t('chair_decline')+'</button></div>' : '')+
+        '</div>';
+    }).join('') : '<p style="color:var(--ink-faint);">'+t('chair_none')+'</p>';
+    h += '<div class="page-head" style="margin-top:30px;"><div><h2 style="font-size:18px;">'+t('chair_letters')+'</h2></div></div>';
+    h += letters.length ? letters.map(function(x){
+      var pr = x.profiles || {};
+      return '<div class="lt-card"><div class="lt-h"><span><b>'+escHtml(pr.full_name||'—')+'</b> · '+escHtml([pr.position,pr.department].filter(Boolean).join(' · '))+'</span>'+
+        '<span class="lt-badge">'+t('lt_'+x.kind)+' · '+(x.status==='answered'?t('st_answered'):t('st_new'))+'</span></div>'+
+        (x.subject ? '<p><b>'+escHtml(x.subject)+'</b></p>' : '')+'<p>'+escHtml(x.body)+'</p>'+
+        (x.answer ? '<div class="ans"><b>'+t('lt_answer')+':</b><br>'+escHtml(x.answer)+'</div>' : '')+
+        '<textarea id="ans-'+x.id+'" placeholder="'+escHtml(t('chair_reply'))+'">'+escHtml(x.answer||'')+'</textarea>'+
+        '<div style="margin-top:8px;display:flex;gap:8px;"><button class="btn btn-gold" onclick="answerLetter(\''+x.id+'\')">'+t('chair_send')+'</button><button class="btn" onclick="delLetter(\''+x.id+'\')">'+t('chair_del')+'</button></div></div>';
+    }).join('') : '<p style="color:var(--ink-faint);">'+t('chair_none')+'</p>';
+    el.innerHTML = h;
+  });
+}
+function decideApp(id, ok){
+  sb.rpc('decide_application', { p_id: id, p_accept: ok }).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderChair(); loadData();
+  });
+}
+function answerLetter(id){
+  var v = document.getElementById('ans-'+id).value.trim(); if(!v) return;
+  sb.from('chair_letters').update({ answer: v, status: 'answered', answered_at: new Date().toISOString() }).eq('id', id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderChair();
+  });
+}
+function delLetter(id){
+  sb.from('chair_letters').delete().eq('id', id).then(function(){ renderChair(); });
+}
+
+/* --- қолдау чаты --- */
+var supTopic = '', supOpen = false;
+function toggleSupport(){
+  if(!authUser){ openAuthModal(); return; }
+  supOpen = !supOpen;
+  document.getElementById('supPanel').classList.toggle('open', supOpen);
+  if(supOpen) renderSupport();
+}
+function renderSupport(){
+  var body = document.getElementById('supBody'), inp = document.getElementById('supIn');
+  if(!body || !authUser) return;
+  sb.from('support_messages').select('*').eq('user_id', authUser.id).order('created_at',{ascending:true}).then(function(r){
+    var rows = (r && r.data) || [];
+    if(!rows.length && !supTopic){
+      body.innerHTML = '<p style="margin:0;font-size:13.5px;">'+t('sup_pick')+'</p>'+
+        '<button class="sup-topic" onclick="pickSupTopic(1)">'+t('sup_t1')+'</button>'+
+        '<button class="sup-topic" onclick="pickSupTopic(2)">'+t('sup_t2')+'</button>';
+      inp.classList.add('hidden'); return;
+    }
+    body.innerHTML = (supTopic ? '<div style="font-size:12px;color:var(--ink-faint);">'+t('sup_topic')+escHtml(supTopic)+'</div>' : '')+
+      rows.map(function(m){ return '<div class="sup-msg '+m.sender+'">'+escHtml(m.body)+'</div>'; }).join('');
+    inp.classList.remove('hidden');
+    body.scrollTop = body.scrollHeight;
+  });
+}
+function pickSupTopic(i){ supTopic = t(i===1 ? 'sup_t1' : 'sup_t2'); renderSupport(); }
+function sendSupport(){
+  var ta = document.getElementById('supText'), v = ta.value.trim(); if(!v || !authUser) return;
+  sb.from('support_messages').insert({ user_id: authUser.id, sender: 'user', topic: supTopic || null, body: v }).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    ta.value = ''; renderSupport();
+  });
+}
+function renderAdminSupport(){
+  var box = document.getElementById('adminSupport'); if(!box) return;
+  sb.from('support_messages').select('*, profiles(full_name)').order('created_at',{ascending:true}).then(function(r){
+    var rows = (r && r.data) || [], g = {}, order = [];
+    rows.forEach(function(m){ if(!g[m.user_id]){ g[m.user_id] = []; order.push(m.user_id); } g[m.user_id].push(m); });
+    order.reverse();
+    box.innerHTML = '<div class="page-head" style="margin-top:34px;"><div><h2>'+t('adm_support')+'</h2></div></div>'+
+      (order.length ? order.map(function(uid){
+        var ms = g[uid], nm = (ms[0].profiles && ms[0].profiles.full_name) || '—';
+        return '<div class="lt-card"><div class="lt-h"><b>'+escHtml(nm)+'</b></div>'+
+          ms.map(function(m){ return '<div class="sup-msg '+m.sender+'" style="max-width:100%;margin-bottom:6px;">'+(m.topic&&m.sender==='user'?'<small style="opacity:.7">'+escHtml(m.topic)+'</small><br>':'')+escHtml(m.body)+'</div>'; }).join('')+
+          '<textarea id="sa-'+uid+'" placeholder="'+escHtml(t('chair_reply'))+'"></textarea>'+
+          '<div style="margin-top:8px;"><button class="btn btn-gold" onclick="adminSupportReply(\''+uid+'\')">'+t('chair_send')+'</button></div></div>';
+      }).join('') : '<p style="color:var(--ink-faint);">'+t('chair_none')+'</p>');
+  });
+}
+function adminSupportReply(uid){
+  var v = document.getElementById('sa-'+uid).value.trim(); if(!v) return;
+  sb.from('support_messages').insert({ user_id: uid, sender: 'admin', body: v }).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderAdminSupport();
+  });
+}
+
+/* --- Таныс бол --- */
+function loadMeet(){
+  var el = document.getElementById('meetList'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  sbGet('instagram_posts?select=*&is_meet=eq.true&order=created_at.desc').then(function(rows){
+    el.innerHTML = rows.length ? rows.map(igCardHtml).join('') : '<p style="color:var(--ink-faint);">'+t('meet_empty')+'</p>';
+    processIgEmbeds();
+  }).catch(function(){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('meet_empty')+'</p>'; });
+}
+
+/* --- басты бет: орындалған іс-шаралар жолағы, цитаталар --- */
+var TICK_SEC = 1.6; // бір іс-шараға кететін секунд (азайтса — жылдамырақ)
+function loadTicker(){
+  var sec = document.getElementById('tickSec'), tr = document.getElementById('tickTrack'); if(!sec || !tr) return;
+  sbGet('events?select=title,event_date&status=eq.done&order=event_date.desc').then(function(rows){
+    var y = String(new Date().getFullYear());
+    var cur = rows.filter(function(r){ return String(r.event_date||'').slice(0,4) === y; });
+    if(cur.length) rows = cur;
+    if(!rows.length){ sec.classList.add('hidden'); return; }
+    sec.classList.remove('hidden');
+    var items = rows.map(function(r){ return '<span class="tick-item">✅ '+escHtml(r.title)+'</span>'; }).join('');
+    var m = Math.max(1, Math.ceil(6 / rows.length)), half = '';
+    for(var i=0;i<m;i++) half += items;
+    tr.innerHTML = half + half;
+    tr.style.setProperty('--tick-dur', Math.max(14, rows.length * m * TICK_SEC) + 's');
+  }).catch(function(){ sec.classList.add('hidden'); });
+}
+function renderQuotes(){
+  var g = document.getElementById('quotesGrid'); if(!g) return;
+  var h = '';
+  for(var i=1;i<=6;i++){
+    var n = t('q'+i+'n'), r = t('q'+i+'r');
+    h += '<div class="quote"><p>«'+escHtml(t('q'+i+'t'))+'»</p>'+(n ? '<b>'+escHtml(n)+'</b>' : '')+'<span>'+escHtml(r)+'</span></div>';
+  }
+  g.innerHTML = h;
+}
+
+/* --- Instagram посттары: «Таныс бол» белгісі --- */
+function renderAdminIgPosts(){
+  var box=document.getElementById('adminIgPosts'); if(!box) return;
+  box.innerHTML='<div class="igp-adm"><h3>'+t('igp_admin')+'</h3><div class="row"><input id="igpUrl" placeholder="'+t('igp_ph')+'"><button class="btn btn-gold" onclick="addIgPost()">'+t('igp_add')+'</button></div>'+
+    '<label class="reg-check"><input type="checkbox" id="igpMeet"> <span>'+t('igp_meet')+'</span></label>'+
+    '<div id="igpMsg" style="color:#c0392b;font-size:12.5px;"></div><div id="igpList"></div></div>';
+  sbGet('instagram_posts?select=*&order=created_at.desc').then(function(rows){
+    document.getElementById('igpList').innerHTML = rows.map(function(r){
+      return '<div class="igp-li"><span>'+(r.is_meet?'🎬 ':'')+'<a href="'+escHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+escHtml(r.url)+'</a></span><span style="display:flex;gap:6px;flex-shrink:0;">'+
+        '<button class="btn" onclick="toggleIgMeet(\''+r.id+'\','+(r.is_meet?'false':'true')+')">'+t(r.is_meet?'igp_meet_off':'igp_meet_add')+'</button>'+
+        '<button class="btn" onclick="delIgPost(\''+r.id+'\')">'+t('igp_del')+'</button></span></div>';
+    }).join('');
+  }).catch(function(){});
+}
+function addIgPost(){
+  var u = igPostUrl(document.getElementById('igpUrl').value), msg=document.getElementById('igpMsg');
+  if(!u){ msg.textContent=t('igp_bad'); return; }
+  var meet = !!document.getElementById('igpMeet').checked;
+  sb.from('instagram_posts').insert(meet ? {url:u, is_meet:true} : {url:u}).then(function(r){
+    if(r.error){ msg.textContent=r.error.message; return; }
+    renderAdminIgPosts();
+  });
+}
+function toggleIgMeet(id, on){
+  sb.from('instagram_posts').update({is_meet:on}).eq('id',id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderAdminIgPosts();
+  });
+}
+
 /* ===================== boot ===================== */
 applyI18n();
 nav('home');
@@ -4748,6 +5288,7 @@ loadQuiz();
 initCarousel();
 drawFooterQRs();
 loadMyState();
+renderQuotes(); renderRegSkills(); loadTicker();
 
 </script>
 <script>
