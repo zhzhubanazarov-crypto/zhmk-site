@@ -606,6 +606,10 @@
   .quotes-sec h2{font-size:20px;margin:0 0 12px;}
   .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
   .quote{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 18px;}
+  .quote{display:flex;gap:16px;align-items:flex-start;}
+  .q-av{position:relative;overflow:hidden;flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:var(--gold-soft);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;}
+  .q-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .q-tx{min-width:0;}
   .quote p{margin:0 0 10px;font-size:14.5px;line-height:1.55;font-style:italic;}
   .quote b{display:block;font-size:13px;}
   .quote span{font-size:12px;color:var(--ink-faint);}
@@ -622,15 +626,15 @@
   .lt-card .ans{background:var(--gold-soft);border-radius:10px;padding:10px 12px;}
   .lt-card textarea,.sup-in textarea{width:100%;font:inherit;font-size:13.5px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);min-height:70px;resize:vertical;}
   .lt-badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:100px;background:var(--paper);border:1px solid var(--line);}
-  .sup-fab{position:fixed;right:16px;bottom:16px;z-index:40;border:none;border-radius:100px;background:var(--blue);color:#fff;font:inherit;font-weight:600;font-size:13.5px;padding:12px 18px;box-shadow:0 6px 20px rgba(15,47,92,.35);cursor:pointer;}
-  .sup-panel{position:fixed;right:16px;bottom:70px;z-index:41;width:340px;max-width:calc(100vw - 32px);max-height:70vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .sup-fab{position:fixed;right:16px;bottom:16px;z-index:40;border:none;border-radius:100px;background:var(--blue);color:#fff;font:inherit;font-weight:700;font-size:18px;padding:16px 26px;box-shadow:0 6px 20px rgba(15,47,92,.35);cursor:pointer;}
+  .sup-panel{position:fixed;right:16px;bottom:86px;z-index:41;width:380px;max-width:calc(100vw - 32px);max-height:70vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;}
   .sup-panel.open{display:flex;}
-  .sup-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--blue-deep);color:#fff;font-weight:600;font-size:14px;}
+  .sup-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--blue-deep);color:#fff;font-weight:700;font-size:17px;}
   .sup-head button{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;}
   .sup-body{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px;}
-  .sup-topic{font:inherit;font-size:13.5px;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);cursor:pointer;}
+  .sup-topic{font:inherit;font-size:15.5px;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);cursor:pointer;}
   .sup-topic:hover{border-color:var(--blue);}
-  .sup-msg{max-width:88%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.45;white-space:pre-wrap;}
+  .sup-msg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:15px;line-height:1.45;white-space:pre-wrap;}
   .sup-msg.user{align-self:flex-end;background:var(--blue);color:#fff;}
   .sup-msg.admin{align-self:flex-start;background:var(--gold-soft);color:var(--ink);}
   .sup-in{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);}
@@ -638,7 +642,7 @@
   .meet-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
   .achv{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55;}
   @media (max-width:980px){.quotes{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:640px){.quotes{grid-template-columns:1fr;}.tick-sec,.quotes-sec{margin:34px 0 0;}.meet-list{grid-template-columns:1fr;}.sup-fab{bottom:12px;right:12px;}}
+  @media (max-width:640px){.quotes{grid-template-columns:1fr;}.tick-sec,.quotes-sec{margin:34px 0 0;}.meet-list{grid-template-columns:1fr;}.sup-fab{bottom:12px;right:12px;font-size:17px;padding:14px 22px;}}
 </style>
 </head>
 <body>
@@ -2900,12 +2904,12 @@ kk:{
   meet_empty:'Бейнелер жақында қосылады.',
   tick_title:'Біздің осы жылы атқарған шаруаларымыз',
   quotes_title:'Жас мамандар не дейді',
-  q1t:'Жас мамандардың өмірін көрсету — бір-бірімізді жақынырақ тануға көмектеседі.', q1n:'Жаңбырбаев Қуандық', q1r:'Мобилограф',
-  q2t:'Әр теңгені дұрыс пайдалану — компанияның болашағына салған үлесіміз.', q2n:'Бегенішов Мұрат', q2r:'Экономист',
-  q3t:'Кез келген жұмыс заң аясында жүргенде ғана сенімді нәтиже береді.', q3n:'Әсем', q3r:'Заңгер',
-  q4t:'Біз үшін мұнайдың әр тамшысы маңызды.', q4n:'', q4r:'Өндіру операторы',
-  q5t:'Жер астын жақсы түсінген сайын, болашақты нақтырақ көреміз.', q5n:'', q5r:'Геолог',
-  q6t:'Бір команда болып жұмыс істесек, кез келген міндет орындалады.', q6n:'', q6r:'Инженер',
+  q1t:'Жас мамандардың өмірін көрсету — бір-бірімізді жақынырақ тануға көмектеседі.', q1n:'Жаңбырбаев Қуандық', q1r:'Техник-геолог · мобилограф',
+  q2t:'Компанияның әр қаражатын үнемдеп, дұрыс пайдалану — болашаққа салған үлесіміз.', q2n:'Бегенішов Мұрат', q2r:'Экономист',
+  q3t:'Кез келген жұмыс заң аясында жүргенде ғана сенімді нәтиже береді.', q3n:'Усенова Әсем', q3r:'Аға заң кеңесшісі',
+  q4t:'Біз үшін мұнайдың әр тамшысы маңызды.', q4n:'Анебаев Еркін', q4r:'Мұнай және газ өндіру операторы',
+  q5t:'Табиғатты сақтау — болашаққа деген біздің жауапкершілігіміз.', q5n:'Кайроллаева Нұршат', q5r:'Қоршаған ортаны қорғау инженері',
+  q6t:'Ұңғыдағы жұмыс — бір команданың келісімді еңбегі.', q6n:'Байтұрған Айдар', q6r:'Ұңғыларды күрделі жөндеу бұрғышы көмекшісі',
   foot_links:'Пайдалы сілтемелер', foot_letter:'Төрағаға хат жазу', foot_bracket:'Турнир кестесі', foot_support:'Қолдау қызметі',
   lt_letter:'Хат', lt_question:'Сұрақ', lt_proposal:'Ұсыныс', lt_subj_ph:'Тақырып', lt_body_ph:'Хатыңызды осында жазыңыз…',
   lt_empty:'Хат мәтінін жазыңыз', lt_sent:'Жіберілді. Төраға жауап берсе, «Менің профилім» бетінде көресіз.',
@@ -4960,6 +4964,7 @@ function loadData(){
     var realIdeas = ideas.filter(function(x){ return !x.example; }).length;
     setStat('statIdeas', realIdeas >= IDEA_STAT_MIN ? realIdeas : '–');
     renderPeople();
+    renderQuotes();
     renderCatChips();
     renderIdeas();
     if(currentUserId) renderProfile(currentUserId);
@@ -5238,12 +5243,15 @@ function loadTicker(){
     tr.style.setProperty('--tick-dur', Math.max(14, rows.length * m * TICK_SEC) + 's');
   }).catch(function(){ sec.classList.add('hidden'); });
 }
+var Q_MATCH = ['жаңбырбаев','бегенішов','усенова','анебаев','кайроллаева','байтұрған'];
 function renderQuotes(){
   var g = document.getElementById('quotesGrid'); if(!g) return;
   var h = '';
   for(var i=1;i<=6;i++){
-    var n = t('q'+i+'n'), r = t('q'+i+'r');
-    h += '<div class="quote"><p>«'+escHtml(t('q'+i+'t'))+'»</p>'+(n ? '<b>'+escHtml(n)+'</b>' : '')+'<span>'+escHtml(r)+'</span></div>';
+    var n = t('q'+i+'n'), r = t('q'+i+'r'), key = Q_MATCH[i-1], pp = null;
+    if(typeof people !== 'undefined') pp = people.find(function(p){ return String(p.name||'').toLowerCase().indexOf(key) === 0; });
+    var ini = (n || r || '?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+    h += '<div class="quote"><div class="q-av">'+escHtml(ini)+photoImg(pp && pp.photo)+'</div><div class="q-tx"><p>«'+escHtml(t('q'+i+'t'))+'»</p>'+(n ? '<b>'+escHtml(n)+'</b>' : '')+'<span>'+escHtml(r)+'</span></div></div>';
   }
   g.innerHTML = h;
 }
