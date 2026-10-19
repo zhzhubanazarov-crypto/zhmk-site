@@ -643,6 +643,28 @@
   .achv{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55;}
   @media (max-width:980px){.quotes{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:640px){.quotes{grid-template-columns:1fr;}.tick-sec,.quotes-sec{margin:34px 0 0;}.meet-list{grid-template-columns:1fr;}.sup-fab{bottom:12px;right:12px;font-size:17px;padding:14px 22px;}}
+  /* v27: тең өлшем, кіші тақырып, үлкен қолдау */
+  .hero h1{font-size:clamp(26px,3.4vw,40px);}
+  @media (min-width:861px){
+    .hero{align-items:stretch;grid-template-columns:1fr 1fr;}
+    .hero>div:first-child{display:flex;flex-direction:column;justify-content:center;}
+    .car{display:flex;flex-direction:column;}
+    .car-view{flex:1;display:flex;}
+    .car-track{width:100%;}
+    .car-track>.hero-art{min-height:0;}
+    .car-dots{position:absolute;left:0;right:0;bottom:12px;margin:0;}
+    .car-dots button{background:rgba(255,255,255,.55);}
+    .car-dots button.on{background:#fff;}
+    .car .hero-art.cup-card{padding-bottom:44px;}
+  }
+  @media (max-width:860px){.car-dots button{background:#b9c9de;}.car-dots button.on{background:var(--blue);}}
+  .sup-fab{font-size:22px;padding:20px 34px;bottom:20px;right:20px;}
+  .sup-panel{height:min(620px,78vh);max-height:none;width:420px;bottom:104px;right:20px;}
+  .sup-head{font-size:19px;padding:16px 18px;}
+  .sup-topic{font-size:16.5px;padding:14px 14px;}
+  .sup-msg{font-size:16px;}
+  .sup-in textarea{font-size:15.5px;height:48px;min-height:48px;}
+  @media (max-width:640px){.sup-fab{font-size:20px;padding:17px 26px;bottom:14px;right:14px;}.sup-panel{height:76vh;width:calc(100vw - 28px);right:14px;bottom:88px;}}
 </style>
 </head>
 <body>
@@ -2892,7 +2914,7 @@ var I18N_EXTRA = {
 
 var I18N_NEW = {
 kk:{
-  nav_ideas:'Жобалар', ideas_title:'Жас мамандар ұсынған жобалары',
+  idea_example:'📌 Мысал үшін салынған жоба', nav_ideas:'Жобалар', ideas_title:'Жас мамандар ұсынған жобалары',
   page_ideas_desc:'Жас мамандар ұсынған барлық жобалардың архиві.',
   feat_ideas_desc:'Жас мамандар ұсынған жобалардың архиві.',
   stat_ideas:'жоба',
@@ -2932,7 +2954,7 @@ kk:{
   prof_all:'Басқа'
 },
 ru:{
-  nav_ideas:'Проекты', ideas_title:'Проекты, предложенные молодыми специалистами',
+  idea_example:'📌 Пример проекта для демонстрации', nav_ideas:'Проекты', ideas_title:'Проекты, предложенные молодыми специалистами',
   page_ideas_desc:'Архив всех проектов, предложенных молодыми специалистами.',
   feat_ideas_desc:'Архив проектов, предложенных молодыми специалистами.',
   stat_ideas:'проектов',
@@ -2963,7 +2985,7 @@ ru:{
   adm_support:'Служба поддержки — сообщения', h_achv:'🏆 Достижения', me_f_achv:'Мои достижения (по одному в строке)', prof_all:'Другое'
 },
 en:{
-  nav_ideas:'Projects', ideas_title:'Projects proposed by young specialists',
+  idea_example:'📌 Example project for demonstration', nav_ideas:'Projects', ideas_title:'Projects proposed by young specialists',
   page_ideas_desc:'Archive of all projects proposed by young specialists.',
   feat_ideas_desc:'Archive of projects proposed by young specialists.',
   stat_ideas:'projects',
@@ -4578,7 +4600,6 @@ function renderIdeas(){
       (i.example ? '<div class="idea-example-tag">'+t('idea_example')+'</div>' : '')+
       '<div class="idea-top">'+
         '<h3 class="idea-title">'+escHtml(i.title)+'</h3>'+
-        '<span class="status-pill '+st.cls+'">'+st.label+'</span>'+
       '</div>'+
       '<div class="idea-meta">'+
         (author ? '<span class="idea-author" onclick="nav(\'profile\',\''+i.author+'\')">'+escHtml(author.name)+'</span>' : '<span>'+escHtml(i.authorName||'—')+'</span>')+
