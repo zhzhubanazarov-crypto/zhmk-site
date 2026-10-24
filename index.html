@@ -692,6 +692,17 @@
   .bday .q-av{flex:0 0 64px;width:64px;height:64px;font-size:20px;}
   .bday b{display:block;font-size:16px;}
   .bday span{font-size:13px;color:var(--ink-soft);}
+  .inst-box{margin:14px 8px 0;background:linear-gradient(135deg,#0f2d5c,#1a4a8a);color:#fff;border-radius:16px;padding:14px 18px;}
+  .inst-box summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:10px;}
+  .inst-box summary::-webkit-details-marker{display:none;}
+  .inst-box summary small{font-weight:400;opacity:.85;margin-left:auto;font-size:13px;}
+  .inst-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .inst-col{background:#fff;color:var(--ink);border-radius:12px;padding:12px 16px;}
+  .inst-col h4{margin:0 0 6px;color:#0f2d5c;font-size:16px;}
+  .inst-col ol{margin:0;padding-left:20px;font-size:14px;line-height:1.5;}
+  .inst-col .w{margin-top:8px;font-size:12.5px;background:var(--gold-soft);border-radius:8px;padding:6px 10px;}
+  .inst-x{display:block;margin:12px 0 0 auto;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:8px;padding:5px 12px;cursor:pointer;font:inherit;font-size:13px;}
+  @media (max-width:640px){.inst-box{margin:14px 0 0;}.inst-cols{grid-template-columns:1fr;}}
   .push-banner{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--gold-soft);border:1px solid var(--gold);border-radius:14px;padding:12px 16px;margin:14px 8px 0;font-size:14px;}
   .push-banner span{flex:1 1 220px;}
   .push-box .pst{font-size:13.5px;margin:0 0 10px;}
@@ -763,6 +774,21 @@
 
   <!-- ============ HOME ============ -->
   <section id="view-home">
+    <details class="inst-box hidden" id="instBox">
+      <summary>📲 <span data-i18n="inst_title">Қосымшаны телефонға орнату</span><small data-i18n="inst_tap">басыңыз</small></summary>
+      <div class="inst-cols">
+        <div class="inst-col"><h4>🍎 iPhone</h4><ol>
+          <li data-i18n-html="inst_i1"></li><li data-i18n-html="inst_i2"></li><li data-i18n-html="inst_i3"></li><li data-i18n-html="inst_i4"></li></ol>
+          <div class="w" data-i18n="inst_iw">⚠️ Тек Safari арқылы жұмыс істейді</div></div>
+        <div class="inst-col"><h4>🤖 Android</h4><ol>
+          <li data-i18n-html="inst_a1"></li><li data-i18n-html="inst_a2"></li><li data-i18n-html="inst_a3"></li><li data-i18n-html="inst_a4"></li></ol></div>
+      </div>
+    </details>
+    <div class="push-banner prof-banner hidden" id="profBanner">
+      <span data-i18n="prof_banner">📝 Өзіңіз туралы деректі толтырып кетіңіз: сурет, білім, қабілеттер. Осы уақытқа дейін қорғаған жобаларыңыз болса, жазып кетіңіз.</span>
+      <button class="btn btn-gold" onclick="nav('me')" data-i18n="prof_banner_btn">Толтыру</button>
+      <button class="btn" onclick="dismissProfBanner()" aria-label="✕">✕</button>
+    </div>
     <div class="push-banner hidden" id="pushBanner">
       <span data-i18n="push_banner">🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз</span>
       <button class="btn btn-gold" onclick="enablePush(true)" data-i18n="push_enable">Қосу</button>
@@ -2983,6 +3009,16 @@ var I18N_EXTRA = {
 var I18N_NEW = {
 kk:{
   bday_title:'🎂 Бүгін кімнің туған күні', bday_wish:'Құттықтаймыз! 🎉',
+  prof_banner:'📝 Өзіңіз туралы деректі толтырып кетіңіз: сурет, білім, қабілеттер. Осы уақытқа дейін қорғаған жобаларыңыз болса, жазып кетіңіз.', prof_banner_btn:'Толтыру',
+  inst_title:'Қосымшаны телефонға орнату', inst_tap:'басыңыз', inst_iw:'⚠️ Тек Safari арқылы жұмыс істейді (Chrome-да емес)', inst_hide:'Қайта көрсетпеу',
+  inst_i1:'<b>Safari</b> браузерінде сайтты ашыңыз',
+  inst_i2:'<b>«Бөлісу»</b> (⬆️) батырмасын басыңыз',
+  inst_i3:'<b>«На экран Домой»</b> → <b>«Добавить»</b>',
+  inst_i4:'Қосымшаны экрандағы белгішеден ашыңыз',
+  inst_a1:'<b>Chrome</b> браузерінде сайтты ашыңыз',
+  inst_a2:'<b>⋮</b> (үш нүкте) мәзірін басыңыз',
+  inst_a3:'<b>«Қосымшаны орнату»</b> / <b>«Добавить на гл. экран»</b>',
+  inst_a4:'<b>«Орнату»</b> басыңыз — белгіше экранда пайда болады',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3037,6 +3073,16 @@ kk:{
 },
 ru:{
   bday_title:'🎂 Сегодня день рождения', bday_wish:'Поздравляем! 🎉',
+  prof_banner:'📝 Заполните информацию о себе: фото, образование, навыки. Если вы уже защищали проекты — добавьте их.', prof_banner_btn:'Заполнить',
+  inst_title:'Установка приложения на телефон', inst_tap:'нажмите', inst_iw:'⚠️ Работает только через Safari (не Chrome)', inst_hide:'Больше не показывать',
+  inst_i1:'Откройте сайт в <b>Safari</b>',
+  inst_i2:'Нажмите <b>«Поделиться»</b> (⬆️)',
+  inst_i3:'<b>«На экран «Домой»»</b> → <b>«Добавить»</b>',
+  inst_i4:'Открывайте приложение с иконки на экране',
+  inst_a1:'Откройте сайт в <b>Chrome</b>',
+  inst_a2:'Нажмите меню <b>⋮</b> (три точки)',
+  inst_a3:'<b>«Установить приложение»</b> / <b>«Добавить на гл. экран»</b>',
+  inst_a4:'Нажмите <b>«Установить»</b> — иконка появится на экране',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3082,6 +3128,16 @@ ru:{
 },
 en:{
   bday_title:'🎂 Birthdays today', bday_wish:'Congratulations! 🎉',
+  prof_banner:'📝 Please fill in your profile: photo, education, skills. If you have defended projects so far, add them.', prof_banner_btn:'Fill in',
+  inst_title:'Install the app on your phone', inst_tap:'tap', inst_iw:'⚠️ Works in Safari only (not Chrome)', inst_hide:"Don't show again",
+  inst_i1:'Open the site in <b>Safari</b>',
+  inst_i2:'Tap <b>Share</b> (⬆️)',
+  inst_i3:'<b>Add to Home Screen</b> → <b>Add</b>',
+  inst_i4:'Open the app from the home-screen icon',
+  inst_a1:'Open the site in <b>Chrome</b>',
+  inst_a2:'Tap the <b>⋮</b> menu',
+  inst_a3:'<b>Install app</b> / <b>Add to Home screen</b>',
+  inst_a4:'Tap <b>Install</b> — the icon appears on your screen',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -3179,6 +3235,9 @@ function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     el.textContent = t(el.getAttribute('data-i18n'));
   });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
     el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
   });
@@ -3251,7 +3310,7 @@ function refreshAuthUI(){
 function loadMyState(){
   return sb.auth.getUser().then(function(res){
     authUser = (res.data && res.data.user) || null;
-    if(!authUser){ myProfile = null; isAdmin = false; isChairman = false; myVotes = {}; refreshAuthUI(); return; }
+    if(!authUser){ myProfile = null; isAdmin = false; isChairman = false; myVotes = {}; refreshAuthUI(); updateProfBanner(); return; }
     return Promise.all([
       sb.rpc('my_profile').then(function(r){
         if(r.error){ return sb.from('profiles').select('*').eq('id', authUser.id).maybeSingle(); }
@@ -3269,6 +3328,7 @@ function loadMyState(){
       myVotes = {};
       ((res2[2] && res2[2].data) || []).forEach(function(r){ myVotes[r.idea_id] = r.vote_type; });
       refreshAuthUI();
+      updateProfBanner();
       syncPush();
       renderIdeas();
       var meV = document.getElementById('view-me');
@@ -5580,6 +5640,25 @@ function updatePushBanner(){
   try{ var d = Number(localStorage.getItem('jmk_push_dismiss')||0); if(d && Date.now()-d < 7*86400000) show = false; }catch(e){}
   b.classList.toggle('hidden', !show);
 }
+function updateInst(){
+  var b=document.getElementById('instBox'); if(!b) return;
+  b.classList.toggle('hidden', isStandalone());
+}
+function dismissProfBanner(){
+  try{ localStorage.setItem('jmk_prof_dismiss', String(Date.now())); }catch(e){}
+  var b = document.getElementById('profBanner'); if(b) b.classList.add('hidden');
+}
+function updateProfBanner(){
+  var b = document.getElementById('profBanner'); if(!b) return;
+  b.classList.add('hidden');
+  if(!authUser || !myProfile || myProfile.approval_status !== 'approved') return;
+  try{ var d = Number(localStorage.getItem('jmk_prof_dismiss')||0); if(d && Date.now()-d < 3*86400000) return; }catch(e){}
+  var miss = !myProfile.photo_url || !myProfile.education;
+  if(miss){ b.classList.remove('hidden'); return; }
+  sb.from('profile_projects').select('id',{count:'exact',head:true}).eq('profile_id', myProfile.id).then(function(r){
+    if(!r.error && !r.count) b.classList.remove('hidden');
+  }, function(){});
+}
 function renderPushBox(){
   var h = document.getElementById('pushBoxHolder'); if(!h) return;
   var inner;
@@ -5632,7 +5711,7 @@ loadQuiz();
 initCarousel();
 drawFooterQRs();
 loadMyState();
-renderQuotes(); renderRegSkills(); loadTicker(); loadBirthdays(); updatePushBanner(); syncPush();
+renderQuotes(); renderRegSkills(); loadTicker(); loadBirthdays(); updatePushBanner(); updateInst(); syncPush();
 
 </script>
 <script>
