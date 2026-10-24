@@ -665,6 +665,39 @@
   .sup-msg{font-size:16px;}
   .sup-in textarea{font-size:15.5px;height:48px;min-height:48px;}
   @media (max-width:640px){.sup-fab{font-size:20px;padding:17px 26px;bottom:14px;right:14px;}.sup-panel{height:76vh;width:calc(100vw - 28px);right:14px;bottom:88px;}}
+  /* perks */
+  .perks-src{margin:34px 0 10px;}
+  .perks-src h3{font-size:17px;margin:0 0 6px;}
+  .perks-src p{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;}
+  .perks-src img{width:100%;max-width:760px;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow-lg);}
+  .perks-sort{font:inherit;font-size:13px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);}
+  .perks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .perk{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;display:flex;gap:12px;align-items:flex-start;}
+  .perk-pct{flex:0 0 auto;min-width:58px;text-align:center;background:var(--blue);color:#fff;border-radius:12px;padding:10px 6px;font-weight:700;font-size:17px;line-height:1.15;}
+  .perk-pct.hi{background:var(--gold);color:var(--blue-deep);}
+  .perk-pct small{display:block;font-size:10.5px;font-weight:500;opacity:.85;}
+  .perk-tx{min-width:0;}
+  .perk h3{margin:0 0 3px;font-size:15.5px;}
+  .perk .pd{font-size:12.5px;color:var(--ink-soft);margin:0 0 4px;}
+  .perk .pa{font-size:12.5px;margin:0 0 3px;}
+  .perk .pn{font-size:12px;color:var(--ink-faint);margin:4px 0 0;}
+  .perk a{color:var(--blue);font-size:13px;font-weight:600;text-decoration:none;}
+  @media (max-width:980px){.perks-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.perks-grid{grid-template-columns:1fr;}}
+  /* birthdays + push */
+  .bday-sec{margin:44px 8px 0;}
+  .bday-sec h2{font-size:20px;margin:0 0 12px;}
+  .bday-grid{display:flex;flex-wrap:wrap;gap:14px;}
+  .bday{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--gold-soft),var(--card));border:1px solid var(--gold);border-radius:16px;padding:14px 20px 14px 14px;}
+  .bday .q-av{flex:0 0 64px;width:64px;height:64px;font-size:20px;}
+  .bday b{display:block;font-size:16px;}
+  .bday span{font-size:13px;color:var(--ink-soft);}
+  .push-banner{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--gold-soft);border:1px solid var(--gold);border-radius:14px;padding:12px 16px;margin:14px 8px 0;font-size:14px;}
+  .push-banner span{flex:1 1 220px;}
+  .push-box .pst{font-size:13.5px;margin:0 0 10px;}
+  .adm-push input,.adm-push textarea,.adm-push select{width:100%;font:inherit;font-size:13.5px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);margin-bottom:8px;}
+  .adm-push textarea{min-height:70px;}
+  @media (max-width:640px){.bday-sec{margin:34px 0 0;}.push-banner{margin:14px 0 0;}}
 </style>
 </head>
 <body>
@@ -686,6 +719,7 @@
     <button data-route="history" onclick="nav('history')" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
     <button data-route="meet" onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="perks" onclick="nav('perks')" data-i18n="nav_perks">Жеңілдіктер</button>
     <button data-route="chair" onclick="nav('chair')" data-i18n="nav_chair" class="hidden" id="navChairTop">Төраға</button>
     <button data-route="admin" onclick="nav('admin')" data-i18n="nav_admin" class="hidden" id="navAdminTop">Админ</button>
   </nav>
@@ -713,6 +747,7 @@
     <button data-route="history" onclick="nav('history');closeDrawer()" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed');closeDrawer()" data-i18n="nav_feed">NE ANGIME</button>
     <button data-route="meet" onclick="nav('meet');closeDrawer()" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="perks" onclick="nav('perks');closeDrawer()" data-i18n="nav_perks">Жеңілдіктер</button>
     <button data-route="chair" onclick="nav('chair');closeDrawer()" data-i18n="nav_chair" class="hidden" id="navChairDrawer">Төраға</button>
     <button data-route="admin" onclick="nav('admin');closeDrawer()" data-i18n="nav_admin" class="hidden" id="navAdminDrawer">Админ</button>
   </div>
@@ -728,6 +763,11 @@
 
   <!-- ============ HOME ============ -->
   <section id="view-home">
+    <div class="push-banner hidden" id="pushBanner">
+      <span data-i18n="push_banner">🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз</span>
+      <button class="btn btn-gold" onclick="enablePush(true)" data-i18n="push_enable">Қосу</button>
+      <button class="btn" onclick="dismissPushBanner()" aria-label="✕">✕</button>
+    </div>
     <div class="hero">
       <div>
         <p class="eyebrow" data-i18n="hero_eyebrow">АҚ Қаражанбасмұнай · Жас мамандар кеңесі</p>
@@ -780,6 +820,11 @@
         <button class="car-arrow next" onclick="carGo(carIdx+1,true)" aria-label="›">›</button>
         <div class="car-dots" id="carDots"></div>
       </div>
+    </div>
+
+    <div class="bday-sec hidden" style="margin-top:0;margin-bottom:28px;" id="bdaySec">
+      <h2 data-i18n="bday_title">🎂 Бүгін кімнің туған күні</h2>
+      <div class="bday-grid" id="bdayGrid"></div>
     </div>
 
     <div class="team-banner">
@@ -1044,6 +1089,27 @@
     <div class="meet-list" id="meetList"></div>
   </section>
 
+  <!-- ============ PERKS ============ -->
+  <section id="view-perks" class="hidden">
+    <div class="page-head">
+      <div>
+        <h2 data-i18n="perks_title">ҚБМ қызметкерлеріне арналған жеңілдіктер</h2>
+        <p data-i18n="perks_desc">Серіктес орындардағы жеңілдіктер. Шарттарын сатып алар алдында орынның өзінен нақтылап алыңыз.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="search-box"><span>🔍</span><input id="perksSearch" data-i18n-ph="perks_search" placeholder="Атауы немесе мекенжайы бойынша іздеу…" oninput="renderPerks()"></div>
+      <select id="perksSort" class="perks-sort" onchange="renderPerks()"></select>
+    </div>
+    <div class="chip-row" id="perksChips" style="margin-bottom:18px;"></div>
+    <div class="perks-grid" id="perksGrid"></div>
+    <div class="perks-src">
+      <h3 data-i18n="perks_src_title">Жеңілдіктер тізімі (түпнұсқа сурет)</h3>
+      <p data-i18n="perks_src_note">Жоғарыдағы барлық жеңілдіктер осы суреттен алынды. Суретті басып, үлкейтіп көруге болады.</p>
+      <a href="perks-list.jpg" target="_blank" rel="noopener"><img src="perks-list.jpg" alt="ҚБМ қызметкерлеріне арналған жеңілдіктер" loading="lazy"></a>
+    </div>
+  </section>
+
   <!-- ============ CHAIR PANEL ============ -->
   <section id="view-chair" class="hidden">
     <div class="page-head">
@@ -1071,6 +1137,7 @@
     <div id="adminEdits"></div>
     <div id="adminIgPosts"></div>
     <div id="adminSupport"></div>
+    <div id="adminPush"></div>
     <div id="adminCup"></div>
     <div class="page-head" style="margin-top:34px;"><div><h2 id="adminQuizH">КБМ QUIZ — баптаулар</h2></div></div>
     <div id="adminQuiz"></div>
@@ -1220,6 +1287,7 @@
       <button onclick="openLetter('letter')" data-i18n="foot_letter">Төрағаға хат жазу</button>
       <button onclick="nav('cup')" data-i18n="foot_bracket">Турнир кестесі</button>
       <button onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
+      <button onclick="nav('perks')" data-i18n="nav_perks">Жеңілдіктер</button>
       <button onclick="nav('qr')" data-i18n="qr_foot">QR код</button>
       <button onclick="toggleSupport()" data-i18n="foot_support">Қолдау қызметі</button>
     </div>
@@ -2914,6 +2982,20 @@ var I18N_EXTRA = {
 
 var I18N_NEW = {
 kk:{
+  bday_title:'🎂 Бүгін кімнің туған күні', bday_wish:'Құттықтаймыз! 🎉',
+  push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
+  push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
+  push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
+  push_ios:'iPhone-да хабарландыру тек сайтты «Басты экранға» қосқаннан кейін жұмыс істейді: Safari → «Бөлісу» → «На экран Домой». Қосқан соң қолданбаны сол иконкадан ашыңыз.',
+  push_unsup:'Бұл құрылғы мен браузер хабарландыруларды қолдамайды.', push_ok:'Хабарландырулар қосылды ✅', push_err:'Қосу мүмкін болмады: ',
+  adm_push:'🔔 Хабарландыру жіберу', adm_push_title:'Тақырып', adm_push_body:'Мәтін', adm_push_url:'Сілтеме (міндетті емес)',
+  adm_push_all:'Барлық жазылғандарға', adm_push_inc:'Профилін толтырмағандарға', adm_push_send:'Жіберу', adm_push_test:'Өзіме сынақ жіберу',
+  adm_push_res:'Жіберілді: ', adm_push_hint:'Жаңа жас маман қосылғанда, туған күні (күн сайын 09:00) және дүйсенбі сайын профиль ескертуі автоматты түрде жіберіледі.',
+  perks_src_title:'Жеңілдіктер тізімі (түпнұсқа сурет)', perks_src_note:'Жоғарыдағы барлық жеңілдіктер осы суреттен алынды. Суретті басып, үлкейтіп көруге болады.',
+  nav_perks:'Жеңілдіктер', perks_title:'ҚБМ қызметкерлеріне арналған жеңілдіктер',
+  perks_desc:'Серіктес орындардағы жеңілдіктер. Шарттарын сатып алар алдында орынның өзінен нақтылап алыңыз.',
+  perks_search:'Атауы немесе мекенжайы бойынша іздеу…', perks_all:'Барлығы', perks_sort_pct:'Жеңілдік көлемі бойынша', perks_sort_name:'Аты бойынша (А–Я)',
+  pc_food:'🍽️ Тамақ', pc_rest:'🌴 Демалыс және денсаулық', pc_edu:'🎓 Білім', pc_shop:'👗 Киім және дүкен', pc_auto:'🚗 Көлік', pc_home:'🏠 Үй және жиһаз', perks_none:'Ештеңе табылмады.',
   idea_example:'📌 Мысал үшін салынған жоба', nav_ideas:'Жобалар', ideas_title:'Жас мамандар ұсынған жобалары',
   page_ideas_desc:'Жас мамандар ұсынған барлық жобалардың архиві.',
   feat_ideas_desc:'Жас мамандар ұсынған жобалардың архиві.',
@@ -2954,6 +3036,20 @@ kk:{
   prof_all:'Басқа'
 },
 ru:{
+  bday_title:'🎂 Сегодня день рождения', bday_wish:'Поздравляем! 🎉',
+  push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
+  push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
+  push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
+  push_ios:'На iPhone уведомления работают только после добавления сайта на экран «Домой»: Safari → «Поделиться» → «На экран Домой». Затем открывайте приложение с иконки.',
+  push_unsup:'Это устройство или браузер не поддерживает уведомления.', push_ok:'Уведомления включены ✅', push_err:'Не удалось включить: ',
+  adm_push:'🔔 Отправить уведомление', adm_push_title:'Заголовок', adm_push_body:'Текст', adm_push_url:'Ссылка (необязательно)',
+  adm_push_all:'Всем подписанным', adm_push_inc:'Тем, кто не заполнил профиль', adm_push_send:'Отправить', adm_push_test:'Отправить тест себе',
+  adm_push_res:'Отправлено: ', adm_push_hint:'Автоматически уходят: новый молодой специалист, дни рождения (ежедневно в 09:00) и напоминание заполнить профиль по понедельникам.',
+  perks_src_title:'Список скидок (оригинал)', perks_src_note:'Все скидки выше взяты из этого изображения. Нажмите на картинку, чтобы увеличить.',
+  nav_perks:'Скидки', perks_title:'Скидки для работников КБМ',
+  perks_desc:'Скидки в заведениях-партнёрах. Условия уточняйте у самого заведения перед покупкой.',
+  perks_search:'Поиск по названию или адресу…', perks_all:'Все', perks_sort_pct:'По размеру скидки', perks_sort_name:'По названию (А–Я)',
+  pc_food:'🍽️ Питание', pc_rest:'🌴 Отдых и здоровье', pc_edu:'🎓 Образование', pc_shop:'👗 Одежда и магазины', pc_auto:'🚗 Авто', pc_home:'🏠 Дом и мебель', perks_none:'Ничего не найдено.',
   idea_example:'📌 Пример проекта для демонстрации', nav_ideas:'Проекты', ideas_title:'Проекты, предложенные молодыми специалистами',
   page_ideas_desc:'Архив всех проектов, предложенных молодыми специалистами.',
   feat_ideas_desc:'Архив проектов, предложенных молодыми специалистами.',
@@ -2985,6 +3081,20 @@ ru:{
   adm_support:'Служба поддержки — сообщения', h_achv:'🏆 Достижения', me_f_achv:'Мои достижения (по одному в строке)', prof_all:'Другое'
 },
 en:{
+  bday_title:'🎂 Birthdays today', bday_wish:'Congratulations! 🎉',
+  push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
+  push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
+  push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
+  push_ios:'On iPhone, notifications only work after adding the site to the Home Screen: Safari → Share → Add to Home Screen. Then open the app from its icon.',
+  push_unsup:'This device or browser does not support notifications.', push_ok:'Notifications enabled ✅', push_err:'Could not enable: ',
+  adm_push:'🔔 Send a notification', adm_push_title:'Title', adm_push_body:'Text', adm_push_url:'Link (optional)',
+  adm_push_all:'All subscribers', adm_push_inc:'Those with incomplete profiles', adm_push_send:'Send', adm_push_test:'Send a test to myself',
+  adm_push_res:'Sent: ', adm_push_hint:'Sent automatically: new young specialist, birthdays (daily 09:00) and a Monday reminder to complete the profile.',
+  perks_src_title:'Discount list (original)', perks_src_note:'All discounts above are taken from this image. Click it to enlarge.',
+  nav_perks:'Discounts', perks_title:'Discounts for KBM employees',
+  perks_desc:'Discounts at partner venues. Please confirm the terms with the venue before buying.',
+  perks_search:'Search by name or address…', perks_all:'All', perks_sort_pct:'By discount size', perks_sort_name:'By name (A–Z)',
+  pc_food:'🍽️ Food', pc_rest:'🌴 Leisure & health', pc_edu:'🎓 Education', pc_shop:'👗 Clothes & shops', pc_auto:'🚗 Auto', pc_home:'🏠 Home & furniture', perks_none:'Nothing found.',
   idea_example:'📌 Example project for demonstration', nav_ideas:'Projects', ideas_title:'Projects proposed by young specialists',
   page_ideas_desc:'Archive of all projects proposed by young specialists.',
   feat_ideas_desc:'Archive of projects proposed by young specialists.',
@@ -3087,8 +3197,9 @@ function setLang(lang){
   renderPeople();
   renderIdeas();
   refreshAuthUI();
-  renderQuotes(); renderRegSkills(); renderLetterTabs();
+  renderQuotes(); renderRegSkills(); renderLetterTabs(); renderBirthdays();
   if(supOpen) renderSupport();
+  if(!document.getElementById('view-perks').classList.contains('hidden')) renderPerks();
   if(!document.getElementById('view-meet').classList.contains('hidden')) loadMeet();
   if(!document.getElementById('view-me').classList.contains('hidden')) renderMe();
   renderCupCard(); renderQuizCard();
@@ -3158,6 +3269,7 @@ function loadMyState(){
       myVotes = {};
       ((res2[2] && res2[2].data) || []).forEach(function(r){ myVotes[r.idea_id] = r.vote_type; });
       refreshAuthUI();
+      syncPush();
       renderIdeas();
       var meV = document.getElementById('view-me');
       if(meV && !meV.classList.contains('hidden')) renderMe();
@@ -3302,7 +3414,7 @@ function doLogout(){
 function renderAdminList(){
   var el = document.getElementById('adminList');
   if(!el) return;
-  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts(); renderAdminSupport();
+  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts(); renderAdminSupport(); renderAdminPush();
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   renderAdminEdits();
@@ -4368,6 +4480,7 @@ function nav(route, param){
   if(route==='qr') drawQR();
   if(route==='feed') loadFeed();
   if(route==='meet') loadMeet();
+  if(route==='perks') renderPerks();
   if(route==='chair') renderChair();
   if(route==='events') loadEvents();
   if(route==='history') loadHistory();
@@ -4729,10 +4842,10 @@ function renderMe(){
   html += '<div class="me-box"><h4>'+t('sk_title')+'</h4><div class="me-hint">'+t('sk_hint')+'</div>'+skPickerHtml(p.skills||[], 'meSk')+
     '<div style="margin-top:12px;"><button class="btn btn-gold" onclick="saveMeSkills()">'+t('me_save')+'</button></div><div class="me-msg" id="meSkMsg"></div></div>';
   if(!p.is_specialist && !p.is_alumni) html += '<div id="meJoinHolder"></div>';
-  html += '<div id="meChairHolder"></div><div id="meLettersHolder"></div>';
+  html += '<div id="pushBoxHolder"></div><div id="meChairHolder"></div><div id="meLettersHolder"></div>';
   body.innerHTML = html;
   if(!p.is_specialist && !p.is_alumni) loadMeJoin();
-  renderMeLetters();
+  renderMeLetters(); renderPushBox();
   if(p.edit_granted) loadMeForm();
   loadMeChair();
 }
@@ -5307,6 +5420,203 @@ function toggleIgMeet(id, on){
   });
 }
 
+
+/* ===================== Жеңілдіктер ===================== */
+// [атауы, сипаттама, мекенжай, телефон/инстаграм, ескертпе, жеңілдік(сұрыптау үшін), жеңілдік мәтіні, санат]
+// Деректерді осы жерден өзгертуге болады. Ескерту: Qlever жолы суретте бұлыңғыр еді — тексеру керек.
+var PERKS = [
+ ['The Spot','Ресторан итальянской кухни','17 мкр, 6 дом, ЖК Green Plaza','','',15,'15%','food'],
+ ['Barista','Кофейня','17 мкр, 6 дом, ЖК Green Plaza','','',10,'10%','food'],
+ ['Vanille','Кондитерский бутик с авторским дизайном','14 мкр, ЖК President','','',10,'10%','food'],
+ ['Sweet Krut','Кондитерский','','+7 (707) 754 00 30','',10,'10%','food'],
+ ['Seasons','','17 мкр, 6 дом, ЖК Green Plaza','','',10,'10%','food'],
+ ['Hunter Kitchen','','17 мкр, 26 дом, ЖК BS Residense','','',15,'15%','food'],
+ ['Masari Sushi','Суши','7А мкр, 17 дом, ЖК «Три короны»','@masari_aktau','',10,'10%','food'],
+ ['Кафе Bridge','','17 мкр, 39 дом','@the_bridge_aktau','Накопительная бонусная система',10,'10%','food'],
+ ['Шашлыки от дяди Гадима','','8 мкр / 29 мкр','','',10,'10%','food'],
+ ['Malibu','Lounge Bar & Karaoke','25 мкр, 76/1 зд.','','',10,'10%','food'],
+ ['Sheker','Кафе','17 мкр, 48 зд.','','',10,'10%','food'],
+ ['Coffee City','','17 мкр, 104 дом','','',10,'10%','food'],
+ ['Coffee City Premium','','14 мкр, 58 дом','','',10,'10%','food'],
+ ['Coffee City Premium','','17 мкр, 6 дом','','',10,'10%','food'],
+ ['Alfaro','Сеть столовых','14 мкр, 58 дом; 24 мкр, 24 дом','','',10,'10%','food'],
+ ['Carat Restobar','','14 мкр, 58/1 зд.','+7 (778) 147 22 77','',10,'10%','food'],
+ ['Shiroyama','Ресторан','5А мкр, 4 дом','','Скидка до 18:00 — 20%, после 18:00 до закрытия — 10%',20,'20% / 10%','food'],
+ ['Bazaar Rooms','Лаундж бар','17 мкр, 6 дом, ЖК Green Plaza','','Скидка до 18:00 — 20%, после 18:00 до закрытия — 10%',20,'20% / 10%','food'],
+ ['Rauan Hotel','Отель','28 мкр, 48/1 зд.','8 (702) 226 46 55','',15,'15%','rest'],
+ ['Tetys Blu','Тематический парк','','','',10,'10%','rest'],
+ ['Rai Thai','SPA центр','17 мкр, 6 дом, ЖК Green Plaza','','',10,'10%','rest'],
+ ['Imbir','Тайский массаж','17 мкр, ЖК Florence','','',15,'15%','rest'],
+ ['Aq Qasqa Aktau','Прогулка с лошадью','Ипподром, напротив Автотона','','',20,'20%','rest'],
+ ['Radiant Dental','Стоматология','12 мкр, 37 дом','','',10,'10%','rest'],
+ ['Dental Mangystau','Цифровая стоматология','13 мкр, 10-1; 27 мкр, 60 дом, 6/7','','',20,'20%','rest'],
+ ['Miracle','Цветочная студия','8 мкр, 42 зд.','','',10,'10%','rest'],
+ ['Hardman by Nuraly','Барбершоп','19 мкр, 31 дом, ЖК Асемай','8 (778) 509 95 94','',20,'20%','rest'],
+ ['My Kids','Детский развлекательный центр','ТРК Актау, 2 этаж','','',30,'30%','rest'],
+ ['Samruk','Образовательный центр','2 мкр, 41 дом','8 (778) 099 83 11','',30,'до 30%','edu'],
+ ['IT Easy School','Международная школа программирования','г. Актау, 13 мкр-н, 55 здание (Кораблик)','','',20,'20%','edu'],
+ ['VIP Оптика','Оптика','11 мкр, 28 дом','','',15,'15%','shop'],
+ ['Actual Optic','Оптика','ТРК Актау, 0 этаж','','',20,'20%','shop'],
+ ['Kazakh Yuvelir','Ювелирные изделия','ТРК Актау, 1 этаж','','',5,'5%','shop'],
+ ['Ketroy','Магазин мужской одежды','104 дом, ЖК Асыл Парк','','',15,'15%','shop'],
+ ['Национальная одежда','','ТД «Магаш», 3А корпус','+7 (775) 354 44 78','',10,'10%','shop'],
+ ['Kabi','Женская обувь','Хазар базар, 67 бутик','','',20,'20%','shop'],
+ ['Esei','Детская одежда','28 мкр, 30 дом','','',20,'20%','shop'],
+ ['Детская одежда','','УТК «Олжа», 2 этаж, Блок А, 47 бутик','','',10,'10%','shop'],
+ ['Shogy','Ателье','17 мкр, 23 дом, ЖК Florence','','',10,'10%','shop'],
+ ['Bro Clean Aktau','Химчистка обуви','28 мкр, ТЦ Метрополис','','',20,'20%','shop'],
+ ['Автоблеск','Автоблеск, покраска, полировка','36 мкр','','',10,'10%','auto'],
+ ['ГБО Авто','Ремонт и установка ГБО на авто','25 мкр, 45 зд.','8 (702) 333 37 35','',10,'10%','auto'],
+ ['Arlan','Аккумуляторы и автотовары','16 мкр, 29 зд.','','Аккумуляторы — 5%, все остальные товары — 10%',10,'5% / 10%','auto'],
+ ['Qlever','Автосервис','29а мкр, 104 зд.','','Масло — 10%, замена бесплатно. Детейлинг на весь спектр — 10%. Мойка на все виды — 7%. Кухня — 10%.',10,'10%','auto'],
+ ['Car Pro Detailing','Детейлинг','г. Актау, Приозёрный-3 (2gis — Car Pro Detailing)','8 (708) 726 13 77','',15,'15%','auto'],
+ ['Dream Mebel','Мебель','29а мкр, 23 зд.; @aktau_dream_mebel','+7 (702) 333 00 08','',12,'12%','home'],
+ ['Casadilusso Aktau','Люстры, розетки, плинтуса, ламинат, диваны','18а мкр, ЖК Premium Plaza, 2 блок; casadilusso_aktau','+7 (777) 205 62 36','',10,'10%','home'],
+ ['Plisse Aktau','Москитные сетки','@plisse_aktau','8 (701) 666 22 91','',15,'15%','home'],
+ ['Решетки','Решетки на окна','','8 (705) 988 02 47','',10,'10%','home']
+];
+var PERK_CATS = ['food','rest','edu','shop','auto','home'];
+var perksCat = 'all';
+function renderPerks(){
+  var grid = document.getElementById('perksGrid'); if(!grid) return;
+  var sortSel = document.getElementById('perksSort');
+  if(!sortSel.options.length){
+    sortSel.innerHTML = '<option value="pct"></option><option value="name"></option>';
+  }
+  sortSel.options[0].textContent = t('perks_sort_pct'); sortSel.options[1].textContent = t('perks_sort_name');
+  document.getElementById('perksChips').innerHTML = ['all'].concat(PERK_CATS).map(function(c){
+    return '<button class="chip'+(perksCat===c?' active':'')+'" onclick="perksCat=\''+c+'\';renderPerks()">'+(c==='all'?t('perks_all'):t('pc_'+c))+'</button>';
+  }).join('');
+  var q = (document.getElementById('perksSearch').value || '').toLowerCase();
+  var list = PERKS.filter(function(p){
+    if(perksCat !== 'all' && p[7] !== perksCat) return false;
+    return !q || (p[0]+' '+p[1]+' '+p[2]+' '+p[3]).toLowerCase().indexOf(q) >= 0;
+  });
+  var byName = sortSel.value === 'name';
+  list.sort(function(a,b){ return byName ? a[0].localeCompare(b[0]) : (b[5]-a[5]) || a[0].localeCompare(b[0]); });
+  grid.innerHTML = list.length ? list.map(function(p){
+    var tel = p[3] && p[3].charAt(0) !== '@' ? '<a href="tel:'+p[3].replace(/[^+\d]/g,'')+'">'+escHtml(p[3])+'</a>' : (p[3] ? '<span style="font-size:13px;font-weight:600;color:var(--blue);">'+escHtml(p[3])+'</span>' : '');
+    return '<div class="perk"><div class="perk-pct'+(p[5]>=20?' hi':'')+'">'+escHtml(p[6])+'</div><div class="perk-tx"><h3>'+escHtml(p[0])+'</h3>'+
+      (p[1] ? '<p class="pd">'+escHtml(p[1])+'</p>' : '')+(p[2] ? '<p class="pa">📍 '+escHtml(p[2])+'</p>' : '')+(tel ? '<p class="pa">'+tel+'</p>' : '')+(p[4] ? '<p class="pn">'+escHtml(p[4])+'</p>' : '')+'</div></div>';
+  }).join('') : '<p style="color:var(--ink-faint);">'+t('perks_none')+'</p>';
+}
+
+
+/* ===================== Туған күндер + Push ===================== */
+var VAPID_PUBLIC = 'BDVVRxhv-q7onCZLmJwn8Vh1W4ZrYQYm5DG_lBgyK8G6jRmsNs6yc0UT0opGJH5Ha5xzkUMoz5QM1dh8iAfupA8';
+var bdayRows = [];
+function loadBirthdays(){
+  sb.rpc('todays_birthdays').then(function(r){
+    bdayRows = (r && !r.error && r.data) || [];
+    renderBirthdays();
+  }, function(){ bdayRows = []; renderBirthdays(); });
+}
+function renderBirthdays(){
+  var sec = document.getElementById('bdaySec'), g = document.getElementById('bdayGrid'); if(!sec || !g) return;
+  if(!bdayRows.length){ sec.classList.add('hidden'); return; }
+  sec.classList.remove('hidden');
+  g.innerHTML = bdayRows.map(function(b){
+    var ini = String(b.name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+    return '<div class="bday"><div class="q-av">'+escHtml(ini)+photoImg(b.photo)+'</div><div><b>'+escHtml(b.name)+'</b><span>'+t('bday_wish')+'</span></div></div>';
+  }).join('');
+}
+
+function pushSupported(){ return ('serviceWorker' in navigator) && ('PushManager' in window) && ('Notification' in window); }
+function isIOSDev(){ return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
+function isStandalone(){ try{ return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }catch(e){ return false; } }
+function b64ToU8(b){
+  var p = '='.repeat((4 - b.length % 4) % 4), s2 = (b + p).replace(/-/g,'+').replace(/_/g,'/'), raw = atob(s2), out = new Uint8Array(raw.length);
+  for(var i=0;i<raw.length;i++) out[i] = raw.charCodeAt(i);
+  return out;
+}
+function pushSaveSub(sub){
+  var j = sub.toJSON();
+  return sb.rpc('save_push_subscription', { p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth });
+}
+function enablePush(fromBanner){
+  if(!pushSupported()){ alert(t('push_unsup')); return; }
+  if(isIOSDev() && !isStandalone()){ alert(t('push_ios')); return; }
+  var permP = Notification.requestPermission();   // қолданушы әрекетінен бірден шақырылады
+  Promise.resolve(permP).then(function(perm){
+    if(perm !== 'granted') throw new Error(perm);
+    return navigator.serviceWorker.ready;
+  }).then(function(reg){
+    return reg.pushManager.getSubscription().then(function(ex){
+      return ex || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToU8(VAPID_PUBLIC) });
+    });
+  }).then(function(sub){ return pushSaveSub(sub); }).then(function(){
+    var b = document.getElementById('pushBanner'); if(b) b.classList.add('hidden');
+    if(!fromBanner) msgSet('pushMsg','ok',t('push_ok'));
+    renderPushBox(); 
+  }).catch(function(e){
+    if(!fromBanner) msgSet('pushMsg','err',t('push_err')+(e && e.message || e));
+    renderPushBox(); updatePushBanner();
+  });
+}
+function disablePush(){
+  navigator.serviceWorker.ready.then(function(reg){ return reg.pushManager.getSubscription(); }).then(function(sub){
+    if(!sub) return;
+    var ep = sub.endpoint;
+    return sub.unsubscribe().then(function(){ return sb.rpc('delete_push_subscription', { p_endpoint: ep }); });
+  }).then(function(){ renderPushBox(); });
+}
+function syncPush(){
+  if(!pushSupported() || Notification.permission !== 'granted') return;
+  navigator.serviceWorker.ready.then(function(reg){ return reg.pushManager.getSubscription(); })
+    .then(function(sub){ if(sub) return pushSaveSub(sub); }).catch(function(){});
+}
+function dismissPushBanner(){
+  try{ localStorage.setItem('jmk_push_dismiss', String(Date.now())); }catch(e){}
+  var b = document.getElementById('pushBanner'); if(b) b.classList.add('hidden');
+}
+function updatePushBanner(){
+  var b = document.getElementById('pushBanner'); if(!b) return;
+  var show = pushSupported() && Notification.permission === 'default' && !(isIOSDev() && !isStandalone());
+  try{ var d = Number(localStorage.getItem('jmk_push_dismiss')||0); if(d && Date.now()-d < 7*86400000) show = false; }catch(e){}
+  b.classList.toggle('hidden', !show);
+}
+function renderPushBox(){
+  var h = document.getElementById('pushBoxHolder'); if(!h) return;
+  var inner;
+  if(!pushSupported()) inner = '<p class="pst">'+t('push_unsup')+'</p>' + (isIOSDev() ? '<p class="pst">'+t('push_ios')+'</p>' : '');
+  else if(isIOSDev() && !isStandalone()) inner = '<p class="pst">'+t('push_ios')+'</p>';
+  else if(Notification.permission === 'denied') inner = '<p class="pst">'+t('push_denied')+'</p>';
+  else {
+    h.innerHTML = '<div class="me-box push-box"><h4>'+t('push_title')+'</h4><div id="pushState"></div><div class="me-msg" id="pushMsg"></div></div>';
+    navigator.serviceWorker.ready.then(function(reg){ return reg.pushManager.getSubscription(); }).then(function(sub){
+      var el = document.getElementById('pushState'); if(!el) return;
+      el.innerHTML = sub ? '<p class="pst">'+t('push_on')+'</p><button class="btn" onclick="disablePush()">'+t('push_off_btn')+'</button>'
+                         : '<button class="btn btn-gold" onclick="enablePush(false)">'+t('push_on_btn')+'</button>';
+    });
+    return;
+  }
+  h.innerHTML = '<div class="me-box push-box"><h4>'+t('push_title')+'</h4>'+inner+'</div>';
+}
+function renderAdminPush(){
+  var box = document.getElementById('adminPush'); if(!box) return;
+  box.innerHTML = '<div class="igp-adm adm-push"><h3>'+t('adm_push')+'</h3>'+
+    '<input id="apTitle" maxlength="80" placeholder="'+escHtml(t('adm_push_title'))+'">'+
+    '<textarea id="apBody" maxlength="240" placeholder="'+escHtml(t('adm_push_body'))+'"></textarea>'+
+    '<input id="apUrl" placeholder="'+escHtml(t('adm_push_url'))+'">'+
+    '<select id="apAud"><option value="all">'+t('adm_push_all')+'</option><option value="incomplete">'+t('adm_push_inc')+'</option></select>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-gold" onclick="sendAdminPush(false)">'+t('adm_push_send')+'</button>'+
+    '<button class="btn" onclick="sendAdminPush(true)">'+t('adm_push_test')+'</button></div>'+
+    '<div class="me-msg" id="apMsg"></div><div class="me-hint">'+t('adm_push_hint')+'</div></div>';
+}
+function sendAdminPush(test){
+  var body = test ? { action: 'test' } : {
+    action: 'broadcast', title: document.getElementById('apTitle').value.trim(), body: document.getElementById('apBody').value.trim(),
+    url: document.getElementById('apUrl').value.trim() || '/', audience: document.getElementById('apAud').value
+  };
+  if(!test && !body.title){ msgSet('apMsg','err',t('adm_push_title')+'?'); return; }
+  msgSet('apMsg','','…');
+  sb.functions.invoke('push', { body: body }).then(function(r){
+    if(r.error){ msgSet('apMsg','err', String(r.error.message || r.error)); return; }
+    var d = r.data || {};
+    msgSet('apMsg','ok', t('adm_push_res')+(d.sent||0)+' / '+(d.total||0));
+  });
+}
+
 /* ===================== boot ===================== */
 applyI18n();
 nav('home');
@@ -5317,7 +5627,7 @@ loadQuiz();
 initCarousel();
 drawFooterQRs();
 loadMyState();
-renderQuotes(); renderRegSkills(); loadTicker();
+renderQuotes(); renderRegSkills(); loadTicker(); loadBirthdays(); updatePushBanner(); syncPush();
 
 </script>
 <script>
