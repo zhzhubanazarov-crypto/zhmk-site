@@ -5536,10 +5536,14 @@ function pushSaveSub(sub){
 function enablePush(fromBanner){
   if(!pushSupported()){ alert(t('push_unsup')); return; }
   if(isIOSDev() && !isStandalone()){ alert(t('push_ios')); return; }
+  if(Notification.permission === 'denied'){ alert(t('push_denied')); return; }
   var permP = Notification.requestPermission();   // қолданушы әрекетінен бірден шақырылады
   Promise.resolve(permP).then(function(perm){
-    if(perm !== 'granted') throw new Error(perm);
-    return navigator.serviceWorker.ready;
+    if(perm !== 'granted') throw new Error('рұқсат берілмеді: '+perm);
+    return Promise.race([
+      navigator.serviceWorker.register('sw.js').then(function(){ return navigator.serviceWorker.ready; }),
+      new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('service worker жауап бермеді')); }, 10000); })
+    ]);
   }).then(function(reg){
     return reg.pushManager.getSubscription().then(function(ex){
       return ex || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToU8(VAPID_PUBLIC) });
@@ -5550,6 +5554,7 @@ function enablePush(fromBanner){
     renderPushBox(); 
   }).catch(function(e){
     if(!fromBanner) msgSet('pushMsg','err',t('push_err')+(e && e.message || e));
+    else alert(t('push_err')+(e && e.message || e));
     renderPushBox(); updatePushBanner();
   });
 }
