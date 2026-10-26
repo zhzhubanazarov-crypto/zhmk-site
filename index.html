@@ -483,6 +483,17 @@
   .foot-bottom{border-top:1px solid var(--line);text-align:center;padding:14px 24px;font-size:12px;color:var(--ink-faint);}
 
   /* ===== auth modal ===== */
+  .history-card{cursor:pointer;transition:box-shadow .15s,transform .15s;}
+  .history-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px);}
+  .history-card .h-bio{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .history-card .h-more{font-size:13px;color:var(--blue);font-weight:600;margin-top:4px;}
+  .hm-box{max-width:460px;}
+  .hm-photo{width:100%;max-height:340px;object-fit:cover;object-position:center top;border-radius:12px;display:block;margin-bottom:14px;background:var(--gold-soft);}
+  .hm-ph{width:100%;height:160px;border-radius:12px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:var(--blue);margin-bottom:14px;}
+  .hm-body{padding:12px 20px 22px;}
+  .hm-body h2{font-size:21px;margin:0 0 2px;}
+  .hm-body .h-years{font-size:15px;color:var(--blue);font-weight:600;margin-bottom:10px;}
+  .hm-body p{font-size:14.5px;line-height:1.65;white-space:pre-wrap;margin:0 0 10px;}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
   .modal-box{background:var(--card);border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
@@ -1172,6 +1183,12 @@
 </main>
 
 <!-- ============ LETTER MODAL ============ -->
+<div class="modal-overlay" id="histModal" onclick="if(event.target===this)closeHist()">
+  <div class="modal-box hm-box">
+    <div class="modal-head"><h3 data-i18n="h_profile">Төраға профилі</h3><button class="modal-close" onclick="closeHist()">✕</button></div>
+    <div class="hm-body" id="histModalBody"></div>
+  </div>
+</div>
 <div class="modal-overlay" id="letterModal">
   <div class="modal-box">
     <div class="modal-head">
@@ -3019,6 +3036,7 @@ kk:{
   inst_a2:'<b>⋮</b> (үш нүкте) мәзірін басыңыз',
   inst_a3:'<b>«Қосымшаны орнату»</b> / <b>«Добавить на гл. экран»</b>',
   inst_a4:'<b>«Орнату»</b> басыңыз — белгіше экранда пайда болады',
+  h_profile:'Төраға профилі', h_more:'Профильді ашу ›',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3083,6 +3101,7 @@ ru:{
   inst_a2:'Нажмите меню <b>⋮</b> (три точки)',
   inst_a3:'<b>«Установить приложение»</b> / <b>«Добавить на гл. экран»</b>',
   inst_a4:'Нажмите <b>«Установить»</b> — иконка появится на экране',
+  h_profile:'Профиль председателя', h_more:'Открыть профиль ›',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3138,6 +3157,7 @@ en:{
   inst_a2:'Tap the <b>⋮</b> menu',
   inst_a3:'<b>Install app</b> / <b>Add to Home screen</b>',
   inst_a4:'Tap <b>Install</b> — the icon appears on your screen',
+  h_profile:'Chairman profile', h_more:'Open profile ›',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -4488,25 +4508,41 @@ function loadHistory(){
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   sb.from('council_history').select('*').order('start_year',{ascending:false}).then(function(res){
     if(res.error){ el.innerHTML = '<p style="color:#c0392b;">'+res.error.message+'</p>'; return; }
-    var rows = res.data || [];
+    var rows = (res.data || []).slice().sort(function(x,y){ return (Number(y.sort_key!=null?y.sort_key:y.start_year)) - (Number(x.sort_key!=null?x.sort_key:x.start_year)); });
     if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('h_empty')+'</p>'; return; }
     el.innerHTML = rows.map(function(h){
       var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
       var years = h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
       var canManage = isAdmin;
-      return '<div class="history-card">'+
+      return '<div class="history-card" onclick="openHist(\''+h.id+'\')">'+
         (h.photo_url ? '<img class="h-photo" src="'+h.photo_url+'">' : '<div class="h-photo-ph">'+initials+'</div>')+
         '<div style="flex:1;">'+
-          '<p class="h-name">'+h.full_name.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" onclick="deleteHistory(\''+h.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
+          '<p class="h-name">'+h.full_name.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" onclick="event.stopPropagation();deleteHistory(\''+h.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
           '<p class="h-years">'+years+'</p>'+
           (h.bio ? '<p class="h-bio">'+h.bio.replace(/</g,'&lt;')+'</p>' : '')+
           (h.achievements ? '<p class="h-workplace"><b>'+t('h_achv')+'</b></p><ul class="achv">'+h.achievements.split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
           (h.current_workplace ? '<p class="h-workplace">💼 '+h.current_workplace.replace(/</g,'&lt;')+'</p>' : '')+
+          '<p class="h-more">'+t('h_more')+'</p>'+
         '</div>'+
       '</div>';
     }).join('');
+    histRows = rows;
   });
 }
+var histRows = [];
+function openHist(id){
+  var h = histRows.filter(function(x){return x.id===id;})[0]; if(!h) return;
+  var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+  var years = h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
+  document.getElementById('histModalBody').innerHTML =
+    (h.photo_url ? '<img class="hm-photo" src="'+escHtml(h.photo_url)+'">' : '<div class="hm-ph">'+escHtml(initials)+'</div>')+
+    '<h2>'+escHtml(h.full_name)+'</h2><div class="h-years">'+escHtml(years)+'</div>'+
+    (h.bio ? '<p>'+escHtml(h.bio)+'</p>' : '')+
+    (h.achievements ? '<p><b>'+t('h_achv')+'</b></p><ul class="achv">'+h.achievements.split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
+    (h.current_workplace ? '<p>💼 '+escHtml(h.current_workplace)+'</p>' : '');
+  document.getElementById('histModal').classList.add('open');
+}
+function closeHist(){ document.getElementById('histModal').classList.remove('open'); }
 
 function deleteHistory(id){
   if(!isAdmin) return;
