@@ -527,6 +527,34 @@
   .st-period button{border:1px solid var(--line);background:var(--card);border-radius:100px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink);}
   .st-period button.on{background:var(--gold);border-color:var(--gold);font-weight:700;}
   @media (max-width:640px){.ev-form{grid-template-columns:1fr 1fr;}.ev-form input:first-child{grid-column:1/-1;}.kpis{grid-template-columns:1fr 1fr;}.ev-row,.st-card,.st-period,.kpis,.ev-form,.chair-tabs{margin-left:0;margin-right:0;}.bar-row{grid-template-columns:90px 1fr 62px;}}
+  .fnd{margin:46px 0 10px;}
+  .fnd-head{border-left:5px solid var(--gold);padding-left:14px;margin-bottom:16px;}
+  .fnd-head h2{margin:0 0 4px;font-size:24px;}
+  .fnd-head p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+  .fnd-note{background:#fff4d6;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:14px;line-height:1.55;}
+  .fnd-cap{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 6px 2px;}
+  .fnd-list{margin:6px 0 0;padding-left:22px;font-size:14.5px;line-height:1.75;}
+  .fnd-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;}
+  .fnd-box h3{margin:0 0 8px;font-size:17px;}
+  .fnd-box p{margin:0 0 8px;font-size:14.5px;line-height:1.65;}
+  .fnd-box ul{margin:6px 0 0;padding-left:20px;font-size:14.5px;line-height:1.6;}
+  .fnd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+  .fnd-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;}
+  .fnd-card.lead{border-color:var(--gold);background:var(--gold-soft);}
+  .fnd-av{width:56px;height:56px;border-radius:14px;flex:none;background:var(--gold-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;overflow:hidden;position:relative;}
+  .fnd-card.lead .fnd-av{background:#fff;}
+  .fnd-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .fnd-card b{display:block;font-size:15px;}
+  .fnd-card span{font-size:13px;color:var(--ink-soft);line-height:1.4;display:block;}
+  .fnd-card em{font-style:normal;font-size:12px;font-weight:700;color:var(--blue);}
+  .fnd-slider{position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px;background:#0f2d5c;aspect-ratio:16/9;max-height:480px;}
+  .fnd-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .6s;cursor:zoom-in;}
+  .fnd-slider img.on{opacity:1;}
+  .fnd-slider button{position:absolute;top:50%;transform:translateY(-50%);border:none;background:rgba(15,45,92,.6);color:#fff;width:38px;height:38px;border-radius:50%;font-size:20px;cursor:pointer;z-index:2;}
+  .fnd-slider .pv{left:10px;}.fnd-slider .nx{right:10px;}
+  .fnd-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;gap:6px;justify-content:center;z-index:2;}
+  .fnd-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);}
+  .fnd-dots i.on{background:#fff;}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
   .modal-box{background:var(--card);border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
@@ -1132,6 +1160,7 @@
       </div>
     </div>
     <div id="historyList"></div>
+    <div id="foundersSec"></div>
   </section>
 
   <!-- ============ НЕ ӘҢГІМЕ ============ -->
@@ -4662,7 +4691,75 @@ function submitHistory(){
   }
 }
 
+
+/* ===== Негізін қалаушылар ===== */
+var FOUNDER_PHOTOS = ['founders-1.jpg','founders-2.jpg','founders-3.jpg','founders-4.jpg','founders-5.jpg','founders-6.jpg','founders-7.jpg','founders-8.jpg','founders-9.jpg','founders-10.jpg','founders-11.jpg','founders-12.jpg'];   // мысалы: ['founders-1.jpg','founders-2.jpg'] — файлдарды сайт түбіріне салыңыз
+var FOUNDERS = [
+  { n:{kk:'Қойлыбаев Бағдат',ru:'Койлыбаев Багдат',en:'Koilybayev Bagdat'}, photo:'', lead:true,
+    r:{kk:'Мұнай өндіру операторы, МӨЦ-2',ru:'Оператор по добыче нефти, ЦДН-2',en:'Oil production operator, Oil Production Shop No. 2'} },
+  { n:{kk:'Нұранов Асқар',ru:'Нуранов Аскар',en:'Nuranov Askar'}, photo:'',
+    r:{kk:'Мұнай өндіру операторы, МӨЦ-1',ru:'Оператор по добыче нефти, ЦДН-1',en:'Oil production operator, Oil Production Shop No. 1'} },
+  { n:{kk:'Ақмұханов Руслан',ru:'Акмуханов Руслан',en:'Akmukhanov Ruslan'}, photo:'',
+    r:{kk:'Өндіру жөніндегі инженер, МӨТБ',ru:'Инженер по добыче нефти, ОТДН',en:'Production engineer'} },
+  { n:{kk:'Нұржанова Жанар',ru:'Нуржанова Жанар',en:'Nurzhanova Zhanar'}, photo:'',
+    r:{kk:'КИПиА слесарі, ӨАЦ',ru:'Слесарь КИПиА, ЦАП',en:'Instrumentation & automation fitter'} },
+  { n:{kk:'Қалдыбаева Жанар',ru:'Калдыбаева Жанар',en:'Kaldybayeva Zhanar'}, photo:'',
+    r:{kk:'Техник геолог',ru:'Техник-геолог, ГС',en:'Geologist technician'} },
+  { n:{kk:'Ахметов Думан',ru:'Ахметов Думан',en:'Akhmetov Duman'}, photo:'',
+    r:{kk:'Инженер, ЕҚжТБ',ru:'Инженер ОТиТБ, ДОТ, ТБ и ООС',en:'HSE engineer'} },
+  { n:{kk:'Көркембаев Марат',ru:'Коркембаев Марат',en:'Korkembayev Marat'}, photo:'',
+    r:{kk:'Тауар операторы, МДАЦ',ru:'Товарный оператор, ЦППН',en:'Commodity operator'} }
+];
+var FND_TXT = {
+  kk:{ h:'Негізін қалаушылар', sub:'Жас мамандар кеңесі 2013 жылы құрылды',
+    about:'Кеңес құру туралы',
+    p1:'«Қаражанбасмұнай» АҚ жас мамандар кеңесі 2013 жылғы 1 тамыздан бастап құрылды.',
+    p2:'Кеңес жас мамандардың бейімделуіне және бекітілуіне, еңбек белсенділігін дамытуға, жас мамандардың бастамаларына, іскерлік біліктілігін көтеруге ықпал тигізуге бағытталған «ҚазМұнайГаз» БӨ» АҚ стратегиясын жүзеге асырудағы жұмысшы жастарды тарту мақсатында құрылды.',
+    crit:'Кеңес құрамына кіру талаптары', c:['Компания қоғамдық өміріне белсенді атсалысуға ниет білдірген жас мамандар;','Жоғары немесе (арнаулы) орта білімі бар жұмыскерлер;','Жас жағынан 30-дан аспайтын жас мамандар.'],
+    staff:'2013 жылғы уақытша штаб құрамы', lead:'штаб төрағасы', member:'штаб мүшесі', photos:'Алғашқы жылдардағы архив суреттері', asof:'ℹ️ Төмендегі ақпарат 2013 жылғы жағдай бойынша берілген. Қызметтер мен жұмыс орындары сол кездегідей көрсетілген, қазіргі қызметтерімен сәйкес келмеуі мүмкін.', yr:'2013 ж.' },
+  ru:{ h:'Основатели', sub:'Совет молодых специалистов создан в 2013 году',
+    about:'О создании Совета',
+    p1:'Совет молодых специалистов АО «Каражанбасмунай» создан с 1 августа 2013 года.',
+    p2:'Совет создаётся в целях вовлечения трудовой молодёжи в реализацию стратегии АО «РД «КазМунайГаз», направленной на содействие в адаптации и закреплении молодых специалистов в Обществе, развитие трудовой активности, инициативы молодых специалистов, повышение деловой квалификации.',
+    crit:'Критерии вступления в Совет', c:['Молодые специалисты, желающие активно принимать участие в общественной жизни Компании;','Работники, имеющие высшее или среднее (специальное) образование;','Молодые специалисты, чей возраст не превышает 30 лет.'],
+    staff:'Временный штаб 2013 года', lead:'председатель штаба', member:'член штаба', photos:'Архивные фото первых лет', asof:'ℹ️ Информация ниже приведена по состоянию на 2013 год. Должности и места работы указаны так, как было тогда, и могут не совпадать с нынешними.', yr:'2013 г.' },
+  en:{ h:'Founders', sub:'The Young Specialists Council was established in 2013',
+    about:'About the founding',
+    p1:'The Young Specialists Council of JSC Karazhanbasmunai was established on 1 August 2013.',
+    p2:'The Council was created to involve young employees in implementing the KazMunayGas strategy: supporting the adaptation and retention of young specialists in the Company, developing their work activity and initiative, and raising their professional qualifications.',
+    crit:'Membership criteria', c:['Young specialists who want to take an active part in the life of the Company;','Employees with higher or secondary (vocational) education;','Young specialists aged 30 or under.'],
+    staff:'Temporary staff of 2013 (founding team)', lead:'head of staff', member:'staff member', photos:'Archive photos from the early years', asof:'ℹ️ The information below is as of 2013. Positions and workplaces are shown as they were then and may differ from the current ones.', yr:'2013' }
+};
+var fndIdx = 0, fndTimer = null;
+function renderFounders(){
+  var el = document.getElementById('foundersSec'); if(!el) return;
+  var x = FND_TXT[LANG] || FND_TXT.kk, L = (LANG==='ru'||LANG==='en') ? LANG : 'kk';
+  var h = '<div class="fnd"><div class="fnd-head"><h2>'+x.h+'</h2><p>'+x.sub+'</p></div>';
+  h += '<div class="fnd-note">'+x.asof+'</div>';
+  if(FOUNDER_PHOTOS.length){
+    h += '<div class="fnd-cap">📷 '+x.photos+'</div>';
+    h += '<div class="fnd-slider" id="fndSlider">'+FOUNDER_PHOTOS.map(function(f,i){ return '<img src="'+escHtml(f)+'" class="'+(i===0?'on':'')+'" onclick="window.open(this.src)">'; }).join('')+
+      (FOUNDER_PHOTOS.length>1 ? '<button class="pv" onclick="fndGo(-1)">‹</button><button class="nx" onclick="fndGo(1)">›</button><div class="fnd-dots">'+FOUNDER_PHOTOS.map(function(f,i){ return '<i class="'+(i===0?'on':'')+'"></i>'; }).join('')+'</div>' : '')+'</div>';
+  }
+  h += '<div class="fnd-box"><h3>'+x.about+'</h3><p>'+x.p1+'</p><p>'+x.p2+'</p></div>';
+  h += '<div class="fnd-box"><h3>'+x.staff+'</h3><ol class="fnd-list">'+FOUNDERS.map(function(f){
+    return '<li><b>'+escHtml(f.n[L])+'</b> — '+escHtml(x.yr+': '+f.r[L])+(f.lead?' ('+x.lead+')':'')+'</li>';
+  }).join('')+'</ol></div></div>';
+  el.innerHTML = h;
+  fndIdx = 0;
+  if(fndTimer){ clearInterval(fndTimer); fndTimer = null; }
+  if(FOUNDER_PHOTOS.length > 1) fndTimer = setInterval(function(){ if(document.getElementById('fndSlider')) fndGo(1); else { clearInterval(fndTimer); fndTimer = null; } }, 4500);
+}
+function fndGo(d){
+  var sl = document.getElementById('fndSlider'); if(!sl) return;
+  var imgs = sl.querySelectorAll('img'), dots = sl.querySelectorAll('.fnd-dots i');
+  imgs[fndIdx].classList.remove('on'); if(dots[fndIdx]) dots[fndIdx].classList.remove('on');
+  fndIdx = (fndIdx + d + imgs.length) % imgs.length;
+  imgs[fndIdx].classList.add('on'); if(dots[fndIdx]) dots[fndIdx].classList.add('on');
+}
+
 function loadHistory(){
+  renderFounders();
   var el = document.getElementById('historyList');
   if(!el) return;
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
@@ -4672,7 +4769,7 @@ function loadHistory(){
     if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('h_empty')+'</p>'; return; }
     el.innerHTML = rows.map(function(h){
       var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
-      var years = h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
+      var years = (h.end_year && h.end_year === h.start_year) ? String(h.start_year) : h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
       var canManage = isAdmin;
       return '<div class="history-card" onclick="openHist(\''+h.id+'\')">'+
         (h.photo_url ? '<img class="h-photo" src="'+h.photo_url+'">' : '<div class="h-photo-ph">'+initials+'</div>')+
@@ -4694,7 +4791,7 @@ function hLoc(h, f){ var v = (LANG==='ru'||LANG==='en') ? h[f+'_'+LANG] : null; 
 function openHist(id){
   var h = histRows.filter(function(x){return x.id===id;})[0]; if(!h) return;
   var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
-  var years = h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
+  var years = (h.end_year && h.end_year === h.start_year) ? String(h.start_year) : h.start_year + '–' + (h.end_year ? h.end_year : t('h_present'));
   document.getElementById('histModalBody').innerHTML =
     (h.photo_url ? '<img class="hm-photo" src="'+escHtml(h.photo_url)+'">' : '<div class="hm-ph">'+escHtml(initials)+'</div>')+
     '<h2>'+escHtml(h.full_name)+'</h2><div class="h-years">'+escHtml(years)+'</div>'+
