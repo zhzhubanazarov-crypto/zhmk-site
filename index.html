@@ -494,6 +494,39 @@
   .hm-body h2{font-size:21px;margin:0 0 2px;}
   .hm-body .h-years{font-size:15px;color:var(--blue);font-weight:600;margin-bottom:10px;}
   .hm-body p{font-size:14.5px;line-height:1.65;white-space:pre-wrap;margin:0 0 10px;}
+  .chair-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 8px 16px;}
+  .chair-tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:100px;padding:9px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;}
+  .chair-tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .ev-form{display:grid;grid-template-columns:1fr 150px 150px auto;gap:8px;margin:0 8px 18px;}
+  .ev-form input,.ev-form select{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--card);color:var(--ink);min-width:0;}
+  .ev-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 8px 10px;}
+  .ev-row .ev-t{font-weight:700;}
+  .ev-row .ev-m{font-size:13px;color:var(--ink-faint);margin-top:2px;}
+  .ev-row .ev-a{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .ev-cnt{font-weight:700;color:var(--blue);font-size:14px;}
+  .att-box{max-width:480px;}
+  .att-body{padding:12px 20px 20px;}
+  .att-body input[type=search]{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;margin-bottom:8px;background:var(--card);color:var(--ink);}
+  .att-tools{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-size:13px;flex-wrap:wrap;}
+  .att-list{max-height:44vh;overflow-y:auto;border:1px solid var(--line);border-radius:10px;}
+  .att-list label{display:flex;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px;}
+  .att-list label:last-child{border-bottom:none;}
+  .att-list small{color:var(--ink-faint);display:block;font-size:12px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 8px 18px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;}
+  .kpi b{display:block;font-size:26px;color:var(--blue);font-variant-numeric:tabular-nums;}
+  .kpi span{font-size:12.5px;color:var(--ink-soft);}
+  .st-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 8px 14px;}
+  .st-card h3{font-size:15.5px;margin:0 0 10px;}
+  .bar-row{display:grid;grid-template-columns:minmax(90px,200px) 1fr 74px;gap:10px;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-row .bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bar-track{background:var(--gold-soft);border-radius:100px;height:14px;overflow:hidden;}
+  .bar-fill{background:var(--blue);height:100%;border-radius:100px;}
+  .bar-row .bv{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;}
+  .st-period{margin:0 8px 14px;display:flex;gap:6px;flex-wrap:wrap;}
+  .st-period button{border:1px solid var(--line);background:var(--card);border-radius:100px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink);}
+  .st-period button.on{background:var(--gold);border-color:var(--gold);font-weight:700;}
+  @media (max-width:640px){.ev-form{grid-template-columns:1fr 1fr;}.ev-form input:first-child{grid-column:1/-1;}.kpis{grid-template-columns:1fr 1fr;}.ev-row,.st-card,.st-period,.kpis,.ev-form,.chair-tabs{margin-left:0;margin-right:0;}.bar-row{grid-template-columns:90px 1fr 62px;}}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
   .modal-box{background:var(--card);border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
@@ -546,6 +579,9 @@
   .comment-form input{flex:1;font:inherit;font-size:12.5px;padding:8px 11px;border:1px solid var(--line);border-radius:100px;background:var(--paper);color:var(--ink);outline:none;}
   .new-post-box input{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;}
   .new-post-box select{width:100%;font:inherit;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);outline:none;}
+  .ev-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start;}
+  .ev-col .section-sub{margin-top:8px;}
+  @media (max-width:900px){.ev-cols{grid-template-columns:1fr;}}
   .section-sub{font-size:14px;font-weight:700;color:var(--ink-soft);margin:22px 4px 10px;padding-left:10px;border-left:4px solid var(--line);}
   .section-sub.status-done{border-color:var(--good);color:var(--good);}
   .section-sub.status-in_progress{border-color:#c9951a;color:#9a7412;}
@@ -1046,12 +1082,14 @@
         <button class="btn btn-primary" onclick="submitEvent()" data-i18n="ev_btn_create">Қосу</button>
       </div>
     </div>
-    <h3 class="section-sub status-done" data-i18n="ev_status_done">Орындалды</h3>
-    <div id="eventsDone"></div>
-    <h3 class="section-sub status-in_progress" data-i18n="ev_status_in_progress">Орындалып жатыр</h3>
-    <div id="eventsInProgress"></div>
-    <h3 class="section-sub status-planned" data-i18n="ev_status_planned">Жоспарда</h3>
-    <div id="eventsPlanned"></div>
+    <div class="ev-cols">
+      <div class="ev-col"><h3 class="section-sub status-done" data-i18n="ev_status_done">Орындалды</h3>
+      <div id="eventsDone"></div></div>
+      <div class="ev-col"><h3 class="section-sub status-in_progress" data-i18n="ev_status_in_progress">Орындалып жатыр</h3>
+      <div id="eventsInProgress"></div></div>
+      <div class="ev-col"><h3 class="section-sub status-planned" data-i18n="ev_status_planned">Жоспарда</h3>
+      <div id="eventsPlanned"></div></div>
+    </div>
   </section>
 
   <!-- ============ HISTORY ============ -->
@@ -1156,6 +1194,7 @@
       </div>
       <button class="btn" onclick="nav('mamandar')" data-i18n="chair_find">Қабілеттер бойынша іздеу</button>
     </div>
+    <div class="chair-tabs" id="chairTabs"></div>
     <div id="chairBody"></div>
   </section>
 
@@ -1187,6 +1226,18 @@
   <div class="modal-box hm-box">
     <div class="modal-head"><h3 data-i18n="h_profile">Төраға профилі</h3><button class="modal-close" onclick="closeHist()">✕</button></div>
     <div class="hm-body" id="histModalBody"></div>
+  </div>
+</div>
+<div class="modal-overlay" id="attModal" onclick="if(event.target===this)closeAtt()">
+  <div class="modal-box att-box">
+    <div class="modal-head"><h3 id="attTitle">Қатысушылар</h3><button class="modal-close" onclick="closeAtt()">✕</button></div>
+    <div class="att-body">
+      <input type="search" id="attSearch" oninput="renderAttList()" data-i18n-ph="ev_search" placeholder="Іздеу…">
+      <div class="att-tools"><button class="btn" type="button" onclick="attAll(true)" data-i18n="ev_sel_all">Көрінгендерін таңдау</button><button class="btn" type="button" onclick="attAll(false)" data-i18n="ev_clear">Тазалау</button><b id="attCount"></b></div>
+      <div class="att-list" id="attList"></div>
+      <div class="me-msg" id="attMsg"></div>
+      <button class="btn btn-gold" style="margin-top:12px;width:100%;" onclick="saveAtt()" data-i18n="ev_save">Сақтау</button>
+    </div>
   </div>
 </div>
 <div class="modal-overlay" id="letterModal">
@@ -3037,6 +3088,42 @@ kk:{
   inst_a3:'<b>«Қосымшаны орнату»</b> / <b>«Добавить на гл. экран»</b>',
   inst_a4:'<b>«Орнату»</b> басыңыз — белгіше экранда пайда болады',
   h_profile:'Төраға профилі', h_more:'Профильді ашу ›',
+  ch_tab_inbox:'Өтініштер мен хаттар',
+  ch_tab_events:'Іс-шаралар',
+  ch_tab_stats:'Статистика',
+  ev_new:'Жаңа іс-шара',
+  ev_title_ph:'Іс-шара атауы',
+  ev_create:'Қосу',
+  ev_none:'Әзірге іс-шара жоқ',
+  ev_mark:'Қатысушылар',
+  ev_del:'Жою',
+  ev_del_conf:'Іс-шара мен қатысу тізімі жойылсын ба?',
+  ev_k_meeting:'Кездесу',
+  ev_k_sport:'Спорт',
+  ev_k_volunteer:'Волонтерлік',
+  ev_k_training:'Оқыту',
+  ev_k_other:'Басқа',
+  ev_search:'Іздеу…',
+  ev_save:'Сақтау',
+  ev_sel_all:'Көрінгендерін таңдау',
+  ev_clear:'Тазалау',
+  ev_selected:'таңдалды',
+  ev_h_modal:'Қатысушылар',
+  ev_people:'адам',
+  st_events:'Іс-шара',
+  st_avg:'Орташа қатысу',
+  st_unique:'Кемінде бір рет қатысқан',
+  st_total_att:'Барлық қатысу',
+  st_p_all:'Барлығы',
+  st_p_year:'Жыл',
+  st_p_90:'90 күн',
+  st_p_30:'30 күн',
+  st_by_event:'Іс-шаралар бойынша қатысу',
+  st_by_kind:'Түрлері бойынша',
+  st_top:'Ең белсенділер',
+  st_never:'Қатыспағандар',
+  st_none:'Таңдалған кезеңде деректер жоқ',
+  st_times:'рет',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3102,6 +3189,42 @@ ru:{
   inst_a3:'<b>«Установить приложение»</b> / <b>«Добавить на гл. экран»</b>',
   inst_a4:'Нажмите <b>«Установить»</b> — иконка появится на экране',
   h_profile:'Профиль председателя', h_more:'Открыть профиль ›',
+  ch_tab_inbox:'Заявки и письма',
+  ch_tab_events:'Мероприятия',
+  ch_tab_stats:'Статистика',
+  ev_new:'Новое мероприятие',
+  ev_title_ph:'Название мероприятия',
+  ev_create:'Добавить',
+  ev_none:'Мероприятий пока нет',
+  ev_mark:'Участники',
+  ev_del:'Удалить',
+  ev_del_conf:'Удалить мероприятие и список участников?',
+  ev_k_meeting:'Встреча',
+  ev_k_sport:'Спорт',
+  ev_k_volunteer:'Волонтёрство',
+  ev_k_training:'Обучение',
+  ev_k_other:'Другое',
+  ev_search:'Поиск…',
+  ev_save:'Сохранить',
+  ev_sel_all:'Выбрать найденных',
+  ev_clear:'Очистить',
+  ev_selected:'выбрано',
+  ev_h_modal:'Участники',
+  ev_people:'чел.',
+  st_events:'Мероприятий',
+  st_avg:'Средняя явка',
+  st_unique:'Участвовали хотя бы раз',
+  st_total_att:'Всего посещений',
+  st_p_all:'Всё время',
+  st_p_year:'Год',
+  st_p_90:'90 дней',
+  st_p_30:'30 дней',
+  st_by_event:'Явка по мероприятиям',
+  st_by_kind:'По типам',
+  st_top:'Самые активные',
+  st_never:'Не участвовали',
+  st_none:'Нет данных за выбранный период',
+  st_times:'раз',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3158,6 +3281,42 @@ en:{
   inst_a3:'<b>Install app</b> / <b>Add to Home screen</b>',
   inst_a4:'Tap <b>Install</b> — the icon appears on your screen',
   h_profile:'Chairman profile', h_more:'Open profile ›',
+  ch_tab_inbox:'Applications & letters',
+  ch_tab_events:'Events',
+  ch_tab_stats:'Statistics',
+  ev_new:'New event',
+  ev_title_ph:'Event name',
+  ev_create:'Add',
+  ev_none:'No events yet',
+  ev_mark:'Attendees',
+  ev_del:'Delete',
+  ev_del_conf:'Delete the event and its attendance list?',
+  ev_k_meeting:'Meeting',
+  ev_k_sport:'Sport',
+  ev_k_volunteer:'Volunteering',
+  ev_k_training:'Training',
+  ev_k_other:'Other',
+  ev_search:'Search…',
+  ev_save:'Save',
+  ev_sel_all:'Select shown',
+  ev_clear:'Clear',
+  ev_selected:'selected',
+  ev_h_modal:'Attendees',
+  ev_people:'people',
+  st_events:'Events',
+  st_avg:'Average attendance',
+  st_unique:'Attended at least once',
+  st_total_att:'Total attendances',
+  st_p_all:'All time',
+  st_p_year:'Year',
+  st_p_90:'90 days',
+  st_p_30:'30 days',
+  st_by_event:'Attendance by event',
+  st_by_kind:'By type',
+  st_top:'Most active',
+  st_never:'Never attended',
+  st_none:'No data for this period',
+  st_times:'times',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -3277,6 +3436,7 @@ function setLang(lang){
   renderIdeas();
   refreshAuthUI();
   renderQuotes(); renderRegSkills(); renderLetterTabs(); renderBirthdays();
+  if(!document.getElementById('view-history').classList.contains('hidden')) loadHistory();
   if(supOpen) renderSupport();
   if(!document.getElementById('view-perks').classList.contains('hidden')) renderPerks();
   if(!document.getElementById('view-meet').classList.contains('hidden')) loadMeet();
@@ -4519,8 +4679,8 @@ function loadHistory(){
         '<div style="flex:1;">'+
           '<p class="h-name">'+h.full_name.replace(/</g,'&lt;')+(canManage ? ' <button class="post-del" onclick="event.stopPropagation();deleteHistory(\''+h.id+'\')">'+t('post_delete')+'</button>' : '')+'</p>'+
           '<p class="h-years">'+years+'</p>'+
-          (h.bio ? '<p class="h-bio">'+h.bio.replace(/</g,'&lt;')+'</p>' : '')+
-          (h.achievements ? '<p class="h-workplace"><b>'+t('h_achv')+'</b></p><ul class="achv">'+h.achievements.split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
+          (hLoc(h,'bio') ? '<p class="h-bio">'+escHtml(hLoc(h,'bio'))+'</p>' : '')+
+          (hLoc(h,'achievements') ? '<p class="h-workplace"><b>'+t('h_achv')+'</b></p><ul class="achv">'+hLoc(h,'achievements').split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
           (h.current_workplace ? '<p class="h-workplace">💼 '+h.current_workplace.replace(/</g,'&lt;')+'</p>' : '')+
           '<p class="h-more">'+t('h_more')+'</p>'+
         '</div>'+
@@ -4530,6 +4690,7 @@ function loadHistory(){
   });
 }
 var histRows = [];
+function hLoc(h, f){ var v = (LANG==='ru'||LANG==='en') ? h[f+'_'+LANG] : null; return v || h[f] || ''; }
 function openHist(id){
   var h = histRows.filter(function(x){return x.id===id;})[0]; if(!h) return;
   var initials = (h.full_name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
@@ -4537,8 +4698,8 @@ function openHist(id){
   document.getElementById('histModalBody').innerHTML =
     (h.photo_url ? '<img class="hm-photo" src="'+escHtml(h.photo_url)+'">' : '<div class="hm-ph">'+escHtml(initials)+'</div>')+
     '<h2>'+escHtml(h.full_name)+'</h2><div class="h-years">'+escHtml(years)+'</div>'+
-    (h.bio ? '<p>'+escHtml(h.bio)+'</p>' : '')+
-    (h.achievements ? '<p><b>'+t('h_achv')+'</b></p><ul class="achv">'+h.achievements.split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
+    (hLoc(h,'bio') ? '<p>'+escHtml(hLoc(h,'bio'))+'</p>' : '')+
+    (hLoc(h,'achievements') ? '<p><b>'+t('h_achv')+'</b></p><ul class="achv">'+hLoc(h,'achievements').split('\n').filter(function(x){return x.trim();}).map(function(x){return '<li>'+escHtml(x)+'</li>';}).join('')+'</ul>' : '')+
     (h.current_workplace ? '<p>💼 '+escHtml(h.current_workplace)+'</p>' : '');
   document.getElementById('histModal').classList.add('open');
 }
@@ -5342,12 +5503,12 @@ function submitJoin(){
 }
 
 /* --- төраға панелі --- */
-function renderChair(){
+function renderChairInbox(){
   var el = document.getElementById('chairBody'); if(!el) return;
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   Promise.all([
     sb.rpc('chair_applications'),
-    sb.from('chair_letters').select('*, profiles(full_name,position,department)').order('created_at',{ascending:false})
+    isChairman ? sb.from('chair_letters').select('*, profiles(full_name,position,department)').order('created_at',{ascending:false}) : Promise.resolve({data:[]})
   ]).then(function(rr){
     var apps = (rr[0] && rr[0].data) || [], letters = (rr[1] && rr[1].data) || [];
     var stName = { pending:t('st_pending'), accepted:t('st_accepted'), declined:t('st_declined') };
@@ -5359,6 +5520,7 @@ function renderChair(){
         (a.status==='pending' && isChairman ? '<div class="admin-actions"><button class="approve" onclick="decideApp(\''+a.id+'\',true)">'+t('chair_accept')+'</button><button class="reject" onclick="decideApp(\''+a.id+'\',false)">'+t('chair_decline')+'</button></div>' : '')+
         '</div>';
     }).join('') : '<p style="color:var(--ink-faint);">'+t('chair_none')+'</p>';
+    if(!isChairman){ el.innerHTML = h; return; }
     h += '<div class="page-head" style="margin-top:30px;"><div><h2 style="font-size:18px;">'+t('chair_letters')+'</h2></div></div>';
     h += letters.length ? letters.map(function(x){
       var pr = x.profiles || {};
@@ -5372,6 +5534,150 @@ function renderChair(){
     el.innerHTML = h;
   });
 }
+
+/* --- төраға: іс-шаралар мен статистика --- */
+var chairTab = 'inbox', evData = { events: [], att: [] }, stPeriod = 'all';
+var EV_KINDS = ['meeting','sport','volunteer','training','other'];
+function setChairTab(x){ chairTab = x; renderChair(); }
+function renderChairTabs(){
+  var el = document.getElementById('chairTabs'); if(!el) return;
+  el.innerHTML = [['inbox','ch_tab_inbox'],['events','ch_tab_events'],['stats','ch_tab_stats']].map(function(x){
+    return '<button class="'+(chairTab===x[0]?'on':'')+'" onclick="setChairTab(\''+x[0]+'\')">'+t(x[1])+'</button>';
+  }).join('');
+}
+function renderChair(){
+  renderChairTabs();
+  if(chairTab === 'events') return renderEvents();
+  if(chairTab === 'stats') return renderStats();
+  return renderChairInbox();
+}
+function loadEvData(){
+  return Promise.all([
+    sb.from('chair_events').select('*').order('event_date',{ascending:false}),
+    sb.from('chair_event_attendance').select('event_id,profile_id')
+  ]).then(function(rr){
+    evData.events = (rr[0] && rr[0].data) || [];
+    evData.att = (rr[1] && rr[1].data) || [];
+    if(rr[0] && rr[0].error) throw rr[0].error;
+    return evData;
+  });
+}
+function evCount(id){ return evData.att.filter(function(a){ return a.event_id === id; }).length; }
+function evDate(d){ var p = String(d||'').split('-'); return p.length===3 ? p[2]+'.'+p[1]+'.'+p[0] : d; }
+function renderEvents(){
+  var el = document.getElementById('chairBody'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  loadEvData().then(function(){
+    var today = new Date().toISOString().slice(0,10);
+    var h = '<div class="ev-form"><input id="chEvTitle" maxlength="120" placeholder="'+escHtml(t('ev_title_ph'))+'"><input id="chEvDate" type="date" value="'+today+'"><select id="chEvKind">'+
+      EV_KINDS.map(function(k){ return '<option value="'+k+'">'+t('ev_k_'+k)+'</option>'; }).join('')+'</select>'+
+      '<button class="btn btn-gold" onclick="createEvent()">'+t('ev_create')+'</button></div><div class="me-msg" id="chEvMsg" style="margin:0 8px 10px;"></div>';
+    h += evData.events.length ? evData.events.map(function(e){
+      return '<div class="ev-row"><div><div class="ev-t">'+escHtml(e.title)+'</div><div class="ev-m">'+escHtml(evDate(e.event_date))+' · '+t('ev_k_'+(e.kind||'other'))+'</div></div>'+
+        '<div class="ev-a"><span class="ev-cnt">'+evCount(e.id)+' '+t('ev_people')+'</span><button class="btn btn-gold" onclick="openAtt(\''+e.id+'\')">'+t('ev_mark')+'</button>'+
+        '<button class="btn" onclick="delEvent(\''+e.id+'\')">'+t('ev_del')+'</button></div></div>';
+    }).join('') : '<p style="color:var(--ink-faint);margin:0 8px;">'+t('ev_none')+'</p>';
+    el.innerHTML = h;
+  }).catch(function(err){ el.innerHTML = '<p style="color:#c0392b;">'+escHtml(err.message||String(err))+'</p>'; });
+}
+function createEvent(){
+  var title = document.getElementById('chEvTitle').value.trim();
+  var date = document.getElementById('chEvDate').value;
+  var kind = document.getElementById('chEvKind').value;
+  if(!title){ msgSet('chEvMsg','err','…'); return; }
+  sb.from('chair_events').insert({ title: title, event_date: date || null, kind: kind, created_by: authUser.id }).select().single().then(function(r){
+    if(r.error){ msgSet('chEvMsg','err',r.error.message); return; }
+    loadEvData().then(function(){ renderEvents(); openAtt(r.data.id); });
+  });
+}
+function delEvent(id){
+  if(!confirm(t('ev_del_conf'))) return;
+  sb.from('chair_events').delete().eq('id', id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderEvents();
+  });
+}
+var attEventId = null, attSel = {};
+function openAtt(id){
+  var e = evData.events.filter(function(x){ return x.id === id; })[0]; if(!e) return;
+  attEventId = id; attSel = {};
+  evData.att.forEach(function(a){ if(a.event_id === id) attSel[a.profile_id] = true; });
+  document.getElementById('attTitle').textContent = e.title + ' · ' + evDate(e.event_date);
+  document.getElementById('attSearch').value = '';
+  msgSet('attMsg','','');
+  renderAttList();
+  document.getElementById('attModal').classList.add('open');
+}
+function closeAtt(){ document.getElementById('attModal').classList.remove('open'); }
+function attFiltered(){
+  var q = (document.getElementById('attSearch').value || '').toLowerCase().trim();
+  return people.filter(function(p){ return !q || (p.name+' '+p.dept+' '+p.role).toLowerCase().indexOf(q) >= 0; })
+    .sort(function(a,b){ return a.name.localeCompare(b.name); });
+}
+function renderAttList(){
+  var list = attFiltered();
+  document.getElementById('attList').innerHTML = list.map(function(p){
+    return '<label><input type="checkbox" '+(attSel[p.id]?'checked':'')+' onchange="attToggle(\''+p.id+'\',this.checked)"><span>'+escHtml(p.name)+'<small>'+escHtml(p.dept)+'</small></span></label>';
+  }).join('');
+  attCountUpd();
+}
+function attToggle(id, on){ if(on) attSel[id] = true; else delete attSel[id]; attCountUpd(); }
+function attAll(on){ attFiltered().forEach(function(p){ if(on) attSel[p.id] = true; else delete attSel[p.id]; }); renderAttList(); }
+function attCountUpd(){ document.getElementById('attCount').textContent = Object.keys(attSel).length + ' ' + t('ev_selected'); }
+function saveAtt(){
+  sb.rpc('set_event_attendance', { p_event: attEventId, p_profiles: Object.keys(attSel) }).then(function(r){
+    if(r.error){ msgSet('attMsg','err',r.error.message); return; }
+    closeAtt(); renderEvents();
+  });
+}
+function setStPeriod(x){ stPeriod = x; renderStats(); }
+function bar(label, val, total, extra){
+  var pct = total ? Math.round(val*100/total) : 0;
+  return '<div class="bar-row"><div class="bl" title="'+escHtml(label)+'">'+escHtml(label)+'</div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><div class="bv">'+(extra!==undefined?extra:val+' · '+pct+'%')+'</div></div>';
+}
+function renderStats(){
+  var el = document.getElementById('chairBody'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  loadEvData().then(function(){
+    var days = { all: 0, year: 365, '90': 90, '30': 30 }[stPeriod] || 0;
+    var since = days ? new Date(Date.now() - days*86400000).toISOString().slice(0,10) : '';
+    var evs = evData.events.filter(function(e){ return !since || e.event_date >= since; });
+    var ids = {}; evs.forEach(function(e){ ids[e.id] = true; });
+    var att = evData.att.filter(function(a){ return ids[a.event_id]; });
+    var total = people.length;
+    var h = '<div class="st-period">'+[['all','st_p_all'],['year','st_p_year'],['90','st_p_90'],['30','st_p_30']].map(function(x){
+      return '<button class="'+(stPeriod===x[0]?'on':'')+'" onclick="setStPeriod(\''+x[0]+'\')">'+t(x[1])+'</button>'; }).join('')+'</div>';
+    if(!evs.length){ el.innerHTML = h + '<p style="color:var(--ink-faint);margin:0 8px;">'+t('st_none')+'</p>'; return; }
+    var perEv = {}; att.forEach(function(a){ perEv[a.event_id] = (perEv[a.event_id]||0) + 1; });
+    var perPerson = {}; att.forEach(function(a){ perPerson[a.profile_id] = (perPerson[a.profile_id]||0) + 1; });
+    var uniq = Object.keys(perPerson).length;
+    var avg = att.length / evs.length;
+    h += '<div class="kpis">'+
+      '<div class="kpi"><b>'+evs.length+'</b><span>'+t('st_events')+'</span></div>'+
+      '<div class="kpi"><b>'+(Math.round(avg*10)/10)+'</b><span>'+t('st_avg')+(total?' · '+Math.round(avg*100/total)+'%':'')+'</span></div>'+
+      '<div class="kpi"><b>'+(total?Math.round(uniq*100/total):0)+'%</b><span>'+t('st_unique')+' ('+uniq+'/'+total+')</span></div>'+
+      '<div class="kpi"><b>'+att.length+'</b><span>'+t('st_total_att')+'</span></div></div>';
+    // әр іс-шара бойынша
+    var chrono = evs.slice().sort(function(a,b){ return a.event_date < b.event_date ? -1 : 1; }).slice(-12);
+    h += '<div class="st-card"><h3>'+t('st_by_event')+'</h3>'+chrono.map(function(e){
+      return bar(evDate(e.event_date).slice(0,5)+' '+e.title, perEv[e.id]||0, total); }).join('')+'</div>';
+    // түрлері бойынша
+    var kinds = {}; evs.forEach(function(e){ var k = e.kind||'other'; (kinds[k] = kinds[k] || {n:0,a:0}); kinds[k].n++; kinds[k].a += (perEv[e.id]||0); });
+    h += '<div class="st-card"><h3>'+t('st_by_kind')+'</h3>'+Object.keys(kinds).map(function(k){
+      var o = kinds[k]; return bar(t('ev_k_'+k)+' ('+o.n+')', Math.round(o.a/o.n*10)/10, total, (Math.round(o.a/o.n*10)/10)+' · '+(total?Math.round(o.a/o.n*100/total):0)+'%'); }).join('')+'</div>';
+    // ең белсенділер
+    var byId = {}; people.forEach(function(p){ byId[p.id] = p; });
+    var top = Object.keys(perPerson).filter(function(id){ return byId[id]; }).sort(function(a,b){ return perPerson[b]-perPerson[a]; }).slice(0,10);
+    h += '<div class="st-card"><h3>'+t('st_top')+'</h3>'+top.map(function(id){
+      return bar(byId[id].name, perPerson[id], evs.length, perPerson[id]+'/'+evs.length+' '+t('st_times')); }).join('')+'</div>';
+    // қатыспағандар
+    var never = people.filter(function(p){ return !perPerson[p.id]; }).sort(function(a,b){ return a.name.localeCompare(b.name); });
+    if(never.length) h += '<div class="st-card"><details><summary style="cursor:pointer;font-weight:700;">'+t('st_never')+' ('+never.length+')</summary><div style="margin-top:8px;font-size:14px;line-height:1.7;">'+
+      never.map(function(p){ return escHtml(p.name); }).join('<br>')+'</div></details></div>';
+    el.innerHTML = h;
+  }).catch(function(err){ el.innerHTML = '<p style="color:#c0392b;">'+escHtml(err.message||String(err))+'</p>'; });
+}
+
 function decideApp(id, ok){
   sb.rpc('decide_application', { p_id: id, p_accept: ok }).then(function(r){
     if(r.error){ alert(r.error.message); return; }
