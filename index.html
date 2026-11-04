@@ -537,6 +537,9 @@
   .fnd-head h2{margin:0 0 4px;font-size:24px;}
   .fnd-head p{margin:0;color:var(--ink-soft);font-size:14.5px;}
   .fnd-vk{display:inline-block;margin:0 10px 14px 0;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none;border-bottom:1px dashed var(--blue);}
+  .fnd-vkrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:2px 0 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;}
+  .fnd-vkrow .fnd-vk{margin:0;border:none;font-size:15px;}
+  .fnd-qrbtn{border:1px solid var(--blue);background:#fff;color:var(--blue);border-radius:8px;padding:6px 14px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;}
   .fnd-note{background:#fff4d6;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:14px;line-height:1.55;}
   .fnd-cap{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 6px 2px;}
   .fnd-list{margin:6px 0 0;padding-left:22px;font-size:14.5px;line-height:1.75;}
@@ -1427,6 +1430,7 @@
       <div class="foot-qrs">
         <button type="button" class="foot-qr" onclick="openQR('ig')" aria-label="QR Instagram"><canvas id="fqIg" width="220" height="220"></canvas><span data-i18n="qr_ig">Instagram парақшасы</span></button>
         <button type="button" class="foot-qr" onclick="openQR('site')" aria-label="QR site"><canvas id="fqSite" width="220" height="220"></canvas><span data-i18n="qr_site">Сайт</span></button>
+        <button type="button" class="foot-qr" onclick="openQR('vk')" aria-label="QR VK"><canvas id="fqVk" width="220" height="220"></canvas><span data-i18n="qr_vk">ВКонтакте архиві</span></button>
       </div>
     </div>
   </div>
@@ -3160,6 +3164,7 @@ kk:{
   st_never:'Қатыспағандар',
   st_none:'Таңдалған кезеңде деректер жоқ',
   st_times:'рет',
+  qr_vk:'ВКонтакте архиві', qr_scan_vk:'ЖМК-ның ВКонтактедегі архив суреттері парақшасын ашу үшін сканерлеңіз',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3261,6 +3266,7 @@ ru:{
   st_never:'Не участвовали',
   st_none:'Нет данных за выбранный период',
   st_times:'раз',
+  qr_vk:'Архив во ВКонтакте', qr_scan_vk:'Отсканируйте, чтобы открыть архив фото Совета во ВКонтакте',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3353,6 +3359,7 @@ en:{
   st_never:'Never attended',
   st_none:'No data for this period',
   st_times:'times',
+  qr_vk:'VKontakte archive', qr_scan_vk:'Scan to open the Council photo archive on VKontakte',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -4748,8 +4755,8 @@ function renderFounders(){
     h += '<div class="fnd-slider" id="fndSlider">'+FOUNDER_PHOTOS.map(function(f,i){ return '<img src="'+escHtml(f)+'" class="'+(i===0?'on':'')+'" onclick="window.open(this.src)">'; }).join('')+
       (FOUNDER_PHOTOS.length>1 ? '<button class="pv" onclick="fndGo(-1)">‹</button><button class="nx" onclick="fndGo(1)">›</button><div class="fnd-dots">'+FOUNDER_PHOTOS.map(function(f,i){ return '<i class="'+(i===0?'on':'')+'"></i>'; }).join('')+'</div>' : '')+'</div>';
   }
-  h += '<a class="fnd-vk" href="https://vk.ru/kbm_sms" target="_blank" rel="noopener noreferrer">'+x.vk+'</a>';
-  h += '<details><summary>'+x.more+'</summary>';
+  h += '<div class="fnd-vkrow"><a class="fnd-vk" href="https://vk.ru/kbm_sms" target="_blank" rel="noopener noreferrer">'+x.vk+'</a><button type="button" class="fnd-qrbtn" onclick="openQR(\'vk\')">QR</button></div>';
+  h += '<details open><summary>'+x.more+'</summary>';
   h += '<div class="fnd-box"><h3>'+x.about+'</h3><p>'+x.p1+'</p><p>'+x.p2+'</p></div>';
   h += '<div class="fnd-box"><h3>'+x.staff+'</h3><ol class="fnd-list">'+FOUNDERS.map(function(f){
     return '<li><b>'+escHtml(f.n[L])+'</b> — '+escHtml(x.yr+': '+f.r[L])+(f.lead?' ('+x.lead+')':'')+'</li>';
@@ -4855,6 +4862,7 @@ function nav(route, param){
 /* ===================== QR ===================== */
 function siteUrl(){ return location.origin + '/'; }
 var IG_URL = 'https://www.instagram.com/kbm_jasmaman/';
+var VK_URL = 'https://vk.ru/kbm_sms';
 var qrCur = { url: null, canvasId: 'qrCanvas', file: 'zhmk-site-qr.png' };
 function renderQR(cv, url){
   var q=new ZhmkQR(-1,3); q.addData(url); q.make();
@@ -4868,8 +4876,8 @@ function hideShareIfNone(){
   Array.prototype.forEach.call(document.querySelectorAll('.qr-share-btn'), function(b){ b.classList.add('hidden'); });
 }
 function drawFooterQRs(){
-  var a=document.getElementById('fqIg'), b=document.getElementById('fqSite');
-  try{ if(a) renderQR(a, IG_URL); if(b) renderQR(b, siteUrl()); }catch(e){}
+  var a=document.getElementById('fqIg'), b=document.getElementById('fqSite'), c=document.getElementById('fqVk');
+  try{ if(a) renderQR(a, IG_URL); if(b) renderQR(b, siteUrl()); if(c) renderQR(c, VK_URL); }catch(e){}
 }
 function drawQR(){
   var cv=document.getElementById('qrCanvas'); if(!cv) return;
@@ -4879,10 +4887,10 @@ function drawQR(){
   hideShareIfNone();
 }
 function openQR(kind){
-  var isIg = kind === 'ig';
-  qrCur = { url: isIg ? IG_URL : siteUrl(), canvasId: 'qrModalCanvas', file: isIg ? 'kbm-jasmaman-instagram-qr.png' : 'zhmk-site-qr.png' };
-  document.getElementById('qrModalTitle').textContent = t(isIg ? 'qr_ig' : 'qr_site');
-  document.getElementById('qrModalDesc').textContent = t(isIg ? 'qr_scan_ig' : 'qr_scan_site');
+  var isIg = kind === 'ig', isVk = kind === 'vk';
+  qrCur = { url: isVk ? VK_URL : (isIg ? IG_URL : siteUrl()), canvasId: 'qrModalCanvas', file: isVk ? 'zhmk-vk-archive-qr.png' : (isIg ? 'kbm-jasmaman-instagram-qr.png' : 'zhmk-site-qr.png') };
+  document.getElementById('qrModalTitle').textContent = t(isVk ? 'qr_vk' : (isIg ? 'qr_ig' : 'qr_site'));
+  document.getElementById('qrModalDesc').textContent = t(isVk ? 'qr_scan_vk' : (isIg ? 'qr_scan_ig' : 'qr_scan_site'));
   document.getElementById('qrModalUrl').textContent = qrCur.url;
   renderQR(document.getElementById('qrModalCanvas'), qrCur.url);
   hideShareIfNone();
