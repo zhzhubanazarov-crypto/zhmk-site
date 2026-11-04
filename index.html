@@ -161,9 +161,11 @@
   @media (prefers-reduced-motion: reduce){body::after{animation:none;}}
 
   /* ===== header ===== */
+  body{padding-top:env(safe-area-inset-top,0px);}
+  .sa-cover{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--card);z-index:60;pointer-events:none;}
   .site-header{
     position:sticky;
-    top:0;
+    top:env(safe-area-inset-top,0px);
     z-index:20;
     display:flex;
     align-items:center;
@@ -171,7 +173,7 @@
     padding:10px 28px;
     background:var(--card);
     border-bottom:1px solid var(--line);
-    flex-wrap:wrap;    padding-top:calc(10px + env(safe-area-inset-top,0px));
+    flex-wrap:wrap;
   }
   .logo-group{display:flex;align-items:center;gap:12px;cursor:pointer;}
   .logo-group img{object-fit:contain;}
@@ -534,6 +536,7 @@
   .fnd-head{border-left:5px solid var(--gold);padding-left:14px;margin-bottom:16px;}
   .fnd-head h2{margin:0 0 4px;font-size:24px;}
   .fnd-head p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+  .fnd-vk{display:inline-block;margin:0 10px 14px 0;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none;border-bottom:1px dashed var(--blue);}
   .fnd-note{background:#fff4d6;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:14px;line-height:1.55;}
   .fnd-cap{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 6px 2px;}
   .fnd-list{margin:6px 0 0;padding-left:22px;font-size:14.5px;line-height:1.75;}
@@ -648,7 +651,7 @@
     .u-row{flex-direction:column;align-items:flex-start;}
     .u-row .u-right{text-align:left;}
     .foot-inner{grid-template-columns:1fr;gap:20px;padding:26px 16px 14px;}
-    .site-header{padding:10px 14px;gap:10px;padding-top:calc(10px + env(safe-area-inset-top,0px));}
+    .site-header{padding:10px 14px;gap:10px;}
     .site-header{flex-wrap:nowrap;}
     #langSwitchTop{display:none;}
     .site-actions{gap:8px;min-width:0;}
@@ -790,6 +793,7 @@
 </style>
 </head>
 <body>
+<div class="sa-cover"></div>
 
 <a class="ig-bar" href="https://www.instagram.com/kbm_jasmaman/" target="_blank" rel="noopener noreferrer"><svg viewBox='0 0 24 24' width='15' height='15' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='5'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' r='1' fill='currentColor'/></svg><span>Instagram: <b>@kbm_jasmaman</b></span></a>
 <div class="demo-banner hidden" id="demoBanner" data-i18n="banner_loading">🔗 Деректер Supabase-тен жүктелуде…</div>
@@ -4719,19 +4723,19 @@ var FND_TXT = {
     p1:'«Қаражанбасмұнай» АҚ жас мамандар кеңесі 2013 жылғы 1 тамыздан бастап құрылды.',
     p2:'Кеңес жас мамандардың бейімделуіне және бекітілуіне, еңбек белсенділігін дамытуға, жас мамандардың бастамаларына, іскерлік біліктілігін көтеруге ықпал тигізуге бағытталған «ҚазМұнайГаз» БӨ» АҚ стратегиясын жүзеге асырудағы жұмысшы жастарды тарту мақсатында құрылды.',
     crit:'Кеңес құрамына кіру талаптары', c:['Компания қоғамдық өміріне белсенді атсалысуға ниет білдірген жас мамандар;','Жоғары немесе (арнаулы) орта білімі бар жұмыскерлер;','Жас жағынан 30-дан аспайтын жас мамандар.'],
-    staff:'2013 жылғы уақытша штаб құрамы', lead:'штаб төрағасы', member:'штаб мүшесі', photos:'Алғашқы жылдардағы архив суреттері', more:'Толығырақ: Кеңес құрылуы және уақытша штаб', asof:'ℹ️ Төмендегі ақпарат 2013 жылғы жағдай бойынша берілген. Қызметтер мен жұмыс орындары сол кездегідей көрсетілген, қазіргі қызметтерімен сәйкес келмеуі мүмкін.', yr:'2013 ж.' },
+    staff:'2013 жылғы уақытша штаб құрамы', lead:'штаб төрағасы', member:'штаб мүшесі', photos:'Алғашқы жылдардағы архив суреттері', more:'Толығырақ: Кеңес құрылуы және уақытша штаб', vk:'ВКонтактедегі толық архив суреттері →', asof:'ℹ️ Төмендегі ақпарат 2013 жылғы жағдай бойынша берілген. Қызметтер мен жұмыс орындары сол кездегідей көрсетілген, қазіргі қызметтерімен сәйкес келмеуі мүмкін.', yr:'2013 ж.' },
   ru:{ h:'Основатели', sub:'Совет молодых специалистов создан в 2013 году',
     about:'О создании Совета',
     p1:'Совет молодых специалистов АО «Каражанбасмунай» создан с 1 августа 2013 года.',
     p2:'Совет создаётся в целях вовлечения трудовой молодёжи в реализацию стратегии АО «РД «КазМунайГаз», направленной на содействие в адаптации и закреплении молодых специалистов в Обществе, развитие трудовой активности, инициативы молодых специалистов, повышение деловой квалификации.',
     crit:'Критерии вступления в Совет', c:['Молодые специалисты, желающие активно принимать участие в общественной жизни Компании;','Работники, имеющие высшее или среднее (специальное) образование;','Молодые специалисты, чей возраст не превышает 30 лет.'],
-    staff:'Временный штаб 2013 года', lead:'председатель штаба', member:'член штаба', photos:'Архивные фото первых лет', more:'Подробнее: создание Совета и временный штаб', asof:'ℹ️ Информация ниже приведена по состоянию на 2013 год. Должности и места работы указаны так, как было тогда, и могут не совпадать с нынешними.', yr:'2013 г.' },
+    staff:'Временный штаб 2013 года', lead:'председатель штаба', member:'член штаба', photos:'Архивные фото первых лет', more:'Подробнее: создание Совета и временный штаб', vk:'Полный архив фото во ВКонтакте →', asof:'ℹ️ Информация ниже приведена по состоянию на 2013 год. Должности и места работы указаны так, как было тогда, и могут не совпадать с нынешними.', yr:'2013 г.' },
   en:{ h:'Founders', sub:'The Young Specialists Council was established in 2013',
     about:'About the founding',
     p1:'The Young Specialists Council of JSC Karazhanbasmunai was established on 1 August 2013.',
     p2:'The Council was created to involve young employees in implementing the KazMunayGas strategy: supporting the adaptation and retention of young specialists in the Company, developing their work activity and initiative, and raising their professional qualifications.',
     crit:'Membership criteria', c:['Young specialists who want to take an active part in the life of the Company;','Employees with higher or secondary (vocational) education;','Young specialists aged 30 or under.'],
-    staff:'Temporary staff of 2013 (founding team)', lead:'head of staff', member:'staff member', photos:'Archive photos from the early years', more:'Read more: founding of the Council and temporary staff', asof:'ℹ️ The information below is as of 2013. Positions and workplaces are shown as they were then and may differ from the current ones.', yr:'2013' }
+    staff:'Temporary staff of 2013 (founding team)', lead:'head of staff', member:'staff member', photos:'Archive photos from the early years', more:'Read more: founding of the Council and temporary staff', vk:'Full photo archive on VKontakte →', asof:'ℹ️ The information below is as of 2013. Positions and workplaces are shown as they were then and may differ from the current ones.', yr:'2013' }
 };
 var fndIdx = 0, fndTimer = null;
 function renderFounders(){
@@ -4744,6 +4748,7 @@ function renderFounders(){
     h += '<div class="fnd-slider" id="fndSlider">'+FOUNDER_PHOTOS.map(function(f,i){ return '<img src="'+escHtml(f)+'" class="'+(i===0?'on':'')+'" onclick="window.open(this.src)">'; }).join('')+
       (FOUNDER_PHOTOS.length>1 ? '<button class="pv" onclick="fndGo(-1)">‹</button><button class="nx" onclick="fndGo(1)">›</button><div class="fnd-dots">'+FOUNDER_PHOTOS.map(function(f,i){ return '<i class="'+(i===0?'on':'')+'"></i>'; }).join('')+'</div>' : '')+'</div>';
   }
+  h += '<a class="fnd-vk" href="https://vk.ru/kbm_sms" target="_blank" rel="noopener noreferrer">'+x.vk+'</a>';
   h += '<details><summary>'+x.more+'</summary>';
   h += '<div class="fnd-box"><h3>'+x.about+'</h3><p>'+x.p1+'</p><p>'+x.p2+'</p></div>';
   h += '<div class="fnd-box"><h3>'+x.staff+'</h3><ol class="fnd-list">'+FOUNDERS.map(function(f){
