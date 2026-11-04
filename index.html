@@ -527,7 +527,10 @@
   .st-period button{border:1px solid var(--line);background:var(--card);border-radius:100px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink);}
   .st-period button.on{background:var(--gold);border-color:var(--gold);font-weight:700;}
   @media (max-width:640px){.ev-form{grid-template-columns:1fr 1fr;}.ev-form input:first-child{grid-column:1/-1;}.kpis{grid-template-columns:1fr 1fr;}.ev-row,.st-card,.st-period,.kpis,.ev-form,.chair-tabs{margin-left:0;margin-right:0;}.bar-row{grid-template-columns:90px 1fr 62px;}}
-  .fnd{margin:46px 0 10px;}
+  .fnd{margin:6px 0 28px;}
+  .fnd details>summary{cursor:pointer;list-style:none;display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:100px;padding:9px 20px;font-weight:700;font-size:14px;color:var(--blue);margin-bottom:14px;}
+  .fnd details>summary::-webkit-details-marker{display:none;}
+  .fnd details[open]>summary{background:var(--blue);color:#fff;border-color:var(--blue);}
   .fnd-head{border-left:5px solid var(--gold);padding-left:14px;margin-bottom:16px;}
   .fnd-head h2{margin:0 0 4px;font-size:24px;}
   .fnd-head p{margin:0;color:var(--ink-soft);font-size:14.5px;}
@@ -804,7 +807,7 @@
     <button data-route="events" onclick="nav('events')" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history')" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
-    <button data-route="meet" onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="meet" onclick="nav('meet')" data-i18n="nav_meet">TANYS BOL</button>
     <button data-route="perks" onclick="nav('perks')" data-i18n="nav_perks">Жеңілдіктер</button>
     <button data-route="chair" onclick="nav('chair')" data-i18n="nav_chair" class="hidden" id="navChairTop">Төраға</button>
     <button data-route="admin" onclick="nav('admin')" data-i18n="nav_admin" class="hidden" id="navAdminTop">Админ</button>
@@ -832,7 +835,7 @@
     <button data-route="events" onclick="nav('events');closeDrawer()" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history');closeDrawer()" data-i18n="nav_history">Тарих</button>
     <button data-route="feed" onclick="nav('feed');closeDrawer()" data-i18n="nav_feed">NE ANGIME</button>
-    <button data-route="meet" onclick="nav('meet');closeDrawer()" data-i18n="nav_meet">Таныс бол</button>
+    <button data-route="meet" onclick="nav('meet');closeDrawer()" data-i18n="nav_meet">TANYS BOL</button>
     <button data-route="perks" onclick="nav('perks');closeDrawer()" data-i18n="nav_perks">Жеңілдіктер</button>
     <button data-route="chair" onclick="nav('chair');closeDrawer()" data-i18n="nav_chair" class="hidden" id="navChairDrawer">Төраға</button>
     <button data-route="admin" onclick="nav('admin');closeDrawer()" data-i18n="nav_admin" class="hidden" id="navAdminDrawer">Админ</button>
@@ -1159,8 +1162,8 @@
         <button class="btn btn-primary" onclick="submitHistory()" data-i18n="ev_btn_create">Қосу</button>
       </div>
     </div>
-    <div id="historyList"></div>
     <div id="foundersSec"></div>
+    <div id="historyList"></div>
   </section>
 
   <!-- ============ НЕ ӘҢГІМЕ ============ -->
@@ -1186,7 +1189,7 @@
   <section id="view-meet" class="hidden">
     <div class="page-head">
       <div>
-        <h2 data-i18n="nav_meet">Таныс бол</h2>
+        <h2 data-i18n="nav_meet">TANYS BOL</h2>
         <p data-i18n="meet_desc">Жас мамандар туралы бір минуттық бейнелер — әріптестеріңізбен танысыңыз.</p>
       </div>
     </div>
@@ -1409,7 +1412,7 @@
       <h4 data-i18n="foot_links">Пайдалы сілтемелер</h4>
       <button onclick="openLetter('letter')" data-i18n="foot_letter">Төрағаға хат жазу</button>
       <button onclick="nav('cup')" data-i18n="foot_bracket">Турнир кестесі</button>
-      <button onclick="nav('meet')" data-i18n="nav_meet">Таныс бол</button>
+      <button onclick="nav('meet')" data-i18n="nav_meet">TANYS BOL</button>
       <button onclick="nav('perks')" data-i18n="nav_perks">Жеңілдіктер</button>
       <button onclick="nav('qr')" data-i18n="qr_foot">QR код</button>
       <button onclick="toggleSupport()" data-i18n="foot_support">Қолдау қызметі</button>
@@ -3173,7 +3176,7 @@ kk:{
   hero_title:'Төрағаға хат',
   hero_desc:'Жас мамандар кеңесін жақсарту бойынша немесе жаңа іс-шаралар бойынша ұсынысыңыз болса, не төрағаға сұрағыңыз болса — тікелей жазыңыз.',
   hero_write:'✉️ Хат жазу', hero_ask:'❓ Сұрақ қою',
-  nav_meet:'Таныс бол', nav_chair:'Төраға',
+  nav_meet:'TANYS BOL', nav_chair:'Төраға',
   meet_desc:'Жас мамандар туралы бір минуттық бейнелер — әріптестеріңізбен танысыңыз.',
   meet_empty:'Бейнелер жақында қосылады.',
   tick_title:'Біздің осы жылы атқарған шаруаларымыз',
@@ -3201,7 +3204,7 @@ kk:{
   flt_dept_all:'Барлық бөлім', flt_prof_all:'Барлық мамандық', flt_skill_all:'Барлық қабілет',
   sup_fab:'Қолдау', sup_title:'Қолдау қызметі', sup_ph:'Хабарлама жазыңыз…',
   sup_t1:'Сайтты жақсарту бойынша ұсыныстарыңыз бар ма?', sup_t2:'Басқа айтар нәрсеңіз бар ма?', sup_pick:'Қандай мәселе бойынша жазғыңыз келеді?', sup_topic:'Тақырып: ',
-  igp_meet:'«Таныс бол» бөлімі (бір минуттық бейне)', igp_meet_on:'Таныс бол', igp_meet_off:'Таныс болдан алу', igp_meet_add:'Таныс болға қосу',
+  igp_meet:'«TANYS BOL» бөлімі (бір минуттық бейне)', igp_meet_on:'TANYS BOL', igp_meet_off:'TANYS BOL-дан алу', igp_meet_add:'TANYS BOL-ға қосу',
   adm_support:'Қолдау қызметі — хабарламалар', h_achv:'🏆 Жетістіктері', me_f_achv:'Жетістіктерім (әр жолға біреуден)',
   prof_all:'Басқа'
 },
@@ -3274,7 +3277,7 @@ ru:{
   hero_title:'Письмо председателю',
   hero_desc:'Есть предложения по улучшению Совета, новым мероприятиям или вопрос к председателю — напишите напрямую.',
   hero_write:'✉️ Написать', hero_ask:'❓ Задать вопрос',
-  nav_meet:'Познакомься', nav_chair:'Председатель',
+  nav_meet:'TANYS BOL', nav_chair:'Председатель',
   meet_desc:'Минутные видео о молодых специалистах — познакомьтесь с коллегами.', meet_empty:'Видео скоро появятся.',
   tick_title:'Что мы сделали в этом году', quotes_title:'Что говорят молодые специалисты',
   foot_links:'Полезные ссылки', foot_letter:'Написать председателю', foot_bracket:'Турнирная сетка', foot_support:'Служба поддержки',
@@ -3294,7 +3297,7 @@ ru:{
   flt_dept_all:'Все отделы', flt_prof_all:'Все профессии', flt_skill_all:'Все навыки',
   sup_fab:'Поддержка', sup_title:'Служба поддержки', sup_ph:'Напишите сообщение…',
   sup_t1:'Есть предложения по улучшению сайта?', sup_t2:'Хотите сказать что-то другое?', sup_pick:'По какому вопросу хотите написать?', sup_topic:'Тема: ',
-  igp_meet:'Раздел «Познакомься» (минутное видео)', igp_meet_on:'Познакомься', igp_meet_off:'Убрать из «Познакомься»', igp_meet_add:'В «Познакомься»',
+  igp_meet:'Раздел «TANYS BOL» (минутное видео)', igp_meet_on:'TANYS BOL', igp_meet_off:'Убрать из «TANYS BOL»', igp_meet_add:'Добавить в «TANYS BOL»',
   adm_support:'Служба поддержки — сообщения', h_achv:'🏆 Достижения', me_f_achv:'Мои достижения (по одному в строке)', prof_all:'Другое'
 },
 en:{
@@ -3366,7 +3369,7 @@ en:{
   hero_title:'Letter to the Chairman',
   hero_desc:'Have a suggestion to improve the Council or a new event, or a question for the chairman? Write directly.',
   hero_write:'✉️ Write a letter', hero_ask:'❓ Ask a question',
-  nav_meet:'Meet us', nav_chair:'Chairman',
+  nav_meet:'TANYS BOL', nav_chair:'Chairman',
   meet_desc:'One-minute videos about young specialists — get to know your colleagues.', meet_empty:'Videos coming soon.',
   tick_title:'What we have done this year', quotes_title:'What young specialists say',
   foot_links:'Useful links', foot_letter:'Write to the chairman', foot_bracket:'Tournament bracket', foot_support:'Support',
@@ -3386,7 +3389,7 @@ en:{
   flt_dept_all:'All departments', flt_prof_all:'All professions', flt_skill_all:'All skills',
   sup_fab:'Support', sup_title:'Support', sup_ph:'Write a message…',
   sup_t1:'Have suggestions to improve the site?', sup_t2:'Anything else to say?', sup_pick:'What would you like to write about?', sup_topic:'Topic: ',
-  igp_meet:'"Meet us" section (one-minute video)', igp_meet_on:'Meet us', igp_meet_off:'Remove from Meet us', igp_meet_add:'Add to Meet us',
+  igp_meet:'"TANYS BOL" section (one-minute video)', igp_meet_on:'TANYS BOL', igp_meet_off:'Remove from TANYS BOL', igp_meet_add:'Add to TANYS BOL',
   adm_support:'Support — messages', h_achv:'🏆 Achievements', me_f_achv:'My achievements (one per line)', prof_all:'Other'
 }};
 (function(){ ['kk','ru','en'].forEach(function(l){ if(I18N[l]) Object.keys(I18N_NEW[l]).forEach(function(k){ I18N[l][k]=I18N_NEW[l][k]; }); }); })();
@@ -4716,19 +4719,19 @@ var FND_TXT = {
     p1:'«Қаражанбасмұнай» АҚ жас мамандар кеңесі 2013 жылғы 1 тамыздан бастап құрылды.',
     p2:'Кеңес жас мамандардың бейімделуіне және бекітілуіне, еңбек белсенділігін дамытуға, жас мамандардың бастамаларына, іскерлік біліктілігін көтеруге ықпал тигізуге бағытталған «ҚазМұнайГаз» БӨ» АҚ стратегиясын жүзеге асырудағы жұмысшы жастарды тарту мақсатында құрылды.',
     crit:'Кеңес құрамына кіру талаптары', c:['Компания қоғамдық өміріне белсенді атсалысуға ниет білдірген жас мамандар;','Жоғары немесе (арнаулы) орта білімі бар жұмыскерлер;','Жас жағынан 30-дан аспайтын жас мамандар.'],
-    staff:'2013 жылғы уақытша штаб құрамы', lead:'штаб төрағасы', member:'штаб мүшесі', photos:'Алғашқы жылдардағы архив суреттері', asof:'ℹ️ Төмендегі ақпарат 2013 жылғы жағдай бойынша берілген. Қызметтер мен жұмыс орындары сол кездегідей көрсетілген, қазіргі қызметтерімен сәйкес келмеуі мүмкін.', yr:'2013 ж.' },
+    staff:'2013 жылғы уақытша штаб құрамы', lead:'штаб төрағасы', member:'штаб мүшесі', photos:'Алғашқы жылдардағы архив суреттері', more:'Толығырақ: Кеңес құрылуы және уақытша штаб', asof:'ℹ️ Төмендегі ақпарат 2013 жылғы жағдай бойынша берілген. Қызметтер мен жұмыс орындары сол кездегідей көрсетілген, қазіргі қызметтерімен сәйкес келмеуі мүмкін.', yr:'2013 ж.' },
   ru:{ h:'Основатели', sub:'Совет молодых специалистов создан в 2013 году',
     about:'О создании Совета',
     p1:'Совет молодых специалистов АО «Каражанбасмунай» создан с 1 августа 2013 года.',
     p2:'Совет создаётся в целях вовлечения трудовой молодёжи в реализацию стратегии АО «РД «КазМунайГаз», направленной на содействие в адаптации и закреплении молодых специалистов в Обществе, развитие трудовой активности, инициативы молодых специалистов, повышение деловой квалификации.',
     crit:'Критерии вступления в Совет', c:['Молодые специалисты, желающие активно принимать участие в общественной жизни Компании;','Работники, имеющие высшее или среднее (специальное) образование;','Молодые специалисты, чей возраст не превышает 30 лет.'],
-    staff:'Временный штаб 2013 года', lead:'председатель штаба', member:'член штаба', photos:'Архивные фото первых лет', asof:'ℹ️ Информация ниже приведена по состоянию на 2013 год. Должности и места работы указаны так, как было тогда, и могут не совпадать с нынешними.', yr:'2013 г.' },
+    staff:'Временный штаб 2013 года', lead:'председатель штаба', member:'член штаба', photos:'Архивные фото первых лет', more:'Подробнее: создание Совета и временный штаб', asof:'ℹ️ Информация ниже приведена по состоянию на 2013 год. Должности и места работы указаны так, как было тогда, и могут не совпадать с нынешними.', yr:'2013 г.' },
   en:{ h:'Founders', sub:'The Young Specialists Council was established in 2013',
     about:'About the founding',
     p1:'The Young Specialists Council of JSC Karazhanbasmunai was established on 1 August 2013.',
     p2:'The Council was created to involve young employees in implementing the KazMunayGas strategy: supporting the adaptation and retention of young specialists in the Company, developing their work activity and initiative, and raising their professional qualifications.',
     crit:'Membership criteria', c:['Young specialists who want to take an active part in the life of the Company;','Employees with higher or secondary (vocational) education;','Young specialists aged 30 or under.'],
-    staff:'Temporary staff of 2013 (founding team)', lead:'head of staff', member:'staff member', photos:'Archive photos from the early years', asof:'ℹ️ The information below is as of 2013. Positions and workplaces are shown as they were then and may differ from the current ones.', yr:'2013' }
+    staff:'Temporary staff of 2013 (founding team)', lead:'head of staff', member:'staff member', photos:'Archive photos from the early years', more:'Read more: founding of the Council and temporary staff', asof:'ℹ️ The information below is as of 2013. Positions and workplaces are shown as they were then and may differ from the current ones.', yr:'2013' }
 };
 var fndIdx = 0, fndTimer = null;
 function renderFounders(){
@@ -4741,10 +4744,11 @@ function renderFounders(){
     h += '<div class="fnd-slider" id="fndSlider">'+FOUNDER_PHOTOS.map(function(f,i){ return '<img src="'+escHtml(f)+'" class="'+(i===0?'on':'')+'" onclick="window.open(this.src)">'; }).join('')+
       (FOUNDER_PHOTOS.length>1 ? '<button class="pv" onclick="fndGo(-1)">‹</button><button class="nx" onclick="fndGo(1)">›</button><div class="fnd-dots">'+FOUNDER_PHOTOS.map(function(f,i){ return '<i class="'+(i===0?'on':'')+'"></i>'; }).join('')+'</div>' : '')+'</div>';
   }
+  h += '<details><summary>'+x.more+'</summary>';
   h += '<div class="fnd-box"><h3>'+x.about+'</h3><p>'+x.p1+'</p><p>'+x.p2+'</p></div>';
   h += '<div class="fnd-box"><h3>'+x.staff+'</h3><ol class="fnd-list">'+FOUNDERS.map(function(f){
     return '<li><b>'+escHtml(f.n[L])+'</b> — '+escHtml(x.yr+': '+f.r[L])+(f.lead?' ('+x.lead+')':'')+'</li>';
-  }).join('')+'</ol></div></div>';
+  }).join('')+'</ol></div></details></div>';
   el.innerHTML = h;
   fndIdx = 0;
   if(fndTimer){ clearInterval(fndTimer); fndTimer = null; }
