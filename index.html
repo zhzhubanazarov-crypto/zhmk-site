@@ -499,6 +499,25 @@
   .chair-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 8px 16px;}
   .chair-tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:100px;padding:9px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;}
   .chair-tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .pst-sec{margin:6px 0 22px;}
+  .pst-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+  .pst-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s;text-align:left;}
+  .pst-card:hover{transform:translateY(-2px);}
+  .pst-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--gold-soft);}
+  .pst-card .pst-b{padding:14px 16px 16px;}
+  .pst-badge{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;border-radius:100px;padding:3px 10px;background:var(--gold-soft);color:#7a5c14;margin-bottom:8px;}
+  .pst-badge.win{background:var(--blue);color:#fff;}
+  .pst-card h3{margin:0 0 6px;font-size:17px;line-height:1.3;}
+  .pst-card p{margin:0;color:var(--ink-faint);font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .pst-full{white-space:pre-line;line-height:1.55;font-size:15px;}
+  .pst-full img{width:100%;border-radius:12px;margin-bottom:12px;display:block;}
+  .wins-year{margin:26px 0 12px;font-size:20px;color:var(--blue);}
+  .pst-form{display:grid;gap:8px;margin:0 8px 18px;}
+  .pst-form input,.pst-form select,.pst-form textarea{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--card);color:var(--ink);min-width:0;width:100%;box-sizing:border-box;}
+  .pst-form .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .pst-form details{border:1px dashed var(--line);border-radius:10px;padding:8px 12px;}
+  .pst-form details summary{cursor:pointer;font-size:13.5px;color:var(--ink-faint);}
+  @media (max-width:640px){.pst-form{margin-left:0;margin-right:0;}.pst-grid{grid-template-columns:1fr;}}
   .ev-form{display:grid;grid-template-columns:1fr 150px 150px auto;gap:8px;margin:0 8px 18px;}
   .ev-form input,.ev-form select{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--card);color:var(--ink);min-width:0;}
   .ev-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 8px 10px;}
@@ -566,6 +585,22 @@
   .fnd-dots i.on{background:#fff;}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:50;align-items:center;justify-content:center;padding:16px;}
   .modal-overlay.open{display:flex;}
+  .pst-media{position:relative;}.pst-play{position:absolute;right:12px;bottom:12px;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;padding-left:3px;}
+  .pst-vid{width:100%;max-width:100%;height:auto;max-height:58vh;object-fit:contain;border-radius:12px;background:#000;display:block;margin-bottom:10px;}
+  #posterModal .modal-box{min-width:0;max-width:min(460px,100%);}
+  #posterModal .hm-body{min-width:0;}
+  .pst-who{font-size:12.5px;color:var(--gold,#b8860b);font-weight:600;margin:2px 0 4px;}
+  .pst-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pst-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer;color:inherit;font-family:inherit;}
+  .pst-res{display:grid;gap:2px;}.pst-res div{padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);}
+  .pst-whoBox{display:grid;gap:6px;}
+  .vis-chart{display:flex;align-items:flex-end;gap:3px;height:90px;}
+  .vis-chart i{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:3px;}
+  .bday-over{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,10,24,.82);align-items:center;justify-content:center;padding:20px;}
+  .bday-over.open{display:flex;}
+  .bday-over canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .bday-card{position:relative;background:var(--card);border-radius:20px;padding:28px 22px;text-align:center;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .bday-card .bday-em{font-size:54px;}.bday-card h2{margin:6px 0 10px;}.bday-card p{margin:0 0 16px;color:var(--ink-soft);line-height:1.5;}
   .modal-box{background:var(--card);border-radius:16px;max-width:380px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
   .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 0;}
   .modal-head h3{font-size:17px;margin:0;}
@@ -813,6 +848,7 @@
     <button data-route="ideas" onclick="nav('ideas')" data-i18n="nav_ideas">Жобалар</button>
     <button data-route="events" onclick="nav('events')" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history')" data-i18n="nav_history">Тарих</button>
+    <button data-route="wins" onclick="nav('wins')" data-i18n="nav_wins">Жетістіктер</button>
     <button data-route="feed" onclick="nav('feed')" data-i18n="nav_feed">NE ANGIME</button>
     <button data-route="meet" onclick="nav('meet')" data-i18n="nav_meet">TANYS BOL</button>
     <button data-route="perks" onclick="nav('perks')" data-i18n="nav_perks">Жеңілдіктер</button>
@@ -841,6 +877,7 @@
     <button data-route="ideas" onclick="nav('ideas');closeDrawer()" data-i18n="nav_ideas">Жобалар</button>
     <button data-route="events" onclick="nav('events');closeDrawer()" data-i18n="nav_events">Іс-шаралар</button>
     <button data-route="history" onclick="nav('history');closeDrawer()" data-i18n="nav_history">Тарих</button>
+    <button data-route="wins" onclick="nav('wins');closeDrawer()" data-i18n="nav_wins">Жетістіктер</button>
     <button data-route="feed" onclick="nav('feed');closeDrawer()" data-i18n="nav_feed">NE ANGIME</button>
     <button data-route="meet" onclick="nav('meet');closeDrawer()" data-i18n="nav_meet">TANYS BOL</button>
     <button data-route="perks" onclick="nav('perks');closeDrawer()" data-i18n="nav_perks">Жеңілдіктер</button>
@@ -879,6 +916,7 @@
       <button class="btn btn-gold" onclick="enablePush(true)" data-i18n="push_enable">Қосу</button>
       <button class="btn" onclick="dismissPushBanner()" aria-label="✕">✕</button>
     </div>
+    <div class="pst-sec hidden" id="posterSec"><div class="pst-grid" id="posterHome"></div></div>
     <div class="hero">
       <div>
         <p class="eyebrow" data-i18n="hero_eyebrow">АҚ Қаражанбасмұнай · Жас мамандар кеңесі</p>
@@ -1192,6 +1230,15 @@
     <div id="feedList"></div>
   </section>
 
+  <!-- ============ ЖЕТІСТІКТЕР ============ -->
+  <section id="view-wins" class="hidden">
+    <div class="page-head"><div>
+      <h2 data-i18n="nav_wins">Жетістіктер</h2>
+      <p data-i18n="wins_desc">Жас мамандарымыздың жарыстардағы және іс-шаралардағы жетістіктері.</p>
+    </div></div>
+    <div id="winsList"></div>
+  </section>
+
   <!-- ============ TANYS BOL ============ -->
   <section id="view-meet" class="hidden">
     <div class="page-head">
@@ -1200,6 +1247,7 @@
         <p data-i18n="meet_desc">Жас мамандар туралы бір минуттық бейнелер — әріптестеріңізбен танысыңыз.</p>
       </div>
     </div>
+    <div class="meet-list" id="meetPosters"></div>
     <div class="meet-list" id="meetList"></div>
   </section>
 
@@ -1245,6 +1293,7 @@
         <p data-i18n="admin_desc">Тіркелу сұраныстарын осы жерден бекітесіз немесе қабылдамайсыз.</p>
       </div>
     </div>
+    <div id="adminStats"></div>
     <div id="adminList"></div>
     <div class="page-head" style="margin-top:34px;"><div><h2 data-i18n="adm_users_title">Платформа қолданушылары</h2></div></div>
     <div id="adminUsers"></div>
@@ -1261,6 +1310,12 @@
 </main>
 
 <!-- ============ LETTER MODAL ============ -->
+<div class="modal-overlay" id="posterModal" onclick="if(event.target===this)closePoster()">
+  <div class="modal-box hm-box">
+    <div class="modal-head"><h3 id="pstModalTitle"></h3><button class="modal-close" onclick="closePoster()">✕</button></div>
+    <div class="hm-body" id="pstModalBody"></div>
+  </div>
+</div>
 <div class="modal-overlay" id="histModal" onclick="if(event.target===this)closeHist()">
   <div class="modal-box hm-box">
     <div class="modal-head"><h3 data-i18n="h_profile">Төраға профилі</h3><button class="modal-close" onclick="closeHist()">✕</button></div>
@@ -3165,6 +3220,15 @@ kk:{
   st_none:'Таңдалған кезеңде деректер жоқ',
   st_times:'рет',
   qr_vk:'ВКонтакте архиві', qr_scan_vk:'ЖМК-ның ВКонтактедегі архив суреттері парақшасын ашу үшін сканерлеңіз',
+  nav_wins:'Жетістіктер', wins_desc:'Жас мамандарымыздың жарыстардағы және іс-шаралардағы жетістіктері.', wins_empty:'Жетістіктер жақында қосылады.',
+  ch_tab_posters:'Плакаттар', pst_kind_meet:'🎬 TANYS BOL', pst_kind_win:'🏆 Жетістік', pst_badge_meet:'🎬 TANYS BOL', pst_badge_win:'🏆 Жетістік',
+  pst_title_ph:'Тақырыбы', pst_body_ph:'Мәтіні (қазақша)', pst_more_lang:'Орысша / ағылшынша (міндетті емес)', pst_title_ru:'Заголовок (орыс)', pst_title_en:'Title (English)',
+  pst_body_ru:'Текст (орыс)', pst_body_en:'Text (English)', pst_start:'Басты бетте көрсету басталуы', pst_days:'Неше күн көрсету', pst_image:'Сурет',
+  pst_publish:'Жариялау', pst_need_title:'Тақырыпты жазыңыз.', pst_saved:'Жарияланды ✓', pst_on_home:'Басты бетте', pst_archived:'Басты беттен алынды', pst_again:'↻ Қайта басты бетке', pst_del:'Өшіру', pst_del_q:'Өшіруге сенімдісіз бе?', pst_go_meet:'TANYS BOL бетіне өту', pst_go_wins:'Барлық жетістіктер',
+  pst_days_hint:'0 = басты бетке шығармай, тек «Жетістіктер» архивіне қосу.', pst_who_ph:'Жас маманды іздеу (кімге қатысты)…',
+  vs_title:'📊 Платформаға кіру статистикасы (тек админге)', vs_today:'Бүгін', vs_yest:'Кеше', vs_7:'7 күнде', vs_30:'30 күнде', vs_total:'Барлығы', vs_members:'Тіркелгендер (30 күн)', vs_installed:'Қосымша ретінде (30 күн)', vs_registered:'Тіркелген жас мамандар', vs_hint:'Бір құрылғы бір күнде бір рет есептеледі. Төрағаға көрінбейді.',
+  bday_hi:'Туған күніңізбен', bday_msg:'Біз сізді туған күніңізбен құттықтаймыз! Жас мамандар кеңесі атынан ең жақсы тілектерді жолдаймыз 🎁', bday_ok:'Рақмет! 🎉', bday_preview:'Салют көру',
+  pst_video:'Видео (mp4, 50 МБ-қа дейін)', pst_vid_up:'Видео жүктелуде… күтіңіз', pst_link:'Сілтеме', pst_link_copied:'Сілтеме көшірілді:',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3267,6 +3331,15 @@ ru:{
   st_none:'Нет данных за выбранный период',
   st_times:'раз',
   qr_vk:'Архив во ВКонтакте', qr_scan_vk:'Отсканируйте, чтобы открыть архив фото Совета во ВКонтакте',
+  nav_wins:'Достижения', wins_desc:'Достижения наших молодых специалистов в соревнованиях и мероприятиях.', wins_empty:'Достижения скоро появятся.',
+  ch_tab_posters:'Плакаты', pst_kind_meet:'🎬 TANYS BOL', pst_kind_win:'🏆 Достижение', pst_badge_meet:'🎬 TANYS BOL', pst_badge_win:'🏆 Достижение',
+  pst_title_ph:'Заголовок', pst_body_ph:'Текст (на казахском)', pst_more_lang:'Русский / английский (необязательно)', pst_title_ru:'Заголовок (рус)', pst_title_en:'Title (English)',
+  pst_body_ru:'Текст (рус)', pst_body_en:'Text (English)', pst_start:'Начало показа на главной', pst_days:'Сколько дней показывать', pst_image:'Фото',
+  pst_publish:'Опубликовать', pst_need_title:'Введите заголовок.', pst_saved:'Опубликовано ✓', pst_on_home:'На главной', pst_archived:'Снято с главной', pst_again:'↻ Вернуть на главную', pst_del:'Удалить', pst_del_q:'Точно удалить?', pst_go_meet:'Перейти в TANYS BOL', pst_go_wins:'Все достижения',
+  pst_days_hint:'0 = не выводить на главную, только добавить в архив «Достижений».', pst_who_ph:'Найти молодого специалиста (о ком)…',
+  vs_title:'📊 Статистика посещений платформы (только админ)', vs_today:'Сегодня', vs_yest:'Вчера', vs_7:'За 7 дней', vs_30:'За 30 дней', vs_total:'Всего', vs_members:'Участники (30 дн.)', vs_installed:'Как приложение (30 дн.)', vs_registered:'Зарегистрированные молодые специалисты', vs_hint:'Одно устройство за день считается один раз. Председателю не видно.',
+  bday_hi:'С днём рождения', bday_msg:'Поздравляем вас с днём рождения! От имени Совета молодых специалистов желаем всего самого лучшего 🎁', bday_ok:'Спасибо! 🎉', bday_preview:'Посмотреть салют',
+  pst_video:'Видео (mp4, до 50 МБ)', pst_vid_up:'Видео загружается… подождите', pst_link:'Ссылка', pst_link_copied:'Ссылка скопирована:',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3360,6 +3433,15 @@ en:{
   st_none:'No data for this period',
   st_times:'times',
   qr_vk:'VKontakte archive', qr_scan_vk:'Scan to open the Council photo archive on VKontakte',
+  nav_wins:'Achievements', wins_desc:'Achievements of our young specialists in competitions and events.', wins_empty:'Achievements coming soon.',
+  ch_tab_posters:'Posters', pst_kind_meet:'🎬 TANYS BOL', pst_kind_win:'🏆 Achievement', pst_badge_meet:'🎬 TANYS BOL', pst_badge_win:'🏆 Achievement',
+  pst_title_ph:'Title', pst_body_ph:'Text (Kazakh)', pst_more_lang:'Russian / English (optional)', pst_title_ru:'Заголовок (рус)', pst_title_en:'Title (English)',
+  pst_body_ru:'Текст (рус)', pst_body_en:'Text (English)', pst_start:'Show on home from', pst_days:'Days to show', pst_image:'Image',
+  pst_publish:'Publish', pst_need_title:'Enter a title.', pst_saved:'Published ✓', pst_on_home:'On home page', pst_archived:'Off home page', pst_again:'↻ Put back on home', pst_del:'Delete', pst_del_q:'Delete for sure?', pst_go_meet:'Go to TANYS BOL', pst_go_wins:'All achievements',
+  pst_days_hint:'0 = keep off the home page, archive only in «Achievements».', pst_who_ph:'Find a young specialist (who it is about)…',
+  vs_title:'📊 Platform visit statistics (admin only)', vs_today:'Today', vs_yest:'Yesterday', vs_7:'Last 7 days', vs_30:'Last 30 days', vs_total:'Total', vs_members:'Members (30 d)', vs_installed:'As installed app (30 d)', vs_registered:'Registered young specialists', vs_hint:'One device counts once per day. Hidden from the chairman.',
+  bday_hi:'Happy birthday', bday_msg:'We congratulate you on your birthday! Best wishes from the Young Specialists Council 🎁', bday_ok:'Thank you! 🎉', bday_preview:'Preview fireworks',
+  pst_video:'Video (mp4, up to 50 MB)', pst_vid_up:'Uploading video… please wait', pst_link:'Link', pst_link_copied:'Link copied:',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -3483,6 +3565,7 @@ function setLang(lang){
   if(supOpen) renderSupport();
   if(!document.getElementById('view-perks').classList.contains('hidden')) renderPerks();
   if(!document.getElementById('view-meet').classList.contains('hidden')) loadMeet();
+  renderPosterHome(); if(!document.getElementById('view-wins').classList.contains('hidden')) loadWins();
   if(!document.getElementById('view-me').classList.contains('hidden')) renderMe();
   renderCupCard(); renderQuizCard();
   if(!document.getElementById('view-cup').classList.contains('hidden')) renderBracket();
@@ -3553,6 +3636,7 @@ function loadMyState(){
       refreshAuthUI();
       updateProfBanner();
       syncPush();
+      logVisit(); checkMyBirthday();
       renderIdeas();
       var meV = document.getElementById('view-me');
       if(meV && !meV.classList.contains('hidden')) renderMe();
@@ -3697,7 +3781,7 @@ function doLogout(){
 function renderAdminList(){
   var el = document.getElementById('adminList');
   if(!el) return;
-  renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts(); renderAdminSupport(); renderAdminPush();
+  renderAdminStats(); renderAdminCup(); renderAdminQuiz(); renderAdminIgPosts(); renderAdminSupport(); renderAdminPush();
   renderAdminUsers();
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   renderAdminEdits();
@@ -4850,6 +4934,7 @@ function nav(route, param){
   if(route==='qr') drawQR();
   if(route==='feed') loadFeed();
   if(route==='meet') loadMeet();
+  if(route==='wins') loadWins();
   if(route==='perks') renderPerks();
   if(route==='chair') renderChair();
   if(route==='events') loadEvents();
@@ -5047,6 +5132,14 @@ function renderProfile(id){
   document.getElementById('pAchievements').innerHTML = p.achievements.length
     ? p.achievements.map(function(x){return '<li>'+x+'</li>';}).join('')
     : '<li style="color:var(--ink-faint);">'+t('profile_no_achievement')+'</li>';
+  renderProfileWins(p);
+}
+function renderProfileWins(p){
+  var ul = document.getElementById('pAchievements'); if(!ul) return;
+  var mine = POSTERS.filter(function(x){ return x.kind === 'win' && (POSTER_PEOPLE[x.id]||[]).indexOf(p.id) >= 0; });
+  if(!mine.length) return;
+  var h = mine.map(function(x){ return '<li><a href="#" onclick="openPoster(\''+x.id+'\');return false;">🏆 '+escHtml(pLoc(x,'title'))+'</a></li>'; }).join('');
+  if(p.achievements.length === 0) ul.innerHTML = h; else ul.innerHTML = h + ul.innerHTML;
 }
 
 /* ===================== ideas ===================== */
@@ -5655,7 +5748,7 @@ var EV_KINDS = ['meeting','sport','volunteer','training','other'];
 function setChairTab(x){ chairTab = x; renderChair(); }
 function renderChairTabs(){
   var el = document.getElementById('chairTabs'); if(!el) return;
-  el.innerHTML = [['inbox','ch_tab_inbox'],['events','ch_tab_events'],['stats','ch_tab_stats']].map(function(x){
+  el.innerHTML = [['inbox','ch_tab_inbox'],['events','ch_tab_events'],['stats','ch_tab_stats'],['posters','ch_tab_posters']].map(function(x){
     return '<button class="'+(chairTab===x[0]?'on':'')+'" onclick="setChairTab(\''+x[0]+'\')">'+t(x[1])+'</button>';
   }).join('');
 }
@@ -5663,6 +5756,7 @@ function renderChair(){
   renderChairTabs();
   if(chairTab === 'events') return renderEvents();
   if(chairTab === 'stats') return renderStats();
+  if(chairTab === 'posters') return renderPosterAdmin();
   return renderChairInbox();
 }
 function loadEvData(){
@@ -5866,9 +5960,195 @@ function adminSupportReply(uid){
   });
 }
 
+/* ===================== Плакаттар (басты бет / Таныс бол / Жетістіктер) ===================== */
+var POSTERS = [];
+function pLoc(p, f){ var v = LANG==='ru' ? p[f+'_ru'] : (LANG==='en' ? p[f+'_en'] : null); return v || p[f] || ''; }
+function pToday(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function pActive(p){
+  var s = String(p.start_date||'').split('-'); if(s.length!==3) return false;
+  var dd = parseInt(p.days,10); if(isNaN(dd)) dd = 1; if(dd < 1) return false;
+  var st = new Date(+s[0], +s[1]-1, +s[2]), en = new Date(+s[0], +s[1]-1, +s[2] + dd);
+  var n = new Date(); n.setHours(0,0,0,0);
+  return n >= st && n < en;
+}
+var POSTER_PEOPLE = {};
+function loadPosters(){
+  return sbGet('home_posters?select=*&order=start_date.desc,created_at.desc').then(function(r){ POSTERS = Array.isArray(r) ? r : []; return POSTERS; })
+    .catch(function(){ POSTERS = []; return POSTERS; })
+    .then(function(){
+      return sbGet('poster_people?select=poster_id,profile_id').then(function(rows){
+        POSTER_PEOPLE = {};
+        (Array.isArray(rows)?rows:[]).forEach(function(x){ (POSTER_PEOPLE[x.poster_id] = POSTER_PEOPLE[x.poster_id] || []).push(x.profile_id); });
+      }).catch(function(){ POSTER_PEOPLE = {}; });
+    }).then(function(){ return POSTERS; });
+}
+function posterWho(p){
+  var ids = POSTER_PEOPLE[p.id] || [];
+  return ids.map(function(i){ var q = people.find(function(x){ return x.id === i; }); return q ? q.name : ''; }).filter(Boolean);
+}
+function posterCard(p){
+  var img = p.image_url ? '<img src="'+escHtml(p.image_url)+'" alt="" loading="lazy">' : '';
+  if(p.video_url) img = '<div class="pst-media">'+img+'<span class="pst-play">▶</span></div>';
+  var body = pLoc(p,'body');
+  return '<div class="pst-card" role="button" tabindex="0" onclick="openPoster(\''+p.id+'\')" onkeydown="if(event.key===\'Enter\')openPoster(\''+p.id+'\')">'+img+
+    '<div class="pst-b"><span class="pst-badge '+(p.kind==='win'?'win':'')+'">'+t(p.kind==='win'?'pst_badge_win':'pst_badge_meet')+'</span>'+
+    '<h3>'+escHtml(pLoc(p,'title'))+'</h3>'+(function(){ var w = posterWho(p); return w.length ? '<div class="pst-who">🏆 '+escHtml(w.join(', '))+'</div>' : ''; })()+(body?'<p>'+escHtml(body)+'</p>':'')+'</div></div>';
+}
+function renderPosterHome(){
+  var sec = document.getElementById('posterSec'), box = document.getElementById('posterHome'); if(!sec || !box) return;
+  var rows = POSTERS.filter(pActive);
+  if(!rows.length){ sec.classList.add('hidden'); box.innerHTML=''; return; }
+  box.innerHTML = rows.map(posterCard).join('');
+  sec.classList.remove('hidden');
+}
+function openPoster(id){
+  var p = POSTERS.find(function(x){ return x.id === id; }); if(!p) return;
+  document.getElementById('pstModalTitle').textContent = pLoc(p,'title');
+  var go = p.kind==='win' ? ['wins','pst_go_wins'] : ['meet','pst_go_meet'];
+  document.getElementById('pstModalBody').innerHTML = '<div class="pst-full">'+(p.video_url ? '<video class="pst-vid" controls playsinline preload="metadata" src="'+escHtml(p.video_url)+'"'+(p.image_url?' poster="'+escHtml(p.image_url)+'"':'')+'></video>' : (p.image_url?'<img src="'+escHtml(p.image_url)+'" alt="">':''))+escHtml(pLoc(p,'body'))+'</div>'+
+    (function(){ var ids = POSTER_PEOPLE[p.id] || []; var h = ids.map(function(i){ var q = people.find(function(x){ return x.id === i; }); return q ? '<button class="pst-chip" onclick="closePoster();nav(\'profile\',\''+q.id+'\')">🏆 '+escHtml(q.name)+'</button>' : ''; }).join(''); return h ? '<div class="pst-chips" style="margin-top:12px;">'+h+'</div>' : ''; })()+
+    '<button class="btn btn-gold" style="margin-top:14px;width:100%;" onclick="closePoster();nav(\''+go[0]+'\')">'+t(go[1])+'</button>';
+  document.getElementById('posterModal').classList.add('open');
+}
+function closePoster(){
+  var m = document.getElementById('posterModal'); m.classList.remove('open');
+  var vv = m.querySelector('video'); if(vv){ try{ vv.pause(); }catch(e){} }
+}
+function openPosterFromUrl(){
+  try{
+    var id = new URLSearchParams(location.search).get('p'); if(!id) return;
+    if(POSTERS.some(function(x){ return x.id === id; })) openPoster(id);
+  }catch(e){}
+}
+function loadWins(){
+  var el = document.getElementById('winsList'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  loadPosters().then(function(){
+    var rows = POSTERS.filter(function(p){ return p.kind === 'win'; });
+    if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-faint);">'+t('wins_empty')+'</p>'; return; }
+    var h = '', y = null;
+    rows.forEach(function(p){
+      var py = String(p.start_date||'').slice(0,4);
+      if(py !== y){ if(y !== null) h += '</div>'; y = py; h += '<h3 class="wins-year">'+escHtml(py)+'</h3><div class="pst-grid">'; }
+      h += posterCard(p);
+    });
+    el.innerHTML = h + '</div>';
+  });
+}
+var posterImgFile = null, posterVidFile = null;
+function renderPosterAdmin(){
+  var el = document.getElementById('chairBody'); if(!el) return;
+  el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
+  loadPosters().then(function(){
+    var h = '<div class="pst-form"><div class="r2"><select id="pstKind"><option value="meet">'+t('pst_kind_meet')+'</option><option value="win">'+t('pst_kind_win')+'</option></select>'+
+      '<input id="pstImg" type="file" accept="image/*" aria-label="'+escHtml(t('pst_image'))+'"></div>'+
+      '<label style="font-size:13px;color:var(--ink-faint);display:block;">'+t('pst_video')+'<input id="pstVid" type="file" accept="video/mp4,video/*"></label>'+
+      '<input id="pstTitle" maxlength="140" placeholder="'+escHtml(t('pst_title_ph'))+'">'+
+      '<textarea id="pstBody" rows="4" placeholder="'+escHtml(t('pst_body_ph'))+'"></textarea>'+
+      '<details><summary>'+t('pst_more_lang')+'</summary><div style="display:grid;gap:8px;margin-top:8px;">'+
+        '<input id="pstTitleRu" maxlength="140" placeholder="'+escHtml(t('pst_title_ru'))+'"><textarea id="pstBodyRu" rows="3" placeholder="'+escHtml(t('pst_body_ru'))+'"></textarea>'+
+        '<input id="pstTitleEn" maxlength="140" placeholder="'+escHtml(t('pst_title_en'))+'"><textarea id="pstBodyEn" rows="3" placeholder="'+escHtml(t('pst_body_en'))+'"></textarea></div></details>'+
+      '<div class="r2"><label style="font-size:13px;color:var(--ink-faint);">'+t('pst_start')+'<input id="pstStart" type="date" value="'+pToday()+'"></label>'+
+      '<label style="font-size:13px;color:var(--ink-faint);">'+t('pst_days')+'<input id="pstDays" type="number" min="0" max="365" value="10"></label></div>'+
+      '<div style="font-size:12.5px;color:var(--ink-faint);">'+t('pst_days_hint')+'</div>'+
+      '<div class="pst-whoBox"><input id="pstWho" autocomplete="off" placeholder="'+escHtml(t('pst_who_ph'))+'" oninput="pstWhoSearch()"><div class="pst-res" id="pstRes"></div><div class="pst-chips" id="pstChips"></div></div>'+
+      '<button class="btn btn-gold" onclick="savePoster()">'+t('pst_publish')+'</button><div class="me-msg" id="pstMsg"></div></div>';
+    h += POSTERS.map(function(p){
+      return '<div class="ev-row"><div><div class="ev-t">'+t(p.kind==='win'?'pst_badge_win':'pst_badge_meet')+' · '+escHtml(p.title)+'</div>'+
+        '<div class="ev-m">'+escHtml(evDate(p.start_date))+' · '+t(pActive(p)?'pst_on_home':'pst_archived')+'</div></div>'+
+        '<div class="ev-a"><button class="btn" onclick="posterLink(\''+p.id+'\')">🔗</button><button class="btn" onclick="posterAgain(\''+p.id+'\')">'+t('pst_again')+'</button><button class="btn" onclick="delPoster(\''+p.id+'\')">'+t('pst_del')+'</button></div></div>';
+    }).join('');
+    el.innerHTML = h;
+    var fi = document.getElementById('pstImg');
+    if(fi) fi.onchange = function(){ posterImgFile = fi.files && fi.files[0] ? fi.files[0] : null; };
+    var fv = document.getElementById('pstVid');
+    if(fv) fv.onchange = function(){ posterVidFile = fv.files && fv.files[0] ? fv.files[0] : null; };
+    posterImgFile = null; posterVidFile = null; pstTagged = []; pstChipsRender();
+  });
+}
+var pstTagged = [];
+function pstChipsRender(){
+  var c = document.getElementById('pstChips'); if(!c) return;
+  c.innerHTML = pstTagged.map(function(x){ return '<span class="pst-chip">'+escHtml(x.name)+' <b onclick="pstWhoDel(\''+x.id+'\')" style="cursor:pointer;">✕</b></span>'; }).join('');
+}
+function pstWhoSearch(){
+  var q = (document.getElementById('pstWho').value||'').trim().toLowerCase(), box = document.getElementById('pstRes'); if(!box) return;
+  if(q.length < 2){ box.innerHTML = ''; return; }
+  var m = people.filter(function(x){ return String(x.name||'').toLowerCase().indexOf(q) >= 0 && !pstTagged.some(function(y){ return y.id === x.id; }); }).slice(0,6);
+  box.innerHTML = m.map(function(x){ return '<div onclick="pstWhoAdd(\''+x.id+'\')">'+escHtml(x.name)+'</div>'; }).join('');
+}
+function pstWhoAdd(id){
+  var q = people.find(function(x){ return x.id === id; }); if(!q) return;
+  pstTagged.push({id:q.id, name:q.name}); document.getElementById('pstWho').value=''; document.getElementById('pstRes').innerHTML=''; pstChipsRender();
+}
+function pstWhoDel(id){ pstTagged = pstTagged.filter(function(x){ return x.id !== id; }); pstChipsRender(); }
+function posterUpload(file, tag, cb){
+  var path = authUser.id + '/' + tag + '-' + Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+  sb.storage.from('post-images').upload(path, file, { contentType: file.type || undefined }).then(function(res){
+    if(res.error){ cb(res.error.message, null); return; }
+    cb(null, sb.storage.from('post-images').getPublicUrl(path).data.publicUrl);
+  });
+}
+function savePoster(){
+  var msg = document.getElementById('pstMsg');
+  var v = function(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+  var title = v('pstTitle'); if(!title){ msg.textContent = t('pst_need_title'); return; }
+  msg.textContent = '…';
+  var dv = parseInt(v('pstDays'),10); var days = Math.max(0, Math.min(365, isNaN(dv) ? 7 : dv));
+  var go = function(url, vurl){
+    sb.from('home_posters').insert({
+      kind: v('pstKind') || 'meet', title: title, title_ru: v('pstTitleRu')||null, title_en: v('pstTitleEn')||null,
+      body: v('pstBody')||null, body_ru: v('pstBodyRu')||null, body_en: v('pstBodyEn')||null,
+      image_url: url, video_url: vurl || null, start_date: v('pstStart') || pToday(), days: days
+    }).select('id').single().then(function(r){
+      if(r.error){ msg.textContent = r.error.message; return; }
+      var fin = function(){ posterImgFile = null; posterVidFile = null; pstTagged = []; renderPosterAdmin(); renderPosterHome(); };
+      if(pstTagged.length && r.data && r.data.id){
+        sb.from('poster_people').insert(pstTagged.map(function(x){ return { poster_id: r.data.id, profile_id: x.id }; })).then(function(r2){
+          if(r2.error){ alert(r2.error.message); }
+          fin();
+        });
+      } else fin();
+    });
+  };
+  var stepVideo = function(url){
+    if(!posterVidFile){ go(url, null); return; }
+    msg.textContent = t('pst_vid_up');
+    posterUpload(posterVidFile, 'poster-video', function(err, vurl){ if(err){ msg.textContent = err; return; } go(url, vurl); });
+  };
+  if(posterImgFile){
+    posterUpload(posterImgFile, 'poster', function(err, url){ if(err){ msg.textContent = err; return; } stepVideo(url); });
+  } else stepVideo(null);
+}
+function posterLink(id){
+  var u = location.origin + location.pathname + '?p=' + id;
+  var done = function(){ alert(t('pst_link_copied') + '\n' + u); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(done, function(){ prompt(t('pst_link'), u); }); }
+  else prompt(t('pst_link'), u);
+}
+function posterAgain(id){
+  sb.from('home_posters').update({ start_date: pToday() }).eq('id', id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderPosterAdmin(); renderPosterHome();
+  });
+}
+function delPoster(id){
+  if(!confirm(t('pst_del_q'))) return;
+  sb.from('home_posters').delete().eq('id', id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    renderPosterAdmin(); renderPosterHome();
+  });
+}
+
 /* --- Таныс бол --- */
 function loadMeet(){
   var el = document.getElementById('meetList'); if(!el) return;
+  loadPosters().then(function(){
+    var pe = document.getElementById('meetPosters'); if(!pe) return;
+    var rows = POSTERS.filter(function(p){ return p.kind === 'meet'; });
+    pe.innerHTML = rows.map(posterCard).join('');
+    pe.style.marginBottom = rows.length ? '16px' : '0';
+  });
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
   sbGet('instagram_posts?select=*&is_meet=eq.true&order=created_at.desc').then(function(rows){
     el.innerHTML = rows.length ? rows.map(igCardHtml).join('') : '<p style="color:var(--ink-faint);">'+t('meet_empty')+'</p>';
@@ -6018,13 +6298,97 @@ function renderPerks(){
 }
 
 
+/* ===================== Кіру статистикасы (тек админге) ===================== */
+function visitorId(){
+  try{ var v = localStorage.getItem('jmk_vid'); if(!v){ v = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2,10); localStorage.setItem('jmk_vid', v); } return v; }
+  catch(e){ return 'x' + Math.random().toString(36).slice(2,12); }
+}
+function logVisit(){
+  try{
+    var d = new Date().toISOString().slice(0,10), key = d + '|' + (authUser ? authUser.id : '-');
+    if(localStorage.getItem('jmk_vl') === key) return;
+    localStorage.setItem('jmk_vl', key);
+  }catch(e){}
+  var plat = isIOSDev() ? 'ios' : (/android/i.test(navigator.userAgent) ? 'android' : 'web');
+  try{ sb.rpc('log_visit', { p_visitor: visitorId(), p_standalone: isStandalone(), p_platform: plat }).then(function(){}, function(){}); }catch(e){}
+}
+function renderAdminStats(){
+  var box = document.getElementById('adminStats'); if(!box) return;
+  if(!isAdmin){ box.innerHTML = ''; return; }
+  box.innerHTML = '<div class="st-card"><h3>'+t('vs_title')+'</h3><p style="color:var(--ink-faint);">'+t('loading')+'</p></div>';
+  sb.rpc('admin_visit_stats').then(function(r){
+    if(r.error || !r.data){ box.innerHTML = ''; return; }
+    var d = r.data, ser = d.series || [], mx = 1;
+    ser.forEach(function(x){ if(x.n > mx) mx = x.n; });
+    var bars = ser.map(function(x){ return '<i title="'+escHtml(String(x.day))+': '+x.n+'" style="height:'+Math.max(3, Math.round(x.n*100/mx))+'%"></i>'; }).join('');
+    box.innerHTML = '<div class="st-card"><h3>'+t('vs_title')+'</h3><div class="kpis" style="margin:0 0 12px;">'+
+      '<div class="kpi"><b>'+(d.today||0)+'</b><span>'+t('vs_today')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.d7||0)+'</b><span>'+t('vs_7')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.d30||0)+'</b><span>'+t('vs_30')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.total||0)+'</b><span>'+t('vs_total')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.members_30||0)+'</b><span>'+t('vs_members')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.installed_30||0)+'</b><span>'+t('vs_installed')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.registered||0)+'</b><span>'+t('vs_registered')+'</span></div>'+
+      '<div class="kpi"><b>'+(d.yesterday||0)+'</b><span>'+t('vs_yest')+'</span></div></div>'+
+      '<div class="vis-chart">'+bars+'</div><div style="font-size:12px;color:var(--ink-faint);margin-top:6px;">'+t('vs_hint')+'</div></div>';
+  }, function(){ box.innerHTML = ''; });
+}
+
+/* ===================== Туған күн сюрпризі ===================== */
+var bdayFx = null;
+function myBirthdayToday(){ return !!(authUser && bdayRows.some(function(b){ return b.pid === authUser.id; })); }
+function checkMyBirthday(){
+  if(!myBirthdayToday()) return;
+  var key = 'jmk_bday_' + new Date().toISOString().slice(0,10) + '_' + authUser.id;
+  try{ if(localStorage.getItem(key)) return; localStorage.setItem(key, '1'); }catch(e){}
+  showBdaySurprise((myProfile && myProfile.full_name) || '');
+}
+function showBdaySurprise(name){
+  var m = document.getElementById('bdayModal');
+  if(!m){
+    m = document.createElement('div'); m.id = 'bdayModal'; m.className = 'bday-over';
+    m.innerHTML = '<canvas id="bdayCv"></canvas><div class="bday-card"><div class="bday-em">🎂</div><h2 id="bdayH"></h2><p>'+t('bday_msg')+'</p><button class="btn btn-gold" onclick="closeBdaySurprise()">'+t('bday_ok')+'</button></div>';
+    document.body.appendChild(m);
+  }
+  document.getElementById('bdayH').textContent = t('bday_hi') + (name ? ', ' + String(name).split(/\s+/)[0] : '') + '! 🎉';
+  m.classList.add('open'); startFireworks();
+}
+function closeBdaySurprise(){
+  var m = document.getElementById('bdayModal'); if(m) m.classList.remove('open');
+  if(bdayFx){ cancelAnimationFrame(bdayFx.raf); bdayFx = null; }
+}
+function startFireworks(){
+  var cv = document.getElementById('bdayCv'); if(!cv) return;
+  var W = cv.width = window.innerWidth, H = cv.height = window.innerHeight, ctx = cv.getContext('2d');
+  var parts = [], last = 0, cols = ['#ffd24a','#ff5c8a','#4ad7ff','#8dff7a','#c08bff','#ff9a4a'];
+  function burst(){
+    var x = W*(0.15+Math.random()*0.7), y = H*(0.12+Math.random()*0.4), c = cols[Math.floor(Math.random()*cols.length)];
+    for(var i=0;i<70;i++){ var a = Math.PI*2*i/70, sp = 1.5+Math.random()*3.8; parts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,c:c}); }
+  }
+  bdayFx = { raf: 0 };
+  function frame(ts){
+    if(!bdayFx) return;
+    ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,.18)'; ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'lighter';
+    if(ts - last > 550){ burst(); last = ts; }
+    parts = parts.filter(function(p){ return p.life > 0.02; });
+    parts.forEach(function(p){
+      p.x += p.vx; p.y += p.vy; p.vy += 0.045; p.vx *= 0.99; p.life *= 0.975;
+      ctx.globalAlpha = p.life; ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, 6.283); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    bdayFx.raf = requestAnimationFrame(frame);
+  }
+  bdayFx.raf = requestAnimationFrame(frame);
+}
+
 /* ===================== Туған күндер + Push ===================== */
 var VAPID_PUBLIC = 'BDVVRxhv-q7onCZLmJwn8Vh1W4ZrYQYm5DG_lBgyK8G6jRmsNs6yc0UT0opGJH5Ha5xzkUMoz5QM1dh8iAfupA8';
 var bdayRows = [];
 function loadBirthdays(){
   sb.rpc('todays_birthdays').then(function(r){
     bdayRows = (r && !r.error && r.data) || [];
-    renderBirthdays();
+    renderBirthdays(); checkMyBirthday();
   }, function(){ bdayRows = []; renderBirthdays(); });
 }
 function renderBirthdays(){
@@ -6140,7 +6504,8 @@ function renderAdminPush(){
     '<input id="apUrl" placeholder="'+escHtml(t('adm_push_url'))+'">'+
     '<select id="apAud"><option value="all">'+t('adm_push_all')+'</option><option value="incomplete">'+t('adm_push_inc')+'</option></select>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-gold" onclick="sendAdminPush(false)">'+t('adm_push_send')+'</button>'+
-    '<button class="btn" onclick="sendAdminPush(true)">'+t('adm_push_test')+'</button></div>'+
+    '<button class="btn" onclick="sendAdminPush(true)">'+t('adm_push_test')+'</button>'+
+    '<button class="btn" onclick="showBdaySurprise(\'\')">🎂 '+t('bday_preview')+'</button></div>'+
     '<div class="me-msg" id="apMsg"></div><div class="me-hint">'+t('adm_push_hint')+'</div></div>';
 }
 function sendAdminPush(test){
@@ -6167,7 +6532,7 @@ loadQuiz();
 initCarousel();
 drawFooterQRs();
 loadMyState();
-renderQuotes(); renderRegSkills(); loadTicker(); loadBirthdays(); updatePushBanner(); updateInst(); syncPush();
+renderQuotes(); renderRegSkills(); loadTicker(); loadBirthdays(); loadPosters().then(function(){ renderPosterHome(); openPosterFromUrl(); }); logVisit(); updatePushBanner(); updateInst(); syncPush();
 
 </script>
 <script>
