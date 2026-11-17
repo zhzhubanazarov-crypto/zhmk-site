@@ -384,8 +384,54 @@
   }
   .chip.active{background:var(--blue);border-color:var(--blue);color:#fff;}
 
+  /* ===== qatysu matrix ===== */
+  .mx-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 8px;}
+  .mx-kpi{font-size:13.5px;color:var(--ink-soft);margin-left:auto;}
+  .mx-hint{font-size:12.5px;color:var(--ink-faint);margin:0 0 10px;}
+  .mx-wrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:12px;background:var(--card);}
+  .mx{border-collapse:separate;border-spacing:0;font-size:13.5px;min-width:100%;}
+  .mx th,.mx td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px 8px;background:var(--card);}
+  .mx thead th{position:sticky;top:0;z-index:3;background:var(--paper,#f4f7fb);}
+  .mx thead tr:first-child th{height:34px;box-sizing:border-box;padding-top:0;padding-bottom:0;}
+  .mx thead tr:nth-child(2) th{top:34px;}
+  .mx .mx-n{position:sticky;left:0;z-index:2;min-width:150px;max-width:170px;text-align:left;}
+  .mx thead .mx-n{z-index:4;}
+  .mx .mx-n small{display:block;font-size:11.5px;color:var(--ink-soft);font-weight:400;}
+  .mx .mx-p{position:sticky;right:0;z-index:2;min-width:86px;text-align:center;background:var(--gold-soft);}
+  .mx thead .mx-p{z-index:4;}
+  .mx .mx-p small{display:block;font-size:11px;color:var(--ink-soft);}
+  .mx .mx-h{text-align:center;font-weight:700;}
+  .mx .mx-e{min-width:130px;vertical-align:top;}
+  .mx .mx-e textarea{width:126px;border:1px dashed var(--line);border-radius:8px;padding:4px 6px;font:600 12.5px/1.3 inherit;text-align:center;resize:none;background:#fff;color:inherit;}
+  .mx .mx-d{display:flex;gap:4px;align-items:center;justify-content:center;margin-top:4px;}
+  .mx .mx-d input{width:104px;font-size:11px;padding:2px;border:1px solid var(--line);border-radius:6px;}
+  .mx .mx-d button{border:none;background:none;cursor:pointer;color:#c0392b;font-size:13px;}
+  .mx td.c{text-align:center;cursor:pointer;height:40px;min-width:130px;user-select:none;}
+  .mx td.c.on{background:#d9f2e1;color:#1d7a3f;font-weight:800;font-size:18px;}
+  .mx tfoot td{position:sticky;bottom:0;z-index:2;background:var(--paper,#f4f7fb);text-align:center;}
+  .mx tfoot .mx-n{text-align:left;}
+  @media (max-width:640px){
+    .mx{font-size:12px;}
+    .mx .mx-n{min-width:96px;max-width:104px;padding:5px 6px;}
+    .mx .mx-n small{font-size:10.5px;}
+    .mx .mx-p{min-width:54px;padding:4px;}
+    .mx .mx-e{min-width:112px;}.mx td.c{min-width:112px;}
+    .mx .mx-e textarea{width:100px;font-size:12px;}
+    .mx .mx-d input{width:78px;}
+  }
   /* ===== mamandar grid ===== */
-  .people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .pc2{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s;}
+  .pc2:hover{transform:translateY(-2px);}
+  .pc2-ph{position:relative;aspect-ratio:1/1;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .pc2-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .pc2-ini{font-family:"Times New Roman",Georgia,serif;font-size:38px;font-weight:600;color:var(--blue-deep);}
+  .pc2-b{padding:10px 12px 12px;}
+  .pc2-n{margin:0 0 3px;font-size:14px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .pc2-d{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.35;}
+  .pc2-x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.92);box-shadow:0 1px 6px rgba(0,0,0,.25);font-size:16px;cursor:pointer;z-index:2;}
+  .pc2-hid{opacity:.6;cursor:default;}
+  .pc-hidden-bar{grid-column:1/-1;margin-top:6px;}
   .person-card{
     background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:18px;cursor:pointer;transition:border-color .15s,transform .15s;
@@ -683,7 +729,7 @@
     .hero{grid-template-columns:1fr;}
     .car{order:-1;max-width:340px;width:100%;margin:0 auto;}
     .feature-grid{grid-template-columns:repeat(2,1fr);}
-    .people-grid{grid-template-columns:repeat(2,1fr);}
+    .people-grid{grid-template-columns:repeat(3,1fr);}
   }
   @media (max-width:640px){
     .ig-bar{font-size:12px;padding:5px 10px;}
@@ -702,7 +748,7 @@
     main{padding:24px 14px 60px;}
     .stat-row{grid-template-columns:repeat(2,1fr);margin:0 0 36px;}
     .feature-grid{grid-template-columns:1fr;}
-    .people-grid{grid-template-columns:1fr;}
+    .people-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
     .profile-main{grid-template-columns:1fr;padding:0 16px 20px;}
     .field-grid{grid-template-columns:repeat(2,1fr);padding:18px 16px;}
     .profile-blocks{grid-template-columns:1fr;}
@@ -746,6 +792,17 @@
   .lt-card .ans{background:var(--gold-soft);border-radius:10px;padding:10px 12px;}
   .lt-card textarea,.sup-in textarea{width:100%;font:inherit;font-size:13.5px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);min-height:70px;resize:vertical;}
   .lt-badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:100px;background:var(--paper);border:1px solid var(--line);}
+  .tabbar{display:none;}
+  @media (max-width:820px){
+    .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:42;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(11,42,91,.10);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));}
+    .tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;border:none;background:none;color:var(--ink-soft);font:inherit;font-size:11px;font-weight:600;padding:4px 2px;cursor:pointer;min-width:0;}
+    .tabbar button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .tabbar button.active{color:var(--blue);}
+    .tabbar button.active svg{stroke-width:2.2;}
+    body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px));}
+    .sup-fab{bottom:calc(80px + env(safe-area-inset-bottom,0px)) !important;}
+    .sup-panel{bottom:calc(150px + env(safe-area-inset-bottom,0px)) !important;max-height:calc(100vh - 230px) !important;}
+  }
   .sup-fab{position:fixed;right:16px;bottom:16px;z-index:40;border:none;border-radius:100px;background:var(--blue);color:#fff;font:inherit;font-weight:700;font-size:18px;padding:16px 26px;box-shadow:0 6px 20px rgba(15,47,92,.35);cursor:pointer;}
   .sup-panel{position:fixed;right:16px;bottom:86px;z-index:41;width:380px;max-width:calc(100vw - 32px);max-height:70vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;}
   .sup-panel.open{display:flex;}
@@ -1492,6 +1549,14 @@
   </div>
   <div class="foot-bottom"><span data-i18n="footer_text">© 2026 АҚ Қаражанбасмұнай · Жас мамандар кеңесі</span></div>
 </footer>
+
+<nav class="tabbar" id="tabbar" aria-label="Navigation">
+  <button data-route="home" onclick="nav('home')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span data-i18n="tb_home">Басты</span></button>
+  <button data-route="meet" onclick="nav('meet')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span data-i18n="tb_meet">Таныс бол</span></button>
+  <button data-route="wins" onclick="nav('wins')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H4v2a3 3 0 0 0 4 3"/><path d="M16 6h4v2a3 3 0 0 1-4 3"/><path d="M12 13v4"/><path d="M8 20h8"/></svg><span data-i18n="tb_wins">Жетістіктер</span></button>
+  <button data-route="chair" id="tabChair" onclick="tabChair()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span id="tabChairLbl" data-i18n="tb_letter">Хат</span></button>
+  <button data-route="me" onclick="nav('me')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span data-i18n="tb_me">Мен</span></button>
+</nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
@@ -2769,7 +2834,7 @@ function sbGet(path){
   });
 }
 
-var people = [];
+var people = [], hiddenPeople = [], hiddenRowsRaw = [], showHiddenPeople = false;
 var ideas = [];
 var currentUserId = null;
 
@@ -3230,6 +3295,9 @@ kk:{
   vs_title:'📊 Платформаға кіру статистикасы (тек админге)', vs_today:'Бүгін', vs_yest:'Кеше', vs_7:'7 күнде', vs_30:'30 күнде', vs_total:'Барлығы', vs_members:'Тіркелгендер (30 күн)', vs_installed:'Қосымша ретінде (30 күн)', vs_registered:'Тіркелген жас мамандар', vs_hint:'Бір құрылғы бір күнде бір рет есептеледі. Төрағаға көрінбейді.',
   bday_hi:'Туған күніңізбен', bday_msg:'Біз сізді туған күніңізбен құттықтаймыз! Жас мамандар кеңесі атынан ең жақсы тілектерді жолдаймыз 🎁', bday_ok:'Рақмет! 🎉', bday_preview:'Салют көру',
   pst_video:'Видео (mp4, 50 МБ-қа дейін)', pst_vid_up:'Видео жүктелуде… күтіңіз', pst_link:'Сілтеме', pst_link_copied:'Сілтеме көшірілді:',
+  pc_hidden:'Жасырылғандар', pc_hide:'Тізімнен жасыру', pc_restore:'Қайтару', pc_q_hide:'Бұл профильді тізімнен жасыра берейін бе?', pc_q_restore:'Профильді тізімге қайтара берейін бе?', pc_sure:'Нақты сенімдісің бе?', pc_acc:'Аккаунт', pc_last:'Соңғы кіру', pc_not_linked:'Аккаунтқа байланбаған профиль',
+  st_add_ev:'+ Іс-шара', st_new_ev:'Келесі іс-шара', st_fio:'ФИО', st_ev_names:'Іс-шара атаулары:', st_pct:'Белсенділік', st_total_row:'Қатысқандар', st_hint:'Атауын басып өзгертіңіз · ұяшықты басып «+» қойыңыз (қайта басса, өшеді)', st_sort_name:'А–Я', st_sort_pct:'Белсенділік бойынша', st_avg_pct:'орташа қатысу', st_none_ev:'«+ Іс-шара» батырмасын басыңыз',
+  tb_home:'Басты', tb_meet:'Таныс бол', tb_wins:'Жетістіктер', tb_letter:'Хат', tb_chair:'Төраға', tb_me:'Мен',
   push_banner:'🔔 Жаңалықтар мен құттықтауларды хабарландыру ретінде алыңыз', push_enable:'Қосу',
   push_title:'🔔 Хабарландырулар', push_on:'Хабарландырулар қосулы.', push_off_btn:'Өшіру', push_on_btn:'Хабарландыруларды қосу',
   push_denied:'Хабарландыру браузер баптауларында бұғатталған. Рұқсат беру үшін сайт баптауларынан «Хабарландырулар» ішін «Рұқсат ету» деп өзгертіңіз.',
@@ -3341,6 +3409,9 @@ ru:{
   vs_title:'📊 Статистика посещений платформы (только админ)', vs_today:'Сегодня', vs_yest:'Вчера', vs_7:'За 7 дней', vs_30:'За 30 дней', vs_total:'Всего', vs_members:'Участники (30 дн.)', vs_installed:'Как приложение (30 дн.)', vs_registered:'Зарегистрированные молодые специалисты', vs_hint:'Одно устройство за день считается один раз. Председателю не видно.',
   bday_hi:'С днём рождения', bday_msg:'Поздравляем вас с днём рождения! От имени Совета молодых специалистов желаем всего самого лучшего 🎁', bday_ok:'Спасибо! 🎉', bday_preview:'Посмотреть салют',
   pst_video:'Видео (mp4, до 50 МБ)', pst_vid_up:'Видео загружается… подождите', pst_link:'Ссылка', pst_link_copied:'Ссылка скопирована:',
+  pc_hidden:'Скрытые', pc_hide:'Скрыть из списка', pc_restore:'Вернуть', pc_q_hide:'Скрыть этот профиль из списка?', pc_q_restore:'Вернуть профиль в список?', pc_sure:'Вы точно уверены?', pc_acc:'Аккаунт', pc_last:'Последний вход', pc_not_linked:'Профиль не привязан к аккаунту',
+  st_add_ev:'+ Мероприятие', st_new_ev:'Следующее мероприятие', st_fio:'ФИО', st_ev_names:'Названия мероприятий:', st_pct:'Активность', st_total_row:'Присутствовало', st_hint:'Нажмите на название, чтобы изменить · нажмите на ячейку, чтобы поставить «+» (повторно — снять)', st_sort_name:'А–Я', st_sort_pct:'По активности', st_avg_pct:'средняя явка', st_none_ev:'Нажмите «+ Мероприятие»',
+  tb_home:'Главная', tb_meet:'Знакомьтесь', tb_wins:'Достижения', tb_letter:'Письмо', tb_chair:'Председатель', tb_me:'Я',
   push_banner:'🔔 Получайте новости и поздравления в виде уведомлений', push_enable:'Включить',
   push_title:'🔔 Уведомления', push_on:'Уведомления включены.', push_off_btn:'Выключить', push_on_btn:'Включить уведомления',
   push_denied:'Уведомления заблокированы в настройках браузера. Разрешите их в настройках сайта.',
@@ -3443,6 +3514,9 @@ en:{
   vs_title:'📊 Platform visit statistics (admin only)', vs_today:'Today', vs_yest:'Yesterday', vs_7:'Last 7 days', vs_30:'Last 30 days', vs_total:'Total', vs_members:'Members (30 d)', vs_installed:'As installed app (30 d)', vs_registered:'Registered young specialists', vs_hint:'One device counts once per day. Hidden from the chairman.',
   bday_hi:'Happy birthday', bday_msg:'We congratulate you on your birthday! Best wishes from the Young Specialists Council 🎁', bday_ok:'Thank you! 🎉', bday_preview:'Preview fireworks',
   pst_video:'Video (mp4, up to 50 MB)', pst_vid_up:'Uploading video… please wait', pst_link:'Link', pst_link_copied:'Link copied:',
+  pc_hidden:'Hidden', pc_hide:'Hide from list', pc_restore:'Restore', pc_q_hide:'Hide this profile from the list?', pc_q_restore:'Restore this profile to the list?', pc_sure:'Are you sure?', pc_acc:'Account', pc_last:'Last sign-in', pc_not_linked:'Profile is not linked to an account',
+  st_add_ev:'+ Event', st_new_ev:'Next event', st_fio:'Name', st_ev_names:'Event names:', st_pct:'Activity', st_total_row:'Attended', st_hint:'Tap a title to rename · tap a cell to mark «+» (tap again to unmark)', st_sort_name:'A–Z', st_sort_pct:'By activity', st_avg_pct:'average attendance', st_none_ev:'Tap «+ Event»',
+  tb_home:'Home', tb_meet:'Meet', tb_wins:'Wins', tb_letter:'Letter', tb_chair:'Chair', tb_me:'Me',
   push_banner:'🔔 Get news and greetings as notifications', push_enable:'Enable',
   push_title:'🔔 Notifications', push_on:'Notifications are on.', push_off_btn:'Turn off', push_on_btn:'Enable notifications',
   push_denied:'Notifications are blocked in your browser settings. Allow them in the site settings.',
@@ -3608,6 +3682,7 @@ function refreshAuthUI(){
   document.getElementById('navAdminDrawer').classList.toggle('hidden', !isAdmin);
   document.getElementById('navChairTop').classList.toggle('hidden', !(isChairman||isAdmin));
   document.getElementById('navChairDrawer').classList.toggle('hidden', !(isChairman||isAdmin));
+  updateTabbar();
   var evAddBtn = document.getElementById('evAddBtn');
   if(evAddBtn) evAddBtn.classList.toggle('hidden', !isAdmin);
   var hAddBtn = document.getElementById('hAddBtn');
@@ -4920,13 +4995,20 @@ function deleteEvent(eventId){
 }
 
 /* ===================== router ===================== */
+function updateTabbar(){
+  var l = document.getElementById('tabChairLbl'); if(!l) return;
+  var on = !!(isChairman || isAdmin);
+  l.textContent = t(on ? 'tb_chair' : 'tb_letter');
+  document.getElementById('tabChair').dataset.route = on ? 'chair' : 'letter';
+}
+function tabChair(){ if(isChairman || isAdmin) nav('chair'); else openLetter('letter'); }
 function nav(route, param){
   if(route === 'admin' && !isAdmin){ route = 'home'; }
   if(route === 'chair' && !(isChairman || isAdmin)){ route = 'home'; }
   if(route === 'me' && !authUser){ openAuthModal(); return; }
   document.querySelectorAll('main > section').forEach(function(s){ s.classList.add('hidden'); });
   document.getElementById('view-'+route).classList.remove('hidden');
-  document.querySelectorAll('.site-nav button, .drawer-nav button').forEach(function(b){
+  document.querySelectorAll('.site-nav button, .drawer-nav button, .tabbar button').forEach(function(b){
     b.classList.toggle('active', b.dataset.route === route);
   });
   if(route==='profile' && param) renderProfile(param);
@@ -5054,18 +5136,50 @@ function renderPeople(){
     if(peopleProf && profGroup(p.role) !== peopleProf) return false;
     if(peopleSkill && (p.skills||[]).indexOf(peopleSkill) < 0) return false;
     return p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q) || p.role.toLowerCase().includes(q);
-  }).forEach(function(p){
-    var card = document.createElement('div');
-    card.className = 'person-card';
-    card.onclick = function(){ nav('profile', p.id); };
-    card.innerHTML =
-      '<div class="person-top">'+
-        '<div class="avatar">'+p.initials+photoImg(p.photo)+'</div>'+
-        '<div><p class="person-name">'+p.name+'</p><p class="person-role">'+p.role+' · '+p.dept+'</p></div>'+
-      '</div>'+
-      '<div class="person-tags">'+tagsFor(p).map(function(tg){return '<span class="ptag">'+tg+'</span>';}).join('')+'</div>';
-    grid.appendChild(card);
-  });
+  }).forEach(function(p){ grid.appendChild(personCard(p)); });
+  var canHide = isAdmin || isChairman;
+  if(canHide && hiddenPeople.length){
+    var tg = document.createElement('div'); tg.className = 'pc-hidden-bar';
+    tg.innerHTML = '<button class="chip'+(showHiddenPeople?' active':'')+'" onclick="toggleHiddenPeople()">🙈 '+t('pc_hidden')+' ('+hiddenPeople.length+')</button>';
+    grid.appendChild(tg);
+    if(showHiddenPeople) hiddenPeople.forEach(function(p){ grid.appendChild(personCard(p)); });
+  }
+}
+function toggleHiddenPeople(){ showHiddenPeople = !showHiddenPeople; renderPeople(); }
+function personCard(p){
+  var canHide = isAdmin || isChairman;
+  var card = document.createElement('div');
+  card.className = 'pc2' + (p.hidden ? ' pc2-hid' : '');
+  card.onclick = function(){ if(!p.hidden) nav('profile', p.id); };
+  card.innerHTML =
+    '<div class="pc2-ph"><span class="pc2-ini">'+escHtml(p.initials)+'</span>'+photoImg(p.photo)+
+      (canHide ? '<button class="pc2-x" title="'+escHtml(p.hidden ? t('pc_restore') : t('pc_hide'))+'" onclick="event.stopPropagation();hideProfileAsk(\''+p.id+'\','+(p.hidden?'false':'true')+')">'+(p.hidden?'↩':'🙈')+'</button>' : '')+
+    '</div>'+
+    '<div class="pc2-b"><p class="pc2-n">'+escHtml(p.name)+'</p><p class="pc2-d">'+escHtml(p.dept)+'</p></div>';
+  return card;
+}
+function hideProfileAsk(id, hide){
+  var p = (hide ? people : hiddenPeople).find(function(x){ return x.id === id; }); if(!p) return;
+  var go = function(info){
+    var msg = (hide ? t('pc_q_hide') : t('pc_q_restore')) + '\n\n' + p.name + ' · ' + p.dept + (info ? '\n' + info : '') + '\n\n' + t('pc_sure');
+    if(!confirm(msg)) return;
+    sb.rpc('hide_profile', { p_id: id, p_hide: hide }).then(function(r){
+      if(r.error){ alert(r.error.message); return; }
+      loadData();
+    });
+  };
+  if(!hide){ go(''); return; }
+  sb.rpc('profile_auth_info', { p_id: id }).then(function(r){
+    var d = r && r.data, info = '';
+    if(d){
+      if(!d.linked) info = t('pc_not_linked');
+      else {
+        var ls = d.last_sign_in ? String(d.last_sign_in).slice(0,10) : '—';
+        info = t('pc_acc') + ': ' + (d.provider || '—') + (d.email ? ' · ' + d.email : '') + '\n' + t('pc_last') + ': ' + ls;
+      }
+    }
+    go(info);
+  }, function(){ go(''); });
 }
 function tagsFor(p){
   var tags = [];
@@ -5502,12 +5616,14 @@ function loadData(){
   ideaList.innerHTML = '<p style="color:var(--ink-faint);text-align:center;padding:30px 0;">'+t('loading')+'</p>';
 
   Promise.all([
-    sbGet('profiles?select=skills,id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,is_alumni,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc').catch(function(){ return sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'); }),
+    sbGet('profiles?select=skills,id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,is_alumni,auth_user_id,hidden_at,profile_projects(title),profile_achievements(title,year)&order=full_name.asc').catch(function(){ return sbGet('profiles?select=id,full_name,avatar_initials,position,department,education,hire_year,council_join_year,council_role,contact,photo_url,instagram,approval_status,is_specialist,auth_user_id,profile_projects(title),profile_achievements(title,year)&order=full_name.asc'); }),
     sbGet('ideas?select=*,profiles(id,full_name)&order=created_at.desc'),
     sbGet('idea_attachments?select=*&order=created_at.asc').catch(function(){ return []; }),
     sb.rpc('unclaimed_specialists').then(function(r){ return (r && r.data) || []; }, function(){ return []; })
   ]).then(function(results){
-    var profileRows = results[0].filter(function(r){ return r.approval_status === 'approved' && r.is_specialist !== false; });
+    var allApproved = results[0].filter(function(r){ return r.approval_status === 'approved' && r.is_specialist !== false; });
+    var profileRows = allApproved.filter(function(r){ return !r.hidden_at; });
+    hiddenRowsRaw = allApproved.filter(function(r){ return !!r.hidden_at; });
     var ideaRows = results[1];
     var attRows = results[2];
     unclaimedIds = {}; results[3].forEach(function(x){ unclaimedIds[x.id] = true; });
@@ -5528,12 +5644,17 @@ function loadData(){
         contact: row.contact,
         instagram: row.instagram || '',
         authUserId: row.auth_user_id || null,
+        hidden: !!row.hidden_at,
         alumni: !!row.is_alumni,
         skills: row.skills || [],
         ideaCount: ideaCount,
         projects: (row.profile_projects || []).map(function(p){ return p.title; }),
         achievements: (row.profile_achievements || []).map(function(a){ return (a.year ? a.year + ' — ' : '') + a.title; })
       };
+    });
+
+    hiddenPeople = hiddenRowsRaw.map(function(row){
+      return { id: row.id, initials: row.avatar_initials || '?', photo: row.photo_url || null, name: row.full_name, dept: row.department || '—', hidden: true };
     });
 
     ideas = ideaRows.map(function(row){
@@ -5749,14 +5870,13 @@ var EV_KINDS = ['meeting','sport','volunteer','training','other'];
 function setChairTab(x){ chairTab = x; renderChair(); }
 function renderChairTabs(){
   var el = document.getElementById('chairTabs'); if(!el) return;
-  el.innerHTML = [['inbox','ch_tab_inbox'],['events','ch_tab_events'],['stats','ch_tab_stats'],['posters','ch_tab_posters']].map(function(x){
+  el.innerHTML = [['inbox','ch_tab_inbox'],['stats','ch_tab_stats'],['posters','ch_tab_posters']].map(function(x){
     return '<button class="'+(chairTab===x[0]?'on':'')+'" onclick="setChairTab(\''+x[0]+'\')">'+t(x[1])+'</button>';
   }).join('');
 }
 function renderChair(){
   renderChairTabs();
-  if(chairTab === 'events') return renderEvents();
-  if(chairTab === 'stats') return renderStats();
+  if(chairTab === 'events' || chairTab === 'stats') return renderStats();
   if(chairTab === 'posters') return renderPosterAdmin();
   return renderChairInbox();
 }
@@ -5844,47 +5964,95 @@ function bar(label, val, total, extra){
   var pct = total ? Math.round(val*100/total) : 0;
   return '<div class="bar-row"><div class="bl" title="'+escHtml(label)+'">'+escHtml(label)+'</div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><div class="bv">'+(extra!==undefined?extra:val+' · '+pct+'%')+'</div></div>';
 }
+var mxSort = 'name';
+function setMxSort(x){ mxSort = x; drawMatrix(); }
 function renderStats(){
   var el = document.getElementById('chairBody'); if(!el) return;
   el.innerHTML = '<p style="color:var(--ink-faint);">'+t('loading')+'</p>';
-  loadEvData().then(function(){
-    var days = { all: 0, year: 365, '90': 90, '30': 30 }[stPeriod] || 0;
-    var since = days ? new Date(Date.now() - days*86400000).toISOString().slice(0,10) : '';
-    var evs = evData.events.filter(function(e){ return !since || e.event_date >= since; });
-    var ids = {}; evs.forEach(function(e){ ids[e.id] = true; });
-    var att = evData.att.filter(function(a){ return ids[a.event_id]; });
-    var total = people.length;
-    var h = '<div class="st-period">'+[['all','st_p_all'],['year','st_p_year'],['90','st_p_90'],['30','st_p_30']].map(function(x){
-      return '<button class="'+(stPeriod===x[0]?'on':'')+'" onclick="setStPeriod(\''+x[0]+'\')">'+t(x[1])+'</button>'; }).join('')+'</div>';
-    if(!evs.length){ el.innerHTML = h + '<p style="color:var(--ink-faint);margin:0 8px;">'+t('st_none')+'</p>'; return; }
-    var perEv = {}; att.forEach(function(a){ perEv[a.event_id] = (perEv[a.event_id]||0) + 1; });
-    var perPerson = {}; att.forEach(function(a){ perPerson[a.profile_id] = (perPerson[a.profile_id]||0) + 1; });
-    var uniq = Object.keys(perPerson).length;
-    var avg = att.length / evs.length;
-    h += '<div class="kpis">'+
-      '<div class="kpi"><b>'+evs.length+'</b><span>'+t('st_events')+'</span></div>'+
-      '<div class="kpi"><b>'+(Math.round(avg*10)/10)+'</b><span>'+t('st_avg')+(total?' · '+Math.round(avg*100/total)+'%':'')+'</span></div>'+
-      '<div class="kpi"><b>'+(total?Math.round(uniq*100/total):0)+'%</b><span>'+t('st_unique')+' ('+uniq+'/'+total+')</span></div>'+
-      '<div class="kpi"><b>'+att.length+'</b><span>'+t('st_total_att')+'</span></div></div>';
-    // әр іс-шара бойынша
-    var chrono = evs.slice().sort(function(a,b){ return a.event_date < b.event_date ? -1 : 1; }).slice(-12);
-    h += '<div class="st-card"><h3>'+t('st_by_event')+'</h3>'+chrono.map(function(e){
-      return bar(evDate(e.event_date).slice(0,5)+' '+e.title, perEv[e.id]||0, total); }).join('')+'</div>';
-    // түрлері бойынша
-    var kinds = {}; evs.forEach(function(e){ var k = e.kind||'other'; (kinds[k] = kinds[k] || {n:0,a:0}); kinds[k].n++; kinds[k].a += (perEv[e.id]||0); });
-    h += '<div class="st-card"><h3>'+t('st_by_kind')+'</h3>'+Object.keys(kinds).map(function(k){
-      var o = kinds[k]; return bar(t('ev_k_'+k)+' ('+o.n+')', Math.round(o.a/o.n*10)/10, total, (Math.round(o.a/o.n*10)/10)+' · '+(total?Math.round(o.a/o.n*100/total):0)+'%'); }).join('')+'</div>';
-    // ең белсенділер
-    var byId = {}; people.forEach(function(p){ byId[p.id] = p; });
-    var top = Object.keys(perPerson).filter(function(id){ return byId[id]; }).sort(function(a,b){ return perPerson[b]-perPerson[a]; }).slice(0,10);
-    h += '<div class="st-card"><h3>'+t('st_top')+'</h3>'+top.map(function(id){
-      return bar(byId[id].name, perPerson[id], evs.length, perPerson[id]+'/'+evs.length+' '+t('st_times')); }).join('')+'</div>';
-    // қатыспағандар
-    var never = people.filter(function(p){ return !perPerson[p.id]; }).sort(function(a,b){ return a.name.localeCompare(b.name); });
-    if(never.length) h += '<div class="st-card"><details><summary style="cursor:pointer;font-weight:700;">'+t('st_never')+' ('+never.length+')</summary><div style="margin-top:8px;font-size:14px;line-height:1.7;">'+
-      never.map(function(p){ return escHtml(p.name); }).join('<br>')+'</div></details></div>';
-    el.innerHTML = h;
-  }).catch(function(err){ el.innerHTML = '<p style="color:#c0392b;">'+escHtml(err.message||String(err))+'</p>'; });
+  loadEvData().then(function(){ el.innerHTML = '<div id="mxBox"></div>'; drawMatrix(); })
+    .catch(function(err){ el.innerHTML = '<p style="color:#c0392b;">'+escHtml(err.message||String(err))+'</p>'; });
+}
+function mxAttMap(){
+  var m = {}; evData.att.forEach(function(a){ m[a.event_id + '|' + a.profile_id] = true; }); return m;
+}
+function drawMatrix(){
+  var box = document.getElementById('mxBox'); if(!box) return;
+  var old = box.querySelector('.mx-wrap'), sl = old ? old.scrollLeft : 0, st = old ? old.scrollTop : 0;
+  var evs = evData.events.slice().sort(function(a,b){ return String(a.event_date) < String(b.event_date) ? -1 : (String(a.event_date) > String(b.event_date) ? 1 : (String(a.created_at) < String(b.created_at) ? -1 : 1)); });
+  var am = mxAttMap(), n = evs.length;
+  var kk = (typeof Intl !== 'undefined' && Intl.Collator) ? new Intl.Collator('kk') : null;
+  var rows = people.map(function(p){
+    var c = 0; evs.forEach(function(e){ if(am[e.id+'|'+p.id]) c++; });
+    return { p: p, c: c, pct: n ? Math.round(c*100/n) : 0 };
+  });
+  rows.sort(function(x,y){
+    if(mxSort === 'pct' && y.c !== x.c) return y.c - x.c;
+    return kk ? kk.compare(x.p.name||'', y.p.name||'') : String(x.p.name||'').localeCompare(String(y.p.name||''));
+  });
+  var totalAtt = 0; evs.forEach(function(e){ evData.att.forEach(function(a){ if(a.event_id === e.id) totalAtt++; }); });
+  var avg = (n && people.length) ? Math.round(totalAtt*100/(n*people.length)) : 0;
+  var h = '<div class="mx-top"><button class="btn btn-gold" onclick="addMxEvent()">'+t('st_add_ev')+'</button>'+
+    '<div class="st-period" style="margin:0;"><button class="'+(mxSort==='name'?'on':'')+'" onclick="setMxSort(\'name\')">'+t('st_sort_name')+'</button><button class="'+(mxSort==='pct'?'on':'')+'" onclick="setMxSort(\'pct\')">'+t('st_sort_pct')+'</button></div>'+
+    '<span class="mx-kpi">'+n+' '+t('st_events')+' · '+t('st_avg_pct')+': <b>'+avg+'%</b></span></div>'+
+    '<div class="mx-hint">'+t('st_hint')+'</div>';
+  h += '<div class="mx-wrap"><table class="mx"><thead><tr><th class="mx-n"></th><th class="mx-h" colspan="'+Math.max(n,1)+'">'+t('st_ev_names')+'</th><th class="mx-p"></th></tr><tr><th class="mx-n">'+t('st_fio')+'</th>';
+  h += n ? evs.map(function(e){
+    return '<th class="mx-e"><textarea id="mxT-'+e.id+'" rows="3" maxlength="120" onchange="mxRename(\''+e.id+'\',this.value)">'+escHtml(e.title)+'</textarea>'+
+      '<div class="mx-d"><input type="date" value="'+escHtml(String(e.event_date||''))+'" onchange="mxDate(\''+e.id+'\',this.value)"><button title="'+escHtml(t('ev_del'))+'" onclick="mxDelEvent(\''+e.id+'\')">✕</button></div></th>';
+  }).join('') : '<th class="mx-e" style="color:var(--ink-faint);font-weight:500;">'+t('st_none_ev')+'</th>';
+  h += '<th class="mx-p">'+t('st_pct')+'</th></tr></thead><tbody>';
+  h += rows.map(function(r){
+    return '<tr><td class="mx-n"><b>'+escHtml(r.p.name)+'</b><small>'+escHtml(r.p.dept)+'</small></td>'+
+      (n ? evs.map(function(e){ var on = am[e.id+'|'+r.p.id]; return '<td class="c'+(on?' on':'')+'" onclick="mxToggle(\''+e.id+'\',\''+r.p.id+'\')">'+(on?'+':'')+'</td>'; }).join('') : '<td class="c"></td>')+
+      '<td class="mx-p"><b>'+r.pct+'%</b><small>'+r.c+'/'+n+'</small></td></tr>';
+  }).join('');
+  h += '</tbody><tfoot><tr><td class="mx-n"><b>'+t('st_total_row')+'</b></td>'+
+    (n ? evs.map(function(e){ var c = 0; evData.att.forEach(function(a){ if(a.event_id === e.id) c++; }); return '<td class="c"><b>'+c+'</b></td>'; }).join('') : '<td class="c"></td>')+
+    '<td class="mx-p"><b>'+avg+'%</b></td></tr></tfoot></table></div>';
+  box.innerHTML = h;
+  var w = box.querySelector('.mx-wrap'); if(w){ w.scrollLeft = sl; w.scrollTop = st; }
+}
+function addMxEvent(){
+  var today = new Date().toISOString().slice(0,10);
+  sb.from('chair_events').insert({ title: t('st_new_ev'), event_date: today, kind: 'other', created_by: authUser.id }).select().single().then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    evData.events.push(r.data); drawMatrix();
+    var ta = document.getElementById('mxT-'+r.data.id);
+    if(ta){ ta.scrollIntoView({inline:'center', block:'nearest'}); ta.focus(); ta.select(); }
+  });
+}
+function mxRename(id, v){
+  v = String(v||'').trim(); if(!v) return;
+  var e = evData.events.find(function(x){ return x.id === id; }); if(e) e.title = v;
+  sb.from('chair_events').update({ title: v }).eq('id', id).then(function(r){ if(r.error) alert(r.error.message); });
+}
+function mxDate(id, v){
+  if(!v) return;
+  var e = evData.events.find(function(x){ return x.id === id; }); if(e) e.event_date = v;
+  sb.from('chair_events').update({ event_date: v }).eq('id', id).then(function(r){ if(r.error) alert(r.error.message); else drawMatrix(); });
+}
+function mxDelEvent(id){
+  if(!confirm(t('ev_del_conf'))) return;
+  sb.from('chair_events').delete().eq('id', id).then(function(r){
+    if(r.error){ alert(r.error.message); return; }
+    evData.events = evData.events.filter(function(x){ return x.id !== id; });
+    evData.att = evData.att.filter(function(a){ return a.event_id !== id; });
+    drawMatrix();
+  });
+}
+function mxToggle(eid, pid){
+  var i = -1; evData.att.forEach(function(a,k){ if(a.event_id === eid && a.profile_id === pid) i = k; });
+  if(i >= 0){
+    evData.att.splice(i,1); drawMatrix();
+    sb.from('chair_event_attendance').delete().eq('event_id', eid).eq('profile_id', pid).then(function(r){
+      if(r.error){ alert(r.error.message); evData.att.push({event_id:eid, profile_id:pid}); drawMatrix(); }
+    });
+  } else {
+    evData.att.push({event_id:eid, profile_id:pid}); drawMatrix();
+    sb.from('chair_event_attendance').insert({ event_id: eid, profile_id: pid }).then(function(r){
+      if(r.error){ alert(r.error.message); evData.att = evData.att.filter(function(a){ return !(a.event_id === eid && a.profile_id === pid); }); drawMatrix(); }
+    });
+  }
 }
 
 function decideApp(id, ok){
