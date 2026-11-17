@@ -6013,8 +6013,8 @@ function drawMatrix(){
 }
 function addMxEvent(){
   var today = new Date().toISOString().slice(0,10);
-  sb.from('chair_events').insert({ title: t('st_new_ev'), event_date: today, kind: 'other', created_by: authUser.id }).select().single().then(function(r){
-    if(r.error){ alert(r.error.message); return; }
+  sb.from('chair_events').insert({ title: t('st_new_ev'), event_date: today, kind: 'other' }).select().single().then(function(r){
+    if(r.error || !r.data){ alert((r.error && r.error.message) || 'Қате: іс-шара құрылмады'); return; }
     evData.events.push(r.data); drawMatrix();
     var ta = document.getElementById('mxT-'+r.data.id);
     if(ta){ ta.scrollIntoView({inline:'center', block:'nearest'}); ta.focus(); ta.select(); }
